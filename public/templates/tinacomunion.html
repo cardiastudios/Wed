@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>First Holy Communion — Christina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burgundy:   #5a1a2a;
+  --burgundy-lt:#7a2a3a;
+  --burgundy-dk:#3a0a1a;
+  --gold:       #c9a84c;
+  --gold-lt:    #e8cc80;
+  --gold-dk:    #a07828;
+  --ivory:      #fdf6e8;
+  --ivory-dk:   #f0e4c8;
+  --ink:        #2a1a0a;
+  --ink-lt:     #5a3a1a;
+   --bw: min(96vw, 460px);
+--page-h: calc(var(--bw) * 1.5);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404; font-family: 'EB Garamond', serif; color: var(--ink); user-select: none; }
+
+#particle-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+#scene-closed { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #2e0e0e 0%, #0a0404 100%); perspective: 1400px; }
+.bible-3d { width: var(--bw); position: relative; transform-style: preserve-3d; }
+.cover-flipper { width: 100%; height: clamp(500px, 145vw, 580px); position: relative; transform-style: preserve-3d; transform-origin: left center; transition: transform 1.2s cubic-bezier(.4,0,.2,1); cursor: pointer; z-index: 10; }
+.cover-flipper.open { transform: rotateY(-180deg); pointer-events: none; }
+.cover-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), inset -3px 0 8px rgba(0,0,0,.4), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px) clamp(16px, 6%, 32px) clamp(60px, 18%, 90px) clamp(26px, 9%, 50px); overflow: hidden; }
+.cover-face::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,5,2,.7) 0%, rgba(10,5,2,.15) 50%, transparent 100%); border-radius: inherit; pointer-events: none; }
+.cover-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: linear-gradient(160deg, #2a1208 0%, #3a1a10 100%); border-radius: 10px 3px 3px 10px; display: flex; align-items: center; justify-content: center; }
+.cover-back-inner { width: 85%; height: 85%; border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; }
+.cover-back-inner svg { width: 30%; opacity: .2; }
+.spine { position: absolute; top: 0; left: -8px; width: 8px; height: 100%; background: linear-gradient(to right, #0e0404, #2a0808, #1a0404); border-radius: 3px 0 0 3px; z-index: 20; pointer-events: none; }
+.cover-title { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(4px, 1.5vw, 8px); }
+.cover-title h1 { font-family: 'Cinzel', serif; font-size: clamp(11px, 4vw, 17px); color: var(--gold-lt); line-height: 1.4; letter-spacing: .12em; text-shadow: 0 0 20px rgba(201,168,76,.5), 0 2px 4px rgba(0,0,0,.5); font-weight: 400; text-transform: uppercase; }
+.cover-name-wrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: clamp(4px, 1.5vw, 8px); }
+.cover-name-line { width: 65%; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,.55), transparent); margin: clamp(3px,1vw,5px) 0; }
+.cover-name-script { font-family: 'Great Vibes', cursive; font-size: clamp(46px, 15vw, 68px); color: var(--gold-lt); text-shadow: 0 0 40px rgba(201,168,76,.9), 0 2px 10px rgba(0,0,0,.7), 0 0 80px rgba(201,168,76,.3); line-height: 1.05; letter-spacing: .02em; }
+.cover-date { font-family: 'Cinzel', serif; font-size: clamp(9px, 2.6vw, 13px); color: rgba(232,204,128,.65); letter-spacing: .15em; text-transform: uppercase; position: relative; z-index: 1; }
+.tap-hint { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: hintPulse 2s ease-in-out infinite; }
+.tap-hint span { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 12px); color: rgba(232,204,128,.75); letter-spacing: .2em; text-transform: uppercase; }
+.tap-hint svg { width: clamp(16px, 5vw, 22px); opacity: .7; }
+@keyframes hintPulse { 0%,100%{opacity:.6;transform:translateX(-50%) translateY(0)} 50%{opacity:1;transform:translateX(-50%) translateY(-3px)} }
+
+/* ══════ BACK COVER SCENE ══════ */
+#scene-back { display: none; width: 100vw; height: 100vh; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #2e0e0e 0%, #0a0404 100%); perspective: 1400px; }
+#scene-back.visible { display: flex; }
+.back-cover-wrap { width: var(--bw); height: clamp(500px, 145vw, 580px); position: relative; transform-style: preserve-3d; transform-origin: left center; }
+.back-cover-face { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px); padding-bottom: clamp(60px,18%,90px); overflow: hidden; }
+.back-cover-face::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,5,2,.75) 0%, rgba(10,5,2,.1) 50%, transparent 100%); pointer-events: none; }
+.back-spine { position: absolute; top: 0; left: -8px; width: 8px; height: 100%; background: linear-gradient(to right, #0e0404, #2a0808, #1a0404); border-radius: 3px 0 0 3px; z-index: 5; }
+.back-cover-text { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(4px,1.5vw,8px); }
+.back-cover-text p { font-family: 'Great Vibes', cursive; font-size: clamp(22px, 8vw, 36px); color: var(--gold-lt); text-shadow: 0 0 20px rgba(201,168,76,.8), 0 2px 8px rgba(0,0,0,.8); margin-bottom: clamp(2px, 1vw, 4px); }
+.back-cover-text small { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 11px); color: rgba(232,204,128,.95); letter-spacing: .2em; text-transform: uppercase; text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+.back-reopen-btn { position: relative; z-index: 2; font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 12px); letter-spacing: .2em; text-transform: uppercase; color: rgba(232,204,128,.95); background: none; border: none; padding: 0; cursor: pointer; opacity: .95; text-shadow: 0 1px 6px rgba(0,0,0,.8); transition: opacity .2s; animation: hintPulse 2s ease-in-out infinite; display: block; margin-bottom: clamp(5px,2vw,10px); }
+.back-reopen-btn:hover { opacity: 1; }
+
+/* ══════ OPEN SCENE ══════ */
+#scene-open { display: none; width: 100vw; min-height: 100vh; background: radial-gradient(ellipse at center, #2e0e0e 0%, #0a0404 100%); padding: 20px 0 30px; align-items: center; justify-content: center; overflow-y: auto; }
+#scene-open.visible { display: flex; }
+.open-book { width: var(--bw); position: relative; display: flex; flex-direction: column; align-items: stretch; }
+.open-spine { position: absolute; top: 0; left: -8px; width: 8px; height: clamp(500px, 145vw, 580px); background: linear-gradient(to right, #0e0404, #2a0808, #1a0404); border-radius: 3px 0 0 3px; z-index: 5; pointer-events: none; }
+
+.page-arrows-below {
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px clamp(10px, 4vw, 18px) 0;
+  margin-top: 2px;
+}
+.page-arrow-btn { pointer-events: auto; font-family: 'Cinzel', serif; font-size: clamp(8px, 2.8vw, 12px); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-lt); background: none; border: none; padding: 0; cursor: pointer; transition: opacity .2s; font-weight: 500; }
+.page-arrow-btn:hover { opacity: .6; }
+.page-arrow-btn:disabled { opacity: .25; cursor: default; }
+.page-label { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); color: var(--gold-lt); letter-spacing: .1em; opacity: .7; }
+.page-nav { display: none; }
+
+.book-spread { width: 100%; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 30px rgba(0,0,0,.9), 0 10px 40px rgba(0,0,0,.6), inset 6px 0 14px rgba(0,0,0,.1); overflow: hidden; position: relative; perspective: 800px; }
+.book-spread::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 4; }
+.book-spread::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(to right, rgba(0,0,0,.12), transparent); z-index: 5; pointer-events: none; }
+.flip-sheet { position: absolute; inset: 0; background: linear-gradient(100deg, var(--ivory-dk) 0%, var(--ivory) 60%); transform-origin: left center; z-index: 10; border-radius: 0 10px 10px 0; pointer-events: none; opacity: 0; }
+.flip-sheet.animate { animation: sheetFlip .55s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes sheetFlip { 0%{opacity:1;transform:rotateY(0deg)} 40%{opacity:1;transform:rotateY(-70deg);box-shadow:-6px 0 18px rgba(0,0,0,.2)} 100%{opacity:0;transform:rotateY(-180deg)} }
+
+.page { display: none; flex-direction: column; align-items: center; text-align: center; height: clamp(500px, 145vw, 580px); overflow: hidden; padding: clamp(14px, 5vw, 24px) clamp(16px, 6vw, 28px) clamp(14px, 5vw, 24px); position: relative; z-index: 6; animation: pgIn .35s ease; justify-content: center; }
+.page.active { display: flex; }
+@keyframes pgIn { from{opacity:0;transform:translateX(6px)} to{opacity:1;transform:none} }
+
+/* Typography */
+.page-num { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 11px); color: var(--gold-dk); letter-spacing: .1em; margin-bottom: clamp(4px, 1.5vw, 8px); opacity: .7; }
+.ornament { display: flex; align-items: center; gap: clamp(4px, 1.5vw, 8px); margin: clamp(5px, 1.8vw, 9px) auto; width: 80%; color: var(--gold); }
+.ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to var(--d,right), transparent, var(--gold-dk)); opacity: .6; }
+.ornament svg { width: clamp(20px, 5vw, 26px); flex-shrink: 0; opacity: .85; }
+/* Grail ornament override — use img instead of inline svg */
+.ornament-img { display: flex; align-items: center; gap: clamp(6px, 2vw, 10px); margin: clamp(6px, 2vw, 10px) auto; width: 80%; color: var(--gold); }
+.ornament-img::before { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dk)); opacity: .5; }
+.ornament-img::after  { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--gold-dk)); opacity: .5; }
+.ornament-img img { flex-shrink: 0; opacity: .8; }
+.ornament-img img.size-grail  { width: clamp(36px, 10vw, 48px); }
+.ornament-img img.size-cross  { width: clamp(20px, 5vw, 28px); }
+.ornament-img img.size-candle { width: clamp(48px, 10vw, 48px); }
+.book-eyebrow { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 11px); letter-spacing: .3em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: clamp(4px, 1.5vw, 7px); opacity: .85; }
+.book-bigname { font-family: 'Great Vibes', cursive; font-size: clamp(38px, 14vw, 60px); color: var(--burgundy); line-height: 1.05; text-shadow: 0 2px 8px rgba(90,26,42,.2); }
+.book-verse { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px, 3.4vw, 15px); color: var(--ink-lt); line-height: 1.55; max-width: 90%; }
+.book-verse-ref { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 10px); color: var(--gold-dk); letter-spacing: .15em; margin-top: clamp(4px, 1.5vw, 7px); }
+.book-verse-ref2 { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 10px); color: var(--gold-dk); letter-spacing: .15em; margin-top: clamp(4px, 1.5vw, 7px); }
+.book-section { font-family: 'Cinzel', serif; font-size: clamp(13px, 4.5vw, 18px); color: var(--burgundy); letter-spacing: .12em; margin-bottom: clamp(-8px, 1.2vw, -12px); }
+.book-gold { font-family: 'Cinzel', serif; font-size: clamp(12px, 4.2vw, 17px); color: var(--burgundy); letter-spacing: .05em; margin: clamp(2px, 1vw, 5px) 0; }
+.book-detail { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px, 3.4vw, 15px); color: var(--ink-lt); line-height: 1.5; }
+.book-sub { font-family: 'Cinzel', serif; font-size: clamp(7px, 2.2vw, 10px); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-dk); margin-top: clamp(2px, 1vw, 5px); opacity: .8; }
+.info-row { display: flex; flex-direction: column; align-items: center; gap: clamp(1px, .6vw, 4px); margin: clamp(5px, 1.8vw, 9px) 0; width: 100%; }
+.info-label { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-dk); opacity: .8; }
+.dropcap { display: inline; font-family: 'Cinzel Decorative', serif; font-size: clamp(28px, 10vw, 42px); line-height: 1; color: var(--burgundy); margin-right: clamp(1px, .5vw, 3px); text-shadow: 2px 2px 0 rgba(201,168,76,.3); vertical-align: bottom; }
+
+/* Cardia Studios credit */
+.cardia-credit { position: absolute; bottom: clamp(30px,3%,38px); left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; }
+.cardia-credit a { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); letter-spacing: .12em; color: rgba(232,204,128,.55); text-decoration: none; text-transform: uppercase; transition: opacity .2s; display: inline-flex; align-items: center; gap: 4px; }
+.cardia-credit a span { border-bottom: 1px solid rgba(232,204,128,.55); padding-bottom: 1px; }
+.cardia-credit a img { width: clamp(14px, 3.5vw, 18px); opacity: .8; flex-shrink: 0; filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85); }
+.cardia-credit a:hover { opacity: 1; }
+.map-link { display: inline-flex; align-items: center; gap: 3px; font-family: 'Cinzel', serif; font-size: clamp(8px, 2.4vw, 11px); color: var(--burgundy); text-decoration: none; letter-spacing: .08em; border-bottom: 1px solid rgba(90,26,42,.3); padding-bottom: 1px; margin-top: clamp(2px,0.8vw,4px); transition: opacity .2s; }
+.map-link:hover { opacity: .7; }
+.map-link svg { flex-shrink: 0; }
+
+/* RSVP */
+.rsvp-form { width: 100%; display: flex; flex-direction: column; gap: clamp(6px, 2.5vw, 12px); margin-top: clamp(5px, 2vw, 10px); }
+.rsvp-field { width: 100%; padding: clamp(5px, 2vw, 9px) 0; border: none; border-bottom: 1px solid rgba(160,120,40,.4); font-family: 'EB Garamond', serif; font-size: clamp(12px, 3.5vw, 15px); color: var(--ink); background: transparent; outline: none; transition: border-color .2s; }
+.rsvp-field:focus { border-bottom-color: var(--gold-dk); }
+.rsvp-field::placeholder { color: rgba(90,26,42,.35); }
+.rsvp-label { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); letter-spacing: .15em; text-transform: uppercase; color: var(--gold-dk); display: block; margin-bottom: clamp(1px, .5vw, 3px); }
+.rsvp-btn { width: 100%; padding: clamp(8px, 2.5vw, 11px); background: var(--burgundy); border: 1px solid var(--gold-dk); color: var(--gold-lt); font-family: 'Cinzel', serif; font-size: clamp(9px, 2.8vw, 12px); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: background .25s; margin-top: clamp(4px, 1.5vw, 8px); }
+.rsvp-btn:hover { background: var(--burgundy-lt); }
+.rsvp-ok { display: none; text-align: center; padding: clamp(10px, 3vw, 16px) 0; }
+.rsvp-ok p { font-family: 'Great Vibes', cursive; font-size: clamp(26px, 9vw, 38px); color: var(--burgundy); margin-bottom: clamp(4px, 1.5vw, 8px); }
+.rsvp-ok small { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(11px, 3vw, 14px); color: var(--ink-lt); line-height: 1.6; }
+
+/* Photo carousel */
+.photo-carousel { width: 100%; position: relative; overflow: hidden; }
+.photo-track { display: flex; transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
+.photo-slide { min-width: 100%; }
+.photo-slide img { width: 100%; height: clamp(260px, 75vw, 320px); object-fit: cover; display: block; }
+.photo-counter { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 10px); color: var(--gold-dk); letter-spacing: .1em; text-align: center; margin-top: clamp(4px, 1.5vw, 7px); opacity: .7; }
+.photo-dots { display: flex; justify-content: center; gap: clamp(5px, 2vw, 8px); margin-top: clamp(4px, 1.5vw, 7px); }
+.photo-dot { width: clamp(6px, 2vw, 9px); height: clamp(6px, 2vw, 9px); border-radius: 50%; background: rgba(160,120,40,.25); border: 1px solid var(--gold-dk); cursor: pointer; transition: all .3s; }
+.photo-dot.active { background: var(--gold); transform: scale(1.3); }
+.photo-arrows { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 clamp(6px, 2vw, 10px); transform: translateY(-50%); pointer-events: none; }
+.photo-arr { pointer-events: auto; background: rgba(253,246,232,.75); border: 1px solid rgba(160,120,40,.3); color: var(--burgundy); width: clamp(26px, 8vw, 34px); height: clamp(26px, 8vw, 34px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: clamp(12px, 4vw, 16px); cursor: pointer; backdrop-filter: blur(4px); }
+
+/* Page icons */
+.page-icon { width: clamp(32px, 10vw, 44px); height: clamp(32px, 10vw, 44px); object-fit: contain; opacity: .75; margin-bottom: clamp(4px, 1.5vw, 8px); }
+.page-icon-pair { display: flex; gap: clamp(10px, 4vw, 18px); align-items: center; justify-content: center; margin-bottom: clamp(4px, 1.5vw, 8px); }
+.page-icon-pair .page-icon { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<audio id="hymn" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Christian_Hymn_-_Jesus_Loves_Me_CeeNaija.com_.mp3" loop preload="auto"></audio>
+
+<!-- ══════ CLOSED BIBLE ══════ -->
+<div id="scene-closed">
+  <div class="bible-3d">
+    <div class="spine"></div>
+    <div class="cover-flipper" id="cover-flipper" onclick="openBible()">
+      <div class="cover-face">
+        <div class="cover-title"><h1>First Holy Communion</h1></div>
+        <div class="cover-name-wrap">
+          <div class="cover-name-line"></div>
+          <div class="cover-name-script">Christina</div>
+          <div class="cover-name-line"></div>
+        </div>
+        <div class="cover-date">April 18, 2026</div>
+        <div class="tap-hint">
+          <span>Open</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(232,204,128,.7)" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="cover-back">
+        <div class="cover-back-inner">
+          <svg viewBox="0 0 80 110" fill="none">
+            <rect x="30" y="5" width="20" height="100" rx="3" fill="rgba(201,168,76,.35)"/>
+            <rect x="5" y="28" width="70" height="18" rx="3" fill="rgba(201,168,76,.35)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ OPEN BIBLE ══════ -->
+<div id="scene-open">
+  <div class="open-book">
+    <div class="open-spine"></div>
+    <div class="book-spread">
+      <div class="flip-sheet" id="flip-sheet"></div>
+
+      <!-- PAGE 1 — Title: Grail top, Cross middle, Grail bottom → SWITCHED: Cross top, Grail middle, Cross bottom -->
+      <div class="page active" id="page-1">
+        <div class="page-num">✦ I ✦</div>
+        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" alt="">
+        <p class="book-eyebrow">First Holy Communion</p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="book-bigname">Christina</div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <p class="book-detail">daughter of<br><span style="font-size:clamp(13px,4.5vw,17px);color:var(--ink);font-style:normal;">Steven &amp; Jihan Nemer</span></p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <p class="book-verse">"Let the little children come to me,<br>and do not hinder them,<br>for the kingdom of heaven<br>belongs to such as these."</p>
+        <p class="book-verse-ref">Matthew 19:14</p>
+      </div>
+
+      <!-- PAGE 2 — Ceremony: grails → crosses -->
+      <div class="page" id="page-2">
+        <div class="page-num">✦ II ✦</div>
+        <div class="page-icon-pair">
+          <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" alt="">
+          <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" alt="">
+        </div>
+        <p class="book-section">The Ceremony</p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+
+        <div class="info-row">
+          <span class="info-label">Date</span>
+          <span class="book-gold">Saturday, April 18th</span>
+          <span class="book-sub">2026</span>
+        </div>
+
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+
+        <div class="info-row">
+          <span class="info-label">Holy Mass</span>
+          <span class="book-gold">3:00 in the Afternoon</span>
+          <a href="https://maps.app.goo.gl/vDquLZeGvZTfBvoV6" target="_blank" class="map-link">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            St. Maroun Church · Al-akbe-Zgharta
+          </a>
+        </div>
+
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+
+        <div class="info-row">
+          <span class="info-label">Celebration Dinner</span>
+          <span class="book-gold">7:30 in the Evening</span>
+          <a href="https://maps.app.goo.gl/bUuTEFqiYMBXPZx19" target="_blank" class="map-link">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Iyam el Loulou Restaurant · Besbeel
+          </a>
+        </div>
+      </div>
+
+      <!-- PAGE 3 — Prayer: grails → candles above and below -->
+      <div class="page" id="page-3">
+        <div class="page-num">✦ III ✦</div>
+        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Dove.png" alt="">
+        <p class="book-section">A Prayer</p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
+        <p class="book-verse">
+          <span class="dropcap">D</span>ear Lord,
+          <br style="clear:both"><br>
+          On this blessed day, Christina opens<br>her heart to receive You<br>for the first time.<br><br>
+          May Your presence fill her with<br>joy, peace, and endless love.<br><br>
+          May she walk always in Your light,<br>guided by faith and surrounded<br>by those who love her.
+        </p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
+        <p class="book-verse-ref2">Amen ✦</p>
+      </div>
+
+      <!-- PAGE 4 — Photos (unchanged) -->
+      <div class="page" id="page-4">
+        <div class="page-num">✦ IV ✦</div>
+        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Dove.png" alt="">
+        <p class="book-section">Christina's Moments</p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
+        <div class="photo-carousel" id="photo-carousel">
+          <div class="photo-track" id="photo-track">
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Tina.jpeg" alt="Photo 1"></div>
+          </div>
+          <div class="photo-arrows">
+            <button class="photo-arr" onclick="photoMove(-1)">‹</button>
+            <button class="photo-arr" onclick="photoMove(1)">›</button>
+          </div>
+        </div>
+        <div class="photo-counter" id="photo-counter">1 / 1</div>
+        <div class="photo-dots" id="photo-dots"></div>
+      </div>
+
+      <!-- PAGE 5 — RSVP (unchanged) -->
+      <div class="page" id="page-5">
+        <div class="page-num">✦ V ✦</div>
+        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" alt="">
+        <p class="book-section">Your Reply</p>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
+        <p id="dear-guest" class="book-detail" style="font-family:'Great Vibes',cursive;font-size:clamp(18px,6vw,26px);color:var(--burgundy);font-style:normal;margin-bottom:clamp(3px,1vw,6px);"></p>
+        <p class="book-detail" style="margin-bottom:clamp(5px,2vw,9px);"><br><strong style="font-style:normal;color:var(--burgundy);">April 18th, 2026</strong></p>
+        <div id="rsvp-form-wrap">
+          <div class="rsvp-form">
+            <div id="rv-name-row"><label class="rsvp-label">Your Name</label><input type="text" class="rsvp-field" id="rv-name" placeholder="e.g. Sarah Khoury"></div>
+            <div><label class="rsvp-label">A blessing message<span style="opacity:.5;">(optional)</span></label><textarea class="rsvp-field" id="rv-msg" rows="3" placeholder="Share a blessing message for Christina…" style="border:1px solid rgba(160,120,40,.4);padding:clamp(5px,1.8vw,8px);resize:none;"></textarea></div>
+            <button class="rsvp-btn" onclick="submitRSVP()">Send ✦</button>
+            <p id="rsvp-error" style="display:none;color:#8b2020;font-size:clamp(8px,2.8vw,11px);font-family:'Cinzel',serif;letter-spacing:.1em;text-align:center;margin-top:clamp(3px,1.5vw,6px);"></p>
+          </div>
+        </div>
+        <div class="rsvp-ok" id="rsvp-ok">
+          <p>Thank you!</p>
+          <small>God bless you for sharing<br>this special day with Christina 🕊️</small>
+        </div>
+      </div>
+
+      <div class="page-nav" id="page-nav"></div>
+    </div><!-- end book-spread -->
+
+    <!-- Nav below the book -->
+    <div class="page-arrows-below">
+      <button class="page-arrow-btn" id="btn-prev" onclick="changePage(-1)">← Prev</button>
+      <span class="page-label" id="page-label">Page 1 of 5</span>
+      <button class="page-arrow-btn" id="btn-next" onclick="changePage(1)">Next →</button>
+    </div>
+
+  </div><!-- end open-book -->
+</div><!-- end scene-open -->
+
+<!-- ══════ BACK COVER ══════ -->
+<div id="scene-back">
+  <div style="width:var(--bw); position:relative;">
+    <div class="back-spine"></div>
+    <div class="back-cover-wrap">
+      <div class="back-cover-face">
+        <div class="back-cover-text">
+          <p>Christina</p>
+          <small>First Holy Communion · April 18, 2026</small>
+        </div>
+        <button class="back-reopen-btn" onclick="reopenFromBack()">← Back to Book</button>
+        <div class="cardia-credit">
+          <a href="https://nemerdavid.github.io/web-des/" target="_blank">
+            Powered by <span>Cardia Studios</span>
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Chain2.png" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="page-flip-sound" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page%20Flip%202.mp3" preload="auto"></audio>
+
+<script>
+/* ══════ FALLING PARTICLES ══════ */
+(function(){
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function drawPetal(ctx, size, opacity){
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    const petals = 8;
+    for(let i = 0; i < petals; i++){
+      ctx.save();
+      ctx.rotate((i / petals) * Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,252,245,1)';
+      ctx.strokeStyle = 'rgba(160,130,90,0.65)';
+      ctx.lineWidth = 0.7;
+      ctx.beginPath();
+      ctx.ellipse(0, -size * 0.72, size * 0.26, size * 0.52, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.fillStyle = 'rgba(255,200,30,1)';
+    ctx.strokeStyle = 'rgba(160,110,10,0.6)';
+    ctx.lineWidth = 0.6;
+    ctx.beginPath();
+    ctx.arc(0, 0, size * 0.30, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(190,130,10,0.85)';
+    ctx.beginPath();
+    ctx.arc(0, 0, size * 0.14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function createParticle(){
+    return {
+      x: Math.random() * (canvas.width + 60) - 30,
+      y: -30,
+      size: Math.random() * 7 + 5,
+      speed: Math.random() * 0.5 + 0.2,
+      drift: (Math.random() - 0.5) * 0.4,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.025,
+      opacity: Math.random() * 0.45 + 0.2,
+      sway: Math.random() * 1.4 + 0.3,
+      swaySpeed: Math.random() * 0.009 + 0.003,
+      swayOffset: Math.random() * Math.PI * 2
+    };
+  }
+
+  for(let i = 0; i < 18; i++){
+    const p = createParticle();
+    p.y = Math.random() * canvas.height;
+    particles.push(p);
+  }
+
+  let frame = 0;
+  let lastTime = 0;
+  function animate(timestamp){
+    const delta = Math.min((timestamp - lastTime) / 16.67, 3);
+    lastTime = timestamp;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frame++;
+    if(frame % 55 === 0 && particles.length < 30) particles.push(createParticle());
+    particles.forEach((p, i) => {
+      p.x += (p.drift + Math.sin(frame * p.swaySpeed + p.swayOffset) * p.sway * 0.06) * delta;
+      p.y += p.speed * delta;
+      p.rot += p.rotSpeed * delta;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      drawPetal(ctx, p.size, p.opacity);
+      ctx.restore();
+      if(p.y > canvas.height + 40) particles[i] = createParticle();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+const TOTAL = 5;
+let current = 1;
+
+const guestName = decodeURIComponent(new URLSearchParams(window.location.search).get('guest') || '');
+if(guestName) {
+  const dearEl = document.getElementById('dear-guest');
+  if(dearEl) dearEl.textContent = 'Dear ' + guestName + ',';
+  const nameField = document.getElementById('rv-name');
+  if(nameField) nameField.value = guestName;
+  const nameRow = document.getElementById('rv-name-row');
+  if(nameRow) nameRow.style.display = 'none';
+}
+
+const hymn = document.getElementById('hymn');
+hymn.volume = 0.4;
+
+function openBible() {
+  hymn.play().catch(()=>{});
+  document.getElementById('cover-flipper').classList.add('open');
+  setTimeout(() => {
+    document.getElementById('scene-closed').style.display = 'none';
+    document.getElementById('scene-open').classList.add('visible');
+    buildDots();
+    window.scrollTo(0, 0);
+  }, 1100);
+}
+
+function closeBible() {
+  const sceneOpen = document.getElementById('scene-open');
+  sceneOpen.style.opacity = '0';
+  sceneOpen.style.transition = 'opacity .4s ease';
+  setTimeout(() => {
+    sceneOpen.classList.remove('visible');
+    sceneOpen.style.opacity = '';
+    sceneOpen.style.transition = '';
+    document.getElementById('scene-back').classList.add('visible');
+    window.scrollTo(0, 0);
+  }, 400);
+}
+
+function closeBibleToFront() {
+  const sceneOpen   = document.getElementById('scene-open');
+  const sceneClosed = document.getElementById('scene-closed');
+  const flipper     = document.getElementById('cover-flipper');
+  sceneOpen.style.opacity = '0';
+  sceneOpen.style.transition = 'opacity .4s ease';
+  setTimeout(() => {
+    sceneOpen.classList.remove('visible');
+    sceneOpen.style.opacity = '';
+    sceneOpen.style.transition = '';
+    flipper.style.transition = 'none';
+    flipper.classList.remove('open');
+    sceneClosed.style.display = 'flex';
+    setTimeout(() => { flipper.style.transition = ''; }, 50);
+    current = 1;
+    document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === 0));
+    document.getElementById('page-label').textContent = 'Page 1 of ' + TOTAL;
+    document.getElementById('btn-prev').textContent = '← Prev';
+    document.getElementById('btn-next').textContent = 'Next →';
+    document.getElementById('btn-next').disabled = false;
+  }, 400);
+}
+
+function reopenFromBack() {
+  document.getElementById('scene-back').classList.remove('visible');
+  document.getElementById('scene-open').classList.add('visible');
+  goTo(TOTAL);
+  window.scrollTo(0, 0);
+}
+
+function buildDots() {
+  const nav = document.getElementById('page-nav');
+  nav.innerHTML = '';
+  for(let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'page-dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    nav.appendChild(d);
+  }
+  buildPhotoDots();
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  const prevBtn = document.getElementById('btn-prev');
+  const nextBtn = document.getElementById('btn-next');
+  prevBtn.disabled = false;
+  prevBtn.textContent = current === 1 ? '✕ Close' : '← Prev';
+  nextBtn.disabled = false;
+  nextBtn.textContent = current === TOTAL ? 'Close ✕' : 'Next →';
+}
+
+function goTo(n) {
+  const snd = document.getElementById('page-flip-sound');
+  if(snd) { snd.currentTime = 0; snd.play().catch(()=>{}); }
+  const sheet = document.getElementById('flip-sheet');
+  sheet.classList.remove('animate');
+  void sheet.offsetWidth;
+  sheet.classList.add('animate');
+  setTimeout(() => {
+    document.getElementById('page-' + current).classList.remove('active');
+    current = Math.max(1, Math.min(TOTAL, n));
+    document.getElementById('page-' + current).classList.add('active');
+    document.querySelectorAll('.page-dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current));
+    document.getElementById('page-label').textContent = 'Page ' + current + ' of ' + TOTAL;
+    updateNavButtons();
+  }, 220);
+}
+
+function changePage(dir) {
+  const target = current + dir;
+  if(target < 1) { closeBibleToFront(); return; }
+  if(target > TOTAL) { closeBible(); return; }
+  goTo(target);
+}
+
+let photoIdx = 0;
+const PHOTO_TOTAL = 1;
+
+function buildPhotoDots() {
+  const dotsWrap = document.getElementById('photo-dots');
+  if(!dotsWrap) return;
+  dotsWrap.innerHTML = '';
+  for(let i = 0; i < PHOTO_TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'photo-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => photoGoTo(i);
+    dotsWrap.appendChild(d);
+  }
+}
+function photoGoTo(idx) {
+  photoIdx = Math.max(0, Math.min(PHOTO_TOTAL - 1, idx));
+  document.getElementById('photo-track').style.transform = 'translateX(-' + (photoIdx * 100) + '%)';
+  document.querySelectorAll('.photo-dot').forEach((d, i) => d.classList.toggle('active', i === photoIdx));
+  document.getElementById('photo-counter').textContent = (photoIdx + 1) + ' / ' + PHOTO_TOTAL;
+}
+function photoMove(dir) { photoGoTo(photoIdx + dir); }
+
+let sx = 0, sy = 0;
+document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+  if(!document.getElementById('scene-open').classList.contains('visible')) return;
+  changePage(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+let px = 0;
+const carousel = document.getElementById('photo-carousel');
+if(carousel) {
+  carousel.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, { passive: true });
+  carousel.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - px;
+    if(Math.abs(dx) < 30) return;
+    photoMove(dx < 0 ? 1 : -1);
+    e.stopPropagation();
+  }, { passive: true });
+}
+
+function submitRSVP() {
+  const name = document.getElementById('rv-name').value.trim();
+  const msg  = document.getElementById('rv-msg').value.trim();
+  const err  = document.getElementById('rsvp-error');
+  if(!name) { err.textContent='Please enter your name.'; err.style.display='block'; return; }
+  err.style.display = 'none';
+  const btn = document.querySelector('.rsvp-btn');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  fetch('https://formsubmit.co/ajax/nemer.david9@gmail.com', {
+    method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({ _subject:'Blessing — Christina First Communion', _template:'table', name, blessing: msg||'(none)' })
+  })
+  .then(r=>r.json()).then(data=>{
+    if(data.success==='true'||data.success===true){
+      document.getElementById('rsvp-form-wrap').style.display='none';
+      document.getElementById('rsvp-ok').style.display='block';
+    } else throw new Error();
+  })
+  .catch(()=>{ btn.textContent='Send ✦'; btn.disabled=false; err.textContent='Something went wrong.'; err.style.display='block'; });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Wedding Invitation — Elvish Fantasy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500&family=IM+Fell+English:ital@0;1&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --forest:     #4a6b3a;
+  --forest-lt:  #6a8b5a;
+  --forest-dk:  #2e4a22;
+  --sage:       #c8d9b8;
+  --sage-lt:    #dee5c3;
+  --sage-dk:    #b8c9a0;
+  --parchment:  #f0f4e8;
+  --ink:        #2e4a22;
+  --ink-lt:     #4a6b3a;
+  --border:     rgba(74,107,58,.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+body { font-family: 'IM Fell English', serif; color: var(--ink); background: var(--sage); }
+
+.page-wrap {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+.page-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.page-wrap.bg1::before { background-image: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/1.png'); }
+.page-wrap.bg2::before { background-image: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/2.png'); }
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12vw 9vw;
+  text-align: center;
+}
+
+.torn-header {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 3;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Typography ── */
+.t-eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .35em; text-transform: uppercase; color: var(--forest); margin-bottom: 4vw; }
+.t-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic; font-size: 17vw; line-height: .95; color: var(--forest-dk); }
+.t-script { font-family: 'Great Vibes', cursive; font-size: 13vw; color: var(--forest); line-height: 1.2; }
+.t-date { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .25em; text-transform: uppercase; color: var(--forest); margin: 3vw 0; }
+.t-section { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic; font-size: 9vw; color: var(--forest-dk); letter-spacing: .03em; }
+.t-label { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.5vw; letter-spacing: .25em; text-transform: uppercase; color: var(--forest); margin-bottom: 2vw; }
+.t-verse { font-family: 'IM Fell English', serif; font-style: italic; font-size: 4.2vw; color: var(--forest); line-height: 2; max-width: 82%; margin: 0 auto; }
+.t-parent { font-family: 'Cormorant Garamond', serif; font-size: 4.5vw; color: var(--forest-dk); }
+.t-honor { font-family: 'IM Fell English', serif; font-style: italic; font-size: 3.8vw; color: var(--forest); line-height: 2; margin: 4vw 0; }
+.t-bigname { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: 16vw; color: var(--forest-dk); line-height: 1.05; }
+.t-and { font-family: 'IM Fell English', serif; font-style: italic; font-size: 7vw; color: var(--forest); }
+.t-sub { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .2em; text-transform: uppercase; color: var(--forest); margin-top: 2vw; }
+
+.divider { display: flex; align-items: center; gap: 3vw; margin: 5vw auto; max-width: 75%; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--forest-lt); opacity: .6; }
+.divider-icon { color: var(--forest-lt); font-size: 3.5vw; }
+
+.btn-open { display: inline-block; margin-top: 6vw; padding: 3.5vw 9vw; border: 1px solid var(--forest); color: var(--forest-dk); font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .25em; text-transform: uppercase; cursor: pointer; background: rgba(240,244,232,.6); backdrop-filter: blur(4px); transition: background .3s, border-color .3s; }
+.btn-open:hover { background: rgba(240,244,232,.85); border-color: var(--forest-dk); }
+
+#inv { display: none; opacity: 0; transition: opacity .8s ease; }
+#inv.open { display: block; }
+#inv.visible { opacity: 1; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: .15s; } .d2 { transition-delay: .3s; } .d3 { transition-delay: .45s; }
+
+/* ── Timeline ── */
+.tl-wrap { width: 100%; margin-top: 5vw; }
+.tl-row { display: grid; grid-template-columns: 1fr 24vw 1fr; align-items: center; gap: 2vw; margin-bottom: 2vw; }
+.tl-left { text-align: right; padding-right: 3vw; }
+.tl-right { text-align: left; padding-left: 3vw; }
+.tl-time { font-family: 'Cormorant Garamond', serif; font-size: 4.5vw; font-weight: 400; color: var(--forest-dk); }
+.tl-venue { font-size: 3vw; color: var(--forest); margin-top: 1vw; font-style: italic; line-height: 1.5; }
+.tl-icon { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+.tl-icon::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 6vw; background: var(--forest-lt); opacity: .5; transform: translateX(-50%); }
+.tl-icon::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 6vw; background: var(--forest-lt); opacity: .5; transform: translateX(-50%); }
+.tl-row:first-child .tl-icon::before { display: none; }
+.tl-row:last-child .tl-icon::after { display: none; }
+.tl-icon img { width: 8vw; height: 8vw; object-fit: contain; filter: hue-rotate(80deg) saturate(.7) brightness(.8); }
+.tl-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 7vw; color: var(--forest-dk); }
+
+/* ── Calendar ── */
+.cal-box { background: rgba(240,244,232,.7); backdrop-filter: blur(6px); border: 1px solid var(--border); padding: 5vw 4vw; width: 100%; margin: 4vw 0; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5vw; }
+.cal-cell { text-align: center; padding: 2vw .5vw; font-size: 3.2vw; color: var(--forest); font-weight: 300; }
+.cal-cell.hdr { font-family: 'Cinzel', serif; font-size: 2vw; letter-spacing: .1em; text-transform: uppercase; color: var(--forest-lt); }
+.cal-cell.empty { opacity: 0; }
+.cal-cell.highlight { color: var(--forest-dk); font-weight: 600; position: relative; }
+
+/* ── Countdown ── */
+.countdown { display: flex; justify-content: center; gap: 3vw; margin-top: 5vw; }
+.flip { text-align: center; background: rgba(240,244,232,.7); backdrop-filter: blur(6px); border: 1px solid var(--border); padding: 3.5vw 2vw 2.5vw; min-width: 16vw; }
+.flip .num { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 8vw; color: var(--forest-dk); line-height: 1; }
+.flip .lbl { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2vw; letter-spacing: .15em; text-transform: uppercase; color: var(--forest); margin-top: 1.5vw; }
+
+/* ── RSVP ── */
+.rsvp-box { background: rgba(240,244,232,.75); backdrop-filter: blur(8px); border: 1px solid var(--border); padding: 7vw 6vw; width: 100%; }
+.rsvp-step { animation: stepIn .4s ease; }
+@keyframes stepIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.form-field { width: 100%; padding: 3.5vw 0; border: none; border-bottom: 1px solid rgba(74,107,58,.3); font-family: 'IM Fell English', serif; font-size: 4vw; color: var(--forest-dk); background: transparent; outline: none; transition: border-color .2s; }
+.form-field:focus { border-bottom-color: var(--forest); }
+.form-field::placeholder { color: rgba(74,107,58,.4); }
+textarea.form-field { border: 1px solid rgba(74,107,58,.3); padding: 3vw; resize: none; }
+textarea.form-field:focus { border-color: var(--forest); }
+.attend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; margin: 4vw 0; }
+.attend-opt { position: relative; cursor: pointer; }
+.attend-opt input { position: absolute; opacity: 0; }
+.attend-box { border: 1px solid rgba(74,107,58,.3); padding: 4vw 3vw; text-align: center; background: rgba(240,244,232,.5); transition: border-color .2s, background .2s; }
+.attend-opt input:checked + .attend-box { border-color: var(--forest); background: rgba(74,107,58,.08); }
+.attend-icon { font-size: 6vw; margin-bottom: 1.5vw; }
+.attend-label { font-size: 3.2vw; color: var(--forest-dk); font-style: italic; }
+.step-dots { display: flex; align-items: center; justify-content: center; gap: 3vw; margin-bottom: 6vw; }
+.step-dot { width: 2.5vw; height: 2.5vw; border-radius: 50%; background: rgba(74,107,58,.3); transition: background .3s, transform .3s; }
+.step-dot.on { background: var(--forest); transform: scale(1.3); }
+.count-row { display: flex; align-items: center; justify-content: center; gap: 5vw; margin: 3vw 0; }
+.count-btn { width: 10vw; height: 10vw; border-radius: 50%; border: 1px solid rgba(74,107,58,.3); background: rgba(240,244,232,.6); font-size: 5vw; color: var(--forest-dk); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+.count-btn:hover { border-color: var(--forest); background: rgba(74,107,58,.1); }
+.count-num { font-family: 'Cormorant Garamond', serif; font-size: 9vw; color: var(--forest-dk); min-width: 8vw; text-align: center; }
+.form-label { display: block; font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .18em; text-transform: uppercase; color: var(--forest); margin-bottom: 2vw; }
+.btn-rose { display: block; width: 100%; padding: 3.5vw; border: 1px solid rgba(74,107,58,.3); color: var(--forest); font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.8vw; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; background: transparent; text-align: center; transition: all .25s; }
+.btn-rose:hover { border-color: var(--forest); color: var(--forest-dk); }
+.btn-solid { background: var(--forest-dk); border-color: var(--forest-dk); color: var(--parchment); }
+.btn-solid:hover { background: var(--forest); border-color: var(--forest); }
+.btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; margin-top: 3vw; }
+.error-msg { font-size: 3vw; color: #8b4a2a; margin-top: 1.5vw; display: none; }
+
+/* ── Gift ── */
+.gift-box { background: rgba(240,244,232,.7); backdrop-filter: blur(6px); border: 1px solid var(--border); display: inline-block; padding: 4vw 9vw; }
+
+/* ── Parents ── */
+.parents-wrap { display: flex; justify-content: center; gap: 8vw; margin: 3vw 0; }
+
+/* ── Photo Carousel ── */
+.carousel-wrap {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(240,244,232,.3);
+}
+.carousel-track {
+  display: flex;
+  transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 75vw;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.9) contrast(.95);
+}
+/* Dot indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 2.5vw;
+  margin-top: 4vw;
+}
+.carousel-dot {
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  background: rgba(74,107,58,.3);
+  border: 1px solid var(--forest-lt);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+.carousel-dot.active {
+  background: var(--forest);
+  transform: scale(1.3);
+}
+/* Arrow buttons */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(240,244,232,.7);
+  border: 1px solid var(--border);
+  color: var(--forest-dk);
+  width: 9vw;
+  height: 9vw;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4vw;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background .2s;
+}
+.carousel-arrow:hover { background: rgba(240,244,232,.95); }
+.carousel-arrow.prev { left: 3vw; }
+.carousel-arrow.next { right: 3vw; }
+/* Counter */
+.carousel-counter {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5vw;
+  color: var(--forest);
+  letter-spacing: .1em;
+  margin-top: 2vw;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO — BG 1 ══════ -->
+<div class="page-wrap bg1">
+  <div class="page-content reveal">
+    <p class="t-eyebrow">Together with their families</p>
+    <h1 class="t-name">Thomas</h1>
+    <p class="t-script">&amp; Sarah</p>
+    <p class="t-date">August 14, 2027 · Ehden, Lebanon</p>
+    <button onclick="openInv()" class="btn-open">Open Invitation ✦</button>
+  </div>
+</div>
+
+<div id="inv">
+
+<!-- ══════ PAGE 2 — NAMES & VERSE — BG 2 ══════ -->
+<div class="page-wrap bg2">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans3.png" alt="">
+ <div class="page-content reveal" id="p2" style="justify-content:space-evenly; padding:35vw 10vw 18vw;">
+    <p class="t-label">Matthew 19:6</p>
+    <p class="t-verse">"What therefore God has joined together,<br>let no man put asunder."</p>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <div class="parents-wrap">
+      <div>
+        <p class="t-label" style="font-size:2.2vw;">Groom's Parents</p>
+        <p class="t-parent">Robert &amp; Christine Martin</p>
+      </div>
+      <div>
+        <p class="t-label" style="font-size:2.2vw;">Bride's Parents</p>
+        <p class="t-parent">Michael &amp; Anne Clarke</p>
+      </div>
+    </div>
+    <p class="t-honor">Request the honor of your presence<br>at the wedding of their son and daughter</p>
+    <h2 class="t-bigname">Thomas</h2>
+    <p class="t-and">and</p>
+    <h2 class="t-bigname">Sarah</h2>
+  </div>
+</div>
+
+<!-- ══════ PAGE 3 — WEDDING DAY — BG 1 ══════ -->
+<div class="page-wrap bg1">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans4.png" alt="">
+  <div class="page-content reveal" id="p3" style="padding:35vw 8vw 12vw;">
+    <p class="t-section">Wedding Day</p>
+    <p class="t-sub">August 14, 2027</p>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <div class="cal-box">
+      <p class="t-label" style="font-size:2.5vw; text-align:center; margin-bottom:3vw;">August 2027</p>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+    <div class="countdown">
+      <div class="flip"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+      <div class="flip"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+      <div class="flip"><div class="num" id="cd-m">--</div><div class="lbl">Min</div></div>
+      <div class="flip"><div class="num" id="cd-s">--</div><div class="lbl">Sec</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE 4 — THE CELEBRATION — BG 2 ══════ -->
+<div class="page-wrap bg2">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans3.png" alt="">
+  <div class="page-content reveal" id="p4" style="padding:35vw 8vw 12vw;">
+    <p class="t-section">The Celebration</p>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <div class="tl-wrap">
+      <div class="tl-row reveal d1">
+        <div class="tl-left"><div class="tl-time">6:00 PM</div><div class="tl-venue">St. Mourra Church<br>Ehden</div></div>
+        <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Rings-removebg-preview.png" alt=""></div>
+        <div class="tl-right"><div class="tl-label">We do</div></div>
+      </div>
+      <div class="tl-row reveal d2">
+        <div class="tl-left"><div class="tl-time">7:30 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+        <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Drink-removebg-preview.png" alt=""></div>
+        <div class="tl-right"><div class="tl-label">We drink</div></div>
+      </div>
+      <div class="tl-row reveal d3">
+        <div class="tl-left"><div class="tl-time">8:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+        <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Dine-removebg-preview.png" alt=""></div>
+        <div class="tl-right"><div class="tl-label">We dine</div></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><div class="tl-time">9:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+        <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Dance-removebg-preview.png" alt=""></div>
+        <div class="tl-right"><div class="tl-label">We dance</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE 5 — GIFT REGISTRY — BG 1 ══════ -->
+<div class="page-wrap bg1">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans4.png" alt="">
+  <div class="page-content reveal" style="padding:35vw 8vw 12vw;">
+    <p class="t-section">Gift Registry</p>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <p style="font-family:'IM Fell English',serif; font-size:3.8vw; line-height:2.2; color:var(--forest); font-style:italic; max-width:80%; margin:0 auto 6vw;">
+      Your love, laughter, and presence are all we could wish for.<br>
+      For those who wish, a wedding list is available at all Whish Money branches.
+    </p>
+    <div class="gift-box">
+      <p class="t-label" style="font-size:2.8vw; margin-bottom:2vw;">Whish Money</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:6vw; color:var(--forest-dk);">ACC# 2024975</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE 6 — PHOTOS — BG 2 ══════ -->
+<div class="page-wrap bg2">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans3.png" alt="">
+  <div class="page-content reveal" style="padding:35vw 8vw 10vw; justify-content:flex-start;">
+    <p class="t-section" style="margin-bottom:1.5vw;">Our Story</p>
+    <p class="t-sub" style="margin-bottom:6vw;">A glimpse of us</p>
+
+    <!-- ── Swipeable Carousel ── -->
+    <div class="carousel-wrap" id="carousel">
+      <div class="carousel-track" id="carousel-track">
+        <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="Photo 1"></div>
+        <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop" alt="Photo 2"></div>
+        <div class="carousel-slide"><img loading="lazy" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/weddd.jpg" alt="Photo 3"></div>
+        <div class="carousel-slide"><img loading="lazy" src="https://images.pexels.com/photos/182006/pexels-photo-182006.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Photo 4"></div>
+        <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" alt="Photo 5"></div>
+        <div class="carousel-slide"><img loading="lazy" src="https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Photo 6"></div>
+      </div>
+      <button class="carousel-arrow prev" onclick="carouselMove(-1)">‹</button>
+      <button class="carousel-arrow next" onclick="carouselMove(1)">›</button>
+    </div>
+    <div class="carousel-counter" id="carousel-counter">1 / 6</div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+
+  </div>
+</div>
+
+<!-- ══════ PAGE 7 — RSVP — BG 1 ══════ -->
+<div class="page-wrap bg1">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans4.png" alt="">
+  <div class="page-content reveal" style="padding:35vw 8vw 12vw;">
+    <p class="t-section">RSVP</p>
+    <p class="t-sub" style="margin-bottom:1.5vw;">Kindly reply before 1st of August 2027</p>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <div class="rsvp-box">
+      <div class="step-dots">
+        <div class="step-dot on" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+      </div>
+      <div id="s1" class="rsvp-step">
+        <p style="font-family:'Great Vibes',cursive; text-align:center; font-size:9vw; color:var(--forest-dk); margin-bottom:4vw;">Dear Guest,</p>
+        <label class="form-label">Your Full Name</label>
+        <input id="f-name" type="text" class="form-field" placeholder="e.g. Sarah &amp; Mark Johnson">
+        <p class="error-msg" id="e-name">Please enter your name.</p>
+        <button class="btn-rose btn-solid" style="margin-top:5vw;" onclick="goStep(1,2)">Continue →</button>
+      </div>
+      <div id="s2" class="rsvp-step" style="display:none;">
+        <label class="form-label">Will you be attending?</label>
+        <div class="attend-grid">
+          <label class="attend-opt"><input type="radio" name="attend" value="yes"><div class="attend-box"><div class="attend-label">Joyfully accepts</div></div></label>
+          <label class="attend-opt"><input type="radio" name="attend" value="no"><div class="attend-box"><div class="attend-label">Regretfully declines</div></div></label>
+        </div>
+        <div id="count-wrap" style="display:none; margin-bottom:3vw;">
+          <label class="form-label">Number of guests</label>
+          <div class="count-row">
+            <button class="count-btn" onclick="chCount(-1)">−</button>
+            <span class="count-num" id="cnt-disp">1</span>
+            <button class="count-btn" onclick="chCount(1)">+</button>
+          </div>
+        </div>
+        <p class="error-msg" id="e-attend">Please select an option.</p>
+        <div class="btn-grid">
+          <button class="btn-rose" onclick="goStep(2,1)">← Back</button>
+          <button class="btn-rose btn-solid" onclick="goStep(2,3)">Continue →</button>
+        </div>
+      </div>
+      <div id="s3" class="rsvp-step" style="display:none;">
+        <label class="form-label">Leave a wish <span style="color:rgba(74,107,58,.4); font-size:2.5vw;">(optional)</span></label>
+        <textarea id="f-msg" class="form-field" rows="4" placeholder="Share a wish for Thomas &amp; Sarah…"></textarea>
+        <div class="btn-grid">
+          <button class="btn-rose" onclick="goStep(3,2)">← Back</button>
+          <button class="btn-rose btn-solid" onclick="submitRSVP()">Send ✦</button>
+        </div>
+      </div>
+      <div id="s-ok" style="display:none; text-align:center; padding:5vw 0;">
+        <div style="font-size:10vw; margin-bottom:3vw;">🌿</div>
+        <h3 style="font-family:'Great Vibes',cursive; font-size:11vw; color:var(--forest-dk); margin-bottom:2vw;">Thank you!</h3>
+        <p id="ok-msg" style="font-size:3.5vw; line-height:1.8; color:var(--forest);"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ FOOTER — BG 2 ══════ -->
+<div class="page-wrap bg2">
+  <img class="torn-header" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Elvish/Trans3.png" alt="">
+  <div class="page-content" style="padding:35vw 8vw 8vw;">
+    <p style="font-family:'Great Vibes',cursive; font-size:11vw; color:var(--forest-dk); margin-bottom:2vw;">Thomas &amp; Sarah</p>
+    <p class="t-label" style="font-size:2.8vw; color:var(--forest);">August 14, 2027 · Ehden, Lebanon</p>
+    <div class="divider" style="margin:4vw auto;"><span class="divider-icon">✦</span></div>
+    <p style="font-size:2.5vw; color:var(--forest); font-style:italic; letter-spacing:.1em;">cardia.studios@gmail.com</p>
+  </div>
+</div>
+
+</div><!-- end #inv -->
+
+<script>
+/* ── Open invitation ── */
+function openInv() {
+  const c = document.getElementById('inv');
+  c.classList.add('open');
+  setTimeout(() => c.classList.add('visible'), 20);
+  setTimeout(() => document.getElementById('p2').scrollIntoView({ behavior: 'smooth' }), 100);
+  setTimeout(() => document.querySelectorAll('#inv .reveal').forEach(el => ro.observe(el)), 300);
+}
+
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.page-wrap:first-child .reveal').forEach(el => ro.observe(el));
+
+/* ── Calendar ── */
+(function() {
+  const grid = document.getElementById('cal-grid');
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => {
+    const el = document.createElement('div'); el.className = 'cal-cell hdr'; el.textContent = d; grid.appendChild(el);
+  });
+  for(let i=0; i<6; i++) { const el = document.createElement('div'); el.className = 'cal-cell empty'; el.textContent = '.'; grid.appendChild(el); }
+  for(let d=1; d<=31; d++) {
+    const el = document.createElement('div'); el.className = 'cal-cell';
+    if(d===14) {
+  el.className += ' highlight';
+  el.innerHTML =
+    '<span style="position:relative;z-index:1;font-family:Cinzel,serif;">'+d+'</span>'
+    +'<svg viewBox="0 0 44 44" fill="none" style="position:absolute;inset:0;width:100%;height:100%;filter: drop-shadow(0 0 1.5px rgba(74,107,58,0.4));">'
+    +'<path d="M22 33C22 33 10 25 10 17C10 12.5 13.5 10 17 10C19.5 10 21 11.5 22 13C23 11.5 24.5 10 27 10C30.5 10 34 12.5 34 17C34 25 22 33 22 33Z" stroke="#4a6b3a" stroke-width="1.2" fill="none" opacity="0.85"/>'
+    +'</svg>';
+} else { el.textContent = d; }
+    grid.appendChild(el);
+  }
+})();
+
+/* ── Countdown ── */
+const TARGET = new Date('2027-08-14T18:00:00');
+function tick() {
+  const diff = Math.max(0, TARGET - new Date());
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent = Math.floor(diff/86400000);
+  document.getElementById('cd-h').textContent = pad(Math.floor(diff/3600000)%24);
+  document.getElementById('cd-m').textContent = pad(Math.floor(diff/60000)%60);
+  document.getElementById('cd-s').textContent = pad(Math.floor(diff/1000)%60);
+}
+tick(); setInterval(tick,1000);
+
+/* ── Photo Carousel ── */
+(function() {
+  const track = document.getElementById('carousel-track');
+  const dotsWrap = document.getElementById('carousel-dots');
+  const counter = document.getElementById('carousel-counter');
+  const total = track.children.length;
+  let current = 0;
+
+  // Build dots
+  for(let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  window.carouselMove = function(dir) { goTo(current + dir); };
+
+  // Touch/swipe support
+  let startX = 0;
+  const carousel = document.getElementById('carousel');
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  carousel.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();
+
+/* ── RSVP ── */
+let gCount = 1;
+document.querySelectorAll('input[name="attend"]').forEach(r => {
+  r.addEventListener('change', () => { document.getElementById('count-wrap').style.display = r.value==='yes' ? 'block' : 'none'; });
+});
+function chCount(d) { gCount = Math.max(1, Math.min(10, gCount+d)); document.getElementById('cnt-disp').textContent = gCount; }
+function goStep(from, to) {
+  if(from===1) { const v = document.getElementById('f-name').value.trim(); if(!v) { document.getElementById('e-name').style.display='block'; return; } document.getElementById('e-name').style.display='none'; }
+  if(from===2 && to===3) { const att = document.querySelector('input[name="attend"]:checked'); if(!att) { document.getElementById('e-attend').style.display='block'; return; } document.getElementById('e-attend').style.display='none'; if(att.value==='no') { submitRSVP(); return; } }
+  document.getElementById('s'+from).style.display='none';
+  document.getElementById('s'+to).style.display='block';
+  [1,2,3].forEach(i => document.getElementById('dot-'+i).classList.toggle('on', i<=to));
+}
+const COUPLE_NAME = 'Thomas & Sarah', CLIENT_EMAIL = 'nemer.david9@gmail.com';
+function submitRSVP() {
+  const name = document.getElementById('f-name').value.trim();
+  const att = document.querySelector('input[name="attend"]:checked');
+  const msg = document.getElementById('f-msg') ? document.getElementById('f-msg').value.trim() : '';
+  const yes = att && att.value === 'yes';
+  const sendBtn = document.querySelector('#s3 .btn-solid');
+  if(sendBtn) { sendBtn.textContent = 'Sending...'; sendBtn.disabled = true; }
+  fetch('https://formsubmit.co/ajax/' + CLIENT_EMAIL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ _subject: 'New RSVP - ' + COUPLE_NAME, _template: 'table', name, attending: yes?'Yes':'No', guests: yes?gCount:0, message: msg||'(none)' })
+  }).then(r => r.json()).then(data => {
+    if(data.success==='true' || data.success===true) {
+      ['s1','s2','s3'].forEach(id => document.getElementById(id).style.display='none');
+      document.querySelector('.step-dots').style.display='none';
+      document.getElementById('s-ok').style.display='block';
+      document.getElementById('ok-msg').innerHTML = yes
+        ? "We're so excited to celebrate with you, <strong>"+name+"</strong>!<br>See you on August 14th! 🌿"
+        : "We'll miss you, <strong>"+name+"</strong>.<br>Thank you for letting us know.";
+    } else { throw new Error(); }
+  }).catch(() => { if(sendBtn) { sendBtn.textContent='Send ✦'; sendBtn.disabled=false; } alert('Something went wrong. Please try again.'); });
+}
+</script>
+</body>
+</html>

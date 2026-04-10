@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+    <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Digital Wedding Invitations — By Nemer</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+          
+          <style>
+          :root {
+            --bg:      #f7f3ee;
+              --bg2:     #ede8e0;
+              --ink:     #2a2018;
+              --ink-lt:  #6b5a48;
+              --rose:    #9a6a58;
+              --rose-lt: #c8988a;
+              --gold:    #b8903c;
+              --gold-lt: #d4b870;
+              --border:  rgba(155,120,90,.2);
+          }
+        
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+        
+        /* ── Hero ── */
+          .hero {
+            width: 100%; min-height: 100svh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 6rem 2rem 4rem;
+            position: relative; overflow: hidden;
+            background: var(--ink);
+          }
+        .hero-bg {
+          position: absolute; inset: 0;
+          background:
+            radial-gradient(ellipse at 30% 40%, rgba(154,106,88,.25) 0%, transparent 55%),
+          radial-gradient(ellipse at 70% 60%, rgba(184,144,60,.15) 0%, transparent 55%),
+          url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+          background-size: cover, cover, 180px 180px;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; }
+        .hero-tag {
+          display: inline-block; padding: .4rem 1.2rem;
+          border: 1px solid rgba(184,144,60,.4);
+          font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+          color: var(--gold-lt); margin-bottom: 2rem;
+        }
+        .hero h1 {
+          font-family: 'Cormorant Garamond', serif; font-weight: 300;
+          font-size: clamp(2.8rem, 10vw, 5.5rem); line-height: 1.05;
+          color: #f5f0e8; margin-bottom: .5rem;
+        }
+        .hero h1 em {
+          font-style: italic; color: var(--gold-lt);
+          display: block; font-size: clamp(2.2rem, 8vw, 4.5rem);
+        }
+        .hero-sub {
+          font-size: .75rem; font-weight: 300; letter-spacing: .18em;
+          text-transform: uppercase; color: rgba(200,180,160,.6);
+          margin: 1.5rem 0 2.5rem;
+        }
+        .hero-cta {
+          display: inline-block; padding: .9rem 2.5rem;
+          background: transparent; border: 1px solid rgba(184,144,60,.5);
+          color: var(--gold-lt); font-family: 'Jost', sans-serif;
+          font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+          cursor: pointer; text-decoration: none;
+          transition: background .3s, border-color .3s;
+        }
+        .hero-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
+        
+        /* ── Floating scroll indicator ── */
+          .scroll-hint {
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+display: flex; flex-direction: column; align-items: center; gap: .5rem;
+color: rgba(200,180,160,.4); font-size: .55rem; letter-spacing: .2em; text-transform: uppercase;
+animation: fadeInUp 2s ease 1s both;
+          }
+        .scroll-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(200,180,160,.4), transparent); animation: pulse 2s ease infinite; }
+        @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+        @keyframes fadeInUp { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+        
+        /* ── Section header ── */
+          .section-header {
+            text-align: center; padding: 5rem 2rem 3rem;
+            background: var(--bg);
+          }
+        .section-header h2 {
+          font-family: 'Cormorant Garamond', serif; font-weight: 400;
+          font-size: clamp(2rem, 5vw, 3rem); color: var(--ink);
+        }
+        .section-header p {
+          font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+          color: var(--rose-lt); margin-top: .75rem;
+        }
+        .gold-line {
+          width: 60px; height: 1px; background: var(--gold);
+          margin: 1.25rem auto 0; opacity: .5;
+        }
+        
+        /* ── Template grid ── */
+          .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2px;
+            background: var(--bg2);
+            padding: 2px;
+            max-width: 1400px;
+            margin: 0 auto;
+          }
+        
+        /* ── Template card ── */
+          .template-card {
+            position: relative; overflow: hidden;
+            background: var(--bg);
+            cursor: pointer;
+            aspect-ratio: 9/14;
+            transition: transform .4s cubic-bezier(.16,1,.3,1);
+          }
+        .template-card:hover { z-index: 10; transform: scale(1.015); }
+        
+        /* Card preview — full iframe */
+          .card-preview {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: none; pointer-events: none;
+            transform-origin: top left;
+          }
+        
+        /* Overlay with info */
+          .card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(20,12,6,.92) 0%, rgba(20,12,6,.4) 40%, transparent 70%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 1.75rem 1.5rem;
+            opacity: 0; transition: opacity .35s ease;
+          }
+        .template-card:hover .card-overlay { opacity: 1; }
+        
+        /* Always-visible badge */
+          .card-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            padding: .3rem .85rem;
+            background: rgba(20,12,6,.75); backdrop-filter: blur(8px);
+            border: 1px solid rgba(200,180,160,.2);
+            font-size: .5rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(240,220,200,.8);
+          }
+        .card-number {
+          position: absolute; top: 1rem; right: 1rem;
+          font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300;
+          color: rgba(200,180,160,.35);
+        }
+        
+        .card-name {
+          font-family: 'Cormorant Garamond', serif; font-weight: 400;
+          font-size: 1.6rem; color: #f5f0e8; margin-bottom: .4rem;
+        }
+        .card-desc { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(200,180,160,.7); margin-bottom: 1rem; }
+        .card-btn {
+          display: inline-block; padding: .7rem 1.5rem;
+          border: 1px solid rgba(200,180,160,.5); color: #f5f0e8;
+            font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+          text-decoration: none; align-self: flex-start;
+          transition: background .25s, border-color .25s;
+        }
+        .card-btn:hover { background: rgba(200,180,160,.15); border-color: rgba(200,180,160,.8); }
+        
+        /* Colored accents per card */
+          .card-classic   { --accent: #c9a96e; }
+              .card-dark      { --accent: #c9a84c; }
+                  .card-soft      { --accent: #c9958a; }
+                      .card-vintage   { --accent: #c4a456; }
+                          .card-garden    { --accent: #7a9e7e; }
+                              .card-midnight  { --accent: #8aaa98; }
+                                  .card-terracotta{ --accent: #c4674a; }
+                                      .card-elvish    { --accent: #2d6e3a; }
+                                          
+                                          .template-card .card-badge { border-color: rgba(var(--accent-rgb, 200,169,110),.3); }
+                                        
+                                        /* ── Color strip at bottom of each card ── */
+                                          .card-strip {
+                                            position: absolute; bottom: 0; left: 0; right: 0;
+                                            height: 3px;
+                                            background: var(--accent, var(--gold));
+                                            transform: scaleX(0); transform-origin: left;
+                                            transition: transform .4s cubic-bezier(.16,1,.3,1);
+                                          }
+                                        .template-card:hover .card-strip { transform: scaleX(1); }
+                                        
+                                        /* ── How it works ── */
+                                          .how-section {
+                                            background: var(--ink);
+                                            padding: 5rem 2rem;
+                                            text-align: center;
+                                          }
+                                        .how-section h2 {
+                                          font-family: 'Cormorant Garamond', serif; font-weight: 300;
+                                          font-size: clamp(1.8rem, 4vw, 2.6rem); color: #f5f0e8;
+                                            margin-bottom: .75rem;
+                                        }
+                                        .how-section p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(200,180,160,.5); margin-bottom: 3rem; }
+                                        .steps {
+                                          display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                                          gap: 2rem; max-width: 900px; margin: 0 auto;
+                                        }
+                                        .step { color: #f0ebe0; }
+                                            .step-num {
+                                              font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
+                                              color: var(--gold); opacity: .5; line-height: 1; margin-bottom: .75rem;
+                                            }
+                                          .step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: .5rem; }
+                                          .step p { font-size: .72rem; line-height: 1.8; color: rgba(200,180,160,.6); font-weight: 300; }
+                                          
+                                          /* ── Pricing ── */
+                                            .pricing-section { background: var(--bg); padding: 5rem 2rem; text-align: center; }
+                                          .pricing-section h2 {
+                                            font-family: 'Cormorant Garamond', serif; font-weight: 400;
+                                            font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--ink); margin-bottom: .5rem;
+                                          }
+                                          .pricing-section > p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--rose-lt); margin-bottom: 3rem; }
+                                          .pricing-cards {
+                                            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                                            gap: 1.5rem; max-width: 860px; margin: 0 auto;
+                                          }
+                                          .price-card {
+                                            border: 1px solid var(--border); padding: 2.5rem 1.5rem;
+                                            background: var(--bg2); text-align: center; position: relative;
+                                          }
+                                          .price-card.featured {
+                                            border-color: var(--gold); background: var(--ink); color: #f0ebe0;
+                                          }
+                                          .price-card.featured .price-name,
+                                          .price-card.featured .price-desc { color: rgba(200,180,160,.7); }
+                                          .price-card.featured .price-amount { color: var(--gold-lt); }
+                                          .price-card.featured .price-feature { color: rgba(240,220,200,.8); }
+                                          .price-badge {
+                                            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+background: var(--gold); padding: .25rem 1rem;
+font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+white-space: nowrap;
+                                          }
+                                          .price-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--ink); }
+                                          .price-amount {
+                                            font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
+                                            color: var(--rose); line-height: 1; margin: 1rem 0 .25rem;
+                                          }
+                                          .price-currency { font-size: 1rem; vertical-align: super; }
+                                          .price-period { font-size: .6rem; color: rgba(150,130,110,.7); }
+                                          .price-desc { font-size: .65rem; letter-spacing: .1em; color: var(--ink-lt); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+                                          .price-features { list-style: none; margin-bottom: 1.5rem; }
+                                          .price-feature { font-size: .72rem; padding: .4rem 0; color: var(--ink-lt); }
+                                          .price-feature::before { content: "✦"; color: var(--gold); margin-right: .5rem; font-size: .5rem; }
+                                          .price-cta {
+                                            display: block; width: 100%; padding: .8rem;
+                                            border: 1px solid var(--rose); color: var(--rose);
+                                            font-family: 'Jost', sans-serif; font-size: .65rem; letter-spacing: .18em;
+                                            text-transform: uppercase; background: transparent; cursor: pointer;
+                                            transition: all .25s; text-decoration: none;
+                                          }
+                                          .price-cta:hover { background: var(--rose); color: #fff; }
+                                              .price-card.featured .price-cta { border-color: var(--gold); color: var(--gold-lt); }
+                                            .price-card.featured .price-cta:hover { background: var(--gold); color: var(--ink); }
+                                            
+                                            /* ── Contact / Footer ── */
+                                              .contact-section {
+                                                background: var(--ink); padding: 5rem 2rem; text-align: center;
+                                                position: relative; overflow: hidden;
+                                              }
+                                            .contact-section::before {
+                                              content: "";
+                                              position: absolute; inset: 0;
+                                              background: radial-gradient(ellipse at 50% 0%, rgba(184,144,60,.1) 0%, transparent 60%);
+                                            }
+                                            .contact-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+                                            .contact-section h2 {
+                                              font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 4rem);
+                                              color: var(--gold-lt); margin-bottom: .5rem;
+                                            }
+                                            .contact-section h3 {
+                                              font-family: 'Cormorant Garamond', serif; font-weight: 300;
+                                              font-size: 1.1rem; color: rgba(200,180,160,.7);
+                                              letter-spacing: .15em; text-transform: uppercase; margin-bottom: 3rem;
+                                            }
+                                            .contact-items { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+                                            .contact-item {
+                                              display: flex; align-items: center; justify-content: center; gap: 1rem;
+                                              padding: 1.25rem 2rem;
+                                              border: 1px solid rgba(200,180,160,.12);
+                                              background: rgba(255,255,255,.03);
+                                              transition: border-color .25s;
+                                            }
+                                            .contact-item:hover { border-color: rgba(200,180,160,.35); }
+                                            .contact-icon { font-size: 1.2rem; opacity: .7; }
+                                            .contact-label { font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.4); margin-bottom: .2rem; }
+                                            .contact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #f0ebe0; }
+                                                .contact-value a { color: inherit; text-decoration: none; }
+                                              .contact-value a:hover { color: var(--gold-lt); }
+                                              
+                                              .contact-cta {
+                                                display: inline-block; padding: 1rem 3rem;
+                                                background: transparent; border: 1px solid rgba(184,144,60,.5);
+                                                color: var(--gold-lt); font-family: 'Jost', sans-serif;
+                                                font-size: .7rem; letter-spacing: .25em; text-transform: uppercase;
+                                                text-decoration: none; transition: all .3s;
+                                              }
+                                              .contact-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
+                                              
+                                              .footer-note {
+                                                margin-top: 4rem; padding-top: 2rem;
+                                                border-top: 1px solid rgba(200,180,160,.08);
+                                                font-size: .6rem; letter-spacing: .12em; color: rgba(200,180,160,.25);
+                                              }
+                                              
+                                              /* ── Reveal animations ── */
+                                                .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+                                              .reveal.visible { opacity: 1; transform: none; }
+                                              
+                                              /* ── Nav ── */
+                                                .nav {
+                                                  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                                                  padding: 1.25rem 2rem;
+                                                  display: flex; align-items: center; justify-content: space-between;
+                                                  background: rgba(42,32,24,.0); transition: background .4s, backdrop-filter .4s;
+                                                }
+                                              .nav.scrolled { background: rgba(42,32,24,.92); backdrop-filter: blur(12px); }
+                                              .nav-logo {
+                                                font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--gold-lt);
+                                                text-decoration: none;
+                                              }
+                                              .nav-links { display: flex; gap: 2rem; }
+                                              .nav-link {
+                                                font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+                                                color: rgba(200,180,160,.7); text-decoration: none; transition: color .25s;
+                                              }
+                                              .nav-link:hover { color: var(--gold-lt); }
+                                              
+                                              @media (max-width: 640px) {
+                                                .nav-links { display: none; }
+                                                .templates-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
+                                                .card-overlay { opacity: 1; background: linear-gradient(to top, rgba(20,12,6,.88) 0%, rgba(20,12,6,.2) 50%, transparent 80%); }
+                                                .card-name { font-size: 1.1rem; }
+                                                .card-desc { display: none; }
+                                                .card-btn { padding: .5rem 1rem; font-size: .55rem; }
+                                              }
+                                              </style>
+                                                </head>
+                                                <body>
+                                                
+                                                <!-- ── Nav ── -->
+                                                <nav class="nav" id="nav">
+                                                <a href="#" class="nav-logo">By Nemer</a>
+                                                <div class="nav-links">
+                                                <a href="#templates" class="nav-link">Templates</a>
+                                                <a href="#how" class="nav-link">How it works</a>
+                                                <a href="#pricing" class="nav-link">Pricing</a>
+                                                <a href="#contact" class="nav-link">Contact</a>
+                                                </div>
+                                                </nav>
+                                                
+                                                <!-- ── Hero ── -->
+                                                <section class="hero">
+                                                <div class="hero-bg"></div>
+                                                <div class="hero-content">
+                                                <div class="hero-tag">Digital Wedding Invitations</div>
+                                                <h1>Your love story,<em>beautifully told.</em></h1>
+                                                <p class="hero-sub">8 exclusive designs · Crafted with care · Delivered in 24h</p>
+                                                <a href="#templates" class="hero-cta">Explore Templates</a>
+                                                </div>
+                                                <div class="scroll-hint">
+                                                <div class="scroll-arrow"></div>
+                                                <span>Scroll</span>
+                                                </div>
+                                                </section>
+                                                
+                                                <!-- ── Templates ── -->
+                                                <section id="templates">
+                                                <div class="section-header reveal">
+                                                <h2>Our Collection</h2>
+                                                <p>Eight exclusive designs, one for every love story</p>
+                                                <div class="gold-line"></div>
+                                                </div>
+                                                
+                                                <div class="templates-grid">
+
+
+
+
+                                                <!-- 1. Terracotta -->
+                                                <div class="template-card card-terracotta reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">01</div>
+                                                <iframe class="card-preview" src="wedding-invitation_terracotta.html" loading="lazy" scrolling="no" title="Terracotta"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Terracotta & Clay</div>
+                                                <div class="card-desc">Warm earthy tones · Boho · Natural</div>
+                                                <a href="wedding-invitation_terracotta.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#c4674a;"></div>
+                                                </div>
+                                                  
+                                            
+                                                
+                                                <!-- 2. Dark & Moody -->
+                                                <div class="template-card card-dark reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">02</div>
+                                                <iframe class="card-preview" src="wedding-invitation_dark.html" loading="lazy" scrolling="no" title="Dark"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Dark & Moody</div>
+                                                <div class="card-desc">Deep charcoal · Gold · Dramatic</div>
+                                                <a href="wedding-invitation_dark.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#c9a84c;"></div>
+                                                </div>
+                                                
+                                                <!-- 3. Soft & Minimal -->
+                                                <div class="template-card card-soft reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">03</div>
+                                                <iframe class="card-preview" src="wedding-invitation_soft.html" loading="lazy" scrolling="no" title="Soft"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Soft & Minimal</div>
+                                                <div class="card-desc">Blush · Minimal · Pure elegance</div>
+                                                <a href="wedding-invitation_soft.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#c9958a;"></div>
+                                                </div>
+                                                
+                                                <!-- 4. Vintage -->
+                                                <div class="template-card card-vintage reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">04</div>
+                                                <iframe class="card-preview" src="wedding-invitation_vintage.html" loading="lazy" scrolling="no" title="Vintage"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Vintage & Romantic</div>
+                                                <div class="card-desc">Aged parchment · Sepia · Ornate frames</div>
+                                                <a href="wedding-invitation_vintage.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#c4a456;"></div>
+                                                </div>
+                                                
+                                                <!-- 5. Garden -->
+                                                <div class="template-card card-garden reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">05</div>
+                                                <iframe class="card-preview" src="wedding-invitation_garden.html" loading="lazy" scrolling="no" title="Garden"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Garden & Floral</div>
+                                                <div class="card-desc">Sage green · Botanical · Fresh</div>
+                                                <a href="wedding-invitation_garden.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#7a9e7e;"></div>
+                                                </div>
+                                                
+                                                <!-- 6. Midnight -->
+                                                <div class="template-card card-midnight reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">06</div>
+                                                <iframe class="card-preview" src="wedding-invitation_night.html" loading="lazy" scrolling="no" title="Midnight"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Midnight Blue</div>
+                                                <div class="card-desc">Navy · Silver · Twinkling stars</div>
+                                                <a href="wedding-invitation_night.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#8aaa98;"></div>
+                                                </div>
+                                                
+                                                <!-- 7. Classic -->
+                                                <div class="template-card card-classic reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">07</div>
+                                                <iframe class="card-preview" src="wedding-invitation_classic.html" loading="lazy" scrolling="no" title="Classic"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Classic</div>
+                                                <div class="card-desc">Warm paper · Torn edges · Gold accents</div>
+                                                <a href="wedding-invitation_classic.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#c9a96e;"></div>
+                                                </div>
+                                                
+                                                <!-- 8. Elvish -->
+                                                <div class="template-card card-elvish reveal">
+                                                <div class="card-badge">Wedding</div>
+                                                <div class="card-number">08</div>
+                                                <iframe class="card-preview" src="wedding-invitation_lotr.html" loading="lazy" scrolling="no" title="Elvish"></iframe>
+                                                <div class="card-overlay">
+                                                <div class="card-name">Elvish Fantasy</div>
+                                                <div class="card-desc">Forest green · Gold · Fireflies · LOTR</div>
+                                                <a href="wedding-invitation_lotr.html" target="_blank" class="card-btn">View Template →</a>
+                                                </div>
+                                                <div class="card-strip" style="--accent:#2d6e3a;"></div>
+                                                </div>
+                                                
+                                                </div>
+                                                </section>
+                                                
+                                                <!-- ── How it works ── -->
+                                                <section class="how-section" id="how">
+                                                <h2 class="reveal">How It Works</h2>
+                                                <p class="reveal">Simple, fast, beautiful</p>
+                                                <div class="steps">
+                                                <div class="step reveal">
+                                                <div class="step-num">01</div>
+                                                <h3>Choose a design</h3>
+                                                <p>Browse our 8 exclusive templates and pick the one that speaks to your love story.</p>
+                                                </div>
+                                                <div class="step reveal">
+                                                <div class="step-num">02</div>
+                                                <h3>Send your details</h3>
+                                                <p>Share your names, date, venue, and any personal touches you'd like included.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>We customize it</h3>
+      <p>Your invitation is personalized with your details, photos, and RSVP email — ready in 24h.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <h3>Share with guests</h3>
+      <p>Send a single link to all your guests. They RSVP directly — replies go straight to your inbox.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="pricing-section" id="pricing">
+  <h2 class="reveal">Simple Pricing</h2>
+  <p class="reveal">No hidden fees · One-time payment</p>
+  <div class="pricing-cards">
+
+    <div class="price-card reveal">
+      <div class="price-name">Essential</div>
+      <div class="price-amount"><span class="price-currency">$</span>49</div>
+      <div class="price-period">one-time</div>
+      <div class="price-desc">Perfect for intimate weddings</div>
+      <ul class="price-features">
+        <li class="price-feature">1 template of your choice</li>
+        <li class="price-feature">Fully personalized</li>
+        <li class="price-feature">RSVP form included</li>
+        <li class="price-feature">Delivered in 48h</li>
+        <li class="price-feature">1 revision</li>
+      </ul>
+      <a href="#contact" class="price-cta">Get Started</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Premium</div>
+      <div class="price-amount"><span class="price-currency">$</span>89</div>
+      <div class="price-period">one-time</div>
+      <div class="price-desc">The complete experience</div>
+      <ul class="price-features">
+        <li class="price-feature">1 template of your choice</li>
+        <li class="price-feature">Fully personalized</li>
+        <li class="price-feature">RSVP form + custom email</li>
+        <li class="price-feature">Your own photos included</li>
+        <li class="price-feature">Delivered in 24h</li>
+        <li class="price-feature">3 revisions</li>
+        <li class="price-feature">Guest name in URL</li>
+      </ul>
+      <a href="#contact" class="price-cta">Get Started</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-name">Deluxe</div>
+      <div class="price-amount"><span class="price-currency">$</span>129</div>
+      <div class="price-period">one-time</div>
+      <div class="price-desc">For the perfect wedding</div>
+      <ul class="price-features">
+        <li class="price-feature">Everything in Premium</li>
+        <li class="price-feature">Custom domain link</li>
+        <li class="price-feature">Background music</li>
+        <li class="price-feature">Unlimited revisions</li>
+        <li class="price-feature">Priority delivery in 12h</li>
+        <li class="price-feature">6 months hosting</li>
+      </ul>
+      <a href="#contact" class="price-cta">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section class="contact-section" id="contact">
+  <div class="contact-content">
+    <h2 class="reveal">Let's create something beautiful</h2>
+                                                <h3 class="reveal">Get in touch</h3>
+                                                
+                                                <div class="contact-items">
+                                                <div class="contact-item reveal">
+                                                <span class="contact-icon">📱</span>
+                                                <div>
+                                                <div class="contact-label">WhatsApp / Call</div>
+                                                <div class="contact-value">
+                                                <a href="tel:+96170123456">+961 70 123 456</a>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="contact-item reveal">
+                                                <span class="contact-icon">✉️</span>
+                                                <div>
+                                                <div class="contact-label">Email</div>
+                                                <div class="contact-value">
+                                                <a href="mailto:velvetinvites@gmail.com">velvetinvites@gmail.com</a>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="contact-item reveal">
+                                                <span class="contact-icon">📸</span>
+                                                <div>
+                                                <div class="contact-label">Instagram</div>
+                                                <div class="contact-value">
+                                                <a href="https://instagram.com/velvetinvites" target="_blank">@velvetinvites</a>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                
+                                                <a href="mailto:velvetinvites@gmail.com" class="contact-cta reveal">Send an Enquiry</a>
+                                                
+                                                <div class="footer-note reveal">
+                                                © 2025 By Nemer · Digital Wedding Invitations · All rights reserved
+                                              </div>
+                                                </div>
+                                                </section>
+                                                
+                                                <script>
+                                                /* Nav scroll effect */
+                                                const nav = document.getElementById('nav');
+                                              window.addEventListener('scroll', () => {
+                                                nav.classList.toggle('scrolled', window.scrollY > 60);
+                                              });
+                                              
+                                              /* Scroll reveal */
+                                                const ro = new IntersectionObserver(entries => {
+                                                  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+                                                }, { threshold: .08 });
+                                              document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+                                              
+                                              /* Scale iframes to fit card */
+                                                function scaleIframes() {
+                                                  document.querySelectorAll('.template-card').forEach(card => {
+                                                    const iframe = card.querySelector('.card-preview');
+                                                    if(!iframe) return;
+                                                    const cw = card.offsetWidth;
+                                                    const ch = card.offsetHeight;
+                                                    const scale = Math.min(cw / 390, ch / 844);
+                                                    iframe.style.width  = '390px';
+                                                    iframe.style.height = '844px';
+                                                    iframe.style.transform = `scale(${scale})`;
+                                                    iframe.style.transformOrigin = 'top left';
+                                                  });
+                                                }
+                                              window.addEventListener('resize', scaleIframes);
+                                              scaleIframes();
+                                              
+                                              /* Smooth scroll for nav links */
+                                                document.querySelectorAll('a[href^="#"]').forEach(a => {
+                                                  a.addEventListener('click', e => {
+                                                    const target = document.querySelector(a.getAttribute('href'));
+                                                    if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+                                                  });
+                                                });
+                                              </script>
+                                                </body>
+                                                </html>

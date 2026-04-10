@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+    <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Cardia Studios — Send Christina's Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Great+Vibes&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burgundy: #5a1a2a;
+  --gold: #c9a84c;
+  --gold-lt: #e8cc80;
+  --gold-dk: #a07828;
+  --ivory: #fdf6e8;
+  --ivory-dk: #f0e4c8;
+  --ink: #2a1a0a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; min-height: 100vh; background: radial-gradient(ellipse at center, #2e0e0e, #0a0404); font-family: 'EB Garamond', serif; color: var(--ink); display: flex; align-items: center; justify-content: center; padding: 20px; }
+
+.card {
+  background: var(--ivory);
+  width: 100%; max-width: 420px;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -6px 0 0 #1a0808, -10px 4px 30px rgba(0,0,0,.8), 0 10px 40px rgba(0,0,0,.5);
+  overflow: hidden;
+  background-image: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page.png');
+  background-size: cover;
+}
+
+.card-header {
+  padding: 28px 24px 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(160,120,40,.2);
+}
+.card-header .logo { font-family: 'Great Vibes', cursive; font-size: 28px; color: var(--burgundy); margin-bottom: 4px; }
+.card-header h1 { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold-dk); opacity: .8; }
+
+.card-body { padding: 24px; }
+
+.ornament { display: flex; align-items: center; gap: 8px; margin: 0 auto 20px; color: var(--gold); }
+.ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to var(--d,right), transparent, var(--gold-dk)); opacity: .5; }
+.ornament svg { width: 14px; flex-shrink: 0; }
+
+label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 6px;
+  opacity: .85;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid rgba(160,120,40,.4);
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  color: var(--ink);
+  background: transparent;
+  outline: none;
+  margin-bottom: 20px;
+  transition: border-color .2s;
+}
+input[type="text"]:focus { border-bottom-color: var(--gold-dk); }
+input[type="text"]::placeholder { color: rgba(90,26,42,.3); }
+
+.btn-generate {
+  width: 100%;
+  padding: 12px;
+  background: var(--burgundy);
+  border: 1px solid var(--gold-dk);
+  color: var(--gold-lt);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  margin-bottom: 20px;
+}
+.btn-generate:hover { background: #7a2a3a; }
+
+/* Result box */
+.result { display: none; }
+.result.visible { display: block; }
+
+.result-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 6px;
+  opacity: .85;
+}
+
+.preview-box {
+  background: rgba(240,230,200,.6);
+  border: 1px solid rgba(160,120,40,.25);
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.preview-dear {
+  font-family: 'Great Vibes', cursive;
+  font-size: 22px;
+  color: var(--burgundy);
+  display: block;
+  margin-bottom: 2px;
+}
+.preview-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: rgba(90,26,42,.6);
+  font-style: italic;
+}
+
+.link-box {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin-bottom: 8px;
+}
+.link-text {
+  flex: 1;
+  padding: 8px 10px;
+  background: rgba(240,230,200,.5);
+  border: 1px solid rgba(160,120,40,.25);
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  color: var(--ink);
+  word-break: break-all;
+  line-height: 1.5;
+  border-radius: 2px;
+}
+.btn-copy {
+  padding: 8px 14px;
+  background: var(--burgundy);
+  border: 1px solid var(--gold-dk);
+  color: var(--gold-lt);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .1em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s;
+  border-radius: 2px;
+}
+.btn-copy:hover { background: #7a2a3a; }
+.btn-copy.copied { background: #2a5a2a; border-color: #4a8a4a; }
+
+.btn-open {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid rgba(160,120,40,.35);
+  color: var(--burgundy);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+.btn-open:hover { background: rgba(90,26,42,.06); }
+
+.hint {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(90,26,42,.5);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* Guest list */
+.guest-list { margin-top: 20px; border-top: 1px solid rgba(160,120,40,.15); padding-top: 16px; }
+.guest-list-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-dk); opacity: .7; margin-bottom: 10px; }
+.guest-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(160,120,40,.1);
+  font-size: 13px; color: var(--ink);
+}
+.guest-item-name { font-family: 'EB Garamond', serif; flex: 1; }
+.guest-item-btns { display: flex; gap: 6px; }
+.guest-item-btn {
+  font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: .1em;
+  padding: 3px 8px; cursor: pointer; border-radius: 2px; transition: all .2s;
+}
+.guest-item-btn.copy { background: none; border: 1px solid rgba(160,120,40,.3); color: var(--gold-dk); }
+.guest-item-btn.copy:hover { border-color: var(--gold-dk); }
+.guest-item-btn.remove { background: none; border: 1px solid rgba(90,26,42,.2); color: var(--burgundy); }
+.guest-item-btn.remove:hover { background: rgba(90,26,42,.08); }
+.no-guests { font-family: 'EB Garamond', serif; font-style: italic; font-size: 13px; color: rgba(90,26,42,.4); text-align: center; padding: 8px 0; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="logo">Cardia Studios</div>
+    <h1>Christina's Invitation — Guest Manager</h1>
+  </div>
+  
+  <div class="card-body">
+    <div class="ornament"><svg viewBox="0 0 40 20" fill="none"><path d="M0 10 Q10 0 20 10 Q30 20 40 10" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="10" r="2" fill="currentColor"/></svg></div>
+      
+      <label>Guest Name</label>
+      <input type="text" id="guest-input" placeholder="e.g. Pierre & Nadia" oninput="onInput()">
+        
+        <button class="btn-generate" onclick="generate()">Generate Invitation Link ✦</button>
+          
+          <!-- Result -->
+          <div class="result" id="result">
+            <div class="result-label">Preview</div>
+              <div class="preview-box">
+                <span class="preview-dear" id="preview-dear"></span>
+                  <span class="preview-name">Christina's First Holy Communion · May 18, 2025</span>
+      </div>
+
+      <div class="result-label" style="margin-top:12px;">Link to send</div>
+      <div class="link-box">
+        <div class="link-text" id="link-text"></div>
+        <button class="btn-copy" id="btn-copy" onclick="copyLink()">Copy</button>
+      </div>
+      <a id="btn-open" class="btn-open" target="_blank">Open Invitation ↗</a>
+    </div>
+
+    <!-- Guest list -->
+    <div class="guest-list">
+      <div class="guest-list-label">Guest List</div>
+      <div id="guest-list-items"><div class="no-guests">No guests added yet</div></div>
+    </div>
+
+    <p class="hint">Type a name, generate the link,<br>then copy &amp; share via WhatsApp or SMS.</p>
+  </div>
+</div>
+
+<script>
+const BASE = 'https://nemerdavid.github.io/web-des/first-communion-bible.html';
+let guests = JSON.parse(localStorage.getItem('christina-guests') || '[]');
+
+function onInput() {
+  document.getElementById('result').classList.remove('visible');
+}
+
+function generate() {
+  const name = document.getElementById('guest-input').value.trim();
+  if(!name) { document.getElementById('guest-input').focus(); return; }
+
+  const link = BASE + '?guest=' + encodeURIComponent(name);
+
+  document.getElementById('preview-dear').textContent = 'Dear ' + name + ',';
+  document.getElementById('link-text').textContent = link;
+  document.getElementById('btn-open').href = link;
+  document.getElementById('btn-copy').textContent = 'Copy';
+  document.getElementById('btn-copy').classList.remove('copied');
+  document.getElementById('result').classList.add('visible');
+
+  // Add to guest list if not already there
+  if(!guests.includes(name)) {
+    guests.push(name);
+    localStorage.setItem('christina-guests', JSON.stringify(guests));
+    renderList();
+  }
+}
+
+function copyLink() {
+  const link = document.getElementById('link-text').textContent;
+  navigator.clipboard.writeText(link).then(() => {
+    const btn = document.getElementById('btn-copy');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = link; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('btn-copy');
+    btn.textContent = 'Copied!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyGuestLink(name) {
+  const link = BASE + '?guest=' + encodeURIComponent(name);
+  navigator.clipboard.writeText(link).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = link; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+function removeGuest(name) {
+  guests = guests.filter(g => g !== name);
+  localStorage.setItem('christina-guests', JSON.stringify(guests));
+  renderList();
+}
+
+function renderList() {
+  const el = document.getElementById('guest-list-items');
+  if(guests.length === 0) {
+    el.innerHTML = '<div class="no-guests">No guests added yet</div>';
+    return;
+  }
+  el.innerHTML = guests.map(name => `
+    <div class="guest-item">
+      <span class="guest-item-name">${name}</span>
+      <div class="guest-item-btns">
+        <button class="guest-item-btn copy" onclick="copyGuestLink('${name.replace(/'/g,"\\'")}')">Copy Link</button>
+                                                                                     <button class="guest-item-btn remove" onclick="removeGuest('${name.replace(/'/g,"\\'")}')">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Allow Enter key to generate
+document.getElementById('guest-input').addEventListener('keydown', e => {
+  if(e.key === 'Enter') generate();
+});
+
+renderList();
+</script>
+</body>
+</html>

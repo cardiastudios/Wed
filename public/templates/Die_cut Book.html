@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Wedding Invitation — Thomas & Sarah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sepia:    #5a2a0a;
+  --sepia-lt: #8a5a2a;
+  --sepia-dk: #3a1a05;
+  --red:      #8b1a1a;
+  --gold:     #b8862a;
+  --cream:    #faf4e8;
+  --cream-dk: #f0e4cc;
+  --border:   rgba(90,42,10,.3);
+  --bw: min(92vw, 420px);
+  --page-h: calc(var(--bw) * 1.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow-x: hidden; background: #1a0e05; font-family: 'EB Garamond', serif; color: var(--sepia-dk); user-select: none; }
+
+#petals-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* ══════ COVER ══════ */
+#scene-cover {
+  width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at center, #2e1a08 0%, #1a0e05 100%);
+}
+.cover-outer { position: relative; width: var(--bw); }
+.cover-spine {
+  position: absolute; top: 0; left: -8px; width: 8px; height: 100%;
+  background: linear-gradient(to right, #0e0804, #3a1e08, #0e0804);
+  border-radius: 4px 0 0 4px; z-index: 20; pointer-events: none;
+}
+.cover-wrap {
+  position: relative; width: var(--bw); height: var(--page-h);
+  overflow: hidden; border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(90,42,10,.4), -16px 14px 34px rgba(0,0,0,.7), 0 16px 36px rgba(0,0,0,.6);
+  cursor: pointer;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/die-cut%20book/Cover.png') center/cover no-repeat;
+}
+.cover-content {
+  position: absolute; top: 46%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; z-index: 2; width: 72%;
+  animation: fadeUp 1.2s ease both;
+}
+.cover-eyebrow {
+  font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 10px);
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--sepia-dk); font-weight: 900;
+  background: rgba(250,244,232,.35);
+  padding: 2px clamp(6px,2vw,10px);
+  border-radius: 2px;
+  margin-top: clamp(100px,1.5vw,120px); display: block;
+}
+.cover-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 15vw, 70px);
+  color: var(--sepia-dk);
+  text-shadow: 0 2px 8px rgba(255,255,255,.3);
+  line-height: 1.0; display: block;
+}
+.cover-amp {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(14px, 4.5vw, 22px);
+  color: var(--sepia); font-weight: 300;
+  display: block; margin: 2px 0;
+}
+.cover-date {
+  font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 10px);
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--sepia-dk); font-weight: 900;
+  background: rgba(250,244,232,.35);
+  padding: 2px clamp(6px,2vw,10px);
+  border-radius: 2px;
+  margin-top: clamp(5px,1.5vw,9px); display: block;
+}
+.cover-line {
+  width: 65%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--sepia-lt), transparent);
+  opacity: .5; margin: clamp(5px,1.5vw,8px) auto;
+}
+.cover-open-hint {
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 3; text-align: center;
+  animation: hintPulse 2s ease-in-out infinite; cursor: pointer;
+}
+.cover-open-hint span {
+  font-family: 'Cinzel', serif; font-size: clamp(7px,2.2vw,10px);font-weight: 999;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--sepia); display: block; margin-bottom: -5px;
+}
+.cover-open-hint svg { width: clamp(13px,3.8vw,17px); opacity: .7; }
+@keyframes hintPulse { 0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)} 50%{opacity:1;transform:translateX(-50%) translateY(-4px)} }
+@keyframes fadeUp { from{opacity:0;transform:translate(-50%,-40%)} to{opacity:1;transform:translate(-50%,-50%)} }
+
+/* ══════ OPEN BOOK ══════ */
+#scene-open {
+  display: none; width: 100vw; min-height: 100vh;
+  background: radial-gradient(ellipse at center, #2e1a08 0%, #1a0e05 100%);
+  align-items: center; justify-content: center; overflow-y: auto;
+  padding: 20px 0 30px;
+}
+#scene-open.visible { display: flex; }
+.open-book { width: var(--bw); position: relative; display: flex; flex-direction: column; align-items: stretch; }
+.open-spine {
+  position: absolute; top: 0; left: -8px; width: 8px; height: var(--page-h);
+  background: linear-gradient(to right, #0e0804, #3a1e08, #0e0804);
+  border-radius: 4px 0 0 4px; z-index: 5; pointer-events: none;
+}
+.book-spread {
+  width: 100%;
+  background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/die-cut%20book/Pages.png') center/cover no-repeat;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(90,42,10,.4), -16px 14px 34px rgba(0,0,0,.6), 0 16px 36px rgba(0,0,0,.5);
+  overflow: hidden; position: relative; perspective: 800px;
+}
+.book-spread::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,.08), transparent);
+  z-index: 5; pointer-events: none;
+}
+
+.flip-sheet {
+  position: absolute; inset: 0;
+  background: linear-gradient(to left, var(--cream-dk) 0%, var(--cream) 60%);
+  transform-origin: left center;
+  z-index: 10; border-radius: 4px 12px 12px 4px;
+  pointer-events: none; opacity: 0;
+  backface-visibility: hidden;
+}
+.flip-sheet.animate { animation: pageFlipLR .65s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes pageFlipLR {
+  0%   { opacity:1; transform: perspective(1200px) rotateY(0deg); }
+  35%  { opacity:1; transform: perspective(1200px) rotateY(-55deg); box-shadow: -10px 0 28px rgba(0,0,0,.2); }
+  70%  { opacity:.6; transform: perspective(1200px) rotateY(-110deg); }
+  100% { opacity:0; transform: perspective(1200px) rotateY(-180deg); }
+}
+
+.page {
+  display: none; flex-direction: column; align-items: center; text-align: center;
+  height: var(--page-h); overflow: hidden;
+  padding: clamp(12px,4.5vw,22px) clamp(18px,7vw,32px) clamp(20px,6vw,30px);
+  position: relative; z-index: 6; animation: pgIn .35s ease; justify-content: center;
+}
+.page.active { display: flex; }
+@keyframes pgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+/* Page 1 — push content down a bit to clear the die-cut top arch */
+#page-1 { padding-top: clamp(55px,16vw,85px); }
+#page-2 { padding-top: clamp(55px,16vw,85px); }
+#page-3 { padding-top: clamp(55px,16vw,85px); }
+#page-4 { padding-top: clamp(55px,16vw,85px); }
+#page-5 { padding-top: clamp(55px,16vw,85px); }
+#page-6 { padding-top: clamp(55px,16vw,85px); }
+#page-7 { padding-top: clamp(55px,16vw,85px); }
+
+/* Nav */
+.page-arrows {
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px clamp(14px,5vw,24px) 0; margin-top: 2px;
+}
+.page-arrow-btn {
+  font-family: 'Cinzel', serif; font-size: clamp(8px,2.8vw,12px);
+  letter-spacing: .1em; text-transform: uppercase; color: var(--gold);
+  background: none; border: none; padding: 0; cursor: pointer; transition: opacity .2s;
+}
+.page-arrow-btn:hover { opacity: .6; }
+.page-label { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); color: var(--gold); letter-spacing: .1em; opacity: .8; }
+
+/* Typography */
+.page-num { font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); color: var(--sepia-lt); letter-spacing: .15em; margin-bottom: clamp(3px,1.2vw,6px); opacity: .85; }
+.gold-div { display: flex; align-items: center; gap: clamp(5px,2vw,10px); margin: clamp(4px,1.5vw,8px) auto; width: 78%; color: var(--sepia-lt); }
+.gold-div::before { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--sepia-lt)); opacity: .5; }
+.gold-div::after  { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--sepia-lt)); opacity: .5; }
+.gold-div svg { flex-shrink: 0; }
+.book-eyebrow { font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .3em; text-transform: uppercase; color: var(--sepia); margin-bottom: clamp(4px,1.5vw,7px); opacity: .85; }
+.book-bigname { font-family: 'Great Vibes', cursive; font-size: clamp(34px,12vw,54px); color: var(--sepia-dk); line-height: 1.05; }
+.book-amp { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(15px,4.5vw,20px); color: var(--sepia-lt); margin: clamp(2px,1vw,4px) 0; }
+.book-verse { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px,3.4vw,15px); color: var(--sepia-dk); line-height: 1.65; max-width: 90%; }
+.book-verse-ref { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,10px); color: var(--red); letter-spacing: .15em; margin-top: clamp(4px,1.5vw,7px); }
+.book-section { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,5.5vw,24px); color: var(--sepia); letter-spacing: .06em; margin-bottom: clamp(3px,1.2vw,6px); font-weight: 400; font-style: italic; }
+.book-detail { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px,3.4vw,15px); color: var(--sepia-dk); line-height: 1.5; }
+.book-sub { font-family: 'Cinzel', serif; font-size: clamp(7px,2.2vw,10px); letter-spacing: .2em; text-transform: uppercase; color: var(--sepia-lt); margin-top: clamp(2px,1vw,5px); opacity: .85; }
+.t-parent { font-family: 'Cormorant Garamond', serif; font-size: clamp(11px,3.5vw,15px); color: var(--sepia-dk); line-height: 1.4; }
+.t-label-sm { font-family: 'Cinzel', serif; font-size: clamp(7px,1.8vw,9px); letter-spacing: .15em; text-transform: uppercase; color: var(--sepia-lt); opacity: .85; margin-bottom: 2px; }
+.parents-wrap { display: flex; justify-content: center; gap: clamp(8px,5vw,20px); margin: clamp(3px,1.2vw,6px) 0; width: 100%; }
+
+/* Calendar */
+.cal-box { background: rgba(255,255,255,.4); border: 1px solid var(--border); padding: clamp(7px,2.5vw,13px) clamp(5px,2vw,10px); width: 100%; margin: clamp(4px,1.5vw,8px) 0; border-radius: 3px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: .3vw; }
+.cal-cell { text-align: center; padding: clamp(2px,1vw,4px) .5vw; font-size: clamp(8px,2.8vw,12px); color: var(--sepia-dk); font-family: 'Cinzel', serif; }
+.cal-cell.hdr { font-size: clamp(7px,1.8vw,9px); text-transform: uppercase; color: var(--sepia-lt); opacity: .9; }
+.cal-cell.empty { opacity: 0; }
+.cal-cell.highlight { color: var(--red); font-weight: 700; position: relative; }
+
+/* Countdown */
+.countdown { display: flex; justify-content: center; gap: clamp(4px,2vw,10px); margin-top: clamp(6px,2.5vw,12px); }
+.flip { text-align: center; background: rgba(255,255,255,.4); border: 1px solid var(--border); padding: clamp(6px,2.5vw,10px) clamp(4px,1.5vw,8px); min-width: clamp(42px,14vw,58px); border-radius: 3px; }
+.flip .num { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(16px,6vw,26px); color: var(--sepia); line-height: 1; }
+.flip .lbl { font-family: 'Cinzel', serif; font-size: clamp(6px,1.8vw,8px); letter-spacing: .1em; text-transform: uppercase; color: var(--sepia-lt); margin-top: clamp(2px,1vw,4px); opacity: .85; }
+
+/* Timeline */
+.tl-wrap { width: 100%; margin-top: clamp(4px,1.5vw,7px); }
+.tl-row { display: grid; grid-template-columns: 1fr clamp(38px,14vw,62px) 1fr; align-items: center; gap: clamp(3px,1.5vw,6px); margin-bottom: clamp(5px,2vw,10px); }
+.tl-left { text-align: right; padding-right: clamp(4px,1.5vw,8px); }
+.tl-right { text-align: left; padding-left: clamp(4px,1.5vw,8px); }
+.tl-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(11px,3.8vw,16px); color: var(--sepia); }
+.tl-venue { font-size: clamp(9px,2.5vw,11px); color: var(--sepia-lt); margin-top: 1px; font-style: italic; line-height: 1.4; }
+.tl-icon { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+.tl-icon::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: clamp(8px,2.5vw,12px); background: var(--sepia-lt); opacity: .4; transform: translateX(-50%); }
+.tl-icon::after  { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: clamp(8px,2.5vw,12px); background: var(--sepia-lt); opacity: .4; transform: translateX(-50%); }
+.tl-row:first-child .tl-icon::before { display: none; }
+.tl-row:last-child .tl-icon::after  { display: none; }
+.tl-icon img { width: clamp(22px,8vw,34px); height: clamp(22px,8vw,34px); object-fit: contain; opacity: .8; filter: sepia(1) saturate(1.5) brightness(.7); }
+.tl-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(14px,5vw,22px); color: var(--sepia); }
+
+/* Gift */
+.gift-box { background: rgba(255,255,255,.4); border: 1px solid var(--border); display: inline-block; padding: clamp(8px,3vw,14px) clamp(14px,5vw,24px); border-radius: 3px; }
+
+/* Photos */
+.photo-carousel { width: 100%; position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: 3px; }
+.photo-track { display: flex; transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
+.photo-slide { min-width: 100%; }
+.photo-slide img { width: 100%; height: clamp(200px,58vw,260px); object-fit: cover; display: block; filter: sepia(.2); }
+.photo-counter { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,10px); color: var(--sepia-lt); letter-spacing: .1em; text-align: center; margin-top: clamp(4px,1.5vw,7px); opacity: .8; }
+.photo-arrows { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 clamp(6px,2vw,10px); transform: translateY(-50%); pointer-events: none; }
+.photo-arr { pointer-events: auto; background: rgba(250,244,232,.85); border: 1px solid var(--border); color: var(--sepia); width: clamp(24px,7vw,32px); height: clamp(24px,7vw,32px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: clamp(12px,4vw,16px); cursor: pointer; }
+
+/* RSVP */
+.rsvp-box { background: rgba(255,255,255,.4); border: 1px solid var(--border); padding: clamp(10px,3.5vw,16px); width: 100%; border-radius: 3px; }
+.step-dots { display: flex; align-items: center; justify-content: center; gap: clamp(4px,2vw,8px); margin-bottom: clamp(8px,2.5vw,12px); }
+.step-dot { width: clamp(6px,2vw,9px); height: clamp(6px,2vw,9px); border-radius: 50%; background: rgba(90,42,10,.1); border: 1px solid var(--sepia-lt); transition: all .3s; }
+.step-dot.on { background: var(--red); transform: scale(1.3); border-color: var(--red); }
+.form-label { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); letter-spacing: .15em; text-transform: uppercase; color: var(--sepia-lt); display: block; margin-bottom: clamp(2px,1vw,4px); }
+.form-field { width: 100%; padding: clamp(5px,2vw,8px) 0; border: none; border-bottom: 1px solid rgba(90,42,10,.25); font-family: 'EB Garamond', serif; font-size: clamp(12px,3.5vw,15px); color: var(--sepia-dk); background: transparent; outline: none; }
+.form-field::placeholder { color: rgba(90,42,10,.25); }
+textarea.form-field { border: 1px solid rgba(90,42,10,.2); padding: clamp(5px,2vw,8px); resize: none; }
+.error-msg { font-size: clamp(8px,2.5vw,10px); color: var(--red); margin-top: clamp(2px,1vw,4px); display: none; font-family: 'Cinzel', serif; }
+.attend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(5px,2vw,10px); margin: clamp(5px,2vw,9px) 0; }
+.attend-opt { position: relative; cursor: pointer; }
+.attend-opt input { position: absolute; opacity: 0; }
+.attend-box { border: 1px solid rgba(90,42,10,.2); padding: clamp(6px,2.5vw,10px); text-align: center; background: rgba(255,255,255,.25); transition: all .2s; }
+.attend-opt input:checked + .attend-box { border-color: var(--red); background: rgba(139,26,26,.06); }
+.attend-label { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(11px,3.2vw,14px); color: var(--sepia-dk); }
+.count-row { display: flex; align-items: center; justify-content: center; gap: clamp(8px,4vw,16px); margin: clamp(4px,1.5vw,8px) 0; }
+.count-btn { width: clamp(26px,8vw,34px); height: clamp(26px,8vw,34px); border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,.3); font-size: clamp(14px,4vw,18px); color: var(--sepia); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.count-num-disp { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,7vw,28px); color: var(--sepia); min-width: 6vw; text-align: center; }
+.btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(4px,2vw,8px); margin-top: clamp(4px,1.5vw,8px); }
+.btn-rsvp { display: block; width: 100%; padding: clamp(6px,2vw,10px); border: 1px solid rgba(90,42,10,.25); color: var(--sepia-dk); font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .15em; text-transform: uppercase; cursor: pointer; background: rgba(255,255,255,.25); transition: all .2s; }
+.btn-solid { background: var(--sepia-dk); border-color: var(--sepia-lt); color: var(--cream); }
+.rsvp-single-btn { width: 100%; padding: clamp(8px,2.5vw,11px); background: rgba(255,255,255,.25); border: 1px solid rgba(90,42,10,.3); color: var(--sepia-dk); font-family: 'Cinzel', serif; font-size: clamp(9px,2.8vw,12px); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; margin-top: clamp(5px,2vw,9px); }
+
+/* ══════ BACK COVER ══════ */
+#scene-back { display: none; width: 100vw; height: 100vh; background: radial-gradient(ellipse at center, #2e1a08 0%, #1a0e05 100%); align-items: center; justify-content: center; }
+#scene-back.visible { display: flex; }
+.back-outer { width: var(--bw); position: relative; }
+.back-spine { position: absolute; top: 0; left: -8px; width: 8px; height: clamp(500px,145vw,630px); background: linear-gradient(to right, #0e0804, #3a1e08, #0e0804); border-radius: 4px 0 0 4px; z-index: 5; }
+.back-wrap { position: relative; width: var(--bw); height: var(--page-h); }
+.back-face {
+  position: absolute; inset: 0;
+  background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/die-cut%20book/Cover.png') center/cover no-repeat;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(90,42,10,.4), -16px 14px 34px rgba(0,0,0,.7);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: clamp(16px,6%,32px); padding-bottom: clamp(50px,15%,80px); overflow: hidden;
+}
+.back-face::before { content: ""; position: absolute; inset: 0; background: rgba(250,244,232,.08); pointer-events: none; }
+.back-text { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(64px,1.5vw,68px); }
+.back-text p { font-family: 'Great Vibes', cursive; font-size: clamp(22px,8vw,36px); color: var(--sepia-dk); text-shadow: 0 1px 4px rgba(255,255,255,.4); margin-bottom: clamp(4px,1.5vw,8px); }
+.back-text small { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,11px); color: var(--sepia); letter-spacing: .2em; text-transform: uppercase; }
+.back-btn { position: relative; z-index: 2; font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .2em; text-transform: uppercase; color: var(--sepia); font-weight: 900; background: none; border: none; padding: 0; cursor: pointer; animation: hintPulse 2s ease-in-out infinite; display: block; margin-bottom: clamp(176px,2vw,176px); }
+
+/* Cardia credit */
+.cardia-credit { position: absolute; bottom: clamp(10px,3%,18px); left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; }
+.cardia-credit a { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); letter-spacing: .12em; color: rgba(90,42,10,.6); text-decoration: none; text-transform: uppercase; transition: opacity .2s; display: inline-flex; align-items: center; gap: 4px; }
+.cardia-credit a span { border-bottom: 1px solid rgba(90,42,10,.45); padding-bottom: 1px; }
+.cardia-credit a img { width: clamp(4px,3.5vw,8px); opacity: .65; flex-shrink: 0; filter: sepia(1) saturate(2) brightness(.6); }
+.cardia-credit a:hover { opacity: .9; }
+</style>
+</head>
+<body>
+
+<canvas id="petals-canvas"></canvas>
+<audio id="wedding-music" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Music/CHRISTINA%20PERRI.mp3" loop preload="auto"></audio>
+<audio id="page-flip-sound" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page%20Flip%202.mp3" preload="auto"></audio>
+
+<!-- ══════ COVER ══════ -->
+<div id="scene-cover">
+  <div class="cover-outer">
+    <div class="cover-spine"></div>
+    <div class="cover-wrap" onclick="openBook()">
+      <div class="cover-bg"></div>
+      <div class="cover-content">
+        <span class="cover-eyebrow">You are invited to the wedding of</span>
+        <div class="cover-line"></div>
+        <span class="cover-name">Thomas</span>
+        <span class="cover-amp">&amp;</span>
+        <span class="cover-name">Sarah</span>
+        <div class="cover-line"></div>
+        <span class="cover-date">14 August 2027 · Ehden, Lebanon</span>
+      </div>
+      <div class="cover-open-hint">
+        <span>✦ Open Invitation ✦</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--sepia)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ OPEN BOOK ══════ -->
+<div id="scene-open">
+  <div class="open-book">
+    <div class="open-spine"></div>
+    <div class="book-spread">
+      <div class="flip-sheet" id="flip-sheet"></div>
+
+      <!-- PAGE 1 -->
+      <div class="page active" id="page-1">
+        <div class="page-num">✦ I ✦</div>
+        <p class="book-eyebrow">Wedding Invitation</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="book-bigname">Thomas</div>
+        <div class="book-amp">&amp;</div>
+        <div class="book-bigname">Sarah</div>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-verse">"What therefore God has joined together,<br>let no man put asunder."</p>
+        <p class="book-verse-ref">Matthew 19:6</p>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page" id="page-2">
+        <div class="page-num">✦ II ✦</div>
+        <p class="book-detail" style="margin-bottom:clamp(4px,1.5vw,8px);">Together with their families</p>
+        <div class="parents-wrap">
+          <div><p class="t-label-sm">Groom's Parents</p><p class="t-parent">Robert &amp;<br>Tina Martin</p></div>
+          <div><p class="t-label-sm">Bride's Parents</p><p class="t-parent">Michael &amp;<br>Anne Clarke</p></div>
+        </div>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-detail">Request the honour of your presence<br>at the wedding of their son and daughter</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="book-bigname" style="font-size:clamp(30px,10vw,48px);">Thomas</div>
+        <div class="book-amp">&amp;</div>
+        <div class="book-bigname" style="font-size:clamp(30px,10vw,48px);">Sarah</div>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page" id="page-3">
+        <div class="page-num">✦ III ✦</div>
+        <p class="book-section">Wedding Day</p>
+        <p class="book-sub">August 14, 2027</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="cal-box">
+          <p style="font-family:'Cinzel',serif;font-size:clamp(8px,2.5vw,11px);color:var(--sepia);letter-spacing:.15em;text-transform:uppercase;text-align:center;margin-bottom:clamp(4px,1.5vw,7px);opacity:.85;">August 2027</p>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="countdown">
+          <div class="flip"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+          <div class="flip"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+          <div class="flip"><div class="num" id="cd-m">--</div><div class="lbl">Min</div></div>
+          <div class="flip"><div class="num" id="cd-s">--</div><div class="lbl">Sec</div></div>
+        </div>
+      </div>
+
+      <!-- PAGE 4 -->
+      <div class="page" id="page-4">
+        <div class="page-num">✦ IV ✦</div>
+        <p class="book-section">The Celebration</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">6:00 PM</div><div class="tl-venue">St. Mourra Church<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Rings-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We do</div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">7:30 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Drink-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We drink</div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">8:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Dine-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We dine</div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">9:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Dance-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We dance</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 5 -->
+      <div class="page" id="page-5">
+        <div class="page-num">✦ V ✦</div>
+        <p class="book-section">Gift Registry</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-verse" style="margin-bottom:clamp(8px,3vw,14px);">Your love, laughter, and presence<br>are all we could wish for.<br><br>For those who wish, a wedding list<br>is available at all Whish Money branches.</p>
+        <div class="gift-box">
+          <p class="book-sub" style="margin-bottom:clamp(3px,1vw,5px);">Whish Money</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,5vw,22px);color:var(--sepia);font-weight:300;">ACC# xxxxxx</p>
+        </div>
+      </div>
+
+      <!-- PAGE 6 -->
+      <div class="page" id="page-6">
+        <div class="page-num">✦ VI ✦</div>
+        <p class="book-section" style="margin-bottom:clamp(2px,1vw,4px);">Our Story</p>
+        <p class="book-sub" style="margin-bottom:clamp(4px,1.5vw,7px);">A glimpse of us</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="photo-carousel" id="photo-carousel">
+          <div class="photo-track" id="photo-track">
+            <div class="photo-slide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt=""></div>
+            <div class="photo-slide"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop" alt=""></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/weddd.jpg" alt=""></div>
+            <div class="photo-slide"><img src="https://images.pexels.com/photos/182006/pexels-photo-182006.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div>
+          </div>
+          <div class="photo-arrows">
+            <button class="photo-arr" onclick="photoMove(-1)">‹</button>
+            <button class="photo-arr" onclick="photoMove(1)">›</button>
+          </div>
+        </div>
+        <div class="photo-counter" id="photo-counter">1 / 4</div>
+      </div>
+
+      <!-- PAGE 7 -->
+      <div class="page" id="page-7">
+        <div class="page-num">✦ VII ✦</div>
+        <p class="book-section">RSVP</p>
+        <p class="book-sub" style="margin-bottom:clamp(3px,1.2vw,6px);">Kindly reply before 1st August 2027</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="rsvp-box">
+          <div class="step-dots">
+            <div class="step-dot on" id="dot-1"></div>
+            <div class="step-dot" id="dot-2"></div>
+            <div class="step-dot" id="dot-3"></div>
+          </div>
+          <div id="s1">
+            <p id="dear-guest" style="font-family:'Great Vibes',cursive;font-size:clamp(18px,6vw,26px);color:var(--sepia);margin-bottom:clamp(3px,1vw,5px);text-align:center;"></p>
+            <div id="rv-name-row"><label class="form-label">Your Full Name</label><input id="f-name" type="text" class="form-field" placeholder="e.g. Sarah &amp; Mark Johnson"></div>
+            <p class="error-msg" id="e-name">Please enter your name.</p>
+            <button class="rsvp-single-btn" onclick="goStep(1,2)">Continue →</button>
+          </div>
+          <div id="s2" style="display:none;">
+            <label class="form-label">Will you be attending?</label>
+            <div class="attend-grid">
+              <label class="attend-opt"><input type="radio" name="attend" value="yes"><div class="attend-box"><div class="attend-label">Joyfully accepts</div></div></label>
+              <label class="attend-opt"><input type="radio" name="attend" value="no"><div class="attend-box"><div class="attend-label">Regretfully declines</div></div></label>
+            </div>
+            <div id="count-wrap" style="display:none;">
+              <label class="form-label">Number of guests</label>
+              <div class="count-row"><button class="count-btn" onclick="chCount(-1)">−</button><span class="count-num-disp" id="cnt-disp">1</span><button class="count-btn" onclick="chCount(1)">+</button></div>
+            </div>
+            <p class="error-msg" id="e-attend">Please select an option.</p>
+            <div class="btn-grid"><button class="btn-rsvp" onclick="goStep(2,1)">← Back</button><button class="btn-rsvp btn-solid" onclick="goStep(2,3)">Continue →</button></div>
+          </div>
+          <div id="s3" style="display:none;">
+            <label class="form-label">A wish <span style="opacity:.4;">(optional)</span></label>
+            <textarea id="f-msg" class="form-field" rows="2" placeholder="Share a wish for Thomas &amp; Sarah…"></textarea>
+            <div class="btn-grid" style="margin-top:clamp(4px,1.5vw,8px);"><button class="btn-rsvp" onclick="goStep(3,2)">← Back</button><button class="btn-rsvp btn-solid" onclick="submitRSVP()">Send ✦</button></div>
+          </div>
+          <div id="s-ok" style="display:none;text-align:center;padding:clamp(8px,3vw,14px) 0;">
+            <div style="font-size:clamp(20px,8vw,32px);margin-bottom:clamp(4px,1.5vw,8px);">🌹</div>
+            <p style="font-family:'Great Vibes',cursive;font-size:clamp(20px,7vw,30px);color:var(--sepia);margin-bottom:clamp(3px,1vw,5px);">Thank you!</p>
+            <p id="ok-msg" style="font-size:clamp(11px,3vw,14px);line-height:1.7;color:var(--sepia-dk);font-style:italic;"></p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .book-spread -->
+
+    <div class="page-arrows">
+      <button class="page-arrow-btn" id="btn-prev" onclick="changePage(-1)">← Prev</button>
+      <span class="page-label" id="page-label">Page 1 of 7</span>
+      <button class="page-arrow-btn" id="btn-next" onclick="changePage(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ BACK COVER ══════ -->
+<div id="scene-back">
+  <div class="back-outer">
+    <div class="back-spine"></div>
+    <div class="back-wrap">
+      <div class="back-face">
+        <div class="back-text">
+          <p>Thomas &amp; Sarah</p>
+          <small>14 August 2027 · Ehden, Lebanon</small>
+        </div>
+        <button class="back-btn" onclick="reopenFromBack()">← Back to Invitation</button>
+        <div class="cardia-credit">
+          <a href="https://nemerdavid.github.io/web-des/" target="_blank">
+            Powered by <span>Cardia Studios</span>
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Chain2.png" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════ FALLING ROSE PETALS ══════ */
+(function(){
+  const canvas = document.getElementById('petals-canvas');
+  const ctx = canvas.getContext('2d');
+  const colors = [
+    'rgba(139,26,26,',   /* vintage red */
+    'rgba(180,140,100,', /* warm sepia */
+    'rgba(220,190,150,', /* light parchment */
+    'rgba(160,80,60,',   /* terracotta */
+    'rgba(200,170,130,', /* cream */
+  ];
+  let petals = [];
+
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function drawPetal(ctx, size, color, opacity){
+    ctx.fillStyle = color + opacity + ')';
+    ctx.strokeStyle = color + (opacity*.35) + ')';
+    ctx.lineWidth = 0.3;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(size*.5, -size*.2, size*.6, -size*.9, 0, -size);
+    ctx.bezierCurveTo(-size*.6, -size*.9, -size*.5, -size*.2, 0, 0);
+    ctx.fill(); ctx.stroke();
+  }
+
+  function create(){
+    return { x:Math.random()*(canvas.width+40)-20, y:-20,
+      size:Math.random()*6+3, speed:Math.random()*.45+.15,
+      drift:(Math.random()-.5)*.35, rot:Math.random()*Math.PI*2,
+      rotSpeed:(Math.random()-.5)*.02, opacity:Math.random()*.35+.12,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      sway:Math.random()*1.3+.3, swaySpeed:Math.random()*.01+.003,
+      swayOffset:Math.random()*Math.PI*2 };
+  }
+
+  for(let i=0;i<16;i++){ const p=create(); p.y=Math.random()*window.innerHeight; petals.push(p); }
+
+  let frame=0, lastTime=0;
+  function animate(ts){
+    const delta=Math.min((ts-lastTime)/16.67,3); lastTime=ts;
+    ctx.clearRect(0,0,canvas.width,canvas.height); frame++;
+    if(frame%55===0&&petals.length<28) petals.push(create());
+    petals.forEach((p,i)=>{
+      p.x+=(p.drift+Math.sin(frame*p.swaySpeed+p.swayOffset)*p.sway*.07)*delta;
+      p.y+=p.speed*delta; p.rot+=p.rotSpeed*delta;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      drawPetal(ctx,p.size,p.color,p.opacity); ctx.restore();
+      if(p.y>canvas.height+20) petals[i]=create();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+/* ══════ BOOK LOGIC ══════ */
+const TOTAL=7; let current=1;
+const music=document.getElementById('wedding-music');
+music.volume=0.4;
+
+function openBook(){
+  music.play().catch(()=>{});
+  const sc=document.getElementById('scene-cover');
+  sc.style.opacity='0'; sc.style.transition='opacity .6s ease';
+  setTimeout(()=>{ sc.style.display='none'; document.getElementById('scene-open').classList.add('visible'); updateNavButtons(); buildCalendar(); tick(); setInterval(tick,1000); },600);
+}
+function closeBible(){
+  const s=document.getElementById('scene-open');
+  s.style.opacity='0'; s.style.transition='opacity .4s ease';
+  setTimeout(()=>{ s.classList.remove('visible'); s.style.opacity=''; s.style.transition=''; document.getElementById('scene-back').classList.add('visible'); },400);
+}
+function closeBibleToFront(){
+  const s=document.getElementById('scene-open');
+  s.style.opacity='0'; s.style.transition='opacity .4s ease';
+  setTimeout(()=>{
+    s.classList.remove('visible'); s.style.opacity=''; s.style.transition='';
+    const cover=document.getElementById('scene-cover');
+    cover.style.display='flex'; cover.style.opacity='0'; cover.style.transition='opacity .6s ease';
+    setTimeout(()=>{ cover.style.opacity='1'; },50);
+    current=1; document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===0));
+    document.getElementById('page-label').textContent='Page 1 of '+TOTAL; updateNavButtons();
+  },400);
+}
+function reopenFromBack(){
+  document.getElementById('scene-back').classList.remove('visible');
+  const cover=document.getElementById('scene-cover');
+  cover.style.display='flex'; cover.style.opacity='0'; cover.style.transition='opacity .6s ease';
+  setTimeout(()=>{ cover.style.opacity='1'; },50);
+  current=1; document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===0));
+  document.getElementById('page-label').textContent='Page 1 of '+TOTAL; updateNavButtons();
+}
+function updateNavButtons(){
+  document.getElementById('btn-prev').textContent=current===1?'✕ Close':'← Prev';
+  document.getElementById('btn-next').textContent=current===TOTAL?'Close ✕':'Next →';
+}
+function goTo(n){
+  const snd=document.getElementById('page-flip-sound');
+  if(snd){ snd.currentTime=0; snd.play().catch(()=>{}); }
+  const sh=document.getElementById('flip-sheet');
+  sh.classList.remove('animate'); void sh.offsetWidth; sh.classList.add('animate');
+  setTimeout(()=>{
+    document.getElementById('page-'+current).classList.remove('active');
+    current=Math.max(1,Math.min(TOTAL,n));
+    document.getElementById('page-'+current).classList.add('active');
+    document.getElementById('page-label').textContent='Page '+current+' of '+TOTAL;
+    updateNavButtons();
+  },280);
+}
+function changePage(dir){ const t=current+dir; if(t<1){closeBibleToFront();return;} if(t>TOTAL){closeBible();return;} goTo(t); }
+
+function buildCalendar(){
+  const g=document.getElementById('cal-grid');
+  if(g.children.length>0) return;
+  ['M','T','W','T','F','S','S'].forEach(d=>{const e=document.createElement('div');e.className='cal-cell hdr';e.textContent=d;g.appendChild(e);});
+  for(let i=0;i<6;i++){const e=document.createElement('div');e.className='cal-cell empty';e.textContent='.';g.appendChild(e);}
+  for(let d=1;d<=31;d++){
+    const e=document.createElement('div');e.className='cal-cell';
+    if(d===14){ e.className+=' highlight'; e.innerHTML='<span style="position:relative;z-index:1;">'+d+'</span><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon2/Heart.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.35;filter:sepia(1) saturate(3) hue-rotate(330deg);" alt=""/>'; }
+    else { e.textContent=d; }
+    g.appendChild(e);
+  }
+}
+const TARGET=new Date('2027-08-14T18:00:00');
+function tick(){ const diff=Math.max(0,TARGET-new Date()); const pad=n=>String(n).padStart(2,'0'); document.getElementById('cd-d').textContent=Math.floor(diff/86400000); document.getElementById('cd-h').textContent=pad(Math.floor(diff/3600000)%24); document.getElementById('cd-m').textContent=pad(Math.floor(diff/60000)%60); document.getElementById('cd-s').textContent=pad(Math.floor(diff/1000)%60); }
+
+let photoIdx=0; const PHOTO_TOTAL=4;
+function photoGoTo(i){photoIdx=Math.max(0,Math.min(PHOTO_TOTAL-1,i));document.getElementById('photo-track').style.transform='translateX(-'+(photoIdx*100)+'%)';document.getElementById('photo-counter').textContent=(photoIdx+1)+' / '+PHOTO_TOTAL;}
+function photoMove(d){photoGoTo(photoIdx+d);}
+const car=document.getElementById('photo-carousel');
+if(car){let px=0;car.addEventListener('touchstart',e=>{px=e.touches[0].clientX;},{passive:true});car.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-px;if(Math.abs(dx)<30)return;photoMove(dx<0?1:-1);e.stopPropagation();},{passive:true});}
+
+let sx=0,sy=0;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)<40||Math.abs(dx)<Math.abs(dy))return;if(!document.getElementById('scene-open').classList.contains('visible'))return;changePage(dx<0?1:-1);},{passive:true});
+
+const guestName=decodeURIComponent(new URLSearchParams(window.location.search).get('guest')||'');
+if(guestName){const d=document.getElementById('dear-guest');if(d)d.textContent='Dear '+guestName+',';const f=document.getElementById('f-name');if(f)f.value=guestName;const r=document.getElementById('rv-name-row');if(r)r.style.display='none';}
+
+let gCount=1;
+document.querySelectorAll('input[name="attend"]').forEach(r=>{r.addEventListener('change',()=>{document.getElementById('count-wrap').style.display=r.value==='yes'?'block':'none';});});
+function chCount(d){gCount=Math.max(1,Math.min(10,gCount+d));document.getElementById('cnt-disp').textContent=gCount;}
+function goStep(from,to){
+  if(from===1){const v=document.getElementById('f-name').value.trim();if(!v&&!guestName){document.getElementById('e-name').style.display='block';return;}document.getElementById('e-name').style.display='none';}
+  if(from===2&&to===3){const att=document.querySelector('input[name="attend"]:checked');if(!att){document.getElementById('e-attend').style.display='block';return;}document.getElementById('e-attend').style.display='none';if(att.value==='no'){submitRSVP();return;}}
+  document.getElementById('s'+from).style.display='none';document.getElementById('s'+to).style.display='block';
+  [1,2,3].forEach(i=>document.getElementById('dot-'+i).classList.toggle('on',i<=to));
+}
+function submitRSVP(){
+  const name=document.getElementById('f-name')?document.getElementById('f-name').value.trim():'';
+  const att=document.querySelector('input[name="attend"]:checked');
+  const msg=document.getElementById('f-msg')?document.getElementById('f-msg').value.trim():'';
+  const yes=att&&att.value==='yes';
+  const btn=document.querySelector('#s3 .btn-solid');if(btn){btn.textContent='Sending...';btn.disabled=true;}
+  fetch('https://formsubmit.co/ajax/nemer.david9@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New RSVP - Thomas & Sarah',_template:'table',name:name||guestName,attending:yes?'Yes':'No',guests:yes?gCount:0,message:msg||'(none)'})})
+  .then(r=>r.json()).then(data=>{
+    if(data.success==='true'||data.success===true){['s1','s2','s3'].forEach(id=>document.getElementById(id).style.display='none');document.querySelector('.step-dots').style.display='none';document.getElementById('s-ok').style.display='block';document.getElementById('ok-msg').innerHTML=yes?"We're so excited to celebrate with you, <strong>"+(name||guestName)+"</strong>!<br>See you on August 14th! 🌹":"We'll miss you, <strong>"+(name||guestName)+"</strong>.<br>Thank you for letting us know.";}else throw new Error();
+  }).catch(()=>{if(btn){btn.textContent='Send ✦';btn.disabled=false;}alert('Something went wrong. Please try again.');});
+}
+</script>
+</body>
+</html>
