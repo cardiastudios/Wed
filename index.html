@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Digital Wedding Invitations — Cardia Studios</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f7f3ee;
+  --bg2:     #ede8e0;
+  --ink:     #2a2018;
+  --ink-lt:  #6b5a48;
+  --rose:    #9a6a58;
+  --rose-lt: #c8988a;
+  --gold:    #b8903c;
+  --gold-lt: #d4b870;
+  --border:  rgba(155,120,90,.2);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(42,32,24,.92); backdrop-filter: blur(12px); }
+.nav-logo { display: inline-flex; align-items: center; text-decoration: none; line-height: 0; }
+.nav-logo img { display: block; height: 48px; width: auto; object-fit: contain; transition: transform .25s, opacity .25s; }
+.nav-logo:hover img { transform: scale(1.02); opacity: .95; }
+@media (max-width:640px) { .nav-logo img { height: 34px; } }
+.nav-links { display: flex; gap: 2rem; }
+.nav-link { font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.7); text-decoration: none; transition: color .25s; }
+.nav-link:hover { color: var(--gold-lt); }
+
+/* HERO */
+.hero { width: 100%; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; background: var(--ink); }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(154,106,88,.25) 0%, transparent 55%), radial-gradient(ellipse at 70% 60%, rgba(184,144,60,.15) 0%, transparent 55%); }
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+.hero-tag { display: inline-block; padding: .4rem 1.2rem; border: 1px solid rgba(184,144,60,.4); font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 2rem; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem,10vw,5.5rem); line-height: 1.05; color: #f5f0e8; margin-bottom: .5rem; }
+.hero h1 em { font-style: italic; color: var(--gold-lt); display: block; font-size: clamp(2.2rem,8vw,4.5rem); }
+.hero-sub { font-size: .75rem; font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: rgba(200,180,160,.6); margin: 1.5rem 0 2.5rem; }
+.hero-cta { display: inline-block; padding: .9rem 2.5rem; background: transparent; border: 1px solid rgba(184,144,60,.5); color: var(--gold-lt); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .3s, border-color .3s; }
+.hero-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
+.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; color: rgba(200,180,160,.4); font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; }
+.scroll-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(200,180,160,.4), transparent); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* TEMPLATES */
+.section-header { text-align: center; padding: 5rem 2rem 2rem; background: var(--bg); }
+.section-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem,5vw,3rem); color: var(--ink); }
+.section-header p { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose-lt); margin-top: .75rem; }
+.gold-line { width: 60px; height: 1px; background: var(--gold); margin: 1.25rem auto 0; opacity: .5; }
+#templates { background: var(--bg); padding-bottom: 4rem; }
+.category-block { padding: 2.5rem 0 1rem; }
+.category-header { display: flex; align-items: baseline; justify-content: space-between; padding: 0 2rem 1rem; max-width: 1400px; margin: 0 auto; }
+.category-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 400; color: var(--ink); }
+.category-title span { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--rose-lt); font-family: 'Jost', sans-serif; font-weight: 300; margin-left: 1rem; }
+.category-arrows { display: flex; gap: .5rem; }
+.cat-arrow { width: 32px; height: 32px; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--ink-lt); font-size: .9rem; transition: all .2s; flex-shrink: 0; }
+.cat-arrow:hover { background: var(--ink); color: var(--gold-lt); border-color: var(--ink); }
+.cards-track-wrap { position: relative; overflow: hidden; padding: 0 2rem; }
+.cards-track { display: flex; gap: 16px; overflow-x: hidden; scrollbar-width: none; padding-bottom: 12px; cursor: grab; user-select: none; }
+.cards-track:active { cursor: grabbing; }
+.cards-track::-webkit-scrollbar { display: none; }
+.card-wrap { flex: 0 0 auto; width: clamp(180px,28vw,280px); display: flex; flex-direction: column; box-shadow: 0 -3px 0 0 var(--card-accent, var(--gold)); }
+.card-wrap.card-classic    { --card-accent: #c9a96e; }
+.card-wrap.card-dark       { --card-accent: #c9a84c; }
+.card-wrap.card-soft       { --card-accent: #c9958a; }
+.card-wrap.card-vintage    { --card-accent: #c4a456; }
+.card-wrap.card-garden     { --card-accent: #7a9e7e; }
+.card-wrap.card-midnight   { --card-accent: #8aaa98; }
+.card-wrap.card-terracotta { --card-accent: #c4674a; }
+.card-wrap.card-elvish     { --card-accent: #2d6e3a; }
+.card-wrap.card-blue       { --card-accent: #8a9bb5; }
+.card-header { padding: .55rem .8rem; background: var(--bg); border-left: 3px solid var(--card-accent, var(--gold)); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .4rem; cursor: pointer; transition: background .2s; }
+.card-header:hover { background: var(--bg2); }
+.card-header-num { font-family: 'Cormorant Garamond', serif; font-size: .68rem; font-weight: 300; color: var(--gold); }
+.card-header-name { font-family: 'Cormorant Garamond', serif; font-size: .85rem; color: var(--ink-lt); }
+.template-card { position: relative; overflow: hidden; background: var(--bg); cursor: pointer; aspect-ratio: 9/14; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+.template-card:hover { z-index: 10; transform: scale(1.015); }
+.card-preview { position: absolute; inset: 0; width: 100%; height: 100%; border: none; pointer-events: none; transform-origin: top left; }
+.card-overlay { position: absolute; inset: 0; background: rgba(20,12,6,.93); display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 1.2rem; opacity: 0; transition: opacity .35s ease; }
+.template-card:hover .card-overlay { opacity: 1; }
+.card-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.3rem; color: #f5f0e8; margin-bottom: .3rem; }
+.card-desc { font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(200,180,160,.7); margin-bottom: .8rem; }
+.card-btn { display: inline-block; padding: .55rem 1.2rem; border: 1px solid rgba(200,180,160,.5); color: #f5f0e8; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; align-self: flex-start; transition: background .25s; }
+.card-btn:hover { background: rgba(200,180,160,.15); }
+.card-strip { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+.template-card:hover .card-strip { transform: scaleX(1); }
+.cards-track-wrap::before, .cards-track-wrap::after { content: ""; position: absolute; top: 0; bottom: 12px; width: 2rem; z-index: 2; pointer-events: none; }
+.cards-track-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.cards-track-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg), transparent); }
+.category-divider { height: 1px; background: var(--border); margin: .5rem 2rem 0; }
+
+/* HOW IT WORKS */
+.how-section { background: var(--ink); padding: 5rem 2rem; text-align: center; }
+.how-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.8rem,4vw,2.6rem); color: #f5f0e8; margin-bottom: .75rem; }
+.how-section > p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(200,180,160,.5); margin-bottom: 3rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
+.step { color: #f0ebe0; }
+.step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); opacity: .5; line-height: 1; margin-bottom: .75rem; }
+.step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: .5rem; }
+.step p { font-size: .72rem; line-height: 1.8; color: rgba(200,180,160,.6); font-weight: 300; }
+
+/* PRICING */
+.pricing-section { background: var(--bg); padding: 5rem 2rem; text-align: center; }
+.pricing-section > h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(1.8rem,4vw,2.6rem); color: var(--ink); margin-bottom: .5rem; }
+.pricing-section > p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--rose-lt); margin-bottom: 3rem; }
+.pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.5rem; max-width: 820px; margin: 0 auto 2.5rem; }
+.price-card { border: 1px solid var(--border); padding: 2.5rem 1.5rem; background: var(--bg2); text-align: center; position: relative; }
+.price-card.featured { border-color: var(--gold); background: var(--ink); color: #f0ebe0; }
+.price-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--gold); padding: .25rem 1rem; font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.price-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: .2rem; }
+.price-card.featured .price-name { color: #f0ebe0; }
+.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--rose); line-height: 1; margin: 1rem 0 .2rem; }
+.price-card.featured .price-amount { color: var(--gold-lt); }
+.price-currency { font-size: 1.1rem; vertical-align: super; }
+.price-period { font-size: .6rem; color: rgba(150,130,110,.7); margin-bottom: 1rem; }
+.price-card.featured .price-period { color: rgba(200,180,160,.5); }
+.price-desc { font-size: .65rem; letter-spacing: .1em; color: var(--ink-lt); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.price-card.featured .price-desc { color: rgba(200,180,160,.6); }
+.price-features { list-style: none; margin-bottom: 1.8rem; text-align: left; }
+.price-feature { font-size: .72rem; padding: .38rem 0; color: var(--ink-lt); display: flex; align-items: flex-start; gap: .5rem; }
+.price-card.featured .price-feature { color: rgba(240,220,200,.8); }
+.price-feature::before { content: "✦"; color: var(--gold); font-size: .5rem; margin-top: .18rem; flex-shrink: 0; }
+
+/* Info tooltip */
+.info-btn { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; border: 1px solid currentColor; font-size: .5rem; cursor: pointer; opacity: .55; margin-left: 4px; flex-shrink: 0; position: relative; font-family: 'Jost', sans-serif; font-weight: 500; color: var(--gold); vertical-align: middle; }
+.info-btn:hover { opacity: 1; }
+.info-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 200px; background: var(--ink); color: rgba(240,220,200,.85); font-size: .62rem; line-height: 1.6; padding: .7rem .9rem; border: 1px solid rgba(184,144,60,.3); text-transform: none; letter-spacing: 0; font-family: 'Jost', sans-serif; z-index: 20; pointer-events: none; }
+.info-btn:hover .info-tooltip { display: block; }
+.info-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--ink); }
+
+.price-cta { display: block; width: 100%; padding: .85rem; border: 1px solid var(--rose); color: var(--rose); font-family: 'Jost', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; background: transparent; cursor: pointer; transition: all .25s; text-decoration: none; margin-top: 0; }
+.price-cta + .price-cta { margin-top: 8px; font-size: .58rem; opacity: .75; }
+.price-cta:hover { background: var(--rose); color: #fff; }
+.price-card.featured .price-cta { border-color: var(--gold); color: var(--gold-lt); }
+.price-card.featured .price-cta:hover { background: var(--gold); color: var(--ink); }
+
+/* Payment */
+.payment-info { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+@media(max-width:600px) { .payment-info { grid-template-columns: 1fr; } }
+.payment-region { border: 1px solid var(--border); padding: 1.6rem 1.5rem; background: var(--bg2); text-align: left; }
+.payment-region h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: .5rem; display: flex; align-items: center; gap: .6rem; }
+.payment-region h4 img { height: 33px; width: auto; border-radius: 2px; object-fit: cover; flex-shrink: 0; }
+.payment-region p { font-size: .68rem; line-height: 1.7; color: var(--ink-lt); margin-bottom: .8rem; }
+.payment-methods { display: flex; flex-direction: column; gap: .5rem; }
+.pay-method { display: flex; align-items: center; gap: .75rem; font-size: .7rem; color: var(--ink-lt); padding: .6rem .9rem; background: rgba(255,255,255,.45); border: 1px solid var(--border); }
+.pay-method strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 1px; }
+.pay-icon { height: 28px; width: auto; max-width: 52px; object-fit: contain; flex-shrink: 0; }
+.payment-note { text-align: center; margin-top: 1.5rem; font-size: .65rem; letter-spacing: .1em; color: var(--rose-lt); text-transform: uppercase; }
+
+/* CONTACT */
+.contact-section { background: var(--ink); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+.contact-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,144,60,.1) 0%, transparent 60%); }
+.contact-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.contact-section h2 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem,8vw,4rem); color: var(--gold-lt); margin-bottom: .5rem; }
+.contact-section h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.1rem; color: rgba(200,180,160,.7); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 3rem; }
+.contact-items { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2.5rem; }
+.contact-item { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 2rem; border: 1px solid rgba(200,180,160,.12); background: rgba(255,255,255,.03); transition: border-color .25s; }
+.contact-item:hover { border-color: rgba(200,180,160,.35); }
+.contact-icon { font-size: 1.2rem; opacity: .7; }
+.contact-label { font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.4); margin-bottom: .2rem; }
+.contact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #f0ebe0; }
+.contact-value a { color: inherit; text-decoration: none; }
+.contact-value a:hover { color: var(--gold-lt); }
+.contact-cta { display: inline-block; padding: 1rem 3rem; background: transparent; border: 1px solid rgba(184,144,60,.5); color: var(--gold-lt); font-family: 'Jost', sans-serif; font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; text-decoration: none; transition: all .3s; }
+.contact-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
+.footer-note { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(200,180,160,.08); font-size: .6rem; letter-spacing: .12em; color: rgba(200,180,160,.25); }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width:640px) {
+  .nav-links { display: none; }
+  .card-overlay { display: none; }
+  .card-wrap { width: clamp(150px,42vw,200px); }
+  .category-header { padding: 0 1rem 1rem; }
+  .cards-track-wrap { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/Logo5c.png" alt="Cardia Studios"></a>
+  <div class="nav-links">
+    <a href="#templates" class="nav-link">Templates</a>
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Digital Wedding Invitations</div>
+    <h1>Your love story,<em>beautifully told.</em></h1>
+    <p class="hero-sub">Exclusive designs · Crafted with care · Delivered in 24h</p>
+    <a href="#templates" class="hero-cta">Explore Templates</a>
+  </div>
+  <div class="scroll-hint"><div class="scroll-arrow"></div><span>Scroll</span></div>
+</section>
+
+<!-- TEMPLATES -->
+<section id="templates">
+  <div class="section-header reveal">
+    <h2>Our Collection</h2>
+    <p>Exclusive designs, one for every love story</p>
+    <div class="gold-line"></div>
+  </div>
+
+  <!-- ══ ROW 1: Book-Style Invitations ══ -->
+  <div class="category-block reveal">
+    <div class="category-header">
+      <div class="category-title">
+        Book Invitations
+        <span>Auto-scrolling ›</span>
+      </div>
+      <div class="category-arrows">
+        <button class="cat-arrow" onclick="nudgeRow('row2', -1)">‹</button>
+        <button class="cat-arrow" onclick="nudgeRow('row2', 1)">›</button>
+      </div>
+    </div>
+    <div class="cards-track-wrap">
+      <div class="cards-track" id="row2">
+
+        <!-- 1. Soft Floral Book -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('Blue_wed_book.html','_blank')">
+            <span class="card-header-num">01</span><span class="card-header-name">Soft Floral Book</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('Blue_wed_book.html','_blank')">
+            <iframe class="card-preview" src="Blue_wed_book.html" loading="lazy" scrolling="no" title="Soft Floral Book"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Soft Floral Book</div>
+              <div class="card-desc">Elegant · Floral · Timeless</div>
+              <a href="Blue_wed_book.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#8a9bb5;"></div>
+          </div>
+        </div>
+
+        <!-- 2. Blue Rose Garden -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('Garden_in_Bloom.html','_blank')">
+            <span class="card-header-num">02</span><span class="card-header-name">Blue Rose Garden</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('Garden_in_Bloom.html','_blank')">
+            <iframe class="card-preview" src="Garden_in_Bloom.html" loading="lazy" scrolling="no" title="Blue Rose Garden"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Blue Rose Garden</div>
+              <div class="card-desc">Romantic · Watercolor · Enchanted</div>
+              <a href="Garden_in_Bloom.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#8a9bb5;"></div>
+          </div>
+        </div>
+
+        <!-- 3. Dark floral book -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('Dark_floral_book.html','_blank')">
+            <span class="card-header-num">03</span><span class="card-header-name">Dark blue Garden</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('Dark_floral_book.html','_blank')">
+            <iframe class="card-preview" src="Dark_floral_book.html" loading="lazy" scrolling="no" title="Dark blue Garden"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Dark blue &amp; gold Rose garden</div>
+              <div class="card-desc">Romantic · gold · Enchanted</div>
+              <a href="Dark_floral_book.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#8a9bb5;"></div>
+          </div>
+        </div>
+
+        <!-- 4. French Village -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('French_village_book.html','_blank')">
+            <span class="card-header-num">04</span><span class="card-header-name">French Village</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('French_village_book.html','_blank')">
+            <iframe class="card-preview" src="French_village_book.html" loading="lazy" scrolling="no" title="French Village"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Jardin de Fleurs — French Village</div>
+              <div class="card-desc">Romantic · Watercolor · Pastel bloom</div>
+              <a href="French_village_book.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c4848a;"></div>
+          </div>
+        </div>
+
+        <!-- 5. Die_cut Book -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('Die_cut Book.html','_blank')">
+            <span class="card-header-num">05</span><span class="card-header-name">Jardin de Fleurs</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('Die_cut Book.html','_blank')">
+            <iframe class="card-preview" src="Die_cut Book.html" loading="lazy" scrolling="no" title="Jardin de Fleurs"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Jardin de Fleurs — Engraving Edition</div>
+              <div class="card-desc">Vintage · Sepia · Hand-engraved</div>
+              <a href="Die_cut Book.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#8a5a2a;"></div>
+          </div>
+        </div>
+
+        <!-- 6. Sky Blue Book -->
+        <div class="card-wrap">
+          <div class="card-header" onclick="window.open('skyblue_book.html','_blank')">
+            <span class="card-header-num">06</span><span class="card-header-name">Ciel Divin</span>
+          </div>
+          <div class="template-card" onclick="window.open('skyblue_book.html','_blank')">
+            <iframe class="card-preview" src="skyblue_book.html" loading="lazy" scrolling="no" title="Ciel Divin"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Ciel Divin — Heavenly Sky</div>
+              <div class="card-desc">Divine · Sky blue · Gold banner</div>
+              <a href="skyblue_book.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#4a7ab5;"></div>
+          </div>
+        </div>
+
+      </div><!-- end row2 track -->
+    </div>
+  </div>
+
+  <!-- ══ ROW 2: Classic Invitations ══ -->
+  <div class="category-block reveal">
+    <div class="category-header">
+      <div class="category-title">
+        Classic Invitations
+        <span>Auto-scrolling ›</span>
+      </div>
+      <div class="category-arrows">
+        <button class="cat-arrow" onclick="nudgeRow('row1', -1)">‹</button>
+        <button class="cat-arrow" onclick="nudgeRow('row1', 1)">›</button>
+      </div>
+    </div>
+    <div class="cards-track-wrap">
+      <div class="cards-track" id="row1">
+
+        <!-- 1. Terracotta -->
+        <div class="card-wrap card-terracotta">
+          <div class="card-header" onclick="window.open('wedding-invitation_terracotta.html','_blank')">
+            <span class="card-header-num">01</span><span class="card-header-name">Dark Gold Luxury</span>
+          </div>
+          <div class="template-card card-terracotta" onclick="window.open('wedding-invitation_terracotta.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_terracotta.html" loading="lazy" scrolling="no" title="Dark Gold Luxury"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Dark Gold Luxury</div>
+              <div class="card-desc">Dark · Gold · Floral · Luxurious</div>
+              <a href="wedding-invitation_terracotta.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c4674a;"></div>
+          </div>
+        </div>
+
+        <!-- 2. Vintage -->
+        <div class="card-wrap card-vintage">
+          <div class="card-header" onclick="window.open('wedding-invitation_vintage.html','_blank')">
+            <span class="card-header-num">02</span><span class="card-header-name">Vintage</span>
+          </div>
+          <div class="template-card card-vintage" onclick="window.open('wedding-invitation_vintage.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_vintage.html" loading="lazy" scrolling="no" title="Vintage"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Vintage &amp; Romantic</div>
+              <div class="card-desc">Aged parchment · Sepia · Ornate frames</div>
+              <a href="wedding-invitation_vintage.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c4a456;"></div>
+          </div>
+        </div>
+
+        <!-- 3. Garden & Floral -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('wedding-invitation_garden.html','_blank')">
+            <span class="card-header-num">03</span><span class="card-header-name">Garden &amp; Floral</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('wedding-invitation_garden.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_garden.html" loading="lazy" scrolling="no" title="Garden"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Garden &amp; Floral</div>
+              <div class="card-desc">Sage green · Botanical · Fresh</div>
+              <a href="wedding-invitation_garden.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#7a9e7e;"></div>
+          </div>
+        </div>
+
+        <!-- 4. Classy -->
+        <div class="card-wrap card-garden">
+          <div class="card-header" onclick="window.open('Classy.html','_blank')">
+            <span class="card-header-num">04</span><span class="card-header-name">Classy</span>
+          </div>
+          <div class="template-card card-garden" onclick="window.open('Classy.html','_blank')">
+            <iframe class="card-preview" src="Classy.html" loading="lazy" scrolling="no" title="Classy"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Classy blues</div>
+              <div class="card-desc">Classy · blues · Fresh</div>
+              <a href="Classy.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#7a9e7e;"></div>
+          </div>
+        </div>
+
+        <!-- 5. Soft & Minimal -->
+        <div class="card-wrap card-soft">
+          <div class="card-header" onclick="window.open('wedding-invitation_soft.html','_blank')">
+            <span class="card-header-num">05</span><span class="card-header-name">Soft &amp; Minimal</span>
+          </div>
+          <div class="template-card card-soft" onclick="window.open('wedding-invitation_soft.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_soft.html" loading="lazy" scrolling="no" title="Soft"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Soft &amp; Minimal</div>
+              <div class="card-desc">Blush · Minimal · Pure elegance</div>
+              <a href="wedding-invitation_soft.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c9958a;"></div>
+          </div>
+        </div>
+
+        <!-- 6. Dark & Moody -->
+        <div class="card-wrap card-dark">
+          <div class="card-header" onclick="window.open('wedding-invitation_dark.html','_blank')">
+            <span class="card-header-num">06</span><span class="card-header-name">Dark &amp; Moody</span>
+          </div>
+          <div class="template-card card-dark" onclick="window.open('wedding-invitation_dark.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_dark.html" loading="lazy" scrolling="no" title="Dark"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Dark &amp; Moody</div>
+              <div class="card-desc">Deep charcoal · Gold · Dramatic</div>
+              <a href="wedding-invitation_dark.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c9a84c;"></div>
+          </div>
+        </div>
+
+        <!-- 7. Midnight Blue -->
+        <div class="card-wrap card-midnight">
+          <div class="card-header" onclick="window.open('wedding-invitation_night.html','_blank')">
+            <span class="card-header-num">07</span><span class="card-header-name">Midnight Blue</span>
+          </div>
+          <div class="template-card card-midnight" onclick="window.open('wedding-invitation_night.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_night.html" loading="lazy" scrolling="no" title="Midnight"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Midnight Blue</div>
+              <div class="card-desc">Navy · Silver · Twinkling stars</div>
+              <a href="wedding-invitation_night.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#8aaa98;"></div>
+          </div>
+        </div>
+
+        <!-- 8. Classic -->
+        <div class="card-wrap card-classic">
+          <div class="card-header" onclick="window.open('wedding-invitation_classic.html','_blank')">
+            <span class="card-header-num">08</span><span class="card-header-name">Classic</span>
+          </div>
+          <div class="template-card card-classic" onclick="window.open('wedding-invitation_classic.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_classic.html" loading="lazy" scrolling="no" title="Classic"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Classic</div>
+              <div class="card-desc">Warm paper · Torn edges · Gold accents</div>
+              <a href="wedding-invitation_classic.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#c9a96e;"></div>
+          </div>
+        </div>
+
+        <!-- 9. Elvish Fantasy -->
+        <div class="card-wrap card-elvish">
+          <div class="card-header" onclick="window.open('wedding-invitation_lotr.html','_blank')">
+            <span class="card-header-num">09</span><span class="card-header-name">Elvish Fantasy</span>
+          </div>
+          <div class="template-card card-elvish" onclick="window.open('wedding-invitation_lotr.html','_blank')">
+            <iframe class="card-preview" src="wedding-invitation_lotr.html" loading="lazy" scrolling="no" title="Elvish"></iframe>
+            <div class="card-overlay">
+              <div class="card-name">Elvish Fantasy</div>
+              <div class="card-desc">Forest green · Gold · Fireflies · LOTR</div>
+              <a href="wedding-invitation_lotr.html" target="_blank" class="card-btn">View Template →</a>
+            </div>
+            <div class="card-strip" style="--accent:#2d6e3a;"></div>
+          </div>
+        </div>
+
+      </div><!-- end row1 track -->
+    </div>
+  </div>
+
+  <div class="category-divider"></div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <h2 class="reveal">How It Works</h2>
+  <p class="reveal">Simple, fast, beautiful</p>
+  <div class="steps">
+    <div class="step reveal"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our exclusive templates and pick the one that speaks to your love story.</p></div>
+    <div class="step reveal"><div class="step-num">02</div><h3>Send your details</h3><p>Share your names, date, venue, schedule, and any personal touches you'd like included.</p></div>
+    <div class="step reveal"><div class="step-num">03</div><h3>We customize it</h3><p>Your invitation is personalized and ready in 24&ndash;48h. We send you a preview first.</p></div>
+    <div class="step reveal"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. RSVPs go straight to your inbox automatically.</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <h2 class="reveal">Simple Pricing</h2>
+  <p class="reveal">No hidden fees &middot; Contact us to get started</p>
+
+  <div class="pricing-cards">
+
+    <!-- STANDARD -->
+    <div class="price-card reveal">
+      <div class="price-name">Standard</div>
+      <div class="price-amount"><span class="price-currency">$</span>79</div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">The complete digital invitation</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>1 template of your choice</span></li>
+        <li class="price-feature">
+          <span>Fully personalized <span class="info-btn">i<span class="info-tooltip">We customize your chosen template with your names, date, venue and schedule. You can add or remove any steps (ceremony, cocktails, dinner, dancing, etc.).</span></span></span>
+        </li>
+        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+        <li class="price-feature"><span>Up to 3 photos included</span></li>
+        <li class="price-feature"><span>Delivered in 48h</span></li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="price-card featured reveal">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Premium</div>
+      <div class="price-amount"><span class="price-currency">$</span>99</div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">The full experience</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>1 template of your choice</span></li>
+        <li class="price-feature">
+          <span>Fully personalized <span class="info-btn">i<span class="info-tooltip">We customize your chosen template with your names, date, venue and schedule. You can add or remove any steps (ceremony, cocktails, dinner, dancing, etc.).</span></span></span>
+        </li>
+        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+        <li class="price-feature"><span>Up to 5 photos included</span></li>
+        <li class="price-feature"><span>Background music</span></li>
+        <li class="price-feature"><span>Delivered in 24h</span></li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
+    </div>
+
+    <!-- LUXURY -->
+    <div class="price-card reveal">
+      <div class="price-name">Luxury</div>
+      <div class="price-amount"><span class="price-currency">$</span>149</div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">For the perfect wedding</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>Everything in Premium</span></li>
+        <li class="price-feature"><span>Up to 10 photos included</span></li>
+        <li class="price-feature"><span>Priority delivery in 12h</span></li>
+        <li class="price-feature">
+          <span>Invitation generator <span class="info-btn">i<span class="info-tooltip">A private tool we give you to instantly generate a unique personalized link per guest &mdash; each guest sees their own name on the invitation card. No technical knowledge needed.</span></span></span>
+        </li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
+      <a href="https://nemerdavid.github.io/web-des/Invitation%20generator.html" target="_blank" class="price-cta">See Invitation Generator &#8599;</a>
+    </div>
+
+  </div>
+
+  <!-- PAYMENT METHODS -->
+  <div class="payment-info reveal">
+
+    <div class="payment-region">
+      <h4>
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/France.png" alt="France flag">
+        France, EU &amp; Worldwide
+      </h4>
+      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
+      <div class="payment-methods">
+        <div class="pay-method">
+          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/virement.png" alt="Virement bancaire" class="pay-icon">
+          <div><strong>Virement bancaire (Bank Transfer)</strong>Details shared on request</div>
+        </div>
+        <div class="pay-method">
+          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/paypal.png" alt="PayPal" class="pay-icon">
+          <div><strong>PayPal</strong>Link shared on request</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-region">
+      <h4>
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/Lebanon.png" alt="Lebanon flag">
+        Lebanon
+      </h4>
+      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
+      <div class="payment-methods">
+        <div class="pay-method">
+          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/WHISH.png" alt="Whish Money" class="pay-icon">
+          <div><strong>Whish Money</strong>Account number shared on request</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="payment-note reveal">Payment is only requested after you have approved your invitation preview</p>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-content">
+    <h2 class="reveal">Let's create something beautiful</h2>
+    <h3 class="reveal">Get in touch</h3>
+    <div class="contact-items">
+      <div class="contact-item reveal">
+        <span class="contact-icon">&#128241;</span>
+        <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/33752807727">+33 07 52 80 77 27</a></div></div>
+      </div>
+      <div class="contact-item reveal">
+        <span class="contact-icon">&#9993;</span>
+        <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:cardia.studios@gmail.com">cardia.studios@gmail.com</a></div></div>
+      </div>
+      <div class="contact-item reveal">
+        <span class="contact-icon">&#128247;</span>
+        <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/cardiastudios" target="_blank">@cardiastudios</a></div></div>
+      </div>
+    </div>
+    <a href="mailto:cardia.studios@gmail.com" class="contact-cta reveal">Send an Enquiry</a>
+    <div class="footer-note reveal">&copy; 2025 Cardia Studios &middot; Digital Wedding Invitations &middot; All rights reserved</div>
+  </div>
+</section>
+
+<script>
+/* ── Reveal on scroll ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── Scale iframes ── */
+function scaleIframes(){
+  document.querySelectorAll('.template-card').forEach(card => {
+    const iframe = card.querySelector('.card-preview');
+    if(!iframe) return;
+    const cw = card.offsetWidth, ch = card.offsetHeight;
+    const scale = Math.min(cw/390, ch/844);
+    iframe.style.width = '390px';
+    iframe.style.height = '844px';
+    iframe.style.transform = 'scale(' + scale + ')';
+    iframe.style.transformOrigin = 'top left';
+  });
+}
+window.addEventListener('resize', scaleIframes);
+scaleIframes();
+
+/* ── Arrow nudge (manual) ── */
+function nudgeRow(id, dir){
+  const state = window._autoScroll && window._autoScroll[id];
+  if(!state) return;
+  state.pos += dir * (state.cardWidth * 2);
+}
+
+/* ── Auto-scroll with seamless loop ── */
+function setupAutoScroll(trackId, speed) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+
+  /* Duplicate cards for seamless loop */
+  const originals = Array.from(track.children);
+  originals.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+
+  /* Measure original set width after render */
+  let originalWidth = 0;
+  let cardWidth = 0;
+
+  function measureWidth() {
+    originalWidth = originals.reduce((sum, card) => sum + card.offsetWidth + 16, 0);
+    cardWidth = originals[0] ? originals[0].offsetWidth + 16 : 200;
+  }
+  measureWidth();
+  window.addEventListener('resize', () => { measureWidth(); scaleIframes(); });
+
+  const state = { pos: 0, paused: false, dragging: false, cardWidth: 0 };
+  window._autoScroll = window._autoScroll || {};
+  window._autoScroll[trackId] = state;
+
+  function tick() {
+    state.cardWidth = cardWidth;
+    if (!state.paused && !state.dragging) {
+      state.pos += speed;
+      if (state.pos >= originalWidth) state.pos -= originalWidth;
+    }
+    track.scrollLeft = state.pos;
+    requestAnimationFrame(tick);
+  }
+
+  /* Pause on hover */
+  track.addEventListener('mouseenter', () => state.paused = true);
+  track.addEventListener('mouseleave', () => { state.paused = false; state.dragging = false; });
+
+  /* Drag to scrub */
+  let startX, scrollStart;
+  track.addEventListener('mousedown', e => {
+    state.dragging = true;
+    state.paused = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStart = state.pos;
+  });
+  track.addEventListener('mouseup', () => { state.dragging = false; state.paused = false; });
+  track.addEventListener('mousemove', e => {
+    if (!state.dragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    state.pos = scrollStart - (x - startX);
+    if (state.pos < 0) state.pos += originalWidth;
+    if (state.pos >= originalWidth) state.pos -= originalWidth;
+  });
+
+  /* Touch support */
+  let touchStartX, touchScrollStart;
+  track.addEventListener('touchstart', e => {
+    state.paused = true;
+    touchStartX = e.touches[0].pageX;
+    touchScrollStart = state.pos;
+  }, { passive: true });
+  track.addEventListener('touchend', () => { state.paused = false; });
+  track.addEventListener('touchmove', e => {
+    const x = e.touches[0].pageX;
+    state.pos = touchScrollStart - (x - touchStartX);
+    if (state.pos < 0) state.pos += originalWidth;
+    if (state.pos >= originalWidth) state.pos -= originalWidth;
+  }, { passive: true });
+
+  requestAnimationFrame(tick);
+}
+
+setupAutoScroll('row1', 0.6);
+setupAutoScroll('row2', 0.6);
+
+/* ── Smooth anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
