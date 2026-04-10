@@ -28,7 +28,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .bible-3d { width: var(--bw); position: relative; transform-style: preserve-3d; }
 .cover-flipper { width: 100%; height: clamp(500px, 145vw, 580px); position: relative; transform-style: preserve-3d; transform-origin: left center; transition: transform 1.2s cubic-bezier(.4,0,.2,1); cursor: pointer; z-index: 10; }
 .cover-flipper.open { transform: rotateY(-180deg); pointer-events: none; }
-.cover-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), inset -3px 0 8px rgba(0,0,0,.4), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px) clamp(16px, 6%, 32px) clamp(60px, 18%, 90px) clamp(26px, 9%, 50px); overflow: hidden; }
+.cover-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), inset -3px 0 8px rgba(0,0,0,.4), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px) clamp(16px, 6%, 32px) clamp(60px, 18%, 90px) clamp(26px, 9%, 50px); overflow: hidden; }
 .cover-face::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,5,2,.7) 0%, rgba(10,5,2,.15) 50%, transparent 100%); border-radius: inherit; pointer-events: none; }
 .cover-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: linear-gradient(160deg, #2a1208 0%, #3a1a10 100%); border-radius: 10px 3px 3px 10px; display: flex; align-items: center; justify-content: center; }
 .cover-back-inner { width: 85%; height: 85%; border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; }
@@ -49,7 +49,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 #scene-back { display: none; width: 100vw; height: 100vh; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #2e0e0e 0%, #0a0404 100%); perspective: 1400px; }
 #scene-back.visible { display: flex; }
 .back-cover-wrap { width: var(--bw); height: clamp(500px, 145vw, 580px); position: relative; transform-style: preserve-3d; transform-origin: left center; }
-.back-cover-face { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px); padding-bottom: clamp(60px,18%,90px); overflow: hidden; }
+.back-cover-face { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/6.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 24px rgba(0,0,0,.85), 4px 8px 30px rgba(0,0,0,.6); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: clamp(16px, 6%, 32px); padding-bottom: clamp(60px,18%,90px); overflow: hidden; }
 .back-cover-face::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,5,2,.75) 0%, rgba(10,5,2,.1) 50%, transparent 100%); pointer-events: none; }
 .back-spine { position: absolute; top: 0; left: -8px; width: 8px; height: 100%; background: linear-gradient(to right, #0e0404, #2a0808, #1a0404); border-radius: 3px 0 0 3px; z-index: 5; }
 .back-cover-text { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(4px,1.5vw,8px); }
@@ -76,7 +76,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .page-label { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); color: var(--gold-lt); letter-spacing: .1em; opacity: .7; }
 .page-nav { display: none; }
 
-.book-spread { width: 100%; background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 30px rgba(0,0,0,.9), 0 10px 40px rgba(0,0,0,.6), inset 6px 0 14px rgba(0,0,0,.1); overflow: hidden; position: relative; perspective: 800px; }
+.book-spread { width: 100%; background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Page.png') center/cover no-repeat; border-radius: 3px 10px 10px 3px; box-shadow: -8px 0 0 #1a0808, -14px 4px 30px rgba(0,0,0,.9), 0 10px 40px rgba(0,0,0,.6), inset 6px 0 14px rgba(0,0,0,.1); overflow: hidden; position: relative; perspective: 800px; }
 .book-spread::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 4; }
 .book-spread::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(to right, rgba(0,0,0,.12), transparent); z-index: 5; pointer-events: none; }
 .flip-sheet { position: absolute; inset: 0; background: linear-gradient(100deg, var(--ivory-dk) 0%, var(--ivory) 60%); transform-origin: left center; z-index: 10; border-radius: 0 10px 10px 0; pointer-events: none; opacity: 0; }
@@ -157,7 +157,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 
 <canvas id="particle-canvas"></canvas>
 
-<audio id="hymn" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Christian_Hymn_-_Jesus_Loves_Me_CeeNaija.com_.mp3" loop preload="auto"></audio>
+<audio id="hymn" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Christian_Hymn_-_Jesus_Loves_Me_CeeNaija.com_.mp3" loop preload="auto"></audio>
 
 <!-- ══════ CLOSED BIBLE ══════ -->
 <div id="scene-closed">
@@ -199,13 +199,13 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
       <!-- PAGE 1 — Title: Grail top, Cross middle, Grail bottom → SWITCHED: Cross top, Grail middle, Cross bottom -->
       <div class="page active" id="page-1">
         <div class="page-num">✦ I ✦</div>
-        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" alt="">
+        <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" alt="">
         <p class="book-eyebrow">First Holy Communion</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
         <div class="book-bigname">Christina</div>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
         <p class="book-detail">daughter of<br><span style="font-size:clamp(13px,4.5vw,17px);color:var(--ink);font-style:normal;">Steven &amp; Jihan Nemer</span></p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
         <p class="book-verse">"Let the little children come to me,<br>and do not hinder them,<br>for the kingdom of heaven<br>belongs to such as these."</p>
         <p class="book-verse-ref">Matthew 19:14</p>
       </div>
@@ -214,11 +214,11 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
       <div class="page" id="page-2">
         <div class="page-num">✦ II ✦</div>
         <div class="page-icon-pair">
-          <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" alt="">
-          <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" alt="">
+          <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Candle.png" alt="">
+          <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Candle.png" alt="">
         </div>
         <p class="book-section">The Ceremony</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
 
         <div class="info-row">
           <span class="info-label">Date</span>
@@ -226,7 +226,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
           <span class="book-sub">2026</span>
         </div>
 
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
 
         <div class="info-row">
           <span class="info-label">Holy Mass</span>
@@ -237,7 +237,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
           </a>
         </div>
 
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
 
         <div class="info-row">
           <span class="info-label">Celebration Dinner</span>
@@ -252,9 +252,9 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
       <!-- PAGE 3 — Prayer: grails → candles above and below -->
       <div class="page" id="page-3">
         <div class="page-num">✦ III ✦</div>
-        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Dove.png" alt="">
+        <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Dove.png" alt="">
         <p class="book-section">A Prayer</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
         <p class="book-verse">
           <span class="dropcap">D</span>ear Lord,
           <br style="clear:both"><br>
@@ -262,19 +262,19 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
           May Your presence fill her with<br>joy, peace, and endless love.<br><br>
           May she walk always in Your light,<br>guided by faith and surrounded<br>by those who love her.
         </p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Candle.png" class="size-candle" alt="✦"></div>
         <p class="book-verse-ref2">Amen ✦</p>
       </div>
 
       <!-- PAGE 4 — Photos (unchanged) -->
       <div class="page" id="page-4">
         <div class="page-num">✦ IV ✦</div>
-        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Dove.png" alt="">
+        <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Dove.png" alt="">
         <p class="book-section">Christina's Moments</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
         <div class="photo-carousel" id="photo-carousel">
           <div class="photo-track" id="photo-track">
-            <div class="photo-slide"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Tina.jpeg" alt="Photo 1"></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina.jpeg" alt="Photo 1"></div>
           </div>
           <div class="photo-arrows">
             <button class="photo-arr" onclick="photoMove(-1)">‹</button>
@@ -288,9 +288,9 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
       <!-- PAGE 5 — RSVP (unchanged) -->
       <div class="page" id="page-5">
         <div class="page-num">✦ V ✦</div>
-        <img class="page-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Cross.png" alt="">
+        <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" alt="">
         <p class="book-section">Your Reply</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
+        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
         <p id="dear-guest" class="book-detail" style="font-family:'Great Vibes',cursive;font-size:clamp(18px,6vw,26px);color:var(--burgundy);font-style:normal;margin-bottom:clamp(3px,1vw,6px);"></p>
         <p class="book-detail" style="margin-bottom:clamp(5px,2vw,9px);"><br><strong style="font-style:normal;color:var(--burgundy);">April 18th, 2026</strong></p>
         <div id="rsvp-form-wrap">
@@ -334,7 +334,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         <div class="cardia-credit">
           <a href="https://nemerdavid.github.io/web-des/" target="_blank">
             Powered by <span>Cardia Studios</span>
-            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Chain2.png" alt="">
+            <img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Chain2.png" alt="">
           </a>
         </div>
       </div>
@@ -342,7 +342,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
   </div>
 </div>
 
-<audio id="page-flip-sound" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Page%20Flip%202.mp3" preload="auto"></audio>
+<audio id="page-flip-sound" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Page%20Flip%202.mp3" preload="auto"></audio>
 
 <script>
 /* ══════ FALLING PARTICLES ══════ */
