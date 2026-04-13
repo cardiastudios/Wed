@@ -87,6 +87,9 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .page.active { display: flex; }
 @keyframes pgIn { from{opacity:0;transform:translateX(6px)} to{opacity:1;transform:none} }
 
+/* Page 4 — maximise photo space */
+#page-4 { padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; }
+
 /* Typography */
 .page-num { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 11px); color: var(--gold-dk); letter-spacing: .1em; margin-bottom: clamp(4px, 1.5vw, 8px); opacity: .7; }
 .ornament { display: flex; align-items: center; gap: clamp(4px, 1.5vw, 8px); margin: clamp(5px, 1.8vw, 9px) auto; width: 80%; color: var(--gold); }
@@ -117,7 +120,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .cardia-credit { position: absolute; bottom: clamp(30px,3%,38px); left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; }
 .cardia-credit a { font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 9px); letter-spacing: .12em; color: rgba(232,204,128,.55); text-decoration: none; text-transform: uppercase; transition: opacity .2s; display: inline-flex; align-items: center; gap: 4px; }
 .cardia-credit a span { border-bottom: 1px solid rgba(232,204,128,.55); padding-bottom: 1px; }
-.cardia-credit a img { width: clamp(14px, 3.5vw, 18px); opacity: .8; flex-shrink: 0; filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85); }
+.cardia-credit a img { width: clamp(8px, 3.5vw, 10px); opacity: .8; flex-shrink: 0; filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85); }
 .cardia-credit a:hover { opacity: 1; }
 .map-link { display: inline-flex; align-items: center; gap: 3px; font-family: 'Cinzel', serif; font-size: clamp(8px, 2.4vw, 11px); color: var(--burgundy); text-decoration: none; letter-spacing: .08em; border-bottom: 1px solid rgba(90,26,42,.3); padding-bottom: 1px; margin-top: clamp(2px,0.8vw,4px); transition: opacity .2s; }
 .map-link:hover { opacity: .7; }
@@ -139,7 +142,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .photo-carousel { width: 100%; position: relative; overflow: hidden; }
 .photo-track { display: flex; transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
 .photo-slide { min-width: 100%; }
-.photo-slide img { width: 100%; height: clamp(260px, 75vw, 320px); object-fit: cover; display: block; }
+.photo-slide img { width: 100%; height: clamp(380px, 110vw, 460px); object-fit: cover; object-position: center top; display: block; }
 .photo-counter { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 10px); color: var(--gold-dk); letter-spacing: .1em; text-align: center; margin-top: clamp(4px, 1.5vw, 7px); opacity: .7; }
 .photo-dots { display: flex; justify-content: center; gap: clamp(5px, 2vw, 8px); margin-top: clamp(4px, 1.5vw, 7px); }
 .photo-dot { width: clamp(6px, 2vw, 9px); height: clamp(6px, 2vw, 9px); border-radius: 50%; background: rgba(160,120,40,.25); border: 1px solid var(--gold-dk); cursor: pointer; transition: all .3s; }
@@ -196,7 +199,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
     <div class="book-spread">
       <div class="flip-sheet" id="flip-sheet"></div>
 
-      <!-- PAGE 1 — Title: Grail top, Cross middle, Grail bottom → SWITCHED: Cross top, Grail middle, Cross bottom -->
+      <!-- PAGE 1 -->
       <div class="page active" id="page-1">
         <div class="page-num">✦ I ✦</div>
         <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" alt="">
@@ -210,7 +213,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         <p class="book-verse-ref">Matthew 19:14</p>
       </div>
 
-      <!-- PAGE 2 — Ceremony: grails → crosses -->
+      <!-- PAGE 2 -->
       <div class="page" id="page-2">
         <div class="page-num">✦ II ✦</div>
         <div class="page-icon-pair">
@@ -219,15 +222,12 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         </div>
         <p class="book-section">The Ceremony</p>
         <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
-
         <div class="info-row">
           <span class="info-label">Date</span>
           <span class="book-gold">Saturday, April 18th</span>
           <span class="book-sub">2026</span>
         </div>
-
         <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
-
         <div class="info-row">
           <span class="info-label">Holy Mass</span>
           <span class="book-gold">3:00 in the Afternoon</span>
@@ -236,9 +236,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
             St. Maroun Church · Al-akbe-Zgharta
           </a>
         </div>
-
         <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" class="size-cross" alt="✦"></div>
-
         <div class="info-row">
           <span class="info-label">Celebration Dinner</span>
           <span class="book-gold">7:30 in the Evening</span>
@@ -249,7 +247,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         </div>
       </div>
 
-      <!-- PAGE 3 — Prayer: grails → candles above and below -->
+      <!-- PAGE 3 -->
       <div class="page" id="page-3">
         <div class="page-num">✦ III ✦</div>
         <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Dove.png" alt="">
@@ -266,26 +264,28 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         <p class="book-verse-ref2">Amen ✦</p>
       </div>
 
-      <!-- PAGE 4 — Photos (unchanged) -->
+      <!-- PAGE 4 — Photos: dove removed, ornament margin tightened -->
       <div class="page" id="page-4">
         <div class="page-num">✦ IV ✦</div>
-        <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Dove.png" alt="">
         <p class="book-section">Christina's Moments</p>
-        <div class="ornament-img"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
+        <div class="ornament-img" style="margin:4px auto;"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Grail.png" class="size-grail" alt="✦"></div>
         <div class="photo-carousel" id="photo-carousel">
           <div class="photo-track" id="photo-track">
-            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina.jpeg" alt="Photo 1"></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina4.jpeg" alt="Photo 1"></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina1.jpeg" alt="Photo 2"></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina3.jpeg" alt="Photo 3"></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina2.jpeg" alt="Photo 4"></div>
           </div>
           <div class="photo-arrows">
             <button class="photo-arr" onclick="photoMove(-1)">‹</button>
             <button class="photo-arr" onclick="photoMove(1)">›</button>
           </div>
         </div>
-        <div class="photo-counter" id="photo-counter">1 / 1</div>
+        <div class="photo-counter" id="photo-counter">1 / 4</div>
         <div class="photo-dots" id="photo-dots"></div>
       </div>
 
-      <!-- PAGE 5 — RSVP (unchanged) -->
+      <!-- PAGE 5 — RSVP -->
       <div class="page" id="page-5">
         <div class="page-num">✦ V ✦</div>
         <img class="page-icon" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Cross.png" alt="">
@@ -332,7 +332,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
         </div>
         <button class="back-reopen-btn" onclick="reopenFromBack()">← Back to Book</button>
         <div class="cardia-credit">
-          <a href="https://nemerdavid.github.io/web-des/" target="_blank">
+          <a href="https://www.cardiastudios.com/" target="_blank">
             Powered by <span>Cardia Studios</span>
             <img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Chain2.png" alt="">
           </a>
@@ -545,7 +545,7 @@ function changePage(dir) {
 }
 
 let photoIdx = 0;
-const PHOTO_TOTAL = 1;
+const PHOTO_TOTAL = 4;
 
 function buildPhotoDots() {
   const dotsWrap = document.getElementById('photo-dots');
@@ -579,7 +579,7 @@ document.addEventListener('touchend', e => {
 let px = 0;
 const carousel = document.getElementById('photo-carousel');
 if(carousel) {
-  carousel.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, { passive: true });
+  carousel.addEventListener('touchstart', e => { px = e.touches[0].clientX; e.stopPropagation(); }, { passive: true });
   carousel.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - px;
     if(Math.abs(dx) < 30) return;
