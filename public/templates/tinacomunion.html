@@ -277,8 +277,8 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
             <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Tina2.jpeg" alt="Photo 4"></div>
           </div>
           <div class="photo-arrows">
-            <button class="photo-arr" onclick="photoMove(-1)">‹</button>
-            <button class="photo-arr" onclick="photoMove(1)">›</button>
+            <button class="photo-arr" onclick="photoMove(-1);event.stopPropagation()">‹</button>
+            <button class="photo-arr" onclick="photoMove(1);event.stopPropagation()">›</button>
           </div>
         </div>
         <div class="photo-counter" id="photo-counter">1 / 4</div>
@@ -566,9 +566,14 @@ function photoGoTo(idx) {
 }
 function photoMove(dir) { photoGoTo(photoIdx + dir); }
 
-let sx = 0, sy = 0;
-document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+let swipeStartedInCarousel = false;
+document.addEventListener('touchstart', e => {
+  sx = e.touches[0].clientX;
+  sy = e.touches[0].clientY;
+  swipeStartedInCarousel = !!e.target.closest('#photo-carousel');
+}, { passive: true });
 document.addEventListener('touchend', e => {
+  if(swipeStartedInCarousel) return;
   const dx = e.changedTouches[0].clientX - sx;
   const dy = e.changedTouches[0].clientY - sy;
   if(Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
