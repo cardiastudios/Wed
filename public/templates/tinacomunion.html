@@ -566,7 +566,7 @@ function photoGoTo(idx) {
 }
 function photoMove(dir) { photoGoTo(photoIdx + dir); }
 
-let swipeStartedInCarousel = false;
+let sx = 0, sy = 0, swipeStartedInCarousel = false;
 document.addEventListener('touchstart', e => {
   sx = e.touches[0].clientX;
   sy = e.touches[0].clientY;
@@ -584,12 +584,11 @@ document.addEventListener('touchend', e => {
 let px = 0;
 const carousel = document.getElementById('photo-carousel');
 if(carousel) {
-  carousel.addEventListener('touchstart', e => { px = e.touches[0].clientX; e.stopPropagation(); }, { passive: true });
+  carousel.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, { passive: true });
   carousel.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - px;
     if(Math.abs(dx) < 30) return;
     photoMove(dx < 0 ? 1 : -1);
-    e.stopPropagation();
   }, { passive: true });
 }
 
