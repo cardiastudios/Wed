@@ -88,7 +88,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 @keyframes pgIn { from{opacity:0;transform:translateX(6px)} to{opacity:1;transform:none} }
 
 /* Page 4 — maximise photo space */
-#page-4 { padding-top: 6px; padding-bottom: 6px; justify-content: flex-start; }
+#page-4 { padding-top: 30px; padding-bottom: 6px; justify-content: flex-start; }
 
 /* Typography */
 .page-num { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.5vw, 11px); color: var(--gold-dk); letter-spacing: .1em; margin-bottom: clamp(4px, 1.5vw, 8px); opacity: .7; }
@@ -142,7 +142,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #0a0404;
 .photo-carousel { width: 100%; position: relative; overflow: hidden; }
 .photo-track { display: flex; transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
 .photo-slide { min-width: 100%; }
-.photo-slide img { width: 100%; height: clamp(380px, 110vw, 460px); object-fit: cover; object-position: center top; display: block; }
+.photo-slide img { width: 100%; height: clamp(340px, 95vw, 400px); object-fit: contain; display: block; }
 .photo-counter { font-family: 'Cinzel', serif; font-size: clamp(8px, 2.2vw, 10px); color: var(--gold-dk); letter-spacing: .1em; text-align: center; margin-top: clamp(4px, 1.5vw, 7px); opacity: .7; }
 .photo-dots { display: flex; justify-content: center; gap: clamp(5px, 2vw, 8px); margin-top: clamp(4px, 1.5vw, 7px); }
 .photo-dot { width: clamp(6px, 2vw, 9px); height: clamp(6px, 2vw, 9px); border-radius: 50%; background: rgba(160,120,40,.25); border: 1px solid var(--gold-dk); cursor: pointer; transition: all .3s; }
