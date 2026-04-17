@@ -107,7 +107,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #dcd8d2;
 }
 .back-cover-face::before { content:""; position:absolute; inset:0; background:linear-gradient(to top,rgba(240,235,225,.7) 0%,transparent 60%); pointer-events:none; }
 .back-spine { position:absolute; top:0; left:-8px; width:8px; height:100%; background:linear-gradient(to right,#888480,#aaa8a4,#909088); border-radius:3px 0 0 3px; z-index:5; }
-.back-cover-text { position:relative; z-index:1; text-align:center; margin-bottom:clamp(6px,2vw,12px); }
+.back-cover-text { position:relative; z-index:1; text-align:center; margin-bottom:clamp(196px,2vw,198px); }
 .back-cover-text p { font-family:'Great Vibes',cursive; font-size:clamp(22px,8vw,36px); color:var(--navy); margin-bottom:clamp(4px,1.5vw,8px); }
 .back-cover-text small {
   font-family:'Cinzel',serif; font-weight:700;
@@ -122,6 +122,7 @@ html, body { width: 100%; height: 100%; overflow-x: hidden; background: #dcd8d2;
   letter-spacing:.2em; text-transform:uppercase;
   color:#000; background:none; border:none; padding:0; cursor:pointer;
   text-shadow:0 1px 4px rgba(255,255,255,.5);
+  margin-bottom:clamp(96px,2vw,98px);
   animation:hintPulse 2s ease-in-out infinite;
 }
 
@@ -237,6 +238,15 @@ textarea.form-field { border:1px solid var(--border); padding:clamp(5px,2vw,8px)
 .btn-rose { display:block; width:100%; padding:clamp(6px,2vw,10px); border:1px solid var(--border); color:var(--navy); font-family:'Cinzel',serif; font-size:clamp(8px,2.5vw,11px); letter-spacing:.15em; text-transform:uppercase; cursor:pointer; background:rgba(255,255,255,.4); transition:all .2s; }
 .btn-solid { background:var(--navy); border-color:var(--navy); color:#e8d890; }
 .rsvp-single-btn { width:100%; padding:clamp(8px,2.5vw,11px); background:var(--navy); border:1px solid var(--gold-dk); color:#e8d890; font-family:'Cinzel',serif; font-size:clamp(9px,2.8vw,12px); letter-spacing:.2em; text-transform:uppercase; cursor:pointer; margin-top:clamp(5px,2vw,9px); }
+
+/* Cardia credit */
+.cardia-credit { position: absolute; bottom: clamp(10px,3%,18px); left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; }
+.cardia-credit a { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); letter-spacing: .12em; color: rgba(74,42,48,.55); text-decoration: none; text-transform: uppercase; transition: opacity .2s; display: inline-flex; align-items: center; gap: 4px; }
+.cardia-credit a span { border-bottom: 1px solid rgba(74,42,48,.4); padding-bottom: 1px; }
+.cardia-credit a img { width: clamp(4px,3.5vw,8px); opacity: .6; flex-shrink: 0; filter: sepia(1) saturate(2) hue-rotate(300deg) brightness(.75); }
+.cardia-credit a:hover { opacity: .9; }
+
+
 </style>
 </head>
 <body>
@@ -451,6 +461,12 @@ textarea.form-field { border:1px solid var(--border); padding:clamp(5px,2vw,8px)
           <small>14 August 2027 · Ehden, Lebanon</small>
         </div>
         <button class="back-reopen-btn" onclick="reopenFromBack()">← Back to Invitation</button>
+          <div class="cardia-credit">
+          <a href="https://nemerdavid.github.io/web-des/" target="_blank">
+            Powered by <span>Cardia Studios</span>
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Tina%20communion/Chain2.png" alt="">
+          </a>
+        </div>
       </div>
     </div>
   </div>
