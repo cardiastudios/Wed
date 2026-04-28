@@ -185,12 +185,49 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
+/* HAMBURGER */
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: .4rem; z-index: 110; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: rgba(200,180,160,.8); transition: all .3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* MOBILE SWIPE — HOW IT WORKS */
+.steps-swiper-wrap { display: none; }
+
+/* MOBILE SWIPE — PRICING */
+.pricing-swiper-wrap { display: none; }
+
 @media (max-width:640px) {
-  .nav-links { display: none; }
+  /* Nav */
+  .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; background: rgba(42,32,24,.98); padding: 5rem 2rem 2rem; gap: 1.5rem; z-index: 105; }
+  .nav-links.open { display: flex; }
+  .nav-hamburger { display: flex; }
+
+  /* Cards */
   .card-overlay { display: none; }
   .card-wrap { width: clamp(150px,42vw,200px); }
   .category-header { padding: 0 1rem 1rem; }
   .cards-track-wrap { padding: 0 1rem; }
+
+  /* How it works — hide grid, show swiper */
+  .steps { display: none; }
+  .steps-swiper-wrap { display: block; width: 100%; overflow: hidden; position: relative; }
+  .steps-swiper-track { display: flex; transition: transform .4s cubic-bezier(.25,1,.4,1); }
+  .steps-swiper-track .step { flex: 0 0 100%; padding: 0 2rem 1.5rem; }
+  .swiper-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
+  .swiper-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,180,160,.25); border: none; cursor: pointer; transition: background .2s, transform .2s; padding: 0; }
+  .swiper-dot.active { background: var(--gold); transform: scale(1.3); }
+  .swiper-arrows { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+  .swiper-btn { background: none; border: 1px solid rgba(200,180,160,.3); color: rgba(200,180,160,.7); width: 36px; height: 36px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .swiper-btn:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+
+  /* Pricing — hide grid, show swiper */
+  .pricing-cards { display: none; }
+  .pricing-swiper-wrap { display: block; width: 100%; overflow: hidden; position: relative; padding: 0 1.25rem; box-sizing: border-box; }
+  .pricing-swiper-track { display: flex; transition: transform .4s cubic-bezier(.25,1,.4,1); will-change: transform; }
+  .pricing-swiper-track .price-card { flex: 0 0 100%; width: 100%; margin: 0; box-sizing: border-box; }
+  .pricing-swiper-wrap .swiper-dots { margin-top: 1.5rem; margin-bottom: 2rem; }
 }
 </style>
 </head>
@@ -199,12 +236,15 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 <!-- NAV -->
 <nav class="nav">
   <a href="#" class="nav-logo"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/Logo5c.png" alt="Cardia Studios"></a>
-  <div class="nav-links">
-    <a href="#templates" class="nav-link">Templates</a>
-    <a href="#how" class="nav-link">How it works</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="#contact" class="nav-link">Contact</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#templates" class="nav-link" onclick="closeMenu()">Templates</a>
+    <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
+    <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
+    <a href="#contact" class="nav-link" onclick="closeMenu()">Contact</a>
   </div>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -519,6 +559,20 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
     <div class="step reveal"><div class="step-num">03</div><h3>We customize it</h3><p>Your invitation is personalized and ready in 24&ndash;48h. We send you a preview first.</p></div>
     <div class="step reveal"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. RSVPs go straight to your inbox automatically.</p></div>
   </div>
+  <!-- Mobile swiper -->
+  <div class="steps-swiper-wrap" id="howSwiper">
+    <div class="steps-swiper-track" id="howTrack">
+      <div class="step"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our exclusive templates and pick the one that speaks to your love story.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Send your details</h3><p>Share your names, date, venue, schedule, and any personal touches you'd like included.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>We customize it</h3><p>Your invitation is personalized and ready in 24&ndash;48h. We send you a preview first.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. RSVPs go straight to your inbox automatically.</p></div>
+    </div>
+    <div class="swiper-arrows">
+      <button class="swiper-btn" onclick="howPrev()">&#8249;</button>
+      <button class="swiper-btn" onclick="howNext()">&#8250;</button>
+    </div>
+    <div class="swiper-dots" id="howDots"></div>
+  </div>
 </section>
 
 <!-- PRICING -->
@@ -584,6 +638,61 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
       <a href="https://nemerdavid.github.io/web-des/Invitation%20generator.html" target="_blank" class="price-cta">See Invitation Generator &#8599;</a>
     </div>
 
+  </div>
+
+  <!-- Mobile pricing swiper -->
+  <div class="pricing-swiper-wrap" id="pricingSwiper">
+    <div class="pricing-swiper-track" id="pricingTrack">
+
+      <div class="price-card">
+        <div class="price-name">Standard</div>
+        <div class="price-amount"><span class="price-currency">$</span>79</div>
+        <div class="price-period">one-time &middot; hosted forever</div>
+        <div class="price-desc">The complete digital invitation</div>
+        <ul class="price-features">
+          <li class="price-feature"><span>1 template of your choice</span></li>
+          <li class="price-feature"><span>Fully personalized</span></li>
+          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+          <li class="price-feature"><span>Up to 3 photos included</span></li>
+          <li class="price-feature"><span>Delivered in 48h</span></li>
+          <li class="price-feature"><span>Hosted forever on our servers</span></li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Premium</div>
+        <div class="price-amount"><span class="price-currency">$</span>99</div>
+        <div class="price-period">one-time &middot; hosted forever</div>
+        <div class="price-desc">The full experience</div>
+        <ul class="price-features">
+          <li class="price-feature"><span>1 template of your choice</span></li>
+          <li class="price-feature"><span>Fully personalized</span></li>
+          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+          <li class="price-feature"><span>Up to 5 photos included</span></li>
+          <li class="price-feature"><span>Background music</span></li>
+          <li class="price-feature"><span>Delivered in 24h</span></li>
+          <li class="price-feature"><span>Hosted forever on our servers</span></li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Luxury</div>
+        <div class="price-amount"><span class="price-currency">$</span>149</div>
+        <div class="price-period">one-time &middot; hosted forever</div>
+        <div class="price-desc">For the perfect wedding</div>
+        <ul class="price-features">
+          <li class="price-feature"><span>Everything in Premium</span></li>
+          <li class="price-feature"><span>Up to 10 photos included</span></li>
+          <li class="price-feature"><span>Priority delivery in 12h</span></li>
+          <li class="price-feature"><span>Invitation generator</span></li>
+          <li class="price-feature"><span>Hosted forever on our servers</span></li>
+        </ul>
+        <a href="https://nemerdavid.github.io/web-des/Invitation%20generator.html" target="_blank" class="price-cta">See Invitation Generator &#8599;</a>
+      </div>
+
+    </div>
+    <div class="swiper-dots" id="pricingDots"></div>
   </div>
 
   <!-- PAYMENT METHODS -->
@@ -761,7 +870,78 @@ function setupAutoScroll(trackId, speed) {
 setupAutoScroll('row1', 0.6);
 setupAutoScroll('row2', 0.6);
 
-/* ── Smooth anchor links ── */
+/* ── Mobile hamburger ── */
+function toggleMenu(){
+  const links = document.getElementById('navLinks');
+  const btn   = document.getElementById('navHamburger');
+  links.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const nav = document.querySelector('.nav');
+  if(!nav.contains(e.target)) closeMenu();
+});
+
+/* ── Generic touch swiper factory ── */
+function makeSwiper(trackId, dotsId, opts){
+  const track = document.getElementById(trackId);
+  const dotsWrap = document.getElementById(dotsId);
+  if(!track) return { go: ()=>{} };
+  const items = Array.from(track.children);
+  let cur = opts.start || 0;
+
+  // Build dots
+  items.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'swiper-dot' + (i===cur?' active':'');
+    d.onclick = () => go(i);
+    dotsWrap.appendChild(d);
+  });
+
+  function go(n){
+    cur = Math.max(0, Math.min(n, items.length-1));
+    const offset = opts.getOffset ? opts.getOffset(cur, items, track) : cur * 100;
+    track.style.transform = `translateX(-${offset}%)`;
+    if(opts.onSlide) opts.onSlide(cur, items);
+    dotsWrap.querySelectorAll('.swiper-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  }
+
+  // Touch swipe
+  let sx, sy, locked=false;
+  track.parentElement.addEventListener('touchstart', e=>{ sx=e.touches[0].clientX; sy=e.touches[0].clientY; locked=false; }, {passive:true});
+  track.parentElement.addEventListener('touchmove', e=>{
+    if(locked) return;
+    const dx = e.touches[0].clientX - sx;
+    const dy = e.touches[0].clientY - sy;
+    if(Math.abs(dy) > Math.abs(dx)) { locked=true; return; }
+    e.preventDefault();
+  }, {passive:false});
+  track.parentElement.addEventListener('touchend', e=>{
+    if(locked) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if(Math.abs(dx) > 40){ dx < 0 ? go(cur+1) : go(cur-1); }
+  }, {passive:true});
+
+  go(cur);
+  return { go, next: ()=>go(cur+1), prev: ()=>go(cur-1) };
+}
+
+/* How it works swiper */
+const howSw = makeSwiper('howTrack','howDots',{ start:0 });
+function howNext(){ howSw.next(); }
+function howPrev(){ howSw.prev(); }
+
+/* Pricing swiper — simple full-width per card */
+const pricingSw = makeSwiper('pricingTrack','pricingDots',{
+  start: 0,
+  getOffset(cur){ return cur * 100; }
+});
+
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
