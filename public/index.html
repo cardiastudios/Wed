@@ -529,17 +529,20 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 }
 
 @media (max-width: 640px) {
-  /* BOOK INVITATIONS — mobile controls */
+  /* BOOK INVITATIONS — mobile controls
+     This is the main place to tweak the book phone frame on mobile.
+     The frame was slightly too tall for the visual area, so the mobile
+     book card now has more height and a softer preview zoom. */
   #row2 .template-card {
     --mock-w: 248px;
     --mock-h: 450px;
-    --mock-top: 42px;
-    --preview-zoom: 1.13;
+    --mock-top: 44px;
+    --preview-zoom: 1.04;
     --preview-shift-x: 0px;
     --preview-shift-y: 0px;
-    --book-cover-w: 359px;
+    --book-cover-w: 399px;
     --book-cover-h: 538px;
-    height: 485px;
+    height: 540px;
   }
 
   /* CLASSIC INVITATIONS — mobile controls */
