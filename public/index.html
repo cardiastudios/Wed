@@ -88,7 +88,8 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
     scroll-padding: 0 1rem;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
-    touch-action: pan-x;
+    overscroll-behavior-y: auto;
+    touch-action: auto;
     padding: 0 1rem 1.2rem;
     margin: 0;
     scrollbar-width: none;
@@ -295,9 +296,10 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 .cards-track-wrap::-webkit-scrollbar { display: none; }
 .cards-track-wrap, .reviews-marquee-wrap, .bestsellers-grid {
   overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
 }
 .cards-track-wrap, .reviews-marquee-wrap {
-  touch-action: pan-x;
+  touch-action: auto;
   contain: layout paint;
   transform: translateZ(0);
 }
@@ -928,10 +930,23 @@ textarea.form-input { resize: vertical; min-height: 90px; }
               <div class="card-strip" style="--accent:#7a9e7e;"></div>
             </div>
           </div>
-
+          <div class="card-wrap card-garden">
+            <div class="card-header" onclick="window.open('templates/Classy.html','_blank')">
+              <span class="card-header-num">C4</span><span class="card-header-name">Classy</span>
+            </div>
+            <div class="template-card card-garden" onclick="window.open('templates/Classy.html','_blank')">
+              <iframe class="card-preview" src="templates/Classy.html" loading="lazy" scrolling="no" title="Classy"></iframe>
+              <div class="card-overlay">
+                <div class="card-name">Classy blues</div>
+                <div class="card-desc">Classy · blues · Fresh</div>
+                <a href="templates/Classy.html" target="_blank" class="card-btn">View Template →</a>
+              </div>
+              <div class="card-strip" style="--accent:#7a9e7e;"></div>
+            </div>
+          </div>
           <div class="card-wrap card-soft">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-              <span class="card-header-num">C4</span><span class="card-header-name">Soft &amp; Minimal</span>
+              <span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span>
             </div>
             <div class="template-card card-soft" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_soft.html" loading="lazy" scrolling="no" title="Soft"></iframe>
@@ -945,7 +960,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-dark">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-              <span class="card-header-num">C5</span><span class="card-header-name">Dark &amp; Moody</span>
+              <span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span>
             </div>
             <div class="template-card card-dark" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_dark.html" loading="lazy" scrolling="no" title="Dark"></iframe>
@@ -959,7 +974,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-midnight">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-              <span class="card-header-num">C6</span><span class="card-header-name">Midnight Blue</span>
+              <span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span>
             </div>
             <div class="template-card card-midnight" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_night.html" loading="lazy" scrolling="no" title="Midnight"></iframe>
@@ -973,7 +988,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-classic">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-              <span class="card-header-num">C7</span><span class="card-header-name">Classic</span>
+              <span class="card-header-num">C8</span><span class="card-header-name">Classic</span>
             </div>
             <div class="template-card card-classic" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_classic.html" loading="lazy" scrolling="no" title="Classic"></iframe>
@@ -987,7 +1002,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-elvish">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-              <span class="card-header-num">C8</span><span class="card-header-name">Elvish Fantasy</span>
+              <span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span>
             </div>
             <div class="template-card card-elvish" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_lotr.html" loading="lazy" scrolling="no" title="Elvish"></iframe>
@@ -1560,6 +1575,20 @@ function setupBestSellersMobileAutoScroll() {
 
 setupBestSellersMobileAutoScroll();
 
+/* ── Prevent horizontal swipe sections from trapping page scroll ── */
+function allowPageScrollOverSwipeSections(){
+  const swipeAreas = document.querySelectorAll('.bestsellers-grid, .cards-track-wrap, .reviews-marquee-wrap');
+  swipeAreas.forEach(area => {
+    area.addEventListener('wheel', e => {
+      const verticalMove = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+      if (!verticalMove) return;
+      e.preventDefault();
+      window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    }, { passive: false });
+  });
+}
+allowPageScrollOverSwipeSections();
+
 /* ── Reveal on scroll ── */
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
@@ -1607,8 +1636,7 @@ function makeSwiper(trackId, dotsId, opts){
     const dx = e.touches[0].clientX - sx;
     const dy = e.touches[0].clientY - sy;
     if(Math.abs(dy) > Math.abs(dx)) { locked=true; return; }
-    e.preventDefault();
-  }, {passive:false});
+  }, {passive:true});
   track.parentElement.addEventListener('touchend', e=>{
     if(locked) return;
     const dx = e.changedTouches[0].clientX - sx;
