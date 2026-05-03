@@ -404,6 +404,11 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   --mock-border: 8px;
   --mock-top: 38px;
   --mock-radius: 32px;
+  --preview-zoom: 1;
+  --preview-shift-x: 0px;
+  --preview-shift-y: 0px;
+  --book-cover-w: 359px;
+  --book-cover-h: 538px;
   position: relative;
   order: 1;
   height: 455px;
@@ -477,6 +482,76 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   .card-header { padding: 1.25rem 1.5rem 1.5rem; }
   .card-header-name { font-size: 2rem; }
   .template-card { --mock-w: 225px; --mock-h: 450px; --mock-top: 42px; height: 540px; }
+}
+
+/* ═══════════════════════════════════════
+   PHONE FRAME CONTROLS FOR TEMPLATE ROWS
+
+   BOOK INVITATIONS = #row2
+   CLASSIC INVITATIONS = #row1
+
+   Tweak these values only:
+   --mock-w          = phone frame width
+   --mock-h          = phone frame height
+   --mock-top        = move phone frame down/up inside the card
+   height            = height of the whole visual area above the title
+   --preview-zoom    = zoom inside the phone screen
+   --preview-shift-x = move the preview left/right inside the phone
+   --preview-shift-y = move the preview up/down inside the phone
+
+   Book-only:
+   --book-cover-w / --book-cover-h control the assumed book-cover size
+   before it is fitted into the phone screen.
+═══════════════════════════════════════ */
+
+/* BOOK INVITATIONS — desktop/tablet controls */
+#row2 .template-card {
+  --mock-w: 248px;
+  --mock-h: 396px;
+  --mock-top: 42px;
+  --preview-zoom: 1.13;
+  --preview-shift-x: 0px;
+  --preview-shift-y: 0px;
+  --book-cover-w: 399px;
+  --book-cover-h: 538px;
+  height: 485px;
+}
+
+/* CLASSIC INVITATIONS — desktop/tablet controls */
+#row1 .template-card {
+  --mock-w: 188px;
+  --mock-h: 396px;
+  --mock-top: 42px;
+  --preview-zoom: 1;
+  --preview-shift-x: 0px;
+  --preview-shift-y: 0px;
+  height: 485px;
+}
+
+@media (max-width: 640px) {
+  /* BOOK INVITATIONS — mobile controls */
+  #row2 .template-card {
+    --mock-w: 248px;
+    --mock-h: 450px;
+    --mock-top: 42px;
+    --preview-zoom: 1.13;
+    --preview-shift-x: 0px;
+    --preview-shift-y: 0px;
+    --book-cover-w: 359px;
+    --book-cover-h: 538px;
+    height: 485px;
+  }
+
+  /* CLASSIC INVITATIONS — mobile controls */
+#row1 .template-card {
+  --mock-w: 188px;
+  --mock-h: 396px;
+  --mock-top: 42px;
+  --preview-zoom: 1;
+  --preview-shift-x: 0px;
+  --preview-shift-y: 0px;
+  height: 485px;
+}
 }
 
 .category-divider { height: 1px; background: var(--border); margin: .5rem 2rem 0; }
@@ -881,15 +956,15 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <div class="cards-inner" id="row2-inner" style="--scroll-dur:32s">
 
           <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Blue_wed_book.html','_blank')">
+            <div class="card-header" onclick="window.open('https://www.cardiastudios.com/templates/Blue_wed_book','_blank')">
               <span class="card-header-num">B1</span><span class="card-header-name">Soft Floral Book</span>
             </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Blue_wed_book.html','_blank')">
-              <iframe class="card-preview" src="templates/Blue_wed_book.html" loading="lazy" scrolling="no" title="Soft Floral Book"></iframe>
+            <div class="template-card card-garden" onclick="window.open('https://www.cardiastudios.com/templates/Blue_wed_book','_blank')">
+              <iframe class="card-preview" src="https://www.cardiastudios.com/templates/Blue_wed_book" loading="lazy" scrolling="no" title="Soft Floral Book"></iframe>
               <div class="card-overlay">
                 <div class="card-name">Soft Floral Book</div>
                 <div class="card-desc">Elegant · Floral · Timeless</div>
-                <a href="templates/Blue_wed_book.html" target="_blank" class="card-btn">View Template →</a>
+                <a href="https://www.cardiastudios.com/templates/Blue_wed_book" target="_blank" class="card-btn">View Template →</a>
               </div>
               <div class="card-strip" style="--accent:#8a9bb5;"></div>
             </div>
@@ -1010,15 +1085,15 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <div class="cards-inner" id="row1-inner" style="--scroll-dur:42s">
 
           <div class="card-wrap card-terracotta">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
+            <div class="card-header" onclick="window.open('https://www.cardiastudios.com/templates/wedding-invitation_terracotta','_blank')">
               <span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span>
             </div>
-            <div class="template-card card-terracotta" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_terracotta.html" loading="lazy" scrolling="no" title="Dark Gold Luxury"></iframe>
+            <div class="template-card card-terracotta" onclick="window.open('https://www.cardiastudios.com/templates/wedding-invitation_terracotta','_blank')">
+              <iframe class="card-preview" src="https://www.cardiastudios.com/templates/wedding-invitation_terracotta" loading="lazy" scrolling="no" title="Dark Gold Luxury"></iframe>
               <div class="card-overlay">
                 <div class="card-name">Dark Gold Luxury</div>
                 <div class="card-desc">Dark · Gold · Floral · Luxurious</div>
-                <a href="templates/wedding-invitation_terracotta.html" target="_blank" class="card-btn">View Template →</a>
+                <a href="https://www.cardiastudios.com/templates/wedding-invitation_terracotta" target="_blank" class="card-btn">View Template →</a>
               </div>
               <div class="card-strip" style="--accent:#c4674a;"></div>
             </div>
@@ -1051,23 +1126,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
               <div class="card-strip" style="--accent:#7a9e7e;"></div>
             </div>
           </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Classy.html','_blank')">
-              <span class="card-header-num">C4</span><span class="card-header-name">Classy</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Classy.html','_blank')">
-              <iframe class="card-preview" src="templates/Classy.html" loading="lazy" scrolling="no" title="Classy"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Classy blues</div>
-                <div class="card-desc">Classy · blues · Fresh</div>
-                <a href="templates/Classy.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#7a9e7e;"></div>
-            </div>
-          </div>
+
           <div class="card-wrap card-soft">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-              <span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span>
+              <span class="card-header-num">C4</span><span class="card-header-name">Soft &amp; Minimal</span>
             </div>
             <div class="template-card card-soft" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_soft.html" loading="lazy" scrolling="no" title="Soft"></iframe>
@@ -1081,7 +1143,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-dark">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-              <span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span>
+              <span class="card-header-num">C5</span><span class="card-header-name">Dark &amp; Moody</span>
             </div>
             <div class="template-card card-dark" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_dark.html" loading="lazy" scrolling="no" title="Dark"></iframe>
@@ -1095,7 +1157,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-midnight">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-              <span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span>
+              <span class="card-header-num">C6</span><span class="card-header-name">Midnight Blue</span>
             </div>
             <div class="template-card card-midnight" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_night.html" loading="lazy" scrolling="no" title="Midnight"></iframe>
@@ -1109,7 +1171,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-classic">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-              <span class="card-header-num">C8</span><span class="card-header-name">Classic</span>
+              <span class="card-header-num">C7</span><span class="card-header-name">Classic</span>
             </div>
             <div class="template-card card-classic" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_classic.html" loading="lazy" scrolling="no" title="Classic"></iframe>
@@ -1123,7 +1185,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           </div>
           <div class="card-wrap card-elvish">
             <div class="card-header" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-              <span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span>
+              <span class="card-header-num">C8</span><span class="card-header-name">Elvish Fantasy</span>
             </div>
             <div class="template-card card-elvish" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
               <iframe class="card-preview" src="templates/wedding-invitation_lotr.html" loading="lazy" scrolling="no" title="Elvish"></iframe>
@@ -1262,7 +1324,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="pricing-swiper-track" id="pricingTrack">
       <div class="price-card">
         <div class="price-name">Standard</div>
-        <div class="price-amount"><span class="price-currency">$</span>79</div>
+        <div class="price-amount"><span class="price-currency">$</span>100</div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">The complete digital invitation</div>
         <ul class="price-features">
@@ -1277,7 +1339,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       <div class="price-card featured">
         <div class="price-badge">Most Popular</div>
         <div class="price-name">Premium</div>
-        <div class="price-amount"><span class="price-currency">$</span>99</div>
+        <div class="price-amount"><span class="price-currency">$</span>159</div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">The full experience</div>
         <ul class="price-features">
@@ -1292,7 +1354,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       </div>
       <div class="price-card">
         <div class="price-name">Luxury</div>
-        <div class="price-amount"><span class="price-currency">$</span>149</div>
+        <div class="price-amount"><span class="price-currency">$</span>189</div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">For the perfect wedding</div>
         <ul class="price-features">
@@ -1583,24 +1645,25 @@ function scaleIframes(){
     const phoneTop = mockTop + mockBorder;
 
     const isBookRow = !!card.closest('#row2');
+    const previewZoom = parseFloat(styles.getPropertyValue('--preview-zoom')) || 1;
+    const previewShiftX = parseFloat(styles.getPropertyValue('--preview-shift-x')) || 0;
+    const previewShiftY = parseFloat(styles.getPropertyValue('--preview-shift-y')) || 0;
 
-    /* Book invitations are not full-screen pages: their cover is centered inside
-       the iframe. We zoom those covers differently so the book itself fills the
-       phone frame instead of looking small or half-empty. Classic invitations
-       are full-screen, so they use the iframe viewport ratio. */
+    /* Book invitations and Classic invitations now have separate CSS controls.
+       Adjust them in the CSS section named PHONE FRAME CONTROLS FOR TEMPLATE ROWS. */
     let scale;
     if (isBookRow) {
-      const coverW = 359; // 92% of a 390px iframe viewport
-      const coverH = 538; // 1.5 × cover width, from the book templates
-      scale = Math.min((innerW / coverW) * 1.16, innerH / coverH);
+      const coverW = parseFloat(styles.getPropertyValue('--book-cover-w')) || 359;
+      const coverH = parseFloat(styles.getPropertyValue('--book-cover-h')) || 538;
+      scale = Math.min(innerW / coverW, innerH / coverH) * previewZoom;
     } else {
-      scale = Math.max(innerW / 390, innerH / 844);
+      scale = Math.max(innerW / 390, innerH / 844) * previewZoom;
     }
 
     const scaledW = 390 * scale;
     const scaledH = 844 * scale;
-    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2) + 'px';
-    iframe.style.top = (phoneTop + (innerH - scaledH) / 2) + 'px';
+    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2 + previewShiftX) + 'px';
+    iframe.style.top = (phoneTop + (innerH - scaledH) / 2 + previewShiftY) + 'px';
     iframe.style.transform = 'scale(' + scale + ')';
   });
 }
