@@ -311,55 +311,174 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   pointer-events: none;
 }
 
-/* The track is now the outer clip; the inner slider does the movement */
+/* The template rows are now modern marketing cards, like the Best Sellers */
+.cards-track-wrap {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 2rem 1.2rem;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 2rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cards-track-wrap::-webkit-scrollbar { display: none; }
+.cards-track-wrap::before,
+.cards-track-wrap::after { display: none !important; content: none !important; }
+
 .cards-track {
   display: flex;
-  gap: 0; /* gap handled inside .cards-inner */
+  gap: 0;
   overflow: visible;
   padding-bottom: 12px;
   user-select: none;
   width: max-content;
 }
-/* Inner slider — animated */
 .cards-inner {
   display: flex;
-  gap: 16px;
-  will-change: transform;
+  gap: 1.4rem;
+  will-change: auto;
   animation: none !important;
 }
 .cards-inner > [aria-hidden="true"] { display: none !important; }
-@keyframes slide-loop {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+.card-wrap {
+  flex: 0 0 auto;
+  width: clamp(300px, 27vw, 360px);
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 0;
+  box-shadow: 0 8px 40px rgba(42,32,24,.10);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
-.card-wrap { flex: 0 0 auto; width: clamp(180px,28vw,280px); display: flex; flex-direction: column; box-shadow: 0 -3px 0 0 var(--card-accent, var(--gold)); }
-.card-wrap.card-classic    { --card-accent: #c9a96e; }
-.card-wrap.card-dark       { --card-accent: #c9a84c; }
-.card-wrap.card-soft       { --card-accent: #c9958a; }
-.card-wrap.card-vintage    { --card-accent: #c4a456; }
-.card-wrap.card-garden     { --card-accent: #7a9e7e; }
-.card-wrap.card-midnight   { --card-accent: #8aaa98; }
-.card-wrap.card-terracotta { --card-accent: #c4674a; }
-.card-wrap.card-elvish     { --card-accent: #2d6e3a; }
-.card-wrap.card-blue       { --card-accent: #8a9bb5; }
-.card-header { padding: .55rem .8rem; background: var(--bg); border-left: 3px solid var(--card-accent, var(--gold)); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .4rem; cursor: pointer; transition: background .2s; }
-.card-header:hover { background: var(--bg2); }
-.card-header-num { font-family: 'Cormorant Garamond', serif; font-size: .68rem; font-weight: 300; color: var(--gold); }
-.card-header-name { font-family: 'Cormorant Garamond', serif; font-size: .85rem; color: var(--ink-lt); }
-.template-card { position: relative; overflow: hidden; background: var(--bg); cursor: pointer; aspect-ratio: 9/14; transition: transform .4s cubic-bezier(.16,1,.3,1); contain: paint; }
-.template-card:hover { z-index: 10; transform: scale(1.015); }
-.cards-track-wrap.is-swiping .template-card:hover { transform: none; }
-.cards-track-wrap.is-swiping .template-card:hover .card-overlay { opacity: 0; }
-.card-preview { position: absolute; inset: 0; width: 100%; height: 100%; border: none; pointer-events: none; transform-origin: top left; display: block; }
-.card-overlay { position: absolute; inset: 0; background: rgba(20,12,6,.93); display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 1.2rem; opacity: 0; transition: opacity .35s ease; }
-.template-card:hover .card-overlay { opacity: 1; }
-.card-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.3rem; color: #f5f0e8; margin-bottom: .3rem; }
-.card-desc { font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(200,180,160,.7); margin-bottom: .8rem; }
-.card-btn { display: inline-block; padding: .55rem 1.2rem; border: 1px solid rgba(200,180,160,.5); color: #f5f0e8; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; align-self: flex-start; transition: background .25s; }
-.card-btn:hover { background: rgba(200,180,160,.15); }
-.card-strip { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.16,1,.3,1); }
-.template-card:hover .card-strip { transform: scaleX(1); }
-.cards-track-wrap::before, .cards-track-wrap::after { display: none !important; content: none !important; }
+.card-wrap.card-classic    { --card-accent: #c9a96e; --preview-bg: rgba(201,169,110,.18); }
+.card-wrap.card-dark       { --card-accent: #c9a84c; --preview-bg: rgba(201,168,76,.18); }
+.card-wrap.card-soft       { --card-accent: #c9958a; --preview-bg: rgba(201,149,138,.16); }
+.card-wrap.card-vintage    { --card-accent: #c4a456; --preview-bg: rgba(196,164,86,.16); }
+.card-wrap.card-garden     { --card-accent: #7a9e7e; --preview-bg: rgba(122,158,126,.16); }
+.card-wrap.card-midnight   { --card-accent: #8aaa98; --preview-bg: rgba(42,61,96,.16); }
+.card-wrap.card-terracotta { --card-accent: #c4674a; --preview-bg: rgba(196,103,74,.16); }
+.card-wrap.card-elvish     { --card-accent: #2d6e3a; --preview-bg: rgba(45,110,58,.16); }
+.card-wrap.card-blue       { --card-accent: #8a9bb5; --preview-bg: rgba(138,155,181,.16); }
+
+.card-header {
+  order: 2;
+  padding: 1.35rem 1.5rem 1.55rem;
+  background: #fff;
+  border: 0;
+  border-top: 1px solid rgba(155,120,90,.12);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .45rem;
+  cursor: pointer;
+  transition: background .2s;
+}
+.card-header:hover { background: #fff; }
+.card-header-num {
+  order: 2;
+  font-family: 'Jost', sans-serif;
+  font-size: .66rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.card-header-num::before { content: 'Template ID: '; }
+.card-header-name {
+  order: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.template-card {
+  --mock-w: 188px;
+  --mock-h: 376px;
+  --mock-border: 8px;
+  --mock-top: 38px;
+  --mock-radius: 32px;
+  position: relative;
+  order: 1;
+  height: 455px;
+  aspect-ratio: auto;
+  overflow: hidden;
+  cursor: pointer;
+  background:
+    radial-gradient(ellipse at 50% 72%, var(--preview-bg, rgba(184,144,60,.18)) 0%, rgba(232,215,190,.12) 72%, transparent 100%),
+    #f0ece4;
+  contain: layout paint;
+  transform: translateZ(0);
+  transition: none;
+}
+.template-card:hover { z-index: 1; transform: none; }
+.template-card::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: var(--mock-top);
+  width: var(--mock-w);
+  height: var(--mock-h);
+  transform: translateX(-50%);
+  border: var(--mock-border) solid #1a1210;
+  border-radius: var(--mock-radius);
+  box-shadow: 0 12px 50px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.08);
+  z-index: 2;
+  pointer-events: none;
+}
+.template-card::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--mock-top) + 13px);
+  left: 50%;
+  width: 48px;
+  height: 8px;
+  transform: translateX(-50%);
+  background: #111;
+  border-radius: 99px;
+  z-index: 3;
+  pointer-events: none;
+}
+.card-preview {
+  position: absolute;
+  width: 390px;
+  height: 844px;
+  border: 0;
+  transform-origin: top left;
+  pointer-events: none;
+  z-index: 1;
+  background: #111;
+  display: block;
+  clip-path: inset(0 round 24px);
+}
+.card-overlay { display: none !important; }
+.card-strip { display: none !important; }
+
+@media (min-width: 900px) {
+  .cards-track-wrap { padding: 0 2.5rem 1.4rem; scroll-padding: 0 2.5rem; }
+  .cards-inner { gap: 1.6rem; }
+  .card-wrap { width: clamp(320px, 25vw, 380px); }
+  .template-card { --mock-w: 198px; --mock-h: 396px; --mock-top: 42px; height: 485px; }
+}
+
+@media (max-width: 640px) {
+  .category-block { padding: 2rem 0 1rem; }
+  .category-header { align-items: center; gap: .8rem; padding: 0 1rem 1rem; }
+  .category-title span { display: inline-block; margin-left: .55rem; }
+  .cards-track-wrap { padding: 0 1rem 1.2rem; scroll-padding: 0 1rem; }
+  .cards-inner { gap: 1rem; }
+  .card-wrap { flex-basis: 82%; width: auto; max-width: 340px; }
+  .card-header { padding: 1.25rem 1.5rem 1.5rem; }
+  .card-header-name { font-size: 2rem; }
+  .template-card { --mock-w: 225px; --mock-h: 450px; --mock-top: 42px; height: 540px; }
+}
+
 .category-divider { height: 1px; background: var(--border); margin: .5rem 2rem 0; }
 
 /* HOW IT WORKS */
@@ -607,138 +726,6 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
 }
 
-/* MOBILE MARKETING CARDS FOR ALL TEMPLATE ROWS */
-@media (max-width:640px) {
-  .category-block { padding: 2rem 0 1rem; }
-  .category-header { align-items: center; gap: .8rem; }
-  .category-title span { display: inline-block; margin-left: .55rem; }
-
-  .cards-track-wrap {
-    padding: 0 1rem 1.2rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scroll-padding: 0 1rem;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .cards-inner { gap: 1rem; }
-
-  .card-wrap {
-    flex: 0 0 82%;
-    width: auto;
-    max-width: 340px;
-    min-width: 0;
-    scroll-snap-align: center;
-    scroll-snap-stop: normal;
-    background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(42,32,24,.10);
-    border: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-header {
-    order: 2;
-    padding: 1.25rem 1.5rem 1.5rem;
-    background: #fff;
-    border-left: 0;
-    border-bottom: 0;
-    border-top: 1px solid rgba(155,120,90,.12);
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: .45rem;
-  }
-
-  .card-header-num {
-    order: 2;
-    font-family: 'Jost', sans-serif;
-    font-size: .66rem;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .card-header-num::before { content: 'Template ID: '; }
-
-  .card-header-name {
-    order: 1;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    line-height: 1.05;
-    color: var(--ink);
-  }
-
-  .template-card {
-    order: 1;
-    height: 540px;
-    aspect-ratio: auto;
-    background: var(--template-mobile-bg, radial-gradient(ellipse at 50% 70%, rgba(184,144,60,.16) 0%, rgba(232,215,190,.12) 70%, transparent 100%), #f0ece4);
-    overflow: hidden;
-    cursor: pointer;
-    transform: translateZ(0);
-    contain: layout paint;
-  }
-
-  .template-card::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 42px;
-    width: 225px;
-    height: 450px;
-    transform: translateX(-50%);
-    border: 8px solid #1a1210;
-    border-radius: 32px;
-    box-shadow: 0 12px 50px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .template-card::after {
-    content: '';
-    position: absolute;
-    top: 55px;
-    left: 50%;
-    width: 48px;
-    height: 8px;
-    transform: translateX(-50%);
-    background: #111;
-    border-radius: 99px;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .card-preview {
-    position: absolute;
-    top: 50px !important;
-    left: calc(50% - 104.5px) !important;
-    width: 390px !important;
-    height: 844px !important;
-    border: 0;
-    border-radius: 24px;
-    transform-origin: top left;
-    pointer-events: none;
-    z-index: 1;
-    background: #111;
-  }
-
-
-  /* Keep each template preview perfectly centered inside the phone frame.
-     This fixes the blank/half-empty phone effect on mobile. */
-  .template-card .card-preview {
-    clip-path: inset(0 round 24px);
-  }
-
-  .template-card:hover { transform: none; }
-  .template-card:hover .card-strip { transform: none; }
-
-  .card-strip { display: none; }
-}
 
 </style>
 </head>
@@ -1577,7 +1564,6 @@ function submitReview() {
    SWIPE ROWS + MOBILE BEST SELLER AUTO-SCROLL
 ════════════════════════════════════ */
 function scaleIframes(){
-  const mobileTemplates = window.matchMedia('(max-width:640px)').matches;
   document.querySelectorAll('.template-card').forEach(card => {
     const iframe = card.querySelector('.card-preview');
     if(!iframe) return;
@@ -1586,18 +1572,36 @@ function scaleIframes(){
     iframe.style.height = '844px';
     iframe.style.transformOrigin = 'top left';
 
-    if (mobileTemplates) {
-      /* Match the large best-seller marketing-card feeling on phones.
-         The iframe is fitted inside a CSS phone frame instead of filling the whole card. */
-      const phoneInnerWidth = 209;
-      const phoneInnerHeight = 434;
-      const scale = Math.min(phoneInnerWidth / 390, phoneInnerHeight / 844);
-      iframe.style.transform = 'scale(' + scale + ')';
+    const styles = getComputedStyle(card);
+    const mockW = parseFloat(styles.getPropertyValue('--mock-w')) || 188;
+    const mockH = parseFloat(styles.getPropertyValue('--mock-h')) || 376;
+    const mockTop = parseFloat(styles.getPropertyValue('--mock-top')) || 38;
+    const mockBorder = parseFloat(styles.getPropertyValue('--mock-border')) || 8;
+    const innerW = mockW - (mockBorder * 2);
+    const innerH = mockH - (mockBorder * 2);
+    const phoneLeft = (card.clientWidth - mockW) / 2 + mockBorder;
+    const phoneTop = mockTop + mockBorder;
+
+    const isBookRow = !!card.closest('#row2');
+
+    /* Book invitations are not full-screen pages: their cover is centered inside
+       the iframe. We zoom those covers differently so the book itself fills the
+       phone frame instead of looking small or half-empty. Classic invitations
+       are full-screen, so they use the iframe viewport ratio. */
+    let scale;
+    if (isBookRow) {
+      const coverW = 359; // 92% of a 390px iframe viewport
+      const coverH = 538; // 1.5 × cover width, from the book templates
+      scale = Math.min((innerW / coverW) * 1.16, innerH / coverH);
     } else {
-      const cw = card.offsetWidth, ch = card.offsetHeight;
-      const scale = Math.min(cw/390, ch/844);
-      iframe.style.transform = 'scale(' + scale + ')';
+      scale = Math.max(innerW / 390, innerH / 844);
     }
+
+    const scaledW = 390 * scale;
+    const scaledH = 844 * scale;
+    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2) + 'px';
+    iframe.style.top = (phoneTop + (innerH - scaledH) / 2) + 'px';
+    iframe.style.transform = 'scale(' + scale + ')';
   });
 }
 window.addEventListener('resize', scaleIframes);
