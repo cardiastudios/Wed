@@ -529,20 +529,17 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 }
 
 @media (max-width: 640px) {
-  /* BOOK INVITATIONS — mobile controls
-     This is the main place to tweak the book phone frame on mobile.
-     The frame was slightly too tall for the visual area, so the mobile
-     book card now has more height and a softer preview zoom. */
+  /* BOOK INVITATIONS — mobile controls */
   #row2 .template-card {
     --mock-w: 248px;
     --mock-h: 450px;
-    --mock-top: 44px;
-    --preview-zoom: 1.04;
+    --mock-top: 42px;
+    --preview-zoom: 1.13;
     --preview-shift-x: 0px;
     --preview-shift-y: 0px;
-    --book-cover-w: 399px;
+    --book-cover-w: 359px;
     --book-cover-h: 538px;
-    height: 540px;
+    height: 485px;
   }
 
   /* CLASSIC INVITATIONS — mobile controls */
@@ -1633,10 +1630,6 @@ function scaleIframes(){
     const iframe = card.querySelector('.card-preview');
     if(!iframe) return;
 
-    iframe.style.width = '390px';
-    iframe.style.height = '844px';
-    iframe.style.transformOrigin = 'top left';
-
     const styles = getComputedStyle(card);
     const mockW = parseFloat(styles.getPropertyValue('--mock-w')) || 188;
     const mockH = parseFloat(styles.getPropertyValue('--mock-h')) || 376;
@@ -1652,19 +1645,31 @@ function scaleIframes(){
     const previewShiftX = parseFloat(styles.getPropertyValue('--preview-shift-x')) || 0;
     const previewShiftY = parseFloat(styles.getPropertyValue('--preview-shift-y')) || 0;
 
-    /* Book invitations and Classic invitations now have separate CSS controls.
-       Adjust them in the CSS section named PHONE FRAME CONTROLS FOR TEMPLATE ROWS. */
+    /*
+      IMPORTANT FIX:
+      Book templates use a wider book-cover viewport, not the same tall mobile viewport
+      as the classic invitations. By sizing the iframe itself to --book-cover-w /
+      --book-cover-h before scaling, the theme background stays inside the black
+      phone frame instead of spilling outside the border.
+    */
+    let iframeW = 390;
+    let iframeH = 844;
     let scale;
+
     if (isBookRow) {
-      const coverW = parseFloat(styles.getPropertyValue('--book-cover-w')) || 359;
-      const coverH = parseFloat(styles.getPropertyValue('--book-cover-h')) || 538;
-      scale = Math.min(innerW / coverW, innerH / coverH) * previewZoom;
+      iframeW = parseFloat(styles.getPropertyValue('--book-cover-w')) || 359;
+      iframeH = parseFloat(styles.getPropertyValue('--book-cover-h')) || 538;
+      scale = Math.min(innerW / iframeW, innerH / iframeH) * previewZoom;
     } else {
-      scale = Math.max(innerW / 390, innerH / 844) * previewZoom;
+      scale = Math.max(innerW / iframeW, innerH / iframeH) * previewZoom;
     }
 
-    const scaledW = 390 * scale;
-    const scaledH = 844 * scale;
+    const scaledW = iframeW * scale;
+    const scaledH = iframeH * scale;
+
+    iframe.style.width = iframeW + 'px';
+    iframe.style.height = iframeH + 'px';
+    iframe.style.transformOrigin = 'top left';
     iframe.style.left = (phoneLeft + (innerW - scaledW) / 2 + previewShiftX) + 'px';
     iframe.style.top = (phoneTop + (innerH - scaledH) / 2 + previewShiftY) + 'px';
     iframe.style.transform = 'scale(' + scale + ')';
