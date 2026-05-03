@@ -75,7 +75,30 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   margin: 0 auto;
 }
 @media (max-width: 900px) { .bestsellers-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px) { .bestsellers-grid { grid-template-columns: 1fr; max-width: 360px; } }
+@media (max-width: 600px) {
+  .bestsellers-grid {
+    display: flex;
+    grid-template-columns: none;
+    max-width: none;
+    width: 100%;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem 1.2rem;
+    margin: 0;
+    scrollbar-width: none;
+  }
+  .bestsellers-grid::-webkit-scrollbar { display: none; }
+  .bestsellers-grid .bs-card {
+    flex: 0 0 82%;
+    max-width: 340px;
+    scroll-snap-align: center;
+  }
+  .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
+}
+.bestsellers-grid .bs-card[aria-hidden="true"] { display: none; }
 
 .bs-card {
   background: #fff;
@@ -228,7 +251,16 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 .category-arrows { display: flex; gap: .5rem; }
 .cat-arrow { width: 32px; height: 32px; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--ink-lt); font-size: .9rem; transition: all .2s; flex-shrink: 0; }
 .cat-arrow:hover { background: var(--ink); color: var(--gold-lt); border-color: var(--ink); }
-.cards-track-wrap { position: relative; overflow: hidden; padding: 0 2rem; }
+.cards-track-wrap {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 2rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cards-track-wrap::-webkit-scrollbar { display: none; }
 /* The track is now the outer clip; the inner slider does the movement */
 .cards-track {
   display: flex;
@@ -243,9 +275,9 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   display: flex;
   gap: 16px;
   will-change: transform;
-  animation: slide-loop var(--scroll-dur, 28s) linear infinite;
+  animation: none !important;
 }
-.cards-inner:hover { animation-play-state: paused; }
+.cards-inner > [aria-hidden="true"] { display: none !important; }
 @keyframes slide-loop {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -373,21 +405,28 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 .reviews-count { font-size: .62rem; color: rgba(200,180,160,.5); letter-spacing: .1em; }
 
 /* Marquee rows */
-.reviews-marquee-wrap { overflow: hidden; margin-bottom: 1rem; }
+.reviews-marquee-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.reviews-marquee-wrap::-webkit-scrollbar { display: none; }
 .reviews-marquee {
   display: flex;
   gap: 1rem;
   width: max-content;
-  animation: marquee-left 60s linear infinite;
+  animation: none !important;
+  padding-bottom: .25rem;
 }
-.reviews-marquee.reverse {
-  animation: marquee-right 70s linear infinite;
-}
-.reviews-marquee-wrap:hover .reviews-marquee { animation-play-state: paused; }
+.reviews-marquee.reverse { animation: none !important; }
 @keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
 .review-card {
+  scroll-snap-align: start;
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(200,180,160,.1);
   border-radius: 4px;
@@ -510,6 +549,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   .pricing-swiper-track .price-card { flex: 0 0 100%; width: 100%; margin: 0; box-sizing: border-box; }
   .pricing-swiper-wrap .swiper-dots { margin-top: 1.5rem; margin-bottom: 2rem; }
 }
+
+@media (max-width: 600px) {
+  .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
+}
 </style>
 </head>
 <body>
@@ -560,20 +603,20 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <div class="phone-back">
           <div class="phone-outer">
             <div class="phone-screen">
-              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Royal Floral preview back"></iframe>
+              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Classy Floral preview back"></iframe>
             </div>
           </div>
         </div>
         <div class="phone-wrap">
           <div class="phone-outer">
             <div class="phone-screen">
-              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Royal Floral preview"></iframe>
+              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Classy Floral preview"></iframe>
             </div>
           </div>
         </div>
       </div>
       <div class="bs-card-info">
-        <div class="bs-card-name">Royal Floral</div>
+        <div class="bs-card-name">Classy Floral</div>
         <div class="bs-card-desc">Timeless romance with delicate floral illustrations and gilded details. A regal invitation fit for your most important day.</div>
         <span class="bs-card-link">View theme</span>
       </div>
@@ -587,20 +630,20 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <div class="phone-back">
           <div class="phone-outer">
             <div class="phone-screen">
-              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Royal Gold preview back"></iframe>
+              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Elegant Royal preview back"></iframe>
             </div>
           </div>
         </div>
         <div class="phone-wrap">
           <div class="phone-outer">
             <div class="phone-screen">
-              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Royal Gold preview"></iframe>
+              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Elegant Royal preview"></iframe>
             </div>
           </div>
         </div>
       </div>
       <div class="bs-card-info">
-        <div class="bs-card-name">Royal Gold</div>
+        <div class="bs-card-name">Elegant Royal</div>
         <div class="bs-card-desc">Opulent gold on rich dark backgrounds. Dramatic, luxurious, unforgettable — for couples who want to leave an impression.</div>
         <span class="bs-card-link">View theme</span>
       </div>
@@ -647,7 +690,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   <!-- ══ ROW 1: Book-Style Invitations ══ -->
   <div class="category-block reveal">
     <div class="category-header">
-      <div class="category-title">Book Invitations <span>Auto-scrolling ›</span></div>
+      <div class="category-title">Book Invitations <span>Swipe to view ›</span></div>
       <div class="category-arrows">
         <button class="cat-arrow" onclick="nudgeRow('row2', -1)">‹</button>
         <button class="cat-arrow" onclick="nudgeRow('row2', 1)">›</button>
@@ -776,7 +819,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   <!-- ══ ROW 2: Classic Invitations ══ -->
   <div class="category-block reveal">
     <div class="category-header">
-      <div class="category-title">Classic Invitations <span>Auto-scrolling ›</span></div>
+      <div class="category-title">Classic Invitations <span>Swipe to view ›</span></div>
       <div class="category-arrows">
         <button class="cat-arrow" onclick="nudgeRow('row1', -1)">‹</button>
         <button class="cat-arrow" onclick="nudgeRow('row1', 1)">›</button>
@@ -1272,14 +1315,11 @@ function buildMarquees() {
   const half = Math.ceil(allReviews.length / 2);
   const row1 = allReviews.slice(0, half);
   const row2 = allReviews.slice(half);
-  // Duplicate each row for seamless loop
   const t1 = document.getElementById('marqueeTrack1');
   const t2 = document.getElementById('marqueeTrack2');
   if(!t1 || !t2) return;
-  const html1 = row1.map(reviewCardHTML).join('');
-  t1.innerHTML = html1 + html1; // duplicate
-  const html2 = row2.map(reviewCardHTML).join('');
-  t2.innerHTML = html2 + html2; // duplicate
+  t1.innerHTML = row1.map(reviewCardHTML).join('');
+  t2.innerHTML = row2.map(reviewCardHTML).join('')
 }
 
 buildMarquees();
@@ -1327,9 +1367,7 @@ function submitReview() {
 }
 
 /* ════════════════════════════════════
-   SMOOTH AUTO-SCROLL (RAF-based)
-   Uses CSS transform instead of scrollLeft
-   for buttery smooth performance
+   SWIPE ROWS + MOBILE BEST SELLER AUTO-SCROLL
 ════════════════════════════════════ */
 function scaleIframes(){
   document.querySelectorAll('.template-card').forEach(card => {
@@ -1346,87 +1384,87 @@ function scaleIframes(){
 window.addEventListener('resize', scaleIframes);
 scaleIframes();
 
-function setupAutoScroll(trackId, speedPx) {
+function setupSwipeRow(trackId) {
   const track = document.getElementById(trackId);
   if (!track) return;
+  const wrap = track.closest('.cards-track-wrap');
+  const inner = track.querySelector('.cards-inner');
+  const firstCard = inner ? inner.querySelector('.card-wrap:not([aria-hidden="true"])') : null;
 
-  const originals = Array.from(track.children);
+  window._swipeRows = window._swipeRows || {};
+  window._swipeRows[trackId] = {
+    nudge(dir) {
+      const amount = firstCard ? (firstCard.offsetWidth + 16) * 2 : 440;
+      wrap.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    }
+  };
+}
+
+function nudgeRow(id, dir) {
+  const state = window._swipeRows && window._swipeRows[id];
+  if(state) state.nudge(dir);
+}
+
+setupSwipeRow('row1');
+setupSwipeRow('row2');
+
+function setupBestSellersMobileAutoScroll() {
+  const track = document.querySelector('.bestsellers-grid');
+  if (!track) return;
+
+  const originals = Array.from(track.querySelectorAll('.bs-card:not([data-clone])'));
   originals.forEach(card => {
     const clone = card.cloneNode(true);
+    clone.dataset.clone = 'true';
     clone.setAttribute('aria-hidden', 'true');
     track.appendChild(clone);
   });
 
-  let pos = 0;
   let paused = false;
-  let dragging = false;
-  let dragStartX = 0;
-  let dragStartPos = 0;
-  let originalWidth = 0;
-
-  function measure() {
-    originalWidth = originals.reduce((s,c) => s + c.offsetWidth + 16, 0);
-  }
-  measure();
-  window.addEventListener('resize', () => { measure(); scaleIframes(); });
-
-  window._autoScroll = window._autoScroll || {};
-  window._autoScroll[trackId] = {
-    nudge(dir) { pos += dir * (originals[0] ? originals[0].offsetWidth + 16 : 220) * 2; }
-  };
-
+  let resumeTimer = null;
   let last = null;
+
+  function isMobile() {
+    return window.matchMedia('(max-width: 600px)').matches;
+  }
+
+  function originalWidth() {
+    if (!originals.length) return 0;
+    const first = originals[0];
+    const lastOriginal = originals[originals.length - 1];
+    return (lastOriginal.offsetLeft + lastOriginal.offsetWidth) - first.offsetLeft + 16;
+  }
+
+  function pauseBriefly() {
+    paused = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { paused = false; }, 2200);
+  }
+
+  track.addEventListener('touchstart', pauseBriefly, { passive: true });
+  track.addEventListener('pointerdown', pauseBriefly, { passive: true });
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+  track.addEventListener('scroll', () => {
+    if (!isMobile()) return;
+    const w = originalWidth();
+    if (w > 0 && track.scrollLeft >= w) track.scrollLeft -= w;
+  }, { passive: true });
+
   function tick(ts) {
-    if(last !== null && !paused && !dragging) {
-      const dt = Math.min(ts - last, 50); // cap delta to avoid jumps after tab switch
-      pos += speedPx * (dt / 16.67);
+    if (last !== null && isMobile() && !paused) {
+      const dt = Math.min(ts - last, 50);
+      track.scrollLeft += 0.35 * dt;
+      const w = originalWidth();
+      if (w > 0 && track.scrollLeft >= w) track.scrollLeft -= w;
     }
     last = ts;
-    if(originalWidth > 0) {
-      pos = ((pos % originalWidth) + originalWidth) % originalWidth;
-    }
-    track.style.transform = `translateX(${-pos}px)`;
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-
-  // Pause on hover
-  track.addEventListener('mouseenter', () => paused = true);
-  track.addEventListener('mouseleave', () => { paused = false; dragging = false; });
-
-  // Drag
-  track.addEventListener('mousedown', e => {
-    dragging = true; paused = true;
-    dragStartX = e.pageX; dragStartPos = pos;
-    track.style.cursor = 'grabbing';
-  });
-  window.addEventListener('mouseup', () => {
-    if(dragging) { dragging = false; paused = false; track.style.cursor = ''; }
-  });
-  track.addEventListener('mousemove', e => {
-    if(!dragging) return;
-    e.preventDefault();
-    pos = dragStartPos - (e.pageX - dragStartX);
-  });
-
-  // Touch
-  let touchStartX = 0, touchStartPos = 0;
-  track.addEventListener('touchstart', e => {
-    paused = true; touchStartX = e.touches[0].pageX; touchStartPos = pos;
-  }, {passive:true});
-  track.addEventListener('touchend', () => paused = false);
-  track.addEventListener('touchmove', e => {
-    pos = touchStartPos - (e.touches[0].pageX - touchStartX);
-  }, {passive:true});
 }
 
-function nudgeRow(id, dir) {
-  const state = window._autoScroll && window._autoScroll[id];
-  if(state) state.nudge(dir);
-}
-
-setupAutoScroll('row1', 0.9);
-setupAutoScroll('row2', 0.9);
+setupBestSellersMobileAutoScroll();
 
 /* ── Reveal on scroll ── */
 const ro = new IntersectionObserver(entries => {
