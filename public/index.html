@@ -833,7 +833,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 @media (max-width: 640px) {
   .nav-controls {
     position: fixed;
-    top: 104px;
+    top: 90px;
     right: 1.15rem;
     z-index: 111;
     gap: .35rem;
@@ -901,6 +901,182 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 }
 
 
+/* ═══════════════════════════════════════
+   QR + SHARE SECTION
+═══════════════════════════════════════ */
+.share-section {
+  background: var(--bg);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.share-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(154,106,88,.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(184,144,60,.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+.share-content {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.share-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem,5vw,3rem);
+  color: var(--ink);
+  margin-bottom: .65rem;
+}
+.share-header p {
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: .76rem;
+  line-height: 1.8;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-lt);
+}
+.share-card {
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: rgba(255,255,255,.62);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 55px rgba(42,32,24,.08);
+  padding: 2rem;
+  text-align: left;
+}
+.qr-frame {
+  background: #fff;
+  border: 1px solid rgba(184,144,60,.28);
+  padding: 1rem;
+  box-shadow: 0 10px 34px rgba(42,32,24,.08);
+}
+.qr-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.share-details h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: .5rem;
+}
+.share-details p {
+  font-size: .78rem;
+  line-height: 1.8;
+  color: var(--ink-lt);
+  margin-bottom: 1.35rem;
+}
+.share-url-box {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.65);
+  margin-bottom: 1rem;
+}
+.share-url-box input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-lt);
+  font-family: 'Jost', sans-serif;
+  font-size: .72rem;
+  padding: .85rem 1rem;
+  outline: none;
+}
+.copy-link-btn {
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: var(--ink);
+  color: var(--gold-lt);
+  font-family: 'Jost', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+  white-space: nowrap;
+}
+.copy-link-btn:hover { background: var(--rose); color: #fff; }
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: 1rem;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 42px;
+  padding: .75rem 1rem;
+  border: 1px solid rgba(155,120,90,.22);
+  background: rgba(255,255,255,.55);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.share-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  background: var(--ink);
+  color: var(--gold-lt);
+}
+.share-btn.native-share {
+  border-color: rgba(184,144,60,.45);
+  color: var(--gold);
+}
+.copy-message {
+  display: none;
+  margin-top: .85rem;
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.copy-message.visible { display: block; }
+@media (max-width: 760px) {
+  .share-section { padding: 4rem 1rem; }
+  .share-card {
+    grid-template-columns: 1fr;
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .qr-frame {
+    width: min(240px, 100%);
+    margin: 0 auto;
+  }
+  .share-url-box { flex-direction: column; }
+  .copy-link-btn {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding: .85rem 1rem;
+  }
+  .share-buttons { justify-content: center; }
+  .share-btn { flex: 1 1 135px; }
+}
+
+
 </style>
 </head>
 <body>
@@ -914,6 +1090,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
+    <a href="#share" class="nav-link" onclick="closeMenu()">Share</a>
     <a href="#contact" class="nav-link" onclick="closeMenu()">Contact</a>
   </div>
 
@@ -1561,6 +1738,44 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   </div>
 </section>
 
+
+<!-- SHARE WEBSITE -->
+<section class="share-section" id="share">
+  <div class="share-content">
+    <div class="share-header reveal">
+      <h2>Share Cardia Studios</h2>
+      <p>Scan the QR code or send our website directly to couples looking for elegant digital wedding invitations.</p>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="share-card reveal">
+      <div class="qr-frame">
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Qr%20code/qr-code.png" alt="QR code for Cardia Studios website" loading="lazy">
+      </div>
+
+      <div class="share-details">
+        <h3>Send our website instantly</h3>
+        <p>Use the buttons below to share Cardia Studios on WhatsApp, Facebook, X/Twitter, by email, or copy the link manually.</p>
+
+        <div class="share-url-box">
+          <input id="shareWebsiteLink" type="text" value="https://www.cardiastudios.com" readonly aria-label="Cardia Studios website link">
+          <button class="copy-link-btn" type="button" onclick="copyWebsiteLink()">Copy link</button>
+        </div>
+
+        <div class="share-buttons">
+          <button class="share-btn native-share" type="button" onclick="nativeShareWebsite()">Share</button>
+          <a class="share-btn" id="shareWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="share-btn" id="shareFacebook" href="#" target="_blank" rel="noopener">Facebook</a>
+          <a class="share-btn" id="shareTwitter" href="#" target="_blank" rel="noopener">X / Twitter</a>
+          <a class="share-btn" id="shareEmail" href="#">Email</a>
+        </div>
+
+        <div id="copyMessage" class="copy-message">Link copied</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-content">
@@ -1587,6 +1802,73 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
 <script>
 
+
+/* ════════════════════════════════════
+   WEBSITE QR + SHARE BUTTONS
+════════════════════════════════════ */
+const CARDIA_SHARE_URL = 'https://www.cardiastudios.com';
+const CARDIA_SHARE_TEXT = 'Elegant digital wedding invitations by Cardia Studios';
+
+function setupWebsiteShareLinks() {
+  const encodedUrl = encodeURIComponent(CARDIA_SHARE_URL);
+  const encodedText = encodeURIComponent(CARDIA_SHARE_TEXT);
+  const whatsapp = document.getElementById('shareWhatsApp');
+  const facebook = document.getElementById('shareFacebook');
+  const twitter = document.getElementById('shareTwitter');
+  const email = document.getElementById('shareEmail');
+
+  if (whatsapp) whatsapp.href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+  if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  if (twitter) twitter.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+  if (email) email.href = `mailto:?subject=${encodeURIComponent('Cardia Studios')}&body=${encodedText}%0A%0A${encodedUrl}`;
+}
+
+function showCopyMessage(message = 'Link copied') {
+  const copyMessage = document.getElementById('copyMessage');
+  if (!copyMessage) return;
+  copyMessage.textContent = message;
+  copyMessage.classList.add('visible');
+  window.clearTimeout(window.cardiaCopyTimer);
+  window.cardiaCopyTimer = window.setTimeout(() => copyMessage.classList.remove('visible'), 2200);
+}
+
+async function copyWebsiteLink() {
+  const input = document.getElementById('shareWebsiteLink');
+  const link = input ? input.value : CARDIA_SHARE_URL;
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(link);
+    } else if (input) {
+      input.focus();
+      input.select();
+      document.execCommand('copy');
+      input.blur();
+    }
+    showCopyMessage('Link copied');
+  } catch (err) {
+    showCopyMessage('Please copy the link manually');
+  }
+}
+
+async function nativeShareWebsite() {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Cardia Studios',
+        text: CARDIA_SHARE_TEXT,
+        url: CARDIA_SHARE_URL
+      });
+      return;
+    } catch (err) {
+      return;
+    }
+  }
+  copyWebsiteLink();
+}
+
+setupWebsiteShareLinks();
+
 /* ════════════════════════════════════
    LANGUAGE + CURRENCY SWITCHERS
    Applies to nav, hero, best sellers, collection, how-it-works,
@@ -1594,7 +1876,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 ════════════════════════════════════ */
 const CARDIA_TRANSLATIONS = {
   en: {
-    nav:['Best Sellers','Templates','How it works','Pricing','Reviews','Contact'],
+    nav:['Best Sellers','Templates','How it works','Pricing','Reviews','Share','Contact'],
     heroTag:'Digital Wedding Invitations', heroTitle:'Your love story,', heroEm:'beautifully told.', heroSub:'Exclusive designs · Crafted with care · Delivered in 24h', heroCta:'Explore Templates',
     bestTitle:'Best Sellers', bestSub:'Our most loved designs — chosen by couples around the world', bestBadge:'Best Seller', viewTheme:'View theme',
     collectionTitle:'Our Collection', collectionSub:'Exclusive designs, one for every love story',
@@ -1625,7 +1907,7 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Let’s create something beautiful', contactSub:'Get in touch', contactCta:'Send an Enquiry', footer:'© 2025 Cardia Studios · Digital Wedding Invitations · All rights reserved'
   },
   fr: {
-    nav:['Meilleures ventes','Modèles','Fonctionnement','Tarifs','Avis','Contact'],
+    nav:['Meilleures ventes','Modèles','Fonctionnement','Tarifs','Avis','Partager','Contact'],
     heroTag:'Invitations de mariage digitales', heroTitle:'Votre histoire d’amour,', heroEm:'magnifiquement racontée.', heroSub:'Designs exclusifs · Créés avec soin · Livrés en 24h', heroCta:'Voir les modèles',
     bestTitle:'Meilleures ventes', bestSub:'Nos designs les plus aimés — choisis par des couples du monde entier', bestBadge:'Meilleure vente', viewTheme:'Voir le modèle',
     collectionTitle:'Notre collection', collectionSub:'Des designs exclusifs pour chaque histoire d’amour',
@@ -1656,7 +1938,7 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Créons quelque chose de beau', contactSub:'Contactez-nous', contactCta:'Envoyer une demande', footer:'© 2025 Cardia Studios · Invitations de mariage digitales · Tous droits réservés'
   },
   es: {
-    nav:['Más vendidos','Plantillas','Cómo funciona','Precios','Reseñas','Contacto'],
+    nav:['Más vendidos','Plantillas','Cómo funciona','Precios','Reseñas','Compartir','Contacto'],
     heroTag:'Invitaciones digitales de boda', heroTitle:'Tu historia de amor,', heroEm:'bellamente contada.', heroSub:'Diseños exclusivos · Hechos con cuidado · Entrega en 24h', heroCta:'Ver plantillas',
     bestTitle:'Más vendidos', bestSub:'Nuestros diseños más queridos — elegidos por parejas de todo el mundo', bestBadge:'Más vendido', viewTheme:'Ver plantilla',
     collectionTitle:'Nuestra colección', collectionSub:'Diseños exclusivos para cada historia de amor',
