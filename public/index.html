@@ -716,7 +716,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   .card-preview {
     position: absolute;
     top: 50px !important;
-    left: 50% !important;
+    left: calc(50% - 104.5px) !important;
     width: 390px !important;
     height: 844px !important;
     border: 0;
@@ -725,6 +725,13 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     pointer-events: none;
     z-index: 1;
     background: #111;
+  }
+
+
+  /* Keep each template preview perfectly centered inside the phone frame.
+     This fixes the blank/half-empty phone effect on mobile. */
+  .template-card .card-preview {
+    clip-path: inset(0 round 24px);
   }
 
   .template-card:hover { transform: none; }
@@ -1585,7 +1592,7 @@ function scaleIframes(){
       const phoneInnerWidth = 209;
       const phoneInnerHeight = 434;
       const scale = Math.min(phoneInnerWidth / 390, phoneInnerHeight / 844);
-      iframe.style.transform = 'translateX(-50%) scale(' + scale + ')';
+      iframe.style.transform = 'scale(' + scale + ')';
     } else {
       const cw = card.offsetWidth, ch = card.offsetHeight;
       const scale = Math.min(cw/390, ch/844);
