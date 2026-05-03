@@ -1,1812 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="kao7gQOJA876twl6R3DbkGlB94eVFUyc7ghjV-NypBo" />
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Digital online Wedding Invitations - Cardia Studios</title>
-<meta name="description" content="Elegant digital online wedding invitations and wedding websites by Cardia Studios. Discover customizable designs for modern, classic, and romantic weddings.">
-<meta name="author" content="Cardia Studios">
-<meta property="og:title" content="Digital Wedding Invitations — Cardia Studios">
-<meta property="og:description" content="Elegant digital wedding invitations and wedding websites by Cardia Studios.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.cardiastudios.com">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Wedding Invitation — Thomas & Sarah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #f7f3ee;
-  --bg2:     #ede8e0;
-  --ink:     #2a2018;
-  --ink-lt:  #6b5a48;
-  --rose:    #9a6a58;
-  --rose-lt: #c8988a;
-  --gold:    #b8903c;
-  --gold-lt: #d4b870;
-  --border:  rgba(155,120,90,.2);
+  --blush:    #c4848a;
+  --blush-lt: #e8b4b8;
+  --blush-dk: #8a4a50;
+  --rose:     #b06070;
+  --lavender: #9a88b0;
+  --sage:     #7a9478;
+  --cream:    #fdf8f4;
+  --cream-dk: #f0e8e0;
+  --ink:      #4a2a30;
+  --ink-lt:   #7a5055;
+  --gold:     #c8a870;
+  --border:   rgba(176,96,112,.25);
+  --bw: min(92vw, 420px);
+  --page-h: calc(var(--bw) * 1.5);
 }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+html, body { width: 100%; height: 100%; overflow-x: hidden; background: #2a1018; font-family: 'EB Garamond', serif; color: var(--ink); user-select: none; }
 
-/* NAV */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(42,32,24,.92); backdrop-filter: blur(12px); }
-.nav-logo { display: inline-flex; align-items: center; text-decoration: none; line-height: 0; }
-.nav-logo img { display: block; height: 188px; width: auto; object-fit: contain; transition: transform .25s, opacity .25s; }
-.nav-logo:hover img { transform: scale(1.02); opacity: .95; }
-@media (max-width:640px) { .nav-logo img { height: 84px; } }
-.nav-links { display: flex; gap: 2rem; }
-.nav-link { font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.7); text-decoration: none; transition: color .25s; }
-.nav-link:hover { color: var(--gold-lt); }
+#petals-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-/* HERO */
-.hero { width: 100%; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; background: var(--ink); }
-.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(154,106,88,.25) 0%, transparent 55%), radial-gradient(ellipse at 70% 60%, rgba(184,144,60,.15) 0%, transparent 55%); }
-.hero-content { position: relative; z-index: 1; max-width: 700px; }
-.hero-tag { display: inline-block; padding: .4rem 1.2rem; border: 1px solid rgba(184,144,60,.4); font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 2rem; }
-.hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem,10vw,5.5rem); line-height: 1.05; color: #f5f0e8; margin-bottom: .5rem; }
-.hero h1 em { font-style: italic; color: var(--gold-lt); display: block; font-size: clamp(2.2rem,8vw,4.5rem); }
-.hero-sub { font-size: .75rem; font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: rgba(200,180,160,.6); margin: 1.5rem 0 2.5rem; }
-.hero-cta { display: inline-block; padding: .9rem 2.5rem; background: transparent; border: 1px solid rgba(184,144,60,.5); color: var(--gold-lt); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .3s, border-color .3s; }
-.hero-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
-.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; color: rgba(200,180,160,.4); font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; }
-.scroll-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(200,180,160,.4), transparent); animation: pulse 2s ease infinite; }
-@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-
-/* ═══════════════════════════════════════
-   BEST SELLERS SECTION
-═══════════════════════════════════════ */
-#bestsellers {
-  background: var(--bg);
-  padding: 5rem 2rem 4rem;
-  text-align: center;
+/* ══════ COVER ══════ */
+#scene-cover {
+  width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at center, #3e1828 0%, #2a1018 100%);
 }
-.bestsellers-header { margin-bottom: 3.5rem; }
-.bestsellers-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem,5vw,3rem); color: var(--ink); }
-.bestsellers-header p { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose-lt); margin-top: .75rem; }
-.gold-line { width: 60px; height: 1px; background: var(--gold); margin: 1.25rem auto 0; opacity: .5; }
-.bestsellers-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
+.cover-outer { position: relative; width: var(--bw); }
+.cover-spine {
+  position: absolute; top: 0; left: -8px; width: 8px; height: 100%;
+  background: linear-gradient(to right, #180810, #5a2030, #180810);
+  border-radius: 4px 0 0 4px; z-index: 20; pointer-events: none;
 }
-@media (max-width: 900px) { .bestsellers-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px) {
-  .bestsellers-grid {
-    display: flex;
-    grid-template-columns: none;
-    max-width: none;
-    width: 100%;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scroll-padding: 0 1rem;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
-    touch-action: auto;
-    padding: 0 1rem 1.2rem;
-    margin: 0;
-    scrollbar-width: none;
-    contain: layout paint;
-    transform: translateZ(0);
-  }
-  .bestsellers-grid::-webkit-scrollbar { display: none; }
-  .bestsellers-grid .bs-card {
-    flex: 0 0 82%;
-    max-width: 340px;
-    scroll-snap-align: center;
-    scroll-snap-stop: normal;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  .bs-card:hover { transform: none; }
-  .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
-}
-.bestsellers-grid .bs-card[aria-hidden="true"] { display: none; }
-
-.bs-card {
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(42,32,24,.10);
+.cover-wrap {
+  position: relative; width: var(--bw); height: var(--page-h);
+  overflow: hidden; border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(176,96,112,.35), -16px 14px 34px rgba(0,0,0,.65), 0 16px 36px rgba(0,0,0,.55);
   cursor: pointer;
-  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
 }
-.bs-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(42,32,24,.18); }
-
-.bs-card-visual {
-  position: relative;
-  background: #f0ece4;
-  padding: 2.5rem 2rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  min-height: 320px;
-  overflow: hidden;
+.cover-bg {
+  position: absolute; inset: 0;
+  background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Jardin%20floral%20book/Cover.png') center/cover no-repeat;
 }
-
-/* Gradient bg behind the phone */
-.bs-card-visual::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--bs-grad, radial-gradient(ellipse at 50% 60%, rgba(184,144,60,.18) 0%, transparent 70%));
+.cover-content {
+  position: absolute; top: 42%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; z-index: 2; width: 68%;
+  animation: fadeUp 1.2s ease both;
 }
-
-.bs-badge {
-  position: absolute;
-  top: 1.1rem;
-  left: 1.1rem;
-  background: #fff;
-  border: 1px solid rgba(184,144,60,.3);
-  color: var(--gold);
-  font-size: .48rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  padding: .28rem .75rem;
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  border-radius: 99px;
-  display: flex;
-  align-items: center;
-  gap: .35rem;
+.cover-eyebrow {
+  font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 10px);
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ink); font-weight: 600;
+  background: rgba(253,248,244,.3);
+  padding: 3px clamp(8px,2.5vw,12px);
+  border-radius: 2px;
+  margin-top: clamp(84px,1.5vw,88px); display: block;
 }
-.bs-badge::before { content: "★"; font-size: .55rem; }
-.bs-template-id {
-  position: absolute;
-  top: 1.1rem;
-  right: 1.1rem;
-  z-index: 3;
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(184,144,60,.32);
-  color: var(--gold);
-  font-size: .55rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  padding: .28rem .62rem;
-  border-radius: 99px;
-  font-weight: 500;
-}
-.template-id-note {
-  display: inline-block;
-  margin-top: .45rem;
-  font-size: .56rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-/* Phone mockup */
-.phone-wrap {
-  position: relative;
-  z-index: 1;
-  width: 170px;
-  flex-shrink: 0;
-}
-.phone-outer {
-  width: 170px;
-  height: 340px;
-  background: #1a1210;
-  border-radius: 30px;
-  padding: 8px;
-  box-shadow: 0 12px 50px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.08);
-  position: relative;
-}
-.phone-outer::before {
-  content: "";
-  position: absolute;
-  top: 12px; left: 50%; transform: translateX(-50%);
-  width: 40px; height: 7px;
-  background: #111;
-  border-radius: 99px;
-  z-index: 2;
-}
-.phone-screen {
-  width: 100%;
-  height: 100%;
-  border-radius: 22px;
-  overflow: hidden;
-  background: #111;
-  position: relative;
-}
-.phone-screen iframe {
-  width: 390px;
-  height: 844px;
-  border: none;
-  transform-origin: top left;
-  transform: scale(calc(154/390));
-  pointer-events: none;
-}
-
-/* Second phone (peeking behind) */
-.phone-back {
-  position: absolute;
-  right: -30px;
-  bottom: 0;
-  width: 140px;
-  opacity: .55;
-  filter: blur(1px);
-  z-index: 0;
-}
-.phone-back .phone-outer {
-  width: 140px;
-  height: 280px;
-  border-radius: 24px;
-  padding: 7px;
-}
-.phone-back .phone-screen { border-radius: 18px; }
-.phone-back .phone-screen iframe { transform: scale(calc(126/390)); }
-
-.bs-card-info {
-  padding: 1.5rem 1.6rem 1.8rem;
-  text-align: left;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: .4rem;
-}
-.bs-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; color: var(--ink); }
-.bs-card-desc { font-size: .68rem; color: var(--ink-lt); line-height: 1.7; }
-.bs-card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  margin-top: .6rem;
-  font-size: .62rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+.cover-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 15vw, 72px);
   color: var(--ink);
-  font-weight: 500;
-  text-decoration: none;
+  text-shadow: 0 2px 12px rgba(253,248,244,.3);
+  line-height: 1.0; display: block;
 }
-.bs-card-link::after { content: "→"; }
-.bs-card-link:hover { color: var(--gold); }
+.cover-amp {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(14px, 4.5vw, 22px);
+  color: var(--blush-dk); font-weight: 300;
+  display: block; margin: 2px 0;
+}
+.cover-date {
+  font-family: 'Cinzel', serif; font-size: clamp(7px, 2vw, 10px);
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--ink); font-weight: 600;
+  background: rgba(253,248,244,.1);
+  padding: 3px clamp(8px,2.5vw,12px);
+  border-radius: 2px;
+  margin-top: clamp(5px,1.5vw,9px); display: block;
+}
+.cover-line {
+  width: 60%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--blush), transparent);
+  opacity: .5; margin: clamp(5px,1.5vw,8px) auto;
+}
+.cover-open-hint {
+  position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%);
+  z-index: 3; text-align: center;
+  animation: hintPulse 2s ease-in-out infinite; cursor: pointer;
+}
+.cover-open-hint span {
+  font-family: 'Cinzel', serif; font-size: clamp(7px,2.2vw,10px);
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--ink); font-weight: 600;
+  background: rgba(253,248,244,.45);
+  padding: 2px 8px; border-radius: 2px;
+  display: block; margin-bottom: 5px;
+}
+.cover-open-hint svg { width: clamp(13px,3.8vw,17px); opacity: .7; }
+@keyframes hintPulse { 0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)} 50%{opacity:1;transform:translateX(-50%) translateY(-4px)} }
+@keyframes fadeUp { from{opacity:0;transform:translate(-50%,-40%)} to{opacity:1;transform:translate(-50%,-50%)} }
 
-
-/* TEMPLATES */
-.section-header { text-align: center; padding: 5rem 2rem 2rem; background: var(--bg); }
-.section-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem,5vw,3rem); color: var(--ink); }
-.section-header p { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose-lt); margin-top: .75rem; }
-#templates { background: var(--bg); padding-bottom: 4rem; }
-.category-block { padding: 2.5rem 0 1rem; }
-.category-header { display: flex; align-items: baseline; justify-content: space-between; padding: 0 2rem 1rem; max-width: 1400px; margin: 0 auto; }
-.category-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 400; color: var(--ink); }
-.category-title span { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--rose-lt); font-family: 'Jost', sans-serif; font-weight: 300; margin-left: 1rem; }
-.category-arrows { display: flex; gap: .5rem; }
-.cat-arrow { width: 32px; height: 32px; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--ink-lt); font-size: .9rem; transition: all .2s; flex-shrink: 0; }
-.cat-arrow:hover { background: var(--ink); color: var(--gold-lt); border-color: var(--ink); }
-.cards-track-wrap {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0 2rem;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+/* ══════ OPEN BOOK ══════ */
+#scene-open {
+  display: none; width: 100vw; min-height: 100vh;
+  background: radial-gradient(ellipse at center, #3e1828 0%, #2a1018 100%);
+  align-items: center; justify-content: center; overflow-y: auto;
+  padding: 20px 0 30px;
 }
-.cards-track-wrap::-webkit-scrollbar { display: none; }
-.cards-track-wrap, .reviews-marquee-wrap, .bestsellers-grid {
-  overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
+#scene-open.visible { display: flex; }
+.open-book { width: var(--bw); position: relative; display: flex; flex-direction: column; align-items: stretch; }
+.open-spine {
+  position: absolute; top: 0; left: -8px; width: 8px; height: var(--page-h);
+  background: linear-gradient(to right, #180810, #5a2030, #180810);
+  border-radius: 4px 0 0 4px; z-index: 5; pointer-events: none;
 }
-.cards-track-wrap, .reviews-marquee-wrap {
-  touch-action: auto;
-  contain: layout paint;
-  transform: translateZ(0);
-}
-.card-wrap, .review-card {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-.card-preview, .phone-screen iframe {
-  pointer-events: none;
-}
-
-/* The template rows are now modern marketing cards, like the Best Sellers */
-.cards-track-wrap {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0 2rem 1.2rem;
-  scroll-snap-type: x proximity;
-  scroll-padding: 0 2rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.cards-track-wrap::-webkit-scrollbar { display: none; }
-.cards-track-wrap::before,
-.cards-track-wrap::after { display: none !important; content: none !important; }
-
-.cards-track {
-  display: flex;
-  gap: 0;
-  overflow: visible;
-  padding-bottom: 12px;
-  user-select: none;
-  width: max-content;
-}
-.cards-inner {
-  display: flex;
-  gap: 1.4rem;
-  will-change: auto;
-  animation: none !important;
-}
-.cards-inner > [aria-hidden="true"] { display: none !important; }
-
-.card-wrap {
-  flex: 0 0 auto;
-  width: clamp(300px, 27vw, 360px);
-  scroll-snap-align: center;
-  scroll-snap-stop: normal;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 0;
-  box-shadow: 0 8px 40px rgba(42,32,24,.10);
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-.card-wrap.card-classic    { --card-accent: #c9a96e; --preview-bg: rgba(201,169,110,.18); }
-.card-wrap.card-dark       { --card-accent: #c9a84c; --preview-bg: rgba(201,168,76,.18); }
-.card-wrap.card-soft       { --card-accent: #c9958a; --preview-bg: rgba(201,149,138,.16); }
-.card-wrap.card-vintage    { --card-accent: #c4a456; --preview-bg: rgba(196,164,86,.16); }
-.card-wrap.card-garden     { --card-accent: #7a9e7e; --preview-bg: rgba(122,158,126,.16); }
-.card-wrap.card-midnight   { --card-accent: #8aaa98; --preview-bg: rgba(42,61,96,.16); }
-.card-wrap.card-terracotta { --card-accent: #c4674a; --preview-bg: rgba(196,103,74,.16); }
-.card-wrap.card-elvish     { --card-accent: #2d6e3a; --preview-bg: rgba(45,110,58,.16); }
-.card-wrap.card-blue       { --card-accent: #8a9bb5; --preview-bg: rgba(138,155,181,.16); }
-
-.card-header {
-  order: 2;
-  padding: 1.35rem 1.5rem 1.55rem;
-  background: #fff;
-  border: 0;
-  border-top: 1px solid rgba(155,120,90,.12);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: .45rem;
-  cursor: pointer;
-  transition: background .2s;
-}
-.card-header:hover { background: #fff; }
-.card-header-num {
-  order: 2;
-  font-family: 'Jost', sans-serif;
-  font-size: .66rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-.card-header-num::before { content: 'Template ID: '; }
-.card-header-name {
-  order: 1;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  line-height: 1.05;
-  color: var(--ink);
-}
-
-.template-card {
-  --mock-w: 188px;
-  --mock-h: 376px;
-  --mock-border: 8px;
-  --mock-top: 38px;
-  --mock-radius: 32px;
-  position: relative;
-  order: 1;
-  height: 455px;
-  aspect-ratio: auto;
-  overflow: hidden;
-  cursor: pointer;
-  background:
-    radial-gradient(ellipse at 50% 72%, var(--preview-bg, rgba(184,144,60,.18)) 0%, rgba(232,215,190,.12) 72%, transparent 100%),
-    #f0ece4;
-  contain: layout paint;
-  transform: translateZ(0);
-  transition: none;
-}
-.template-card:hover { z-index: 1; transform: none; }
-.template-card::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: var(--mock-top);
-  width: var(--mock-w);
-  height: var(--mock-h);
-  transform: translateX(-50%);
-  border: var(--mock-border) solid #1a1210;
-  border-radius: var(--mock-radius);
-  box-shadow: 0 12px 50px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.08);
-  z-index: 2;
-  pointer-events: none;
-}
-.template-card::after {
-  content: '';
-  position: absolute;
-  top: calc(var(--mock-top) + 13px);
-  left: 50%;
-  width: 48px;
-  height: 8px;
-  transform: translateX(-50%);
-  background: #111;
-  border-radius: 99px;
-  z-index: 3;
-  pointer-events: none;
-}
-.card-preview {
-  position: absolute;
-  width: 390px;
-  height: 844px;
-  border: 0;
-  transform-origin: top left;
-  pointer-events: none;
-  z-index: 1;
-  background: #111;
-  display: block;
-  clip-path: inset(0 round 24px);
-}
-.card-overlay { display: none !important; }
-.card-strip { display: none !important; }
-
-@media (min-width: 900px) {
-  .cards-track-wrap { padding: 0 2.5rem 1.4rem; scroll-padding: 0 2.5rem; }
-  .cards-inner { gap: 1.6rem; }
-  .card-wrap { width: clamp(320px, 25vw, 380px); }
-  .template-card { --mock-w: 198px; --mock-h: 396px; --mock-top: 42px; height: 485px; }
-}
-
-@media (max-width: 640px) {
-  .category-block { padding: 2rem 0 1rem; }
-  .category-header { align-items: center; gap: .8rem; padding: 0 1rem 1rem; }
-  .category-title span { display: inline-block; margin-left: .55rem; }
-  .cards-track-wrap { padding: 0 1rem 1.2rem; scroll-padding: 0 1rem; }
-  .cards-inner { gap: 1rem; }
-  .card-wrap { flex-basis: 82%; width: auto; max-width: 340px; }
-  .card-header { padding: 1.25rem 1.5rem 1.5rem; }
-  .card-header-name { font-size: 2rem; }
-  .template-card { --mock-w: 225px; --mock-h: 450px; --mock-top: 42px; height: 540px; }
-}
-
-.category-divider { height: 1px; background: var(--border); margin: .5rem 2rem 0; }
-
-/* HOW IT WORKS */
-.how-section { background: var(--ink); padding: 5rem 2rem; text-align: center; }
-.how-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.8rem,4vw,2.6rem); color: #f5f0e8; margin-bottom: .75rem; }
-.how-section > p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(200,180,160,.5); margin-bottom: 3rem; }
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
-.step { color: #f0ebe0; }
-.step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); opacity: .5; line-height: 1; margin-bottom: .75rem; }
-.step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: .5rem; }
-.step p { font-size: .72rem; line-height: 1.8; color: rgba(200,180,160,.6); font-weight: 300; }
-
-/* PRICING */
-.pricing-section { background: var(--bg); padding: 5rem 2rem; text-align: center; }
-.pricing-section > h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(1.8rem,4vw,2.6rem); color: var(--ink); margin-bottom: .5rem; }
-.pricing-section > p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--rose-lt); margin-bottom: 3rem; }
-.pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.5rem; max-width: 820px; margin: 0 auto 2.5rem; }
-.price-card { border: 1px solid var(--border); padding: 2.5rem 1.5rem; background: var(--bg2); text-align: center; position: relative; }
-.price-card.featured { border-color: var(--gold); background: var(--ink); color: #f0ebe0; }
-.price-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--gold); padding: .25rem 1rem; font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-.price-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: .2rem; }
-.price-card.featured .price-name { color: #f0ebe0; }
-.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--rose); line-height: 1; margin: 1rem 0 .2rem; }
-.price-card.featured .price-amount { color: var(--gold-lt); }
-.price-currency { font-size: 1.1rem; vertical-align: super; }
-.price-period { font-size: .6rem; color: rgba(150,130,110,.7); margin-bottom: 1rem; }
-.price-card.featured .price-period { color: rgba(200,180,160,.5); }
-.price-desc { font-size: .65rem; letter-spacing: .1em; color: var(--ink-lt); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
-.price-card.featured .price-desc { color: rgba(200,180,160,.6); }
-.price-features { list-style: none; margin-bottom: 1.8rem; text-align: left; }
-.price-feature { font-size: .72rem; padding: .38rem 0; color: var(--ink-lt); display: flex; align-items: flex-start; gap: .5rem; }
-.price-card.featured .price-feature { color: rgba(240,220,200,.8); }
-.price-feature::before { content: "✦"; color: var(--gold); font-size: .5rem; margin-top: .18rem; flex-shrink: 0; }
-.info-btn { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; border: 1px solid currentColor; font-size: .5rem; cursor: pointer; opacity: .55; margin-left: 4px; flex-shrink: 0; position: relative; font-family: 'Jost', sans-serif; font-weight: 500; color: var(--gold); vertical-align: middle; }
-.info-btn:hover { opacity: 1; }
-.info-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 200px; background: var(--ink); color: rgba(240,220,200,.85); font-size: .62rem; line-height: 1.6; padding: .7rem .9rem; border: 1px solid rgba(184,144,60,.3); text-transform: none; letter-spacing: 0; font-family: 'Jost', sans-serif; z-index: 20; pointer-events: none; }
-.info-btn:hover .info-tooltip { display: block; }
-.info-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--ink); }
-.price-cta { display: block; width: 100%; padding: .85rem; border: 1px solid var(--rose); color: var(--rose); font-family: 'Jost', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; background: transparent; cursor: pointer; transition: all .25s; text-decoration: none; margin-top: 0; }
-.price-cta + .price-cta { margin-top: 8px; font-size: .58rem; opacity: .75; }
-.price-cta:hover { background: var(--rose); color: #fff; }
-.price-card.featured .price-cta { border-color: var(--gold); color: var(--gold-lt); }
-.price-card.featured .price-cta:hover { background: var(--gold); color: var(--ink); }
-
-/* Payment */
-.payment-info { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-@media(max-width:600px) { .payment-info { grid-template-columns: 1fr; } }
-.payment-region { border: 1px solid var(--border); padding: 1.6rem 1.5rem; background: var(--bg2); text-align: left; }
-.payment-region h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: .5rem; display: flex; align-items: center; gap: .6rem; }
-.payment-region h4 img { height: 33px; width: auto; border-radius: 2px; object-fit: cover; flex-shrink: 0; }
-.payment-region p { font-size: .68rem; line-height: 1.7; color: var(--ink-lt); margin-bottom: .8rem; }
-.payment-methods { display: flex; flex-direction: column; gap: .5rem; }
-.pay-method { display: flex; align-items: center; gap: .75rem; font-size: .7rem; color: var(--ink-lt); padding: .6rem .9rem; background: rgba(255,255,255,.45); border: 1px solid var(--border); }
-.pay-method strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 1px; }
-.pay-icon { height: 28px; width: auto; max-width: 52px; object-fit: contain; flex-shrink: 0; }
-.payment-note { text-align: center; margin-top: 1.5rem; font-size: .65rem; letter-spacing: .1em; color: var(--rose-lt); text-transform: uppercase; }
-
-/* ═══════════════════════════════════════
-   REVIEWS SECTION
-═══════════════════════════════════════ */
-#reviews {
-  background: var(--ink);
-  padding: 5rem 2rem 4rem;
-  position: relative;
-  overflow: hidden;
-}
-#reviews::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(184,144,60,.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-.reviews-header {
-  text-align: center;
-  margin-bottom: 3.5rem;
-  position: relative;
-}
-.reviews-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.8rem,4vw,2.6rem); color: #f5f0e8; margin-bottom: .5rem; }
-.reviews-header p { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(200,180,160,.5); }
-.reviews-rating-summary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.2rem;
-}
-.reviews-big-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--gold-lt); line-height: 1; }
-.reviews-stars-col { display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; }
-.stars-row { display: flex; gap: 3px; }
-.star { color: var(--gold); font-size: 1rem; }
-.star.half { color: var(--gold); opacity: .5; }
-.reviews-count { font-size: .62rem; color: rgba(200,180,160,.5); letter-spacing: .1em; }
-.reviews-arrows { display: flex; justify-content: center; gap: .75rem; margin: 1.8rem 0 2rem; position: relative; z-index: 2; }
-.review-arrow { width: 40px; height: 40px; border: 1px solid rgba(200,180,160,.22); background: transparent; color: var(--gold-lt); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all .2s; }
-.review-arrow:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
-
-/* Marquee rows */
-.reviews-marquee-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin-bottom: 1rem;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.reviews-marquee-wrap::-webkit-scrollbar { display: none; }
-.reviews-marquee {
-  display: flex;
-  gap: 1rem;
-  width: max-content;
-  animation: none !important;
-  padding-bottom: .25rem;
-}
-.reviews-marquee.reverse { animation: none !important; }
-@keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-
-.review-card {
-  scroll-snap-align: start;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(200,180,160,.1);
-  border-radius: 4px;
-  padding: 1.4rem 1.5rem;
-  width: 280px;
-  flex-shrink: 0;
-  transition: border-color .25s;
-}
-.review-card:hover { border-color: rgba(184,144,60,.3); }
-.review-card-stars { display: flex; gap: 3px; margin-bottom: .75rem; }
-.review-card-stars .star { font-size: .75rem; }
-.review-card-text { font-family: 'Cormorant Garamond', serif; font-size: .95rem; line-height: 1.65; color: rgba(240,225,200,.8); margin-bottom: 1rem; font-style: italic; }
-.review-card-author { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(200,180,160,.45); }
-.review-card-author strong { color: var(--gold-lt); font-weight: 500; display: block; font-size: .62rem; letter-spacing: .1em; margin-bottom: 2px; }
-
-/* Add review form */
-.add-review-wrap {
-  max-width: 580px;
-  margin: 3rem auto 0;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(200,180,160,.12);
-  padding: 2rem 2rem;
-  position: relative;
-}
-.add-review-wrap h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 1.25rem; }
-.add-review-form { display: flex; flex-direction: column; gap: .8rem; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
-.form-input {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(200,180,160,.18);
-  color: #f0ebe0;
-  font-family: 'Jost', sans-serif;
-  font-size: .75rem;
-  padding: .75rem 1rem;
-  outline: none;
-  transition: border-color .25s;
+.book-spread {
   width: 100%;
+  background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Jardin%20floral%20book/Pages.png') center/cover no-repeat;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(176,96,112,.3), -16px 14px 34px rgba(0,0,0,.6), 0 16px 36px rgba(0,0,0,.5);
+  overflow: hidden; position: relative; perspective: 800px;
 }
-.form-input::placeholder { color: rgba(200,180,160,.3); }
-.form-input:focus { border-color: rgba(184,144,60,.45); }
-textarea.form-input { resize: vertical; min-height: 90px; }
-.star-picker { display: flex; gap: .35rem; align-items: center; }
-.star-picker label { color: rgba(200,180,160,.35); font-size: 1.3rem; cursor: pointer; transition: color .15s; }
-.star-picker input[type=radio] { display: none; }
-.star-picker label:hover,
-.star-picker label.active { color: var(--gold); }
-.star-picker-row { display: flex; align-items: center; gap: .8rem; }
-.star-picker-label { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(200,180,160,.4); }
-.form-submit {
-  background: transparent;
-  border: 1px solid rgba(184,144,60,.45);
-  color: var(--gold-lt);
-  font-family: 'Jost', sans-serif;
-  font-size: .65rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  padding: .85rem 2rem;
-  cursor: pointer;
-  transition: all .25s;
-  align-self: flex-start;
-}
-.form-submit:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
-.form-success { display: none; text-align: center; padding: 1rem; color: var(--gold-lt); font-size: .75rem; letter-spacing: .1em; }
-
-/* CONTACT */
-.contact-section { background: var(--ink); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(200,180,160,.08); }
-.contact-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,144,60,.1) 0%, transparent 60%); }
-.contact-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-.contact-section h2 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem,8vw,4rem); color: var(--gold-lt); margin-bottom: .5rem; }
-.contact-section h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.1rem; color: rgba(200,180,160,.7); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 3rem; }
-.contact-items { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2.5rem; }
-.contact-item { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 2rem; border: 1px solid rgba(200,180,160,.12); background: rgba(255,255,255,.03); transition: border-color .25s; }
-.contact-item:hover { border-color: rgba(200,180,160,.35); }
-.contact-icon { font-size: 1.2rem; opacity: .7; }
-.contact-label { font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.4); margin-bottom: .2rem; }
-.contact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #f0ebe0; }
-.contact-value a { color: inherit; text-decoration: none; }
-.contact-value a:hover { color: var(--gold-lt); }
-.contact-cta { display: inline-block; padding: 1rem 3rem; background: transparent; border: 1px solid rgba(184,144,60,.5); color: var(--gold-lt); font-family: 'Jost', sans-serif; font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; text-decoration: none; transition: all .3s; }
-.contact-cta:hover { background: rgba(184,144,60,.12); border-color: var(--gold-lt); }
-.footer-note { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(200,180,160,.08); font-size: .6rem; letter-spacing: .12em; color: rgba(200,180,160,.25); }
-
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
-.reveal.visible { opacity: 1; transform: none; }
-
-/* HAMBURGER */
-.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: .4rem; z-index: 110; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: rgba(200,180,160,.8); transition: all .3s; }
-.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* MOBILE SWIPE — HOW IT WORKS */
-.steps-swiper-wrap { display: none; }
-/* MOBILE SWIPE — PRICING */
-.pricing-swiper-wrap { display: none; }
-
-@media (max-width:640px) {
-  .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; background: rgba(42,32,24,.98); padding: 5rem 2rem 2rem; gap: 1.5rem; z-index: 105; }
-  .nav-links.open { display: flex; }
-  .nav-hamburger { display: flex; }
-  .card-overlay { display: none; }
-  .card-wrap { width: clamp(150px,42vw,200px); }
-  .category-header { padding: 0 1rem 1rem; }
-  .cards-track-wrap { padding: 0 1rem; }
-  .steps { display: none; }
-  .steps-swiper-wrap { display: block; width: 100%; overflow: hidden; position: relative; }
-  .steps-swiper-track { display: flex; transition: transform .4s cubic-bezier(.25,1,.4,1); }
-  .steps-swiper-track .step { flex: 0 0 100%; padding: 0 2rem 1.5rem; }
-  .swiper-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
-  .swiper-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,180,160,.25); border: none; cursor: pointer; transition: background .2s, transform .2s; padding: 0; }
-  .swiper-dot.active { background: var(--gold); transform: scale(1.3); }
-  .swiper-arrows { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
-  .swiper-btn { background: none; border: 1px solid rgba(200,180,160,.3); color: rgba(200,180,160,.7); width: 36px; height: 36px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
-  .swiper-btn:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
-  .pricing-cards { display: none; }
-  .pricing-swiper-wrap { display: block; width: 100%; overflow: hidden; position: relative; padding: 0 1.25rem; box-sizing: border-box; }
-  .pricing-swiper-track { display: flex; transition: transform .4s cubic-bezier(.25,1,.4,1); will-change: transform; }
-  .pricing-swiper-track .price-card { flex: 0 0 100%; width: 100%; margin: 0; box-sizing: border-box; }
-  .pricing-swiper-wrap .swiper-dots { margin-top: 1.5rem; margin-bottom: 2rem; }
+.book-spread::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,.07), transparent);
+  z-index: 5; pointer-events: none;
 }
 
-@media (max-width: 600px) {
-  .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
+.flip-sheet {
+  position: absolute; inset: 0;
+  background: linear-gradient(to left, var(--cream-dk) 0%, var(--cream) 60%);
+  transform-origin: left center;
+  z-index: 10; border-radius: 4px 12px 12px 4px;
+  pointer-events: none; opacity: 0; backface-visibility: hidden;
+}
+.flip-sheet.animate { animation: pageFlipLR .65s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes pageFlipLR {
+  0%   { opacity:1; transform: perspective(1200px) rotateY(0deg); }
+  35%  { opacity:1; transform: perspective(1200px) rotateY(-55deg); box-shadow:-10px 0 28px rgba(0,0,0,.15); }
+  70%  { opacity:.6; transform: perspective(1200px) rotateY(-110deg); }
+  100% { opacity:0; transform: perspective(1200px) rotateY(-180deg); }
 }
 
+.page {
+  display: none; flex-direction: column; align-items: center; text-align: center;
+  height: var(--page-h); overflow: hidden;
+  padding: clamp(12px,4.5vw,22px) clamp(20px,7.5vw,34px) clamp(20px,6vw,30px);
+  position: relative; z-index: 6; animation: pgIn .35s ease; justify-content: center;
+}
+.page.active { display: flex; }
+@keyframes pgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
+/* Push content below the die-cut floral top arch */
+#page-1,#page-2,#page-3,#page-4,#page-5,#page-6,#page-7 {
+  padding-top: clamp(50px,14vw,78px);
+  padding-bottom: clamp(60px,16vw,90px); /* clear the car at the bottom */
+}
+
+/* Nav */
+.page-arrows {
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px clamp(14px,5vw,24px) 0; margin-top: 2px;
+}
+.page-arrow-btn {
+  font-family: 'Cinzel', serif; font-size: clamp(8px,2.8vw,12px);
+  letter-spacing: .1em; text-transform: uppercase; color: var(--blush-lt);
+  background: none; border: none; padding: 0; cursor: pointer; transition: opacity .2s;
+}
+.page-arrow-btn:hover { opacity: .6; }
+.page-label { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); color: var(--blush-lt); letter-spacing: .1em; opacity: .8; }
+
+/* Typography */
+.page-num { font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); color: var(--blush); letter-spacing: .15em; margin-bottom: clamp(3px,1.2vw,6px); opacity: .8; }
+.gold-div { display: flex; align-items: center; gap: clamp(5px,2vw,10px); margin: clamp(4px,1.4vw,7px) auto; width: 78%; color: var(--blush); }
+.gold-div::before { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--blush)); opacity: .4; }
+.gold-div::after  { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--blush)); opacity: .4; }
+.gold-div svg { flex-shrink: 0; }
+.book-eyebrow { font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .3em; text-transform: uppercase; color: var(--blush-dk); margin-bottom: clamp(4px,1.5vw,7px); opacity: .85; }
+.book-bigname { font-family: 'Great Vibes', cursive; font-size: clamp(34px,12vw,54px); color: var(--ink); line-height: 1.05; }
+.book-amp { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(15px,4.5vw,20px); color: var(--blush); margin: clamp(2px,1vw,4px) 0; }
+.book-verse { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px,3.4vw,15px); color: var(--ink); line-height: 1.65; max-width: 90%; }
+.book-verse-ref { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,10px); color: var(--lavender); letter-spacing: .15em; margin-top: clamp(4px,1.5vw,7px); }
+.book-section { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,5.5vw,24px); color: var(--blush-dk); letter-spacing: .06em; margin-bottom: clamp(3px,1.2vw,6px); font-weight: 400; font-style: italic; }
+.book-detail { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(12px,3.4vw,15px); color: var(--ink); line-height: 1.5; }
+.book-sub { font-family: 'Cinzel', serif; font-size: clamp(7px,2.2vw,10px); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-lt); margin-top: clamp(2px,1vw,5px); opacity: .85; }
+.t-parent { font-family: 'Cormorant Garamond', serif; font-size: clamp(11px,3.5vw,15px); color: var(--ink); line-height: 1.4; }
+.t-label-sm { font-family: 'Cinzel', serif; font-size: clamp(7px,1.8vw,9px); letter-spacing: .15em; text-transform: uppercase; color: var(--blush); opacity: .85; margin-bottom: 2px; }
+.parents-wrap { display: flex; justify-content: center; gap: clamp(8px,5vw,20px); margin: clamp(3px,1.2vw,6px) 0; width: 100%; }
+
+/* Calendar */
+.cal-box { background: rgba(255,255,255,.45); border: 1px solid var(--border); padding: clamp(7px,2.5vw,13px) clamp(5px,2vw,10px); width: 100%; margin: clamp(4px,1.5vw,8px) 0; border-radius: 3px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: .3vw; }
+.cal-cell { text-align: center; padding: clamp(2px,1vw,4px) .5vw; font-size: clamp(8px,2.8vw,12px); color: var(--ink); font-family: 'Cinzel', serif; }
+.cal-cell.hdr { font-size: clamp(7px,1.8vw,9px); text-transform: uppercase; color: var(--blush); opacity: .9; }
+.cal-cell.empty { opacity: 0; }
+.cal-cell.highlight { color: var(--blush-dk); font-weight: 700; position: relative; }
+
+/* Countdown */
+.countdown { display: flex; justify-content: center; gap: clamp(4px,2vw,10px); margin-top: clamp(6px,2.5vw,12px); }
+.flip { text-align: center; background: rgba(255,255,255,.45); border: 1px solid var(--border); padding: clamp(6px,2.5vw,10px) clamp(4px,1.5vw,8px); min-width: clamp(42px,14vw,58px); border-radius: 3px; }
+.flip .num { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(16px,6vw,26px); color: var(--blush-dk); line-height: 1; }
+.flip .lbl { font-family: 'Cinzel', serif; font-size: clamp(6px,1.8vw,8px); letter-spacing: .1em; text-transform: uppercase; color: var(--blush); margin-top: clamp(2px,1vw,4px); opacity: .85; }
+
+/* Timeline */
+.tl-wrap { width: 100%; margin-top: clamp(4px,1.5vw,7px); }
+.tl-row { display: grid; grid-template-columns: 1fr clamp(38px,14vw,62px) 1fr; align-items: center; gap: clamp(3px,1.5vw,6px); margin-bottom: clamp(5px,2vw,10px); }
+.tl-left { text-align: right; padding-right: clamp(4px,1.5vw,8px); }
+.tl-right { text-align: left; padding-left: clamp(4px,1.5vw,8px); }
+.tl-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(11px,3.8vw,16px); color: var(--blush-dk); }
+.tl-venue { font-size: clamp(9px,2.5vw,11px); color: var(--ink-lt); margin-top: 1px; font-style: italic; line-height: 1.4; }
+.tl-icon { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+.tl-icon::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: clamp(8px,2.5vw,12px); background: var(--blush); opacity: .35; transform: translateX(-50%); }
+.tl-icon::after  { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: clamp(8px,2.5vw,12px); background: var(--blush); opacity: .35; transform: translateX(-50%); }
+.tl-row:first-child .tl-icon::before { display: none; }
+.tl-row:last-child .tl-icon::after  { display: none; }
+.tl-icon img { width: clamp(22px,8vw,34px); height: clamp(22px,8vw,34px); object-fit: contain; opacity: .8; filter: sepia(1) saturate(2) hue-rotate(300deg) brightness(.85); }
+.tl-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(14px,5vw,22px); color: var(--blush-dk); }
+
+/* Gift */
+.gift-box { background: rgba(255,255,255,.45); border: 1px solid var(--border); display: inline-block; padding: clamp(8px,3vw,14px) clamp(14px,5vw,24px); border-radius: 3px; }
+
+/* Photos */
+.photo-carousel { width: 100%; position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: 3px; }
+.photo-track { display: flex; transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
+.photo-slide { min-width: 100%; }
+.photo-slide img { width: 100%; height: clamp(200px,58vw,260px); object-fit: cover; display: block; }
+.photo-counter { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,10px); color: var(--blush); letter-spacing: .1em; text-align: center; margin-top: clamp(4px,1.5vw,7px); opacity: .8; }
+.photo-arrows { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 clamp(6px,2vw,10px); transform: translateY(-50%); pointer-events: none; }
+.photo-arr { pointer-events: auto; background: rgba(253,248,244,.85); border: 1px solid var(--border); color: var(--blush-dk); width: clamp(24px,7vw,32px); height: clamp(24px,7vw,32px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: clamp(12px,4vw,16px); cursor: pointer; }
+
+/* RSVP */
+.rsvp-box { background: rgba(255,255,255,.4); border: 1px solid var(--border); padding: clamp(10px,3.5vw,16px); width: 100%; border-radius: 3px; }
+.step-dots { display: flex; align-items: center; justify-content: center; gap: clamp(4px,2vw,8px); margin-bottom: clamp(8px,2.5vw,12px); }
+.step-dot { width: clamp(6px,2vw,9px); height: clamp(6px,2vw,9px); border-radius: 50%; background: rgba(176,96,112,.1); border: 1px solid var(--blush); transition: all .3s; }
+.step-dot.on { background: var(--blush); transform: scale(1.3); border-color: var(--blush-dk); }
+.form-label { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); letter-spacing: .15em; text-transform: uppercase; color: var(--ink-lt); display: block; margin-bottom: clamp(2px,1vw,4px); }
+.form-field { width: 100%; padding: clamp(5px,2vw,8px) 0; border: none; border-bottom: 1px solid rgba(176,96,112,.2); font-family: 'EB Garamond', serif; font-size: clamp(12px,3.5vw,15px); color: var(--ink); background: transparent; outline: none; }
+.form-field::placeholder { color: rgba(74,42,48,.2); }
+textarea.form-field { border: 1px solid rgba(176,96,112,.18); padding: clamp(5px,2vw,8px); resize: none; }
+.error-msg { font-size: clamp(8px,2.5vw,10px); color: var(--blush-dk); margin-top: clamp(2px,1vw,4px); display: none; font-family: 'Cinzel', serif; }
+.attend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(5px,2vw,10px); margin: clamp(5px,2vw,9px) 0; }
+.attend-opt { position: relative; cursor: pointer; }
+.attend-opt input { position: absolute; opacity: 0; }
+.attend-box { border: 1px solid rgba(176,96,112,.2); padding: clamp(6px,2.5vw,10px); text-align: center; background: rgba(255,255,255,.25); transition: all .2s; }
+.attend-opt input:checked + .attend-box { border-color: var(--blush); background: rgba(196,132,138,.08); }
+.attend-label { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(11px,3.2vw,14px); color: var(--ink); }
+.count-row { display: flex; align-items: center; justify-content: center; gap: clamp(8px,4vw,16px); margin: clamp(4px,1.5vw,8px) 0; }
+.count-btn { width: clamp(26px,8vw,34px); height: clamp(26px,8vw,34px); border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,.3); font-size: clamp(14px,4vw,18px); color: var(--blush-dk); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.count-num-disp { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,7vw,28px); color: var(--blush-dk); min-width: 6vw; text-align: center; }
+.btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(4px,2vw,8px); margin-top: clamp(4px,1.5vw,8px); }
+.btn-rsvp { display: block; width: 100%; padding: clamp(6px,2vw,10px); border: 1px solid rgba(176,96,112,.22); color: var(--ink); font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .15em; text-transform: uppercase; cursor: pointer; background: rgba(255,255,255,.25); transition: all .2s; }
+.btn-solid { background: var(--blush-dk); border-color: var(--blush); color: var(--cream); }
+.rsvp-single-btn { width: 100%; padding: clamp(8px,2.5vw,11px); background: rgba(255,255,255,.25); border: 1px solid rgba(176,96,112,.25); color: var(--ink); font-family: 'Cinzel', serif; font-size: clamp(9px,2.8vw,12px); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; margin-top: clamp(5px,2vw,9px); }
+
+/* ══════ BACK COVER ══════ */
+#scene-back { display: none; width: 100vw; height: 100vh; background: radial-gradient(ellipse at center, #3e1828 0%, #2a1018 100%); align-items: center; justify-content: center; }
+#scene-back.visible { display: flex; }
+.back-outer { width: var(--bw); position: relative; }
+.back-spine { position: absolute; top: 0; left: -8px; width: 8px; height: clamp(500px,145vw,630px); background: linear-gradient(to right, #180810, #5a2030, #180810); border-radius: 4px 0 0 4px; z-index: 5; }
+.back-wrap { position: relative; width: var(--bw); height: var(--page-h); }
+.back-face {
+  position: absolute; inset: 0;
+  background: url('https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Jardin%20floral%20book/Cover.png') center/cover no-repeat;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 rgba(176,96,112,.35), -16px 14px 34px rgba(0,0,0,.65);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: clamp(16px,6%,32px); overflow: hidden;
+}
+.back-face::before { content: ""; position: absolute; inset: 0; background: rgba(253,248,244,.06); pointer-events: none; }
+.back-text { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(6px,2vw,12px); }
+.back-text p { font-family: 'Great Vibes', cursive; font-size: clamp(22px,8vw,36px); color: var(--ink); text-shadow: 0 1px 6px rgba(253,248,244,.5); margin-bottom: clamp(4px,1.5vw,8px); }
+.back-text small { font-family: 'Cinzel', serif; font-size: clamp(8px,2.2vw,11px); color: var(--ink-lt); letter-spacing: .2em; text-transform: uppercase; }
+.back-btn { position: relative; z-index: 2; font-family: 'Cinzel', serif; font-size: clamp(8px,2.5vw,11px); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); font-weight: 500; background: none; border: none; padding: 0; cursor: pointer; animation: hintPulse 2s ease-in-out infinite; display: block; margin-top: clamp(6px,2vw,10px); }
+
+/* Cardia credit */
+.cardia-credit { position: absolute; bottom: clamp(10px,3%,18px); left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; }
+.cardia-credit a { font-family: 'Cinzel', serif; font-size: clamp(7px,2vw,9px); letter-spacing: .12em; color: rgba(74,42,48,.55); text-decoration: none; text-transform: uppercase; transition: opacity .2s; display: inline-flex; align-items: center; gap: 4px; }
+.cardia-credit a span { border-bottom: 1px solid rgba(74,42,48,.4); padding-bottom: 1px; }
+.cardia-credit a img { width: clamp(4px,3.5vw,8px); opacity: .6; flex-shrink: 0; filter: sepia(1) saturate(2) hue-rotate(300deg) brightness(.75); }
+.cardia-credit a:hover { opacity: .9; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="#" class="nav-logo"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/Nlogo3.png" alt="Cardia Studios"></a>
-  <div class="nav-links" id="navLinks">
-    <a href="#bestsellers" class="nav-link" onclick="closeMenu()">Best Sellers</a>
-    <a href="#templates" class="nav-link" onclick="closeMenu()">Templates</a>
-    <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
-    <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
-    <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
-    <a href="#contact" class="nav-link" onclick="closeMenu()">Contact</a>
+<canvas id="petals-canvas"></canvas>
+<audio id="wedding-music" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Music/CHRISTINA%20PERRI.mp3" loop preload="auto"></audio>
+<audio id="page-flip-sound" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Page%20Flip%202.mp3" preload="auto"></audio>
+
+<!-- ══════ COVER ══════ -->
+<div id="scene-cover">
+  <div class="cover-outer">
+    <div class="cover-spine"></div>
+    <div class="cover-wrap" onclick="openBook()">
+      <div class="cover-bg"></div>
+      <div class="cover-content">
+        <span class="cover-eyebrow">You are invited to the wedding of</span>
+        <div class="cover-line"></div>
+        <span class="cover-name">Thomas</span>
+        <span class="cover-amp">&amp;</span>
+        <span class="cover-name">Sarah</span>
+        <div class="cover-line"></div>
+        <span class="cover-date">14 August 2027 · Ehden, Lebanon</span>
+      </div>
+      <div class="cover-open-hint">
+        <span>✦ Open Invitation ✦</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
   </div>
-  <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Digital Wedding Invitations</div>
-    <h1>Your love story,<em>beautifully told.</em></h1>
-    <p class="hero-sub">Exclusive designs · Crafted with care · Delivered in 24h</p>
-    <a href="#bestsellers" class="hero-cta">Explore Templates</a>
-  </div>
-  <div class="scroll-hint"><div class="scroll-arrow"></div><span>Scroll</span></div>
-</section>
+<!-- ══════ OPEN BOOK ══════ -->
+<div id="scene-open">
+  <div class="open-book">
+    <div class="open-spine"></div>
+    <div class="book-spread">
+      <div class="flip-sheet" id="flip-sheet"></div>
 
-<!-- ═══ BEST SELLERS ═══ -->
-<section id="bestsellers">
-  <div class="bestsellers-header reveal">
-    <h2>Best Sellers</h2>
-    <p>Our most loved designs — chosen by couples around the world</p>
-    <div class="gold-line"></div>
-  </div>
+      <!-- PAGE 1 -->
+      <div class="page active" id="page-1">
+        <div class="page-num">✦ I ✦</div>
+        <p class="book-eyebrow">Wedding Invitation</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="book-bigname">Thomas</div>
+        <div class="book-amp">&amp;</div>
+        <div class="book-bigname">Sarah</div>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-verse">"What therefore God has joined together,<br>let no man put asunder."</p>
+        <p class="book-verse-ref">Matthew 19:6</p>
+      </div>
 
-  <div class="bestsellers-grid">
-
-    <!-- Royal Floral -->
-    <a class="bs-card reveal" href="templates/Royal_Floral.html" target="_blank"
-       style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(154,106,88,.22) 0%, rgba(232,215,190,.15) 70%, transparent 100%);">
-      <div class="bs-card-visual">
-        <div class="bs-badge">Best Seller</div>
-        <div class="bs-template-id">A1</div>
-        <div class="phone-back">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Classy Floral preview back"></iframe>
-            </div>
-          </div>
+      <!-- PAGE 2 -->
+      <div class="page" id="page-2">
+        <div class="page-num">✦ II ✦</div>
+        <p class="book-detail" style="margin-bottom:clamp(4px,1.5vw,8px);">Together with their families</p>
+        <div class="parents-wrap">
+          <div><p class="t-label-sm">Groom's Parents</p><p class="t-parent">Robert &amp;<br>Tina Martin</p></div>
+          <div><p class="t-label-sm">Bride's Parents</p><p class="t-parent">Michael &amp;<br>Anne Clarke</p></div>
         </div>
-        <div class="phone-wrap">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Royal_Floral.html" loading="lazy" scrolling="no" title="Classy Floral preview"></iframe>
-            </div>
-          </div>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-detail">Request the honour of your presence<br>at the wedding of their son and daughter</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="book-bigname" style="font-size:clamp(30px,10vw,48px);">Thomas</div>
+        <div class="book-amp">&amp;</div>
+        <div class="book-bigname" style="font-size:clamp(30px,10vw,48px);">Sarah</div>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page" id="page-3">
+        <div class="page-num">✦ III ✦</div>
+        <p class="book-section">Wedding Day</p>
+        <p class="book-sub">August 14, 2027</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="cal-box">
+          <p style="font-family:'Cinzel',serif;font-size:clamp(8px,2.5vw,11px);color:var(--blush-dk);letter-spacing:.15em;text-transform:uppercase;text-align:center;margin-bottom:clamp(4px,1.5vw,7px);opacity:.85;">August 2027</p>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="countdown">
+          <div class="flip"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+          <div class="flip"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+          <div class="flip"><div class="num" id="cd-m">--</div><div class="lbl">Min</div></div>
+          <div class="flip"><div class="num" id="cd-s">--</div><div class="lbl">Sec</div></div>
         </div>
       </div>
-      <div class="bs-card-info">
-        <div class="bs-card-name">Classy Floral</div>
-        <div class="template-id-note">Template ID: A1</div>
-        <div class="bs-card-desc">Timeless romance with delicate floral illustrations and gilded details. A regal invitation fit for your most important day.</div>
-        <span class="bs-card-link">View theme</span>
-      </div>
-    </a>
 
-    <!-- Royal Gold -->
-    <a class="bs-card reveal" href="templates/Royal_Gold.html" target="_blank"
-       style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(184,144,60,.22) 0%, rgba(220,200,150,.10) 70%, transparent 100%);">
-      <div class="bs-card-visual">
-        <div class="bs-badge">Best Seller</div>
-        <div class="bs-template-id">A2</div>
-        <div class="phone-back">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Elegant Royal preview back"></iframe>
-            </div>
+      <!-- PAGE 4 -->
+      <div class="page" id="page-4">
+        <div class="page-num">✦ IV ✦</div>
+        <p class="book-section">The Celebration</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">6:00 PM</div><div class="tl-venue">St. Mourra Church<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Icon2/Rings-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We do</div></div>
           </div>
-        </div>
-        <div class="phone-wrap">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Royal_Gold.html" loading="lazy" scrolling="no" title="Elegant Royal preview"></iframe>
-            </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">7:30 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Icon2/Drink-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We drink</div></div>
           </div>
-        </div>
-      </div>
-      <div class="bs-card-info">
-        <div class="bs-card-name">Elegant Royal</div>
-        <div class="template-id-note">Template ID: A2</div>
-        <div class="bs-card-desc">Opulent gold on rich dark backgrounds. Dramatic, luxurious, unforgettable — for couples who want to leave an impression.</div>
-        <span class="bs-card-link">View theme</span>
-      </div>
-    </a>
-
-    <!-- Italien Theme -->
-    <a class="bs-card reveal" href="templates/Italien-theme.html" target="_blank"
-       style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(122,158,126,.22) 0%, rgba(200,220,200,.10) 70%, transparent 100%);">
-      <div class="bs-card-visual">
-        <div class="bs-badge">Best Seller</div>
-        <div class="bs-template-id">A3</div>
-        <div class="phone-back">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Italien-theme.html" loading="lazy" scrolling="no" title="Italien theme preview back"></iframe>
-            </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">8:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Icon2/Dine-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We dine</div></div>
           </div>
-        </div>
-        <div class="phone-wrap">
-          <div class="phone-outer">
-            <div class="phone-screen">
-              <iframe src="templates/Italien-theme.html" loading="lazy" scrolling="no" title="Italien theme preview"></iframe>
-            </div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-time">9:00 PM</div><div class="tl-venue">Twinz Hotel<br>Ehden</div></div>
+            <div class="tl-icon"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Icon2/Dance-removebg-preview.png" alt=""></div>
+            <div class="tl-right"><div class="tl-label">We dance</div></div>
           </div>
         </div>
       </div>
-      <div class="bs-card-info">
-        <div class="bs-card-name">Dolce Italia</div>
-        <div class="template-id-note">Template ID: A3</div>
-        <div class="bs-card-desc">Sun-soaked Tuscan warmth meets modern elegance. Lush gardens, warm terracotta tones and a Mediterranean soul.</div>
-        <span class="bs-card-link">View theme</span>
-      </div>
-    </a>
 
-  </div>
-</section>
-
-<!-- TEMPLATES -->
-<section id="templates">
-  <div class="section-header reveal">
-    <h2>Our Collection</h2>
-    <p>Exclusive designs, one for every love story</p>
-    <div class="gold-line"></div>
-  </div>
-
-  <!-- ══ ROW 1: Book-Style Invitations ══ -->
-  <div class="category-block reveal">
-    <div class="category-header">
-      <div class="category-title">Book Invitations <span>Swipe to view ›</span></div>
-      <div class="category-arrows">
-        <button class="cat-arrow" onclick="nudgeRow('row2', -1)">‹</button>
-        <button class="cat-arrow" onclick="nudgeRow('row2', 1)">›</button>
-      </div>
-    </div>
-    <div class="cards-track-wrap">
-      <div class="cards-track" id="row2">
-        <div class="cards-inner" id="row2-inner" style="--scroll-dur:32s">
-
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Blue_wed_book.html','_blank')">
-              <span class="card-header-num">B1</span><span class="card-header-name">Soft Floral Book</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Blue_wed_book.html','_blank')">
-              <iframe class="card-preview" src="templates/Blue_wed_book.html" loading="lazy" scrolling="no" title="Soft Floral Book"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Soft Floral Book</div>
-                <div class="card-desc">Elegant · Floral · Timeless</div>
-                <a href="templates/Blue_wed_book.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#8a9bb5;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Garden_in_Bloom.html','_blank')">
-              <span class="card-header-num">B2</span><span class="card-header-name">Blue Rose Garden</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Garden_in_Bloom.html','_blank')">
-              <iframe class="card-preview" src="templates/Garden_in_Bloom.html" loading="lazy" scrolling="no" title="Blue Rose Garden"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Blue Rose Garden</div>
-                <div class="card-desc">Romantic · Watercolor · Enchanted</div>
-                <a href="templates/Garden_in_Bloom.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#8a9bb5;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Dark_floral_book.html','_blank')">
-              <span class="card-header-num">B3</span><span class="card-header-name">Dark blue Garden</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Dark_floral_book.html','_blank')">
-              <iframe class="card-preview" src="templates/Dark_floral_book.html" loading="lazy" scrolling="no" title="Dark blue Garden"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Dark blue &amp; gold Rose garden</div>
-                <div class="card-desc">Romantic · gold · Enchanted</div>
-                <a href="templates/Dark_floral_book.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#8a9bb5;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/French_village_book.html','_blank')">
-              <span class="card-header-num">B4</span><span class="card-header-name">French Village</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/French_village_book.html','_blank')">
-              <iframe class="card-preview" src="templates/French_village_book.html" loading="lazy" scrolling="no" title="French Village"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Jardin de Fleurs — French Village</div>
-                <div class="card-desc">Romantic · Watercolor · Pastel bloom</div>
-                <a href="templates/French_village_book.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c4848a;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Die_cut Book.html','_blank')">
-              <span class="card-header-num">B5</span><span class="card-header-name">Jardin de Fleurs</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Die_cut Book.html','_blank')">
-              <iframe class="card-preview" src="templates/Die_cut Book.html" loading="lazy" scrolling="no" title="Jardin de Fleurs"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Jardin de Fleurs — Engraving Edition</div>
-                <div class="card-desc">Vintage · Sepia · Hand-engraved</div>
-                <a href="templates/Die_cut Book.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#8a5a2a;"></div>
-            </div>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header" onclick="window.open('templates/skyblue_book.html','_blank')">
-              <span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span>
-            </div>
-            <div class="template-card" onclick="window.open('templates/skyblue_book.html','_blank')">
-              <iframe class="card-preview" src="templates/skyblue_book.html" loading="lazy" scrolling="no" title="Ciel Divin"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Ciel Divin — Heavenly Sky</div>
-                <div class="card-desc">Divine · Sky blue · Gold banner</div>
-                <a href="templates/skyblue_book.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#4a7ab5;"></div>
-            </div>
-          </div>
-
-          <!-- Duplicates for seamless loop -->
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B1</span><span class="card-header-name">Soft Floral Book</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/Blue_wed_book.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B2</span><span class="card-header-name">Blue Rose Garden</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/Garden_in_Bloom.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B3</span><span class="card-header-name">Dark blue Garden</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/Dark_floral_book.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B4</span><span class="card-header-name">French Village</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/French_village_book.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c4848a;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B5</span><span class="card-header-name">Jardin de Fleurs</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/Die_cut Book.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#8a5a2a;"></div></div>
-          </div>
-          <div class="card-wrap" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span></div>
-            <div class="template-card"><iframe class="card-preview" src="templates/skyblue_book.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#4a7ab5;"></div></div>
-          </div>
-
-        </div><!-- end cards-inner -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ ROW 2: Classic Invitations ══ -->
-  <div class="category-block reveal">
-    <div class="category-header">
-      <div class="category-title">Classic Invitations <span>Swipe to view ›</span></div>
-      <div class="category-arrows">
-        <button class="cat-arrow" onclick="nudgeRow('row1', -1)">‹</button>
-        <button class="cat-arrow" onclick="nudgeRow('row1', 1)">›</button>
-      </div>
-    </div>
-    <div class="cards-track-wrap">
-      <div class="cards-track" id="row1">
-        <div class="cards-inner" id="row1-inner" style="--scroll-dur:42s">
-
-          <div class="card-wrap card-terracotta">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
-              <span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span>
-            </div>
-            <div class="template-card card-terracotta" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_terracotta.html" loading="lazy" scrolling="no" title="Dark Gold Luxury"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Dark Gold Luxury</div>
-                <div class="card-desc">Dark · Gold · Floral · Luxurious</div>
-                <a href="templates/wedding-invitation_terracotta.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c4674a;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-vintage">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_vintage.html','_blank')">
-              <span class="card-header-num">C2</span><span class="card-header-name">Vintage</span>
-            </div>
-            <div class="template-card card-vintage" onclick="window.open('templates/wedding-invitation_vintage.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_vintage.html" loading="lazy" scrolling="no" title="Vintage"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Vintage &amp; Romantic</div>
-                <div class="card-desc">Aged parchment · Sepia · Ornate frames</div>
-                <a href="templates/wedding-invitation_vintage.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c4a456;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_garden.html','_blank')">
-              <span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/wedding-invitation_garden.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_garden.html" loading="lazy" scrolling="no" title="Garden"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Garden &amp; Floral</div>
-                <div class="card-desc">Sage green · Botanical · Fresh</div>
-                <a href="templates/wedding-invitation_garden.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#7a9e7e;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-garden">
-            <div class="card-header" onclick="window.open('templates/Classy.html','_blank')">
-              <span class="card-header-num">C4</span><span class="card-header-name">Classy</span>
-            </div>
-            <div class="template-card card-garden" onclick="window.open('templates/Classy.html','_blank')">
-              <iframe class="card-preview" src="templates/Classy.html" loading="lazy" scrolling="no" title="Classy"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Classy blues</div>
-                <div class="card-desc">Classy · blues · Fresh</div>
-                <a href="templates/Classy.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#7a9e7e;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-soft">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-              <span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span>
-            </div>
-            <div class="template-card card-soft" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_soft.html" loading="lazy" scrolling="no" title="Soft"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Soft &amp; Minimal</div>
-                <div class="card-desc">Blush · Minimal · Pure elegance</div>
-                <a href="templates/wedding-invitation_soft.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c9958a;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-dark">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-              <span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span>
-            </div>
-            <div class="template-card card-dark" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_dark.html" loading="lazy" scrolling="no" title="Dark"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Dark &amp; Moody</div>
-                <div class="card-desc">Deep charcoal · Gold · Dramatic</div>
-                <a href="templates/wedding-invitation_dark.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c9a84c;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-midnight">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-              <span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span>
-            </div>
-            <div class="template-card card-midnight" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_night.html" loading="lazy" scrolling="no" title="Midnight"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Midnight Blue</div>
-                <div class="card-desc">Navy · Silver · Twinkling stars</div>
-                <a href="templates/wedding-invitation_night.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#8aaa98;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-classic">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-              <span class="card-header-num">C8</span><span class="card-header-name">Classic</span>
-            </div>
-            <div class="template-card card-classic" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_classic.html" loading="lazy" scrolling="no" title="Classic"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Classic</div>
-                <div class="card-desc">Warm paper · Torn edges · Gold accents</div>
-                <a href="templates/wedding-invitation_classic.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#c9a96e;"></div>
-            </div>
-          </div>
-          <div class="card-wrap card-elvish">
-            <div class="card-header" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-              <span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span>
-            </div>
-            <div class="template-card card-elvish" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-              <iframe class="card-preview" src="templates/wedding-invitation_lotr.html" loading="lazy" scrolling="no" title="Elvish"></iframe>
-              <div class="card-overlay">
-                <div class="card-name">Elvish Fantasy</div>
-                <div class="card-desc">Forest green · Gold · Fireflies · LOTR</div>
-                <a href="templates/wedding-invitation_lotr.html" target="_blank" class="card-btn">View Template →</a>
-              </div>
-              <div class="card-strip" style="--accent:#2d6e3a;"></div>
-            </div>
-          </div>
-
-          <!-- Duplicates for seamless loop -->
-          <div class="card-wrap card-terracotta" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span></div>
-            <div class="template-card card-terracotta"><iframe class="card-preview" src="templates/wedding-invitation_terracotta.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c4674a;"></div></div>
-          </div>
-          <div class="card-wrap card-vintage" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C2</span><span class="card-header-name">Vintage</span></div>
-            <div class="template-card card-vintage"><iframe class="card-preview" src="templates/wedding-invitation_vintage.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c4a456;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/wedding-invitation_garden.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
-          </div>
-          <div class="card-wrap card-garden" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C4</span><span class="card-header-name">Classy</span></div>
-            <div class="template-card card-garden"><iframe class="card-preview" src="templates/Classy.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
-          </div>
-          <div class="card-wrap card-soft" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span></div>
-            <div class="template-card card-soft"><iframe class="card-preview" src="templates/wedding-invitation_soft.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c9958a;"></div></div>
-          </div>
-          <div class="card-wrap card-dark" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span></div>
-            <div class="template-card card-dark"><iframe class="card-preview" src="templates/wedding-invitation_dark.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c9a84c;"></div></div>
-          </div>
-          <div class="card-wrap card-midnight" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span></div>
-            <div class="template-card card-midnight"><iframe class="card-preview" src="templates/wedding-invitation_night.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#8aaa98;"></div></div>
-          </div>
-          <div class="card-wrap card-classic" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C8</span><span class="card-header-name">Classic</span></div>
-            <div class="template-card card-classic"><iframe class="card-preview" src="templates/wedding-invitation_classic.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#c9a96e;"></div></div>
-          </div>
-          <div class="card-wrap card-elvish" aria-hidden="true">
-            <div class="card-header"><span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span></div>
-            <div class="template-card card-elvish"><iframe class="card-preview" src="templates/wedding-invitation_lotr.html" loading="lazy" scrolling="no"></iframe><div class="card-strip" style="--accent:#2d6e3a;"></div></div>
-          </div>
-
-        </div><!-- end cards-inner -->
-      </div>
-    </div>
-  </div>
-  <div class="category-divider"></div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <h2 class="reveal">How It Works</h2>
-  <p class="reveal">Simple, fast, beautiful</p>
-  <div class="steps">
-    <div class="step reveal"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our exclusive templates and pick the one that speaks to your love story. Each design has an ID: A for Best Sellers, B for Book Invitations, and C for Classic Invitations.</p></div>
-    <div class="step reveal"><div class="step-num">02</div><h3>Send your details</h3><p>Share your template ID, names, date, venue, schedule, and any personal touches you'd like included.</p></div>
-    <div class="step reveal"><div class="step-num">03</div><h3>We customize it</h3><p>Your invitation is personalized and ready in 24&ndash;48h. We send you a preview first.</p></div>
-    <div class="step reveal"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. RSVPs go straight to your inbox automatically.</p></div>
-  </div>
-  <div class="steps-swiper-wrap" id="howSwiper">
-    <div class="steps-swiper-track" id="howTrack">
-      <div class="step"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our exclusive templates and pick the one that speaks to your love story. Each design has an ID: A for Best Sellers, B for Book Invitations, and C for Classic Invitations.</p></div>
-      <div class="step"><div class="step-num">02</div><h3>Send your details</h3><p>Share your template ID, names, date, venue, schedule, and any personal touches you'd like included.</p></div>
-      <div class="step"><div class="step-num">03</div><h3>We customize it</h3><p>Your invitation is personalized and ready in 24&ndash;48h. We send you a preview first.</p></div>
-      <div class="step"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. RSVPs go straight to your inbox automatically.</p></div>
-    </div>
-    <div class="swiper-arrows">
-      <button class="swiper-btn" onclick="howPrev()">&#8249;</button>
-      <button class="swiper-btn" onclick="howNext()">&#8250;</button>
-    </div>
-    <div class="swiper-dots" id="howDots"></div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing-section" id="pricing">
-  <h2 class="reveal">Simple Pricing</h2>
-  <p class="reveal">No hidden fees &middot; Contact us to get started</p>
-  <div class="pricing-cards">
-    <div class="price-card reveal">
-      <div class="price-name">Standard</div>
-      <div class="price-amount"><span class="price-currency">$</span>100</div>
-      <div class="price-period">one-time &middot; hosted forever</div>
-      <div class="price-desc">The complete digital invitation</div>
-      <ul class="price-features">
-        <li class="price-feature"><span>1 template of your choice</span></li>
-        <li class="price-feature"><span>Fully personalized <span class="info-btn">i<span class="info-tooltip">We customize your chosen template with your names, date, venue and schedule. You can add or remove any steps (ceremony, cocktails, dinner, dancing, etc.).</span></span></span></li>
-        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-        <li class="price-feature"><span>Up to 3 photos included</span></li>
-        <li class="price-feature"><span>Delivered in 48h</span></li>
-        <li class="price-feature"><span>Hosted forever on our servers</span></li>
-      </ul>
-    </div>
-    <div class="price-card featured reveal">
-      <div class="price-badge">Most Popular</div>
-      <div class="price-name">Premium</div>
-      <div class="price-amount"><span class="price-currency">$</span>159</div>
-      <div class="price-period">one-time &middot; hosted forever</div>
-      <div class="price-desc">The full experience</div>
-      <ul class="price-features">
-        <li class="price-feature"><span>1 template of your choice</span></li>
-        <li class="price-feature"><span>Fully personalized <span class="info-btn">i<span class="info-tooltip">We customize your chosen template with your names, date, venue and schedule. You can add or remove any steps (ceremony, cocktails, dinner, dancing, etc.).</span></span></span></li>
-        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-        <li class="price-feature"><span>Up to 5 photos of your choice included (e.g., from your wedding photo shoot) </span></li>
-        <li class="price-feature"><span>Background music</span></li>
-        <li class="price-feature"><span>Delivered in 24h</span></li>
-        <li class="price-feature"><span>Hosted forever on our servers</span></li>
-      </ul>
-    </div>
-    <div class="price-card reveal">
-      <div class="price-name">Luxury</div>
-      <div class="price-amount"><span class="price-currency">$</span>189</div>
-      <div class="price-period">one-time &middot; hosted forever</div>
-      <div class="price-desc">For the perfect wedding</div>
-      <ul class="price-features">
-        <li class="price-feature"><span>Everything in Premium</span></li>
-        <li class="price-feature"><span>Up to 15 photos of your choice included (e.g., from your wedding photo shoot) </span></li>
-        <li class="price-feature"><span>Priority delivery in 12h</span></li>
-
-        <li class="price-feature"><span>Hosted forever on our servers</span></li>
-      </ul>
-
-    </div>
-  </div>
-
-  <!-- Mobile pricing swiper -->
-  <div class="pricing-swiper-wrap" id="pricingSwiper">
-    <div class="pricing-swiper-track" id="pricingTrack">
-      <div class="price-card">
-        <div class="price-name">Standard</div>
-        <div class="price-amount"><span class="price-currency">$</span>79</div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">The complete digital invitation</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>1 template of your choice</span></li>
-          <li class="price-feature"><span>Fully personalized</span></li>
-          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-          <li class="price-feature"><span>Up to 3 photos included</span></li>
-          <li class="price-feature"><span>Delivered in 48h</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-name">Premium</div>
-        <div class="price-amount"><span class="price-currency">$</span>99</div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">The full experience</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>1 template of your choice</span></li>
-          <li class="price-feature"><span>Fully personalized</span></li>
-          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-          <li class="price-feature"><span>Up to 5 photos included</span></li>
-          <li class="price-feature"><span>Background music</span></li>
-          <li class="price-feature"><span>Delivered in 24h</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <div class="price-name">Luxury</div>
-        <div class="price-amount"><span class="price-currency">$</span>149</div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">For the perfect wedding</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>Everything in Premium</span></li>
-          <li class="price-feature"><span>Up to 10 photos included</span></li>
-          <li class="price-feature"><span>Priority delivery in 12h</span></li>
-          <li class="price-feature"><span>Invitation generator</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-        <a href="https://nemerdavid.github.io/web-des/Invitation%20generator.html" target="_blank" class="price-cta">See Invitation Generator &#8599;</a>
-      </div>
-    </div>
-    <div class="swiper-dots" id="pricingDots"></div>
-  </div>
-
-  <!-- PAYMENT METHODS -->
-  <div class="payment-info reveal">
-    <div class="payment-region">
-      <h4>
-        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/France.png" alt="France flag">
-        France, EU &amp; Worldwide
-      </h4>
-      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
-      <div class="payment-methods">
-        <div class="pay-method">
-          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/virement.png" alt="Virement bancaire" class="pay-icon">
-          <div><strong>Virement bancaire (Bank Transfer)</strong>Details shared on request</div>
-        </div>
-        <div class="pay-method">
-          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/paypal.png" alt="PayPal" class="pay-icon">
-          <div><strong>PayPal</strong>Link shared on request</div>
+      <!-- PAGE 5 -->
+      <div class="page" id="page-5">
+        <div class="page-num">✦ V ✦</div>
+        <p class="book-section">Gift Registry</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <p class="book-verse" style="margin-bottom:clamp(8px,3vw,14px);">Your love, laughter, and presence<br>are all we could wish for.<br><br>For those who wish, a wedding list<br>is available at all Whish Money branches.</p>
+        <div class="gift-box">
+          <p class="book-sub" style="margin-bottom:clamp(3px,1vw,5px);">Whish Money</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,5vw,22px);color:var(--blush-dk);font-weight:300;">ACC# xxxxxx</p>
         </div>
       </div>
+
+      <!-- PAGE 6 -->
+      <div class="page" id="page-6">
+        <div class="page-num">✦ VI ✦</div>
+        <p class="book-section" style="margin-bottom:clamp(2px,1vw,4px);">Our Story</p>
+        <p class="book-sub" style="margin-bottom:clamp(4px,1.5vw,7px);">A glimpse of us</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="photo-carousel" id="photo-carousel">
+          <div class="photo-track" id="photo-track">
+            <div class="photo-slide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt=""></div>
+            <div class="photo-slide"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop" alt=""></div>
+            <div class="photo-slide"><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/BG/weddd.jpg" alt=""></div>
+            <div class="photo-slide"><img src="https://images.pexels.com/photos/182006/pexels-photo-182006.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div>
+          </div>
+          <div class="photo-arrows">
+            <button class="photo-arr" onclick="photoMove(-1)">‹</button>
+            <button class="photo-arr" onclick="photoMove(1)">›</button>
+          </div>
+        </div>
+        <div class="photo-counter" id="photo-counter">1 / 4</div>
+      </div>
+
+      <!-- PAGE 7 -->
+      <div class="page" id="page-7">
+        <div class="page-num">✦ VII ✦</div>
+        <p class="book-section">RSVP</p>
+        <p class="book-sub" style="margin-bottom:clamp(3px,1.2vw,6px);">Kindly reply before 1st August 2027</p>
+        <div class="gold-div"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+        <div class="rsvp-box">
+          <div class="step-dots">
+            <div class="step-dot on" id="dot-1"></div>
+            <div class="step-dot" id="dot-2"></div>
+            <div class="step-dot" id="dot-3"></div>
+          </div>
+          <div id="s1">
+            <p id="dear-guest" style="font-family:'Great Vibes',cursive;font-size:clamp(18px,6vw,26px);color:var(--blush-dk);margin-bottom:clamp(3px,1vw,5px);text-align:center;"></p>
+            <div id="rv-name-row"><label class="form-label">Your Full Name</label><input id="f-name" type="text" class="form-field" placeholder="e.g. Sarah &amp; Mark Johnson"></div>
+            <p class="error-msg" id="e-name">Please enter your name.</p>
+            <button class="rsvp-single-btn" onclick="goStep(1,2)">Continue →</button>
+          </div>
+          <div id="s2" style="display:none;">
+            <label class="form-label">Will you be attending?</label>
+            <div class="attend-grid">
+              <label class="attend-opt"><input type="radio" name="attend" value="yes"><div class="attend-box"><div class="attend-label">Joyfully accepts</div></div></label>
+              <label class="attend-opt"><input type="radio" name="attend" value="no"><div class="attend-box"><div class="attend-label">Regretfully declines</div></div></label>
+            </div>
+            <div id="count-wrap" style="display:none;">
+              <label class="form-label">Number of guests</label>
+              <div class="count-row"><button class="count-btn" onclick="chCount(-1)">−</button><span class="count-num-disp" id="cnt-disp">1</span><button class="count-btn" onclick="chCount(1)">+</button></div>
+            </div>
+            <p class="error-msg" id="e-attend">Please select an option.</p>
+            <div class="btn-grid"><button class="btn-rsvp" onclick="goStep(2,1)">← Back</button><button class="btn-rsvp btn-solid" onclick="goStep(2,3)">Continue →</button></div>
+          </div>
+          <div id="s3" style="display:none;">
+            <label class="form-label">A wish <span style="opacity:.4;">(optional)</span></label>
+            <textarea id="f-msg" class="form-field" rows="2" placeholder="Share a wish for Thomas &amp; Sarah…"></textarea>
+            <div class="btn-grid" style="margin-top:clamp(4px,1.5vw,8px);"><button class="btn-rsvp" onclick="goStep(3,2)">← Back</button><button class="btn-rsvp btn-solid" onclick="submitRSVP()">Send ✦</button></div>
+          </div>
+          <div id="s-ok" style="display:none;text-align:center;padding:clamp(8px,3vw,14px) 0;">
+            <div style="font-size:clamp(20px,8vw,32px);margin-bottom:clamp(4px,1.5vw,8px);">🕊️</div>
+            <p style="font-family:'Great Vibes',cursive;font-size:clamp(20px,7vw,30px);color:var(--blush-dk);margin-bottom:clamp(3px,1vw,5px);">Thank you!</p>
+            <p id="ok-msg" style="font-size:clamp(11px,3vw,14px);line-height:1.7;color:var(--ink);font-style:italic;"></p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .book-spread -->
+
+    <div class="page-arrows">
+      <button class="page-arrow-btn" id="btn-prev" onclick="changePage(-1)">← Prev</button>
+      <span class="page-label" id="page-label">Page 1 of 7</span>
+      <button class="page-arrow-btn" id="btn-next" onclick="changePage(1)">Next →</button>
     </div>
-    <div class="payment-region">
-      <h4>
-        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/Lebanon.png" alt="Lebanon flag">
-        Lebanon
-      </h4>
-      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
-      <div class="payment-methods">
-        <div class="pay-method">
-          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/WHISH.png" alt="Whish Money" class="pay-icon">
-          <div><strong>Whish Money</strong>Account number shared on request</div>
+  </div>
+</div>
+
+<!-- ══════ BACK COVER ══════ -->
+<div id="scene-back">
+  <div class="back-outer">
+    <div class="back-spine"></div>
+    <div class="back-wrap">
+      <div class="back-face">
+        <div class="back-text">
+          <p>Thomas &amp; Sarah</p>
+          <small>14 August 2027 · Ehden, Lebanon</small>
+        </div>
+        <button class="back-btn" onclick="reopenFromBack()">← Back to Invitation</button>
+        <div class="cardia-credit">
+          <a href="https://nemerdavid.github.io/web-des/" target="_blank">
+            Powered by <span>Cardia Studios</span>
+            <img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Tina%20communion/Chain2.png" alt="">
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <p class="payment-note reveal">Payment is only requested after you have approved your invitation preview</p>
-</section>
-
-<!-- ═══ REVIEWS ═══ -->
-<section id="reviews">
-  <div class="reviews-header reveal">
-    <h2>What Couples Say</h2>
-    <p>Real stories from our happiest clients</p>
-    <div class="reviews-rating-summary">
-      <div class="reviews-big-num">4.9</div>
-      <div class="reviews-stars-col">
-        <div class="stars-row">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <div class="reviews-count">Based on 50+ reviews</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="reviews-arrows reveal">
-    <button class="review-arrow" onclick="nudgeReviews(-1)" aria-label="Previous reviews">&#8249;</button>
-    <button class="review-arrow" onclick="nudgeReviews(1)" aria-label="Next reviews">&#8250;</button>
-  </div>
-
-  <!-- Row 1 marquee (left) -->
-  <div class="reviews-marquee-wrap" id="marqueeRow1">
-    <div class="reviews-marquee" id="marqueeTrack1"></div>
-  </div>
-
-  <!-- Row 2 marquee (right) -->
-  <div class="reviews-marquee-wrap" style="margin-top:1rem" id="marqueeRow2">
-    <div class="reviews-marquee reverse" id="marqueeTrack2"></div>
-  </div>
-
-  <!-- Add review form -->
-  <div class="add-review-wrap reveal">
-    <h3>Share your experience</h3>
-    <div class="add-review-form" id="reviewForm">
-      <div class="form-row">
-        <input type="text" class="form-input" id="reviewName" placeholder="Your name" maxlength="50">
-        <input type="text" class="form-input" id="reviewLocation" placeholder="City, Country" maxlength="40">
-      </div>
-      <div class="star-picker-row">
-        <span class="star-picker-label">Rating</span>
-        <div class="star-picker" id="starPicker">
-          <input type="radio" name="rating" id="s5" value="5"><label for="s5" data-val="5">★</label>
-          <input type="radio" name="rating" id="s4" value="4"><label for="s4" data-val="4">★</label>
-          <input type="radio" name="rating" id="s3" value="3"><label for="s3" data-val="3">★</label>
-          <input type="radio" name="rating" id="s2" value="2"><label for="s2" data-val="2">★</label>
-          <input type="radio" name="rating" id="s1" value="1"><label for="s1" data-val="1">★</label>
-        </div>
-      </div>
-      <textarea class="form-input" id="reviewText" placeholder="Tell us about your experience…" maxlength="300"></textarea>
-      <button class="form-submit" onclick="submitReview()">Submit Review</button>
-    </div>
-    <div class="form-success" id="formSuccess">✦ Thank you! Your review has been added.</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="contact-content">
-    <h2 class="reveal">Let's create something beautiful</h2>
-    <h3 class="reveal">Get in touch</h3>
-    <div class="contact-items">
-      <div class="contact-item reveal">
-        <span class="contact-icon">&#128241;</span>
-        <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/33752807727">+33 07 52 80 77 27</a></div></div>
-      </div>
-      <div class="contact-item reveal">
-        <span class="contact-icon">&#9993;</span>
-        <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:cardia.studios@gmail.com">cardia.studios@gmail.com</a></div></div>
-      </div>
-      <div class="contact-item reveal">
-        <span class="contact-icon">&#128247;</span>
-        <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/cardiastudios" target="_blank">@cardiastudios</a></div></div>
-      </div>
-    </div>
-    <a href="mailto:cardia.studios@gmail.com" class="contact-cta reveal">Send an Enquiry</a>
-    <div class="footer-note reveal">&copy; 2025 Cardia Studios &middot; Digital Wedding Invitations &middot; All rights reserved</div>
-  </div>
-</section>
+</div>
 
 <script>
-/* ═══════════════════════════════════
-   REVIEW DATA (50 seeded reviews)
-═══════════════════════════════════ */
-const SEED_REVIEWS = [
-  { name:"Sophie L.", loc:"Paris, France", stars:5, text:"Absolutely magical. Our guests couldn't believe how stunning the invitation was — everyone was asking who made it!" },
-  { name:"Marco &amp; Elena R.", loc:"Milan, Italy", stars:5, text:"The Royal Gold theme blew us away. Delivery was faster than expected and the team was super attentive." },
-  { name:"Chloe M.", loc:"London, UK", stars:5, text:"Worth every penny. We went with the Premium package and the result was beyond our expectations." },
-  { name:"Antoine B.", loc:"Lyon, France", stars:5, text:"On a eu notre invitation en moins de 24h. Le résultat était parfait, exactement comme demandé." },
-  { name:"Nadia &amp; Karim H.", loc:"Beirut, Lebanon", stars:5, text:"The Dark blue Garden theme is a dream. All our family in Lebanon were amazed by the invitation link!" },
-  { name:"Jessica T.", loc:"New York, USA", stars:5, text:"I've seen digital invitations before but nothing like this. The animations are breathtaking." },
-  { name:"Lara &amp; Tom F.", loc:"Brussels, Belgium", stars:5, text:"Incredibly smooth process. We gave them our details and they handled everything beautifully." },
-  { name:"Amira S.", loc:"Dubai, UAE", stars:5, text:"The Luxury package with the invitation generator was a game changer — each guest got their own personalized link!" },
-  { name:"Clara V.", loc:"Marseille, France", stars:5, text:"Magnifique travail ! L'invitation française correspondait parfaitement à l'ambiance de notre mariage en Provence." },
-  { name:"David &amp; Rachel K.", loc:"Tel Aviv, Israel", stars:5, text:"Responsive team, beautiful outcome. We chose the Midnight Blue and it felt like magic." },
-  { name:"Léa &amp; Pierre D.", loc:"Bordeaux, France", stars:5, text:"Le thème Jardin de Fleurs était exactement ce que nous cherchions. Nos invités ont adoré." },
-  { name:"Sarah O.", loc:"Lagos, Nigeria", stars:5, text:"Stunning work. Our guests in Nigeria and France were all impressed by the digital invitation." },
-  { name:"Valentina C.", loc:"Rome, Italy", stars:5, text:"The Italian theme felt tailor-made for our Tuscan wedding. Pure elegance!" },
-  { name:"Reem &amp; Fadi N.", loc:"Beirut, Lebanon", stars:5, text:"أجمل دعوة رقمية رأيتها. الفريق كان محترفاً جداً وسريع في الرد." },
-  { name:"Emma &amp; James W.", loc:"Manchester, UK", stars:5, text:"We were skeptical about digital invitations at first, but this completely changed our minds." },
-  { name:"Isabelle T.", loc:"Nice, France", stars:5, text:"Travail soigné, délais respectés, et un résultat magnifique. Je recommande vivement!" },
-  { name:"Hannah &amp; Leo B.", loc:"Berlin, Germany", stars:5, text:"The Garden and Floral template matched our outdoor wedding perfectly. All guests complimented it." },
-  { name:"Yasmine A.", loc:"Casablanca, Morocco", stars:5, text:"Vraiment impressionnée par la qualité du design. Le service est professionnel et chaleureux." },
-  { name:"Priya &amp; Raj M.", loc:"London, UK", stars:5, text:"Elegant, fast and affordable. We got so many compliments from family across India and the UK." },
-  { name:"Florian G.", loc:"Strasbourg, France", stars:5, text:"L'équipe a été très à l'écoute. Notre invitation était prête en 20h chrono!" },
-  { name:"Alice &amp; Ben H.", loc:"Sydney, Australia", stars:5, text:"Ordered from Australia and the experience was seamless. Communication was prompt and professional." },
-  { name:"Camille R.", loc:"Toulouse, France", stars:5, text:"La section RSVP est géniale — les réponses arrivent directement dans ma boîte mail, zéro stress." },
-  { name:"Omar &amp; Dina K.", loc:"Cairo, Egypt", stars:5, text:"The Dark Gold Luxury template was majestic. Exactly the grand impression we wanted to make." },
-  { name:"Elise M.", loc:"Nantes, France", stars:5, text:"Je recommande à 1000%. L'invitation était tellement belle que certains invités ont voulu l'encadrer." },
-  { name:"Lucas &amp; Marie F.", loc:"Lille, France", stars:5, text:"Excellent rapport qualité-prix. Nous avons choisi le pack Premium et nous ne regrettons pas." },
-  { name:"Natalie P.", loc:"Amsterdam, Netherlands", stars:5, text:"Clean, luxurious design. The RSVP feature saved us so much time managing responses." },
-  { name:"Chiara &amp; Luca B.", loc:"Florence, Italy", stars:5, text:"The Elvish Fantasy template was unique and our guests loved the fantasy touch. Absolutely magical." },
-  { name:"Zara &amp; Mehmet Y.", loc:"Istanbul, Turkey", stars:5, text:"Professional service, beautiful designs and delivered exactly when promised. 10/10." },
-  { name:"Julie &amp; Thomas M.", loc:"Rennes, France", stars:5, text:"Notre invitation était tellement élégante. Les photos intégrées rendaient le tout très personnel." },
-  { name:"Fatima Z.", loc:"Rabat, Morocco", stars:5, text:"Service impeccable, résultat magnifique. Je recommande Cardia Studios sans hésitation." },
-  { name:"Charlotte &amp; Oliver S.", loc:"Edinburgh, UK", stars:5, text:"Gorgeous designs and a really smooth experience from start to finish. Will recommend to everyone." },
-  { name:"Manon B.", loc:"Grenoble, France", stars:5, text:"L'invitation musicale avec fond sonore était un vrai plus — nos invités ont adoré l'effet!" },
-  { name:"Anastasia V.", loc:"Athens, Greece", stars:5, text:"The Royal Floral theme was breathtaking. Even my grandmother said it was the most beautiful invitation she'd ever seen." },
-  { name:"Kevin &amp; Laura D.", loc:"Geneva, Switzerland", stars:5, text:"Swiss quality standards — and Cardia Studios met them! Fast, precise, and stunningly beautiful." },
-  { name:"Inès &amp; Julien P.", loc:"Paris, France", stars:5, text:"On a adoré le processus : on envoie nos infos, ils créent la magie. Simple, rapide, parfait." },
-  { name:"Sophia N.", loc:"Nairobi, Kenya", stars:5, text:"I wanted something classy for an international wedding. The Soft & Minimal theme was perfection." },
-  { name:"Tarek &amp; Hana A.", loc:"Beirut, Lebanon", stars:5, text:"خدمة ممتازة والنتيجة كانت خيالية. كل ضيوفنا سألونا عن مصدر الدعوة الإلكترونية." },
-  { name:"Mathilde C.", loc:"Montpellier, France", stars:5, text:"Design recherché, livraison rapide et équipe très sympathique. Que demander de plus?" },
-  { name:"Rosa &amp; Diego M.", loc:"Barcelona, Spain", stars:5, text:"The Italian theme was perfect for our Mediterranean wedding. Absolutely gorgeous!" },
-  { name:"Claire &amp; Nicolas R.", loc:"Metz, France", stars:5, text:"Habitant à Metz, je suis ravie d'avoir trouvé un service aussi professionnel et élégant." },
-  { name:"Layla T.", loc:"Beirut, Lebanon", stars:5, text:"The Blue Rose Garden was so romantic — every detail was exactly as we described. Thank you!" },
-  { name:"Paul &amp; Emilie G.", loc:"Nîmes, France", stars:5, text:"Parfait de A à Z. L'invitation personnalisée avec musique de fond a fait pleurer nos parents!" },
-  { name:"Sandra H.", loc:"Zurich, Switzerland", stars:5, text:"Quick turnaround and stunning result. The invitation set the tone for our entire wedding." },
-  { name:"Amal &amp; Joseph N.", loc:"Jounieh, Lebanon", stars:5, text:"الموقع رائع والخدمة أروع. تسليم سريع والنتيجة فاقت توقعاتنا بكثير." },
-  { name:"Elisa &amp; Benoit V.", loc:"Reims, France", stars:5, text:"Nous avons été bluffés par la qualité et la rapidité. Le générateur d'invitations du pack Luxury est génial!" },
-  { name:"Mia &amp; Noah P.", loc:"Vienna, Austria", stars:5, text:"Impeccable quality and a team that truly cares. Our guests are still talking about the invitation." },
-  { name:"Aurélie M.", loc:"Clermont-Ferrand, France", stars:5, text:"J'ai commandé à la dernière minute et l'invitation était prête en moins de 12h. Incroyable!" },
-  { name:"Sara &amp; Ali B.", loc:"Abu Dhabi, UAE", stars:5, text:"Luxurious feel, elegant design, and a team that listened to every detail. Highly recommended." },
-  { name:"Marine &amp; Alexis D.", loc:"Bordeaux, France", stars:5, text:"Notre mariage était dans deux semaines et ils ont tout livré en temps record. Merci infiniment!" },
-  { name:"Hana &amp; Rami C.", loc:"Beirut, Lebanon", stars:5, text:"The Ciel Divin theme was breathtaking — our guests felt like they were opening a piece of art." },
-  { name:"Louise &amp; Henri T.", loc:"Tours, France", stars:5, text:"Simple, élégant, efficace. On a reçu exactement ce qu'on voulait. Je recommande à tous les futurs mariés." },
-];
+/* ══════ FALLING PETALS ══════ */
+(function(){
+  const canvas = document.getElementById('petals-canvas');
+  const ctx = canvas.getContext('2d');
+  const colors = [
+    'rgba(220,160,170,', /* blush pink */
+    'rgba(196,180,220,', /* soft lavender */
+    'rgba(160,190,160,', /* sage green */
+    'rgba(240,200,210,', /* pale rose */
+    'rgba(255,240,245,', /* near white */
+  ];
+  let petals = [];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
 
-let allReviews = [...SEED_REVIEWS];
+  function drawPetal(ctx, size, color, opacity){
+    ctx.fillStyle = color + opacity + ')';
+    ctx.strokeStyle = color + (opacity*.3) + ')';
+    ctx.lineWidth = 0.3;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(size*.5, -size*.2, size*.6, -size*.9, 0, -size);
+    ctx.bezierCurveTo(-size*.6, -size*.9, -size*.5, -size*.2, 0, 0);
+    ctx.fill(); ctx.stroke();
+  }
 
-function starsHTML(n) {
-  return Array.from({length:5}, (_,i) => `<span class="star">${i<n?'★':'☆'}</span>`).join('');
-}
+  function create(){
+    return { x:Math.random()*(canvas.width+40)-20, y:-20,
+      size:Math.random()*7+4, speed:Math.random()*.4+.12,
+      drift:(Math.random()-.5)*.3, rot:Math.random()*Math.PI*2,
+      rotSpeed:(Math.random()-.5)*.018, opacity:Math.random()*.4+.15,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      sway:Math.random()*1.4+.4, swaySpeed:Math.random()*.01+.003,
+      swayOffset:Math.random()*Math.PI*2 };
+  }
+  for(let i=0;i<18;i++){ const p=create(); p.y=Math.random()*window.innerHeight; petals.push(p); }
 
-function reviewCardHTML(r) {
-  return `<div class="review-card">
-    <div class="review-card-stars">${starsHTML(r.stars)}</div>
-    <div class="review-card-text">"${r.text}"</div>
-    <div class="review-card-author"><strong>${r.name}</strong>${r.loc}</div>
-  </div>`;
-}
-
-function buildMarquees() {
-  const half = Math.ceil(allReviews.length / 2);
-  const row1 = allReviews.slice(0, half);
-  const row2 = allReviews.slice(half);
-  const t1 = document.getElementById('marqueeTrack1');
-  const t2 = document.getElementById('marqueeTrack2');
-  if(!t1 || !t2) return;
-  t1.innerHTML = row1.map(reviewCardHTML).join('');
-  t2.innerHTML = row2.map(reviewCardHTML).join('')
-}
-
-buildMarquees();
-
-function nudgeReviews(dir) {
-  const rows = [document.getElementById('marqueeRow1'), document.getElementById('marqueeRow2')].filter(Boolean);
-  rows.forEach(row => {
-    const card = row.querySelector('.review-card');
-    const amount = card ? card.offsetWidth + 16 : 300;
-    row.scrollBy({ left: dir * amount, behavior: 'smooth' });
-  });
-}
-
-/* Star picker interaction */
-const picker = document.getElementById('starPicker');
-let selectedRating = 5;
-if(picker) {
-  // Default select 5 stars
-  document.getElementById('s5').checked = true;
-  picker.querySelectorAll('label').forEach(label => {
-    label.classList.toggle('active', parseInt(label.dataset.val) <= selectedRating);
-  });
-  picker.querySelectorAll('label').forEach(label => {
-    label.addEventListener('click', () => {
-      selectedRating = parseInt(label.dataset.val);
-      picker.querySelectorAll('label').forEach(l => {
-        l.classList.toggle('active', parseInt(l.dataset.val) <= selectedRating);
-      });
+  let frame=0, lastTime=0;
+  function animate(ts){
+    const delta=Math.min((ts-lastTime)/16.67,3); lastTime=ts;
+    ctx.clearRect(0,0,canvas.width,canvas.height); frame++;
+    if(frame%50===0&&petals.length<30) petals.push(create());
+    petals.forEach((p,i)=>{
+      p.x+=(p.drift+Math.sin(frame*p.swaySpeed+p.swayOffset)*p.sway*.07)*delta;
+      p.y+=p.speed*delta; p.rot+=p.rotSpeed*delta;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      drawPetal(ctx,p.size,p.color,p.opacity); ctx.restore();
+      if(p.y>canvas.height+20) petals[i]=create();
     });
-    label.addEventListener('mouseover', () => {
-      const hov = parseInt(label.dataset.val);
-      picker.querySelectorAll('label').forEach(l => {
-        l.style.color = parseInt(l.dataset.val) <= hov ? 'var(--gold)' : '';
-      });
-    });
-    label.addEventListener('mouseout', () => {
-      picker.querySelectorAll('label').forEach(l => {
-        l.style.color = '';
-        l.classList.toggle('active', parseInt(l.dataset.val) <= selectedRating);
-      });
-    });
-  });
-}
-
-function submitReview() {
-  const name = document.getElementById('reviewName').value.trim();
-  const loc  = document.getElementById('reviewLocation').value.trim();
-  const text = document.getElementById('reviewText').value.trim();
-  if(!name || !text) { alert('Please fill in your name and review.'); return; }
-  allReviews.push({ name, loc: loc || '', stars: selectedRating, text });
-  buildMarquees();
-  document.getElementById('reviewForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-}
-
-/* ════════════════════════════════════
-   SWIPE ROWS + MOBILE BEST SELLER AUTO-SCROLL
-════════════════════════════════════ */
-function scaleIframes(){
-  document.querySelectorAll('.template-card').forEach(card => {
-    const iframe = card.querySelector('.card-preview');
-    if(!iframe) return;
-
-    iframe.style.width = '390px';
-    iframe.style.height = '844px';
-    iframe.style.transformOrigin = 'top left';
-
-    const styles = getComputedStyle(card);
-    const mockW = parseFloat(styles.getPropertyValue('--mock-w')) || 188;
-    const mockH = parseFloat(styles.getPropertyValue('--mock-h')) || 376;
-    const mockTop = parseFloat(styles.getPropertyValue('--mock-top')) || 38;
-    const mockBorder = parseFloat(styles.getPropertyValue('--mock-border')) || 8;
-    const innerW = mockW - (mockBorder * 2);
-    const innerH = mockH - (mockBorder * 2);
-    const phoneLeft = (card.clientWidth - mockW) / 2 + mockBorder;
-    const phoneTop = mockTop + mockBorder;
-
-    const isBookRow = !!card.closest('#row2');
-
-    /* Book invitations are not full-screen pages: their cover is centered inside
-       the iframe. We zoom those covers differently so the book itself fills the
-       phone frame instead of looking small or half-empty. Classic invitations
-       are full-screen, so they use the iframe viewport ratio. */
-    let scale;
-    if (isBookRow) {
-      const coverW = 359; // 92% of a 390px iframe viewport
-      const coverH = 538; // 1.5 × cover width, from the book templates
-      scale = Math.min((innerW / coverW) * 1.16, innerH / coverH);
-    } else {
-      scale = Math.max(innerW / 390, innerH / 844);
-    }
-
-    const scaledW = 390 * scale;
-    const scaledH = 844 * scale;
-    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2) + 'px';
-    iframe.style.top = (phoneTop + (innerH - scaledH) / 2) + 'px';
-    iframe.style.transform = 'scale(' + scale + ')';
-  });
-}
-window.addEventListener('resize', scaleIframes);
-scaleIframes();
-
-function setupSwipeRow(trackId) {
-  const track = document.getElementById(trackId);
-  if (!track) return;
-  const wrap = track.closest('.cards-track-wrap');
-  const inner = track.querySelector('.cards-inner');
-  const firstCard = inner ? inner.querySelector('.card-wrap:not([aria-hidden="true"])') : null;
-
-  let swipeTimer = null;
-  function markSwiping(){
-    wrap.classList.add('is-swiping');
-    clearTimeout(swipeTimer);
-    swipeTimer = setTimeout(() => wrap.classList.remove('is-swiping'), 220);
+    requestAnimationFrame(animate);
   }
-  wrap.addEventListener('scroll', markSwiping, { passive: true });
-  wrap.addEventListener('touchstart', () => wrap.classList.add('is-swiping'), { passive: true });
-  wrap.addEventListener('touchend', markSwiping, { passive: true });
+  requestAnimationFrame(animate);
+})();
 
-  window._swipeRows = window._swipeRows || {};
-  window._swipeRows[trackId] = {
-    nudge(dir) {
-      const amount = firstCard ? (firstCard.offsetWidth + 16) * 2 : 440;
-      wrap.scrollBy({ left: dir * amount, behavior: 'smooth' });
-    }
-  };
+/* ══════ BOOK LOGIC ══════ */
+const TOTAL=7; let current=1;
+const music=document.getElementById('wedding-music');
+music.volume=0.4;
+
+function openBook(){
+  music.play().catch(()=>{});
+  const sc=document.getElementById('scene-cover');
+  sc.style.opacity='0'; sc.style.transition='opacity .6s ease';
+  setTimeout(()=>{ sc.style.display='none'; document.getElementById('scene-open').classList.add('visible'); updateNavButtons(); buildCalendar(); tick(); setInterval(tick,1000); },600);
 }
-
-function nudgeRow(id, dir) {
-  const state = window._swipeRows && window._swipeRows[id];
-  if(state) state.nudge(dir);
+function closeBible(){
+  const s=document.getElementById('scene-open');
+  s.style.opacity='0'; s.style.transition='opacity .4s ease';
+  setTimeout(()=>{ s.classList.remove('visible'); s.style.opacity=''; s.style.transition=''; document.getElementById('scene-back').classList.add('visible'); },400);
 }
+function closeBibleToFront(){
+  const s=document.getElementById('scene-open');
+  s.style.opacity='0'; s.style.transition='opacity .4s ease';
+  setTimeout(()=>{
+    s.classList.remove('visible'); s.style.opacity=''; s.style.transition='';
+    const cover=document.getElementById('scene-cover');
+    cover.style.display='flex'; cover.style.opacity='0'; cover.style.transition='opacity .6s ease';
+    setTimeout(()=>{ cover.style.opacity='1'; },50);
+    current=1; document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===0));
+    document.getElementById('page-label').textContent='Page 1 of '+TOTAL; updateNavButtons();
+  },400);
+}
+function reopenFromBack(){
+  document.getElementById('scene-back').classList.remove('visible');
+  const cover=document.getElementById('scene-cover');
+  cover.style.display='flex'; cover.style.opacity='0'; cover.style.transition='opacity .6s ease';
+  setTimeout(()=>{ cover.style.opacity='1'; },50);
+  current=1; document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===0));
+  document.getElementById('page-label').textContent='Page 1 of '+TOTAL; updateNavButtons();
+}
+function updateNavButtons(){
+  document.getElementById('btn-prev').textContent=current===1?'✕ Close':'← Prev';
+  document.getElementById('btn-next').textContent=current===TOTAL?'Close ✕':'Next →';
+}
+function goTo(n){
+  const snd=document.getElementById('page-flip-sound');
+  if(snd){ snd.currentTime=0; snd.play().catch(()=>{}); }
+  const sh=document.getElementById('flip-sheet');
+  sh.classList.remove('animate'); void sh.offsetWidth; sh.classList.add('animate');
+  setTimeout(()=>{
+    document.getElementById('page-'+current).classList.remove('active');
+    current=Math.max(1,Math.min(TOTAL,n));
+    document.getElementById('page-'+current).classList.add('active');
+    document.getElementById('page-label').textContent='Page '+current+' of '+TOTAL;
+    updateNavButtons();
+  },280);
+}
+function changePage(dir){ const t=current+dir; if(t<1){closeBibleToFront();return;} if(t>TOTAL){closeBible();return;} goTo(t); }
 
-setupSwipeRow('row1');
-setupSwipeRow('row2');
-
-function setupBestSellersMobileAutoScroll() {
-  const track = document.querySelector('.bestsellers-grid');
-  if (!track) return;
-
-  /*
-    Mobile fix: no infinite clone/reset loop.
-    The previous version continuously changed scrollLeft and reset it during momentum.
-    On a strong phone swipe, that can fight the browser's inertial scrolling and cause lag.
-    This version uses the real cards only and auto-advances one card at a time.
-  */
-  track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
-  const cards = Array.from(track.querySelectorAll('.bs-card:not([aria-hidden="true"])'));
-
-  let index = 0;
-  let direction = 1;
-  let pausedUntil = 0;
-  let autoTimer = null;
-  let scrollEndTimer = null;
-
-  function isMobile() {
-    return window.matchMedia('(max-width: 600px)').matches;
+function buildCalendar(){
+  const g=document.getElementById('cal-grid');
+  if(g.children.length>0) return;
+  ['M','T','W','T','F','S','S'].forEach(d=>{const e=document.createElement('div');e.className='cal-cell hdr';e.textContent=d;g.appendChild(e);});
+  for(let i=0;i<6;i++){const e=document.createElement('div');e.className='cal-cell empty';e.textContent='.';g.appendChild(e);}
+  for(let d=1;d<=31;d++){
+    const e=document.createElement('div');e.className='cal-cell';
+    if(d===14){ e.className+=' highlight'; e.innerHTML='<span style="position:relative;z-index:1;">'+d+'</span><img src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/Icon2/Heart.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.4;filter:sepia(1) saturate(3) hue-rotate(300deg);" alt=""/>'; }
+    else { e.textContent=d; }
+    g.appendChild(e);
   }
-
-  function centerCard(i, behavior = 'smooth') {
-    if (!isMobile() || !cards[i]) return;
-    const left = cards[i].offsetLeft - (track.clientWidth - cards[i].clientWidth) / 2;
-    track.scrollTo({ left, behavior });
-  }
-
-  function pause(ms = 4500) {
-    pausedUntil = Date.now() + ms;
-  }
-
-  function syncIndexFromScroll() {
-    if (!cards.length) return;
-    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    cards.forEach((card, i) => {
-      const cardCenter = card.offsetLeft + card.clientWidth / 2;
-      const dist = Math.abs(cardCenter - viewportCenter);
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = i;
-      }
-    });
-    index = best;
-  }
-
-  function scheduleAuto() {
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(() => {
-      if (!isMobile()) { scheduleAuto(); return; }
-      if (Date.now() < pausedUntil) { scheduleAuto(); return; }
-
-      syncIndexFromScroll();
-      if (index >= cards.length - 1) direction = -1;
-      if (index <= 0) direction = 1;
-      index += direction;
-      centerCard(index, 'smooth');
-      scheduleAuto();
-    }, 3200);
-  }
-
-  ['touchstart', 'pointerdown', 'wheel'].forEach(evt => {
-    track.addEventListener(evt, () => pause(), { passive: true });
-  });
-
-  track.addEventListener('scroll', () => {
-    if (!isMobile()) return;
-    pause(1800);
-    clearTimeout(scrollEndTimer);
-    scrollEndTimer = setTimeout(syncIndexFromScroll, 120);
-  }, { passive: true });
-
-  window.addEventListener('resize', () => {
-    if (isMobile()) centerCard(index, 'auto');
-  }, { passive: true });
-
-  scheduleAuto();
 }
+const TARGET=new Date('2027-08-14T18:00:00');
+function tick(){ const diff=Math.max(0,TARGET-new Date()); const pad=n=>String(n).padStart(2,'0'); document.getElementById('cd-d').textContent=Math.floor(diff/86400000); document.getElementById('cd-h').textContent=pad(Math.floor(diff/3600000)%24); document.getElementById('cd-m').textContent=pad(Math.floor(diff/60000)%60); document.getElementById('cd-s').textContent=pad(Math.floor(diff/1000)%60); }
 
-setupBestSellersMobileAutoScroll();
+let photoIdx=0; const PHOTO_TOTAL=4;
+function photoGoTo(i){photoIdx=Math.max(0,Math.min(PHOTO_TOTAL-1,i));document.getElementById('photo-track').style.transform='translateX(-'+(photoIdx*100)+'%)';document.getElementById('photo-counter').textContent=(photoIdx+1)+' / '+PHOTO_TOTAL;}
+function photoMove(d){photoGoTo(photoIdx+d);}
+const car=document.getElementById('photo-carousel');
+if(car){let px=0;car.addEventListener('touchstart',e=>{px=e.touches[0].clientX;},{passive:true});car.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-px;if(Math.abs(dx)<30)return;photoMove(dx<0?1:-1);e.stopPropagation();},{passive:true});}
 
-/* ── Prevent horizontal swipe sections from trapping page scroll ── */
-function allowPageScrollOverSwipeSections(){
-  const swipeAreas = document.querySelectorAll('.bestsellers-grid, .cards-track-wrap, .reviews-marquee-wrap');
-  swipeAreas.forEach(area => {
-    area.addEventListener('wheel', e => {
-      const verticalMove = Math.abs(e.deltaY) > Math.abs(e.deltaX);
-      if (!verticalMove) return;
-      e.preventDefault();
-      window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
-    }, { passive: false });
-  });
+let sx=0,sy=0;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)<40||Math.abs(dx)<Math.abs(dy))return;if(!document.getElementById('scene-open').classList.contains('visible'))return;changePage(dx<0?1:-1);},{passive:true});
+
+const guestName=decodeURIComponent(new URLSearchParams(window.location.search).get('guest')||'');
+if(guestName){const d=document.getElementById('dear-guest');if(d)d.textContent='Dear '+guestName+',';const f=document.getElementById('f-name');if(f)f.value=guestName;const r=document.getElementById('rv-name-row');if(r)r.style.display='none';}
+
+let gCount=1;
+document.querySelectorAll('input[name="attend"]').forEach(r=>{r.addEventListener('change',()=>{document.getElementById('count-wrap').style.display=r.value==='yes'?'block':'none';});});
+function chCount(d){gCount=Math.max(1,Math.min(10,gCount+d));document.getElementById('cnt-disp').textContent=gCount;}
+function goStep(from,to){
+  if(from===1){const v=document.getElementById('f-name').value.trim();if(!v&&!guestName){document.getElementById('e-name').style.display='block';return;}document.getElementById('e-name').style.display='none';}
+  if(from===2&&to===3){const att=document.querySelector('input[name="attend"]:checked');if(!att){document.getElementById('e-attend').style.display='block';return;}document.getElementById('e-attend').style.display='none';if(att.value==='no'){submitRSVP();return;}}
+  document.getElementById('s'+from).style.display='none';document.getElementById('s'+to).style.display='block';
+  [1,2,3].forEach(i=>document.getElementById('dot-'+i).classList.toggle('on',i<=to));
 }
-allowPageScrollOverSwipeSections();
-
-/* ── Reveal on scroll ── */
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
-}, { threshold: .08 });
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-/* ── Mobile hamburger ── */
-function toggleMenu(){
-  document.getElementById('navLinks').classList.toggle('open');
-  document.getElementById('navHamburger').classList.toggle('open');
+function submitRSVP(){
+  const name=document.getElementById('f-name')?document.getElementById('f-name').value.trim():'';
+  const att=document.querySelector('input[name="attend"]:checked');
+  const msg=document.getElementById('f-msg')?document.getElementById('f-msg').value.trim():'';
+  const yes=att&&att.value==='yes';
+  const btn=document.querySelector('#s3 .btn-solid');if(btn){btn.textContent='Sending...';btn.disabled=true;}
+  fetch('https://formsubmit.co/ajax/nemer.david9@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New RSVP - Thomas & Sarah',_template:'table',name:name||guestName,attending:yes?'Yes':'No',guests:yes?gCount:0,message:msg||'(none)'})})
+  .then(r=>r.json()).then(data=>{
+    if(data.success==='true'||data.success===true){['s1','s2','s3'].forEach(id=>document.getElementById(id).style.display='none');document.querySelector('.step-dots').style.display='none';document.getElementById('s-ok').style.display='block';document.getElementById('ok-msg').innerHTML=yes?"We're so excited to celebrate with you, <strong>"+(name||guestName)+"</strong>!<br>See you on August 14th! 🌹":"We'll miss you, <strong>"+(name||guestName)+"</strong>.<br>Thank you for letting us know.";}else throw new Error();
+  }).catch(()=>{if(btn){btn.textContent='Send ✦';btn.disabled=false;}alert('Something went wrong. Please try again.');});
 }
-function closeMenu(){
-  document.getElementById('navLinks').classList.remove('open');
-  document.getElementById('navHamburger').classList.remove('open');
-}
-document.addEventListener('click', e => {
-  const nav = document.querySelector('.nav');
-  if(!nav.contains(e.target)) closeMenu();
-});
-
-/* ── Generic touch swiper factory ── */
-function makeSwiper(trackId, dotsId, opts){
-  const track = document.getElementById(trackId);
-  const dotsWrap = document.getElementById(dotsId);
-  if(!track) return { go: ()=>{}, next:()=>{}, prev:()=>{} };
-  const items = Array.from(track.children);
-  let cur = opts.start || 0;
-  items.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'swiper-dot' + (i===cur?' active':'');
-    d.onclick = () => go(i);
-    dotsWrap.appendChild(d);
-  });
-  function go(n){
-    cur = Math.max(0, Math.min(n, items.length-1));
-    const offset = opts.getOffset ? opts.getOffset(cur, items, track) : cur * 100;
-    track.style.transform = `translateX(-${offset}%)`;
-    if(opts.onSlide) opts.onSlide(cur, items);
-    dotsWrap.querySelectorAll('.swiper-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
-  }
-  let sx, sy, locked=false;
-  track.parentElement.addEventListener('touchstart', e=>{ sx=e.touches[0].clientX; sy=e.touches[0].clientY; locked=false; }, {passive:true});
-  track.parentElement.addEventListener('touchmove', e=>{
-    if(locked) return;
-    const dx = e.touches[0].clientX - sx;
-    const dy = e.touches[0].clientY - sy;
-    if(Math.abs(dy) > Math.abs(dx)) { locked=true; return; }
-  }, {passive:true});
-  track.parentElement.addEventListener('touchend', e=>{
-    if(locked) return;
-    const dx = e.changedTouches[0].clientX - sx;
-    if(Math.abs(dx) > 40){ dx < 0 ? go(cur+1) : go(cur-1); }
-  }, {passive:true});
-  go(cur);
-  return { go, next: ()=>go(cur+1), prev: ()=>go(cur-1) };
-}
-
-const howSw = makeSwiper('howTrack','howDots',{ start:0 });
-function howNext(){ howSw.next(); }
-function howPrev(){ howSw.prev(); }
-const pricingSw = makeSwiper('pricingTrack','pricingDots',{ start:0, getOffset(cur){ return cur*100; } });
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
 </script>
 </body>
 </html>
