@@ -606,6 +606,133 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 @media (max-width: 600px) {
   .bestsellers-grid .bs-card[aria-hidden="true"] { display: flex; }
 }
+
+/* MOBILE MARKETING CARDS FOR ALL TEMPLATE ROWS */
+@media (max-width:640px) {
+  .category-block { padding: 2rem 0 1rem; }
+  .category-header { align-items: center; gap: .8rem; }
+  .category-title span { display: inline-block; margin-left: .55rem; }
+
+  .cards-track-wrap {
+    padding: 0 1rem 1.2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scroll-padding: 0 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cards-inner { gap: 1rem; }
+
+  .card-wrap {
+    flex: 0 0 82%;
+    width: auto;
+    max-width: 340px;
+    min-width: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(42,32,24,.10);
+    border: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-header {
+    order: 2;
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: #fff;
+    border-left: 0;
+    border-bottom: 0;
+    border-top: 1px solid rgba(155,120,90,.12);
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .45rem;
+  }
+
+  .card-header-num {
+    order: 2;
+    font-family: 'Jost', sans-serif;
+    font-size: .66rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .card-header-num::before { content: 'Template ID: '; }
+
+  .card-header-name {
+    order: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  .template-card {
+    order: 1;
+    height: 540px;
+    aspect-ratio: auto;
+    background: var(--template-mobile-bg, radial-gradient(ellipse at 50% 70%, rgba(184,144,60,.16) 0%, rgba(232,215,190,.12) 70%, transparent 100%), #f0ece4);
+    overflow: hidden;
+    cursor: pointer;
+    transform: translateZ(0);
+    contain: layout paint;
+  }
+
+  .template-card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 42px;
+    width: 225px;
+    height: 450px;
+    transform: translateX(-50%);
+    border: 8px solid #1a1210;
+    border-radius: 32px;
+    box-shadow: 0 12px 50px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .template-card::after {
+    content: '';
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    width: 48px;
+    height: 8px;
+    transform: translateX(-50%);
+    background: #111;
+    border-radius: 99px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .card-preview {
+    position: absolute;
+    top: 50px !important;
+    left: 50% !important;
+    width: 390px !important;
+    height: 844px !important;
+    border: 0;
+    border-radius: 24px;
+    transform-origin: top left;
+    pointer-events: none;
+    z-index: 1;
+    background: #111;
+  }
+
+  .template-card:hover { transform: none; }
+  .template-card:hover .card-strip { transform: none; }
+
+  .card-strip { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -1443,15 +1570,27 @@ function submitReview() {
    SWIPE ROWS + MOBILE BEST SELLER AUTO-SCROLL
 ════════════════════════════════════ */
 function scaleIframes(){
+  const mobileTemplates = window.matchMedia('(max-width:640px)').matches;
   document.querySelectorAll('.template-card').forEach(card => {
     const iframe = card.querySelector('.card-preview');
     if(!iframe) return;
-    const cw = card.offsetWidth, ch = card.offsetHeight;
-    const scale = Math.min(cw/390, ch/844);
+
     iframe.style.width = '390px';
     iframe.style.height = '844px';
-    iframe.style.transform = 'scale(' + scale + ')';
     iframe.style.transformOrigin = 'top left';
+
+    if (mobileTemplates) {
+      /* Match the large best-seller marketing-card feeling on phones.
+         The iframe is fitted inside a CSS phone frame instead of filling the whole card. */
+      const phoneInnerWidth = 209;
+      const phoneInnerHeight = 434;
+      const scale = Math.min(phoneInnerWidth / 390, phoneInnerHeight / 844);
+      iframe.style.transform = 'translateX(-50%) scale(' + scale + ')';
+    } else {
+      const cw = card.offsetWidth, ch = card.offsetHeight;
+      const scale = Math.min(cw/390, ch/844);
+      iframe.style.transform = 'scale(' + scale + ')';
+    }
   });
 }
 window.addEventListener('resize', scaleIframes);
