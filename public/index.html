@@ -805,6 +805,102 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 }
 
 
+/* ═══════════════════════════════════════
+   LANGUAGE + CURRENCY CONTROLS
+═══════════════════════════════════════ */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-left: 1rem;
+}
+.nav-select {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(200,180,160,.25);
+  color: rgba(240,220,200,.82);
+  font-family: 'Jost', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .45rem .7rem;
+  outline: none;
+  cursor: pointer;
+}
+.nav-select option {
+  background: #2a2018;
+  color: #f0dcc8;
+}
+@media (max-width: 640px) {
+  .nav-controls {
+    position: fixed;
+    top: 104px;
+    right: 1.15rem;
+    z-index: 111;
+    gap: .35rem;
+  }
+  .nav-select {
+    font-size: .52rem;
+    padding: .35rem .45rem;
+    max-width: 92px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   PC EDGE SWIPE BUTTONS FOR TEMPLATE ROWS
+═══════════════════════════════════════ */
+.category-block { position: relative; }
+.row-edge-arrows { display: none; }
+@media (min-width: 641px) {
+  .category-header .category-arrows { display: none; }
+  .row-edge-arrows {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+  }
+  .edge-arrow {
+    position: absolute;
+    top: 56%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 64px;
+    border: 1px solid rgba(184,144,60,.28);
+    background: rgba(247,243,238,.82);
+    backdrop-filter: blur(8px);
+    color: var(--ink-lt);
+    font-size: 1.45rem;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+    box-shadow: 0 8px 30px rgba(42,32,24,.08);
+  }
+  .edge-arrow:hover {
+    background: var(--ink);
+    color: var(--gold-lt);
+    border-color: var(--ink);
+  }
+  .edge-arrow.left { left: 1rem; }
+  .edge-arrow.right { right: 1rem; }
+}
+@media (min-width: 1500px) {
+  .edge-arrow.left { left: 1.5rem; }
+  .edge-arrow.right { right: 1.5rem; }
+}
+
+.currency-note {
+  display: inline-block;
+  margin-top: .65rem;
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--rose-lt);
+}
+
+
 </style>
 </head>
 <body>
@@ -819,6 +915,21 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
     <a href="#contact" class="nav-link" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <div class="nav-controls">
+    <select id="languageSelect" class="nav-select" aria-label="Language">
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="es">ES</option>
+    </select>
+    <select id="currencySelect" class="nav-select" aria-label="Currency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="CAD">CAD</option>
+      <option value="AUD">AUD</option>
+    </select>
   </div>
   <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -954,6 +1065,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <button class="cat-arrow" onclick="nudgeRow('row2', 1)">›</button>
       </div>
     </div>
+    <div class="row-edge-arrows">
+      <button class="edge-arrow left" onclick="nudgeRow('row2', -1)" aria-label="Previous book invitations">&#8249;</button>
+      <button class="edge-arrow right" onclick="nudgeRow('row2', 1)" aria-label="Next book invitations">&#8250;</button>
+    </div>
     <div class="cards-track-wrap">
       <div class="cards-track" id="row2">
         <div class="cards-inner" id="row2-inner" style="--scroll-dur:32s">
@@ -1082,6 +1197,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <button class="cat-arrow" onclick="nudgeRow('row1', -1)">‹</button>
         <button class="cat-arrow" onclick="nudgeRow('row1', 1)">›</button>
       </div>
+    </div>
+    <div class="row-edge-arrows">
+      <button class="edge-arrow left" onclick="nudgeRow('row1', -1)" aria-label="Previous classic invitations">&#8249;</button>
+      <button class="edge-arrow right" onclick="nudgeRow('row1', 1)" aria-label="Next classic invitations">&#8250;</button>
     </div>
     <div class="cards-track-wrap">
       <div class="cards-track" id="row1">
@@ -1275,10 +1394,11 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 <section class="pricing-section" id="pricing">
   <h2 class="reveal">Simple Pricing</h2>
   <p class="reveal">No hidden fees &middot; Contact us to get started</p>
+  <span class="currency-note reveal">Choose your currency from the top menu</span>
   <div class="pricing-cards">
     <div class="price-card reveal">
       <div class="price-name">Standard</div>
-      <div class="price-amount"><span class="price-currency">$</span>100</div>
+      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The complete digital invitation</div>
       <ul class="price-features">
@@ -1293,7 +1413,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="price-card featured reveal">
       <div class="price-badge">Most Popular</div>
       <div class="price-name">Premium</div>
-      <div class="price-amount"><span class="price-currency">$</span>159</div>
+      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The full experience</div>
       <ul class="price-features">
@@ -1308,7 +1428,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     </div>
     <div class="price-card reveal">
       <div class="price-name">Luxury</div>
-      <div class="price-amount"><span class="price-currency">$</span>189</div>
+      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">For the perfect wedding</div>
       <ul class="price-features">
@@ -1327,7 +1447,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="pricing-swiper-track" id="pricingTrack">
       <div class="price-card">
         <div class="price-name">Standard</div>
-        <div class="price-amount"><span class="price-currency">$</span>100</div>
+        <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">The complete digital invitation</div>
         <ul class="price-features">
@@ -1342,7 +1462,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       <div class="price-card featured">
         <div class="price-badge">Most Popular</div>
         <div class="price-name">Premium</div>
-        <div class="price-amount"><span class="price-currency">$</span>159</div>
+        <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">The full experience</div>
         <ul class="price-features">
@@ -1357,7 +1477,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       </div>
       <div class="price-card">
         <div class="price-name">Luxury</div>
-        <div class="price-amount"><span class="price-currency">$</span>189</div>
+        <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
         <div class="price-period">one-time &middot; hosted forever</div>
         <div class="price-desc">For the perfect wedding</div>
         <ul class="price-features">
@@ -1439,30 +1559,6 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   <div class="reviews-marquee-wrap" style="margin-top:1rem" id="marqueeRow2">
     <div class="reviews-marquee reverse" id="marqueeTrack2"></div>
   </div>
-
-  <!-- Add review form -->
-  <div class="add-review-wrap reveal">
-    <h3>Share your experience</h3>
-    <div class="add-review-form" id="reviewForm">
-      <div class="form-row">
-        <input type="text" class="form-input" id="reviewName" placeholder="Your name" maxlength="50">
-        <input type="text" class="form-input" id="reviewLocation" placeholder="City, Country" maxlength="40">
-      </div>
-      <div class="star-picker-row">
-        <span class="star-picker-label">Rating</span>
-        <div class="star-picker" id="starPicker">
-          <input type="radio" name="rating" id="s5" value="5"><label for="s5" data-val="5">★</label>
-          <input type="radio" name="rating" id="s4" value="4"><label for="s4" data-val="4">★</label>
-          <input type="radio" name="rating" id="s3" value="3"><label for="s3" data-val="3">★</label>
-          <input type="radio" name="rating" id="s2" value="2"><label for="s2" data-val="2">★</label>
-          <input type="radio" name="rating" id="s1" value="1"><label for="s1" data-val="1">★</label>
-        </div>
-      </div>
-      <textarea class="form-input" id="reviewText" placeholder="Tell us about your experience…" maxlength="300"></textarea>
-      <button class="form-submit" onclick="submitReview()">Submit Review</button>
-    </div>
-    <div class="form-success" id="formSuccess">✦ Thank you! Your review has been added.</div>
-  </div>
 </section>
 
 <!-- CONTACT -->
@@ -1490,6 +1586,251 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 </section>
 
 <script>
+
+/* ════════════════════════════════════
+   LANGUAGE + CURRENCY SWITCHERS
+   Applies to nav, hero, best sellers, collection, how-it-works,
+   pricing, payment, reviews, and contact sections.
+════════════════════════════════════ */
+const CARDIA_TRANSLATIONS = {
+  en: {
+    nav:['Best Sellers','Templates','How it works','Pricing','Reviews','Contact'],
+    heroTag:'Digital Wedding Invitations', heroTitle:'Your love story,', heroEm:'beautifully told.', heroSub:'Exclusive designs · Crafted with care · Delivered in 24h', heroCta:'Explore Templates',
+    bestTitle:'Best Sellers', bestSub:'Our most loved designs — chosen by couples around the world', bestBadge:'Best Seller', viewTheme:'View theme',
+    collectionTitle:'Our Collection', collectionSub:'Exclusive designs, one for every love story',
+    bookTitle:'Book Invitations', classicTitle:'Classic Invitations', swipe:'Swipe to view ›', templateId:'Template ID: ',
+    howTitle:'How It Works', howSub:'Simple, fast, beautiful',
+    steps:[
+      ['Choose a design','Browse our exclusive templates and pick the one that speaks to your love story. Each design has an ID: A for Best Sellers, B for Book Invitations, and C for Classic Invitations.'],
+      ['Send your details',"Share your template ID, names, date, venue, schedule, and any personal touches you'd like included."],
+      ['We customize it','Your invitation is personalized and ready in 24–48h. We send you a preview first.'],
+      ['Share with guests','Send a single link to all your guests. RSVPs go straight to your inbox automatically.']
+    ],
+    pricingTitle:'Simple Pricing', pricingSub:'No hidden fees · Contact us to get started', currencyNote:'Choose your currency from the top menu',
+    plans:['Standard','Premium','Luxury'], popular:'Most Popular', oneTime:'one-time · hosted forever',
+    planDesc:['The complete digital invitation','The full experience','For the perfect wedding'],
+    features:{
+      standard:['1 template of your choice','Fully personalized','RSVP form — replies go to your inbox','Up to 3 photos included','Delivered in 48h','Hosted forever on our servers'],
+      premium:['1 template of your choice','Fully personalized','RSVP form — replies go to your inbox','Up to 5 photos of your choice included','Background music','Delivered in 24h','Hosted forever on our servers'],
+      luxury:['Everything in Premium','Up to 15 photos of your choice included','Priority delivery in 12h','Hosted forever on our servers'],
+      luxuryMobile:['Everything in Premium','Up to 10 photos included','Priority delivery in 12h','Invitation generator','Hosted forever on our servers']
+    },
+    tooltip:'We customize your chosen template with your names, date, venue and schedule. You can add or remove any steps (ceremony, cocktails, dinner, dancing, etc.).',
+    generator:'See Invitation Generator ↗',
+    paymentHead1:'France, EU & Worldwide', paymentHead2:'Lebanon',
+    paymentText:"Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.",
+    bank:'Virement bancaire (Bank Transfer)', bankDetails:'Details shared on request', paypal:'PayPal', paypalDetails:'Link shared on request', whish:'Whish Money', whishDetails:'Account number shared on request',
+    paymentNote:'Payment is only requested after you have approved your invitation preview',
+    reviewsTitle:'What Couples Say', reviewsSub:'Real stories from our happiest clients', reviewsCount:'Based on 50+ reviews', prevReviews:'Previous reviews', nextReviews:'Next reviews',
+    contactTitle:'Let’s create something beautiful', contactSub:'Get in touch', contactCta:'Send an Enquiry', footer:'© 2025 Cardia Studios · Digital Wedding Invitations · All rights reserved'
+  },
+  fr: {
+    nav:['Meilleures ventes','Modèles','Fonctionnement','Tarifs','Avis','Contact'],
+    heroTag:'Invitations de mariage digitales', heroTitle:'Votre histoire d’amour,', heroEm:'magnifiquement racontée.', heroSub:'Designs exclusifs · Créés avec soin · Livrés en 24h', heroCta:'Voir les modèles',
+    bestTitle:'Meilleures ventes', bestSub:'Nos designs les plus aimés — choisis par des couples du monde entier', bestBadge:'Meilleure vente', viewTheme:'Voir le modèle',
+    collectionTitle:'Notre collection', collectionSub:'Des designs exclusifs pour chaque histoire d’amour',
+    bookTitle:'Invitations livre', classicTitle:'Invitations classiques', swipe:'Faites glisser ›', templateId:'ID du modèle : ',
+    howTitle:'Comment ça marche', howSub:'Simple, rapide, élégant',
+    steps:[
+      ['Choisissez un design','Parcourez nos modèles exclusifs et choisissez celui qui correspond à votre histoire. Chaque design possède un ID : A pour les meilleures ventes, B pour les invitations livre et C pour les invitations classiques.'],
+      ['Envoyez vos informations','Partagez l’ID du modèle, les noms, la date, le lieu, le programme et les détails personnels à ajouter.'],
+      ['Nous personnalisons','Votre invitation est personnalisée et prête sous 24–48h. Nous vous envoyons d’abord un aperçu.'],
+      ['Partagez avec vos invités','Envoyez un seul lien à tous vos invités. Les RSVP arrivent directement dans votre boîte mail.']
+    ],
+    pricingTitle:'Tarifs simples', pricingSub:'Aucun frais caché · Contactez-nous pour commencer', currencyNote:'Choisissez votre devise dans le menu du haut',
+    plans:['Standard','Premium','Luxury'], popular:'Le plus populaire', oneTime:'paiement unique · hébergement inclus',
+    planDesc:['L’invitation digitale complète','L’expérience complète','Pour un mariage parfait'],
+    features:{
+      standard:['1 modèle au choix','Entièrement personnalisé','Formulaire RSVP — réponses dans votre boîte mail','Jusqu’à 3 photos incluses','Livré en 48h','Hébergé pour toujours sur nos serveurs'],
+      premium:['1 modèle au choix','Entièrement personnalisé','Formulaire RSVP — réponses dans votre boîte mail','Jusqu’à 5 photos au choix incluses','Musique de fond','Livré en 24h','Hébergé pour toujours sur nos serveurs'],
+      luxury:['Tout ce qui est inclus dans Premium','Jusqu’à 15 photos au choix incluses','Livraison prioritaire en 12h','Hébergé pour toujours sur nos serveurs'],
+      luxuryMobile:['Tout ce qui est inclus dans Premium','Jusqu’à 10 photos incluses','Livraison prioritaire en 12h','Générateur d’invitations','Hébergé pour toujours sur nos serveurs']
+    },
+    tooltip:'Nous personnalisons le modèle choisi avec vos noms, la date, le lieu et le programme. Vous pouvez ajouter ou supprimer des étapes (cérémonie, cocktail, dîner, soirée, etc.).',
+    generator:'Voir le générateur d’invitations ↗',
+    paymentHead1:'France, UE et monde entier', paymentHead2:'Liban',
+    paymentText:'Choisissez votre modèle et contactez-nous par email ou WhatsApp. Nous le personnalisons avec vos informations et vous envoyons un aperçu à valider — le paiement est demandé uniquement lorsque le résultat vous convient.',
+    bank:'Virement bancaire', bankDetails:'Détails partagés sur demande', paypal:'PayPal', paypalDetails:'Lien partagé sur demande', whish:'Whish Money', whishDetails:'Numéro de compte partagé sur demande',
+    paymentNote:'Le paiement est demandé uniquement après validation de l’aperçu de votre invitation',
+    reviewsTitle:'Ce que disent les couples', reviewsSub:'De vraies histoires de nos clients heureux', reviewsCount:'Basé sur plus de 50 avis', prevReviews:'Avis précédents', nextReviews:'Avis suivants',
+    contactTitle:'Créons quelque chose de beau', contactSub:'Contactez-nous', contactCta:'Envoyer une demande', footer:'© 2025 Cardia Studios · Invitations de mariage digitales · Tous droits réservés'
+  },
+  es: {
+    nav:['Más vendidos','Plantillas','Cómo funciona','Precios','Reseñas','Contacto'],
+    heroTag:'Invitaciones digitales de boda', heroTitle:'Tu historia de amor,', heroEm:'bellamente contada.', heroSub:'Diseños exclusivos · Hechos con cuidado · Entrega en 24h', heroCta:'Ver plantillas',
+    bestTitle:'Más vendidos', bestSub:'Nuestros diseños más queridos — elegidos por parejas de todo el mundo', bestBadge:'Más vendido', viewTheme:'Ver plantilla',
+    collectionTitle:'Nuestra colección', collectionSub:'Diseños exclusivos para cada historia de amor',
+    bookTitle:'Invitaciones libro', classicTitle:'Invitaciones clásicas', swipe:'Desliza para ver ›', templateId:'ID de plantilla: ',
+    howTitle:'Cómo funciona', howSub:'Simple, rápido, hermoso',
+    steps:[
+      ['Elige un diseño','Explora nuestras plantillas exclusivas y elige la que mejor represente tu historia. Cada diseño tiene un ID: A para más vendidos, B para invitaciones libro y C para invitaciones clásicas.'],
+      ['Envía tus detalles','Comparte el ID de la plantilla, nombres, fecha, lugar, programa y cualquier toque personal que quieras incluir.'],
+      ['Lo personalizamos','Tu invitación se personaliza y está lista en 24–48h. Primero te enviamos una vista previa.'],
+      ['Comparte con invitados','Envía un solo enlace a todos tus invitados. Las respuestas RSVP llegan directamente a tu correo.']
+    ],
+    pricingTitle:'Precios simples', pricingSub:'Sin costos ocultos · Contáctanos para empezar', currencyNote:'Elige tu moneda en el menú superior',
+    plans:['Standard','Premium','Luxury'], popular:'Más popular', oneTime:'pago único · alojamiento incluido',
+    planDesc:['La invitación digital completa','La experiencia completa','Para una boda perfecta'],
+    features:{
+      standard:['1 plantilla a elección','Totalmente personalizada','Formulario RSVP — respuestas a tu correo','Hasta 3 fotos incluidas','Entrega en 48h','Alojada para siempre en nuestros servidores'],
+      premium:['1 plantilla a elección','Totalmente personalizada','Formulario RSVP — respuestas a tu correo','Hasta 5 fotos a elección incluidas','Música de fondo','Entrega en 24h','Alojada para siempre en nuestros servidores'],
+      luxury:['Todo lo incluido en Premium','Hasta 15 fotos a elección incluidas','Entrega prioritaria en 12h','Alojada para siempre en nuestros servidores'],
+      luxuryMobile:['Todo lo incluido en Premium','Hasta 10 fotos incluidas','Entrega prioritaria en 12h','Generador de invitaciones','Alojada para siempre en nuestros servidores']
+    },
+    tooltip:'Personalizamos la plantilla elegida con vuestros nombres, fecha, lugar y programa. Puedes añadir o quitar etapas (ceremonia, cóctel, cena, baile, etc.).',
+    generator:'Ver generador de invitaciones ↗',
+    paymentHead1:'Francia, UE y todo el mundo', paymentHead2:'Líbano',
+    paymentText:'Elige tu plantilla y contáctanos por email o WhatsApp. La personalizamos con tus datos y te enviamos una vista previa para aprobar — el pago solo se solicita cuando estés feliz con el resultado.',
+    bank:'Transferencia bancaria', bankDetails:'Detalles compartidos bajo solicitud', paypal:'PayPal', paypalDetails:'Enlace compartido bajo solicitud', whish:'Whish Money', whishDetails:'Número de cuenta compartido bajo solicitud',
+    paymentNote:'El pago solo se solicita después de aprobar la vista previa de tu invitación',
+    reviewsTitle:'Lo que dicen las parejas', reviewsSub:'Historias reales de nuestros clientes felices', reviewsCount:'Basado en más de 50 reseñas', prevReviews:'Reseñas anteriores', nextReviews:'Reseñas siguientes',
+    contactTitle:'Creemos algo hermoso', contactSub:'Contáctanos', contactCta:'Enviar consulta', footer:'© 2025 Cardia Studios · Invitaciones digitales de boda · Todos los derechos reservados'
+  }
+};
+
+function setText(selector, text) {
+  const el = document.querySelector(selector);
+  if (el) el.textContent = text;
+}
+function setAllText(selector, text) {
+  document.querySelectorAll(selector).forEach(el => { el.textContent = text; });
+}
+function setFeatureList(card, items, tooltip) {
+  if (!card) return;
+  const spans = card.querySelectorAll('.price-feature > span');
+  spans.forEach((span, i) => {
+    if (!items[i]) return;
+    span.textContent = items[i];
+    if (i === 1 && tooltip && card.querySelector('.info-tooltip')) {
+      span.innerHTML = items[i] + ' <span class="info-btn">i<span class="info-tooltip">' + tooltip + '</span></span>';
+    }
+  });
+}
+function applyLanguage(lang) {
+  if (!CARDIA_TRANSLATIONS[lang]) lang = 'en';
+  const t = CARDIA_TRANSLATIONS[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = 'ltr';
+
+  const nav = document.querySelectorAll('.nav-link');
+  t.nav.forEach((txt,i)=>{ if(nav[i]) nav[i].textContent = txt; });
+
+  setText('.hero-tag', t.heroTag);
+  const heroH1 = document.querySelector('.hero h1');
+  if(heroH1){ heroH1.innerHTML = ''; heroH1.append(document.createTextNode(t.heroTitle)); const em=document.createElement('em'); em.textContent=t.heroEm; heroH1.appendChild(em); }
+  setText('.hero-sub', t.heroSub);
+  setText('.hero-cta', t.heroCta);
+
+  setText('.bestsellers-header h2', t.bestTitle);
+  setText('.bestsellers-header p', t.bestSub);
+  setAllText('.bs-badge', t.bestBadge);
+  setAllText('.bs-card-link', t.viewTheme);
+
+  setText('.section-header h2', t.collectionTitle);
+  setText('.section-header p', t.collectionSub);
+  const cats = document.querySelectorAll('.category-title');
+  if(cats[0]) cats[0].innerHTML = `${t.bookTitle} <span>${t.swipe}</span>`;
+  if(cats[1]) cats[1].innerHTML = `${t.classicTitle} <span>${t.swipe}</span>`;
+  document.querySelectorAll('.card-header-num').forEach(el => {
+    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: )/,'').trim();
+    el.textContent = t.templateId + el.dataset.rawId;
+  });
+  document.querySelectorAll('.template-id-note').forEach(el => {
+    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: )/,'').trim();
+    el.textContent = t.templateId + el.dataset.rawId;
+  });
+
+  setText('.how-section h2', t.howTitle);
+  setText('.how-section > p', t.howSub);
+  const desktopSteps = document.querySelectorAll('.steps .step');
+  const mobileSteps = document.querySelectorAll('.steps-swiper-track .step');
+  t.steps.forEach((pair,i)=>{
+    [desktopSteps[i], mobileSteps[i]].forEach(step=>{
+      if(step){ const h=step.querySelector('h3'); const p=step.querySelector('p'); if(h) h.textContent=pair[0]; if(p) p.textContent=pair[1]; }
+    });
+  });
+
+  setText('.pricing-section > h2', t.pricingTitle);
+  setText('.pricing-section > p', t.pricingSub);
+  setText('.currency-note', t.currencyNote);
+  document.querySelectorAll('.price-name').forEach((el,i)=>{ el.textContent = t.plans[i%3]; });
+  setAllText('.price-badge', t.popular);
+  setAllText('.price-period', t.oneTime);
+  document.querySelectorAll('.price-desc').forEach((el,i)=>{ el.textContent = t.planDesc[i%3]; });
+
+  const desktopPriceCards = document.querySelectorAll('.pricing-cards .price-card');
+  setFeatureList(desktopPriceCards[0], t.features.standard, t.tooltip);
+  setFeatureList(desktopPriceCards[1], t.features.premium, t.tooltip);
+  setFeatureList(desktopPriceCards[2], t.features.luxury, t.tooltip);
+  const mobilePriceCards = document.querySelectorAll('.pricing-swiper-track .price-card');
+  setFeatureList(mobilePriceCards[0], t.features.standard, null);
+  setFeatureList(mobilePriceCards[1], t.features.premium, null);
+  setFeatureList(mobilePriceCards[2], t.features.luxuryMobile, null);
+  setText('.price-cta', t.generator);
+
+  const paymentHeads = document.querySelectorAll('.payment-region h4');
+  if(paymentHeads[0]) paymentHeads[0].lastChild.textContent = ' ' + t.paymentHead1;
+  if(paymentHeads[1]) paymentHeads[1].lastChild.textContent = ' ' + t.paymentHead2;
+  document.querySelectorAll('.payment-region p').forEach(p => p.textContent = t.paymentText);
+  const payMethods = document.querySelectorAll('.pay-method');
+  if(payMethods[0]) payMethods[0].querySelector('div').innerHTML = `<strong>${t.bank}</strong>${t.bankDetails}`;
+  if(payMethods[1]) payMethods[1].querySelector('div').innerHTML = `<strong>${t.paypal}</strong>${t.paypalDetails}`;
+  if(payMethods[2]) payMethods[2].querySelector('div').innerHTML = `<strong>${t.whish}</strong>${t.whishDetails}`;
+  setText('.payment-note', t.paymentNote);
+
+  setText('.reviews-header h2', t.reviewsTitle);
+  setText('.reviews-header p', t.reviewsSub);
+  setText('.reviews-count', t.reviewsCount);
+  const reviewBtns = document.querySelectorAll('.review-arrow');
+  if(reviewBtns[0]) reviewBtns[0].setAttribute('aria-label', t.prevReviews);
+  if(reviewBtns[1]) reviewBtns[1].setAttribute('aria-label', t.nextReviews);
+
+  setText('.contact-section h2', t.contactTitle);
+  setText('.contact-section h3', t.contactSub);
+  setText('.contact-cta', t.contactCta);
+  setText('.footer-note', t.footer);
+
+  const langSelect = document.getElementById('languageSelect');
+  if(langSelect) langSelect.value = lang;
+  localStorage.setItem('cardiaLang', lang);
+}
+
+const CARDIA_CURRENCIES = {
+  USD: { symbol:'$', rate:1 },
+  EUR: { symbol:'€', rate:.93 },
+  GBP: { symbol:'£', rate:.80 },
+  CAD: { symbol:'C$', rate:1.37 },
+  AUD: { symbol:'A$', rate:1.53 }
+};
+function applyCurrency(code) {
+  if (!CARDIA_CURRENCIES[code]) code = 'USD';
+  const c = CARDIA_CURRENCIES[code];
+  document.querySelectorAll('.price-amount').forEach(el => {
+    const usd = parseFloat(el.dataset.usd || '0');
+    const rounded = Math.round(usd * c.rate);
+    const currencyEl = el.querySelector('.price-currency');
+    const valueEl = el.querySelector('.price-value');
+    if(currencyEl) currencyEl.textContent = c.symbol;
+    if(valueEl) valueEl.textContent = rounded.toLocaleString();
+  });
+  const currencySelect = document.getElementById('currencySelect');
+  if(currencySelect) currencySelect.value = code;
+  localStorage.setItem('cardiaCurrency', code);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const langSelect = document.getElementById('languageSelect');
+  const currencySelect = document.getElementById('currencySelect');
+  let savedLang = localStorage.getItem('cardiaLang') || 'en';
+  let savedCurrency = localStorage.getItem('cardiaCurrency') || 'USD';
+  if (!CARDIA_TRANSLATIONS[savedLang]) savedLang = 'en';
+  if (!CARDIA_CURRENCIES[savedCurrency]) savedCurrency = 'USD';
+  if(langSelect){ langSelect.value = savedLang; langSelect.addEventListener('change', e => applyLanguage(e.target.value)); }
+  if(currencySelect){ currencySelect.value = savedCurrency; currencySelect.addEventListener('change', e => applyCurrency(e.target.value)); }
+  applyLanguage(savedLang);
+  applyCurrency(savedCurrency);
+});
+
 /* ═══════════════════════════════════
    REVIEW DATA (50 seeded reviews)
 ═══════════════════════════════════ */
@@ -1581,48 +1922,6 @@ function nudgeReviews(dir) {
     const amount = card ? card.offsetWidth + 16 : 300;
     row.scrollBy({ left: dir * amount, behavior: 'smooth' });
   });
-}
-
-/* Star picker interaction */
-const picker = document.getElementById('starPicker');
-let selectedRating = 5;
-if(picker) {
-  // Default select 5 stars
-  document.getElementById('s5').checked = true;
-  picker.querySelectorAll('label').forEach(label => {
-    label.classList.toggle('active', parseInt(label.dataset.val) <= selectedRating);
-  });
-  picker.querySelectorAll('label').forEach(label => {
-    label.addEventListener('click', () => {
-      selectedRating = parseInt(label.dataset.val);
-      picker.querySelectorAll('label').forEach(l => {
-        l.classList.toggle('active', parseInt(l.dataset.val) <= selectedRating);
-      });
-    });
-    label.addEventListener('mouseover', () => {
-      const hov = parseInt(label.dataset.val);
-      picker.querySelectorAll('label').forEach(l => {
-        l.style.color = parseInt(l.dataset.val) <= hov ? 'var(--gold)' : '';
-      });
-    });
-    label.addEventListener('mouseout', () => {
-      picker.querySelectorAll('label').forEach(l => {
-        l.style.color = '';
-        l.classList.toggle('active', parseInt(l.dataset.val) <= selectedRating);
-      });
-    });
-  });
-}
-
-function submitReview() {
-  const name = document.getElementById('reviewName').value.trim();
-  const loc  = document.getElementById('reviewLocation').value.trim();
-  const text = document.getElementById('reviewText').value.trim();
-  if(!name || !text) { alert('Please fill in your name and review.'); return; }
-  allReviews.push({ name, loc: loc || '', stars: selectedRating, text });
-  buildMarquees();
-  document.getElementById('reviewForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
 }
 
 /* ════════════════════════════════════
