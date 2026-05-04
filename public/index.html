@@ -389,7 +389,7 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
   text-transform: uppercase;
   color: var(--gold);
 }
-.card-header-num::before { content: 'Template ID: '; }
+.card-header-num::before { content:; }
 .card-header-name {
   order: 1;
   font-family: 'Cormorant Garamond', serif;
@@ -1099,6 +1099,8 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       <option value="en">EN</option>
       <option value="fr">FR</option>
       <option value="es">ES</option>
+      <option value="it">IT</option>
+      <option value="pt">PT</option>
     </select>
     <select id="currencySelect" class="nav-select" aria-label="Currency">
       <option value="USD">USD</option>
@@ -1967,6 +1969,68 @@ const CARDIA_TRANSLATIONS = {
     paymentNote:'El pago solo se solicita después de aprobar la vista previa de tu invitación',
     reviewsTitle:'Lo que dicen las parejas', reviewsSub:'Historias reales de nuestros clientes felices', reviewsCount:'Basado en más de 50 reseñas', prevReviews:'Reseñas anteriores', nextReviews:'Reseñas siguientes',
     contactTitle:'Creemos algo hermoso', contactSub:'Contáctanos', contactCta:'Enviar consulta', footer:'© 2025 Cardia Studios · Invitaciones digitales de boda · Todos los derechos reservados'
+  },
+  it: {
+    nav:['Più venduti','Modelli','Come funziona','Prezzi','Recensioni','Condividi','Contatto'],
+    heroTag:'Inviti digitali per matrimonio', heroTitle:'La vostra storia d’amore,', heroEm:'raccontata con eleganza.', heroSub:'Design esclusivi · Creati con cura · Consegna in 24h', heroCta:'Esplora i modelli',
+    bestTitle:'Più venduti', bestSub:'I nostri design più amati — scelti da coppie in tutto il mondo', bestBadge:'Più venduto', viewTheme:'Vedi modello',
+    collectionTitle:'La nostra collezione', collectionSub:'Design esclusivi per ogni storia d’amore',
+    bookTitle:'Inviti libro', classicTitle:'Inviti classici', swipe:'Scorri per vedere ›', templateId:'ID modello: ',
+    howTitle:'Come funziona', howSub:'Semplice, veloce, elegante',
+    steps:[
+      ['Scegli un design','Sfoglia i nostri modelli esclusivi e scegli quello che racconta meglio la vostra storia. Ogni design ha un ID: A per i più venduti, B per gli inviti libro e C per gli inviti classici.'],
+      ['Invia i dettagli','Condividi l’ID del modello, i nomi, la data, il luogo, il programma e ogni dettaglio personale che vuoi includere.'],
+      ['Lo personalizziamo','Il tuo invito viene personalizzato ed è pronto in 24–48h. Prima ti inviamo un’anteprima.'],
+      ['Condividi con gli ospiti','Invia un solo link a tutti i tuoi ospiti. Le risposte RSVP arrivano direttamente nella tua email.']
+    ],
+    pricingTitle:'Prezzi semplici', pricingSub:'Nessun costo nascosto · Contattaci per iniziare', currencyNote:'Scegli la valuta dal menu in alto',
+    plans:['Standard','Premium','Luxury'], popular:'Più popolare', oneTime:'pagamento unico · hosting incluso',
+    planDesc:['L’invito digitale completo','L’esperienza completa','Per un matrimonio perfetto'],
+    features:{
+      standard:['1 modello a scelta','Completamente personalizzato','Modulo RSVP — risposte nella tua email','Fino a 3 foto incluse','Consegna in 48h','Ospitato per sempre sui nostri server'],
+      premium:['1 modello a scelta','Completamente personalizzato','Modulo RSVP — risposte nella tua email','Fino a 5 foto a scelta incluse','Musica di sottofondo','Consegna in 24h','Ospitato per sempre sui nostri server'],
+      luxury:['Tutto ciò che è incluso in Premium','Fino a 15 foto a scelta incluse','Consegna prioritaria in 12h','Ospitato per sempre sui nostri server'],
+      luxuryMobile:['Tutto ciò che è incluso in Premium','Fino a 10 foto incluse','Consegna prioritaria in 12h','Generatore di inviti','Ospitato per sempre sui nostri server']
+    },
+    tooltip:'Personalizziamo il modello scelto con i vostri nomi, la data, il luogo e il programma. Puoi aggiungere o rimuovere le tappe (cerimonia, cocktail, cena, ballo, ecc.).',
+    generator:'Vedi il generatore di inviti ↗',
+    paymentHead1:'Francia, UE e tutto il mondo', paymentHead2:'Libano',
+    paymentText:'Scegli il tuo modello e contattaci via email o WhatsApp. Lo personalizziamo con i tuoi dettagli e ti inviamo un’anteprima da approvare — il pagamento viene richiesto solo quando sei soddisfatto del risultato.',
+    bank:'Bonifico bancario', bankDetails:'Dettagli condivisi su richiesta', paypal:'PayPal', paypalDetails:'Link condiviso su richiesta', whish:'Whish Money', whishDetails:'Numero di conto condiviso su richiesta',
+    paymentNote:'Il pagamento viene richiesto solo dopo l’approvazione dell’anteprima dell’invito',
+    reviewsTitle:'Cosa dicono le coppie', reviewsSub:'Storie reali dei nostri clienti felici', reviewsCount:'Basato su oltre 50 recensioni', prevReviews:'Recensioni precedenti', nextReviews:'Recensioni successive',
+    contactTitle:'Creiamo qualcosa di bello', contactSub:'Contattaci', contactCta:'Invia una richiesta', footer:'© 2025 Cardia Studios · Inviti digitali per matrimonio · Tutti i diritti riservati'
+  },
+  pt: {
+    nav:['Mais vendidos','Modelos','Como funciona','Preços','Avaliações','Partilhar','Contacto'],
+    heroTag:'Convites digitais de casamento', heroTitle:'A vossa história de amor,', heroEm:'contada com elegância.', heroSub:'Designs exclusivos · Criados com cuidado · Entrega em 24h', heroCta:'Explorar modelos',
+    bestTitle:'Mais vendidos', bestSub:'Os nossos designs mais adorados — escolhidos por casais em todo o mundo', bestBadge:'Mais vendido', viewTheme:'Ver modelo',
+    collectionTitle:'A nossa coleção', collectionSub:'Designs exclusivos para cada história de amor',
+    bookTitle:'Convites livro', classicTitle:'Convites clássicos', swipe:'Deslize para ver ›', templateId:'ID do modelo: ',
+    howTitle:'Como funciona', howSub:'Simples, rápido, bonito',
+    steps:[
+      ['Escolha um design','Explore os nossos modelos exclusivos e escolha aquele que melhor conta a vossa história. Cada design tem um ID: A para mais vendidos, B para convites livro e C para convites clássicos.'],
+      ['Envie os detalhes','Partilhe o ID do modelo, nomes, data, local, programa e qualquer toque pessoal que queira incluir.'],
+      ['Nós personalizamos','O seu convite é personalizado e fica pronto em 24–48h. Primeiro enviamos uma pré-visualização.'],
+      ['Partilhe com os convidados','Envie um único link a todos os seus convidados. As respostas RSVP chegam diretamente ao seu email.']
+    ],
+    pricingTitle:'Preços simples', pricingSub:'Sem taxas escondidas · Contacte-nos para começar', currencyNote:'Escolha a sua moeda no menu superior',
+    plans:['Standard','Premium','Luxury'], popular:'Mais popular', oneTime:'pagamento único · alojamento incluído',
+    planDesc:['O convite digital completo','A experiência completa','Para o casamento perfeito'],
+    features:{
+      standard:['1 modelo à sua escolha','Totalmente personalizado','Formulário RSVP — respostas no seu email','Até 3 fotos incluídas','Entrega em 48h','Alojado para sempre nos nossos servidores'],
+      premium:['1 modelo à sua escolha','Totalmente personalizado','Formulário RSVP — respostas no seu email','Até 5 fotos à sua escolha incluídas','Música de fundo','Entrega em 24h','Alojado para sempre nos nossos servidores'],
+      luxury:['Tudo incluído no Premium','Até 15 fotos à sua escolha incluídas','Entrega prioritária em 12h','Alojado para sempre nos nossos servidores'],
+      luxuryMobile:['Tudo incluído no Premium','Até 10 fotos incluídas','Entrega prioritária em 12h','Gerador de convites','Alojado para sempre nos nossos servidores']
+    },
+    tooltip:'Personalizamos o modelo escolhido com os vossos nomes, data, local e programa. Pode adicionar ou remover etapas (cerimónia, cocktail, jantar, dança, etc.).',
+    generator:'Ver gerador de convites ↗',
+    paymentHead1:'França, UE e mundo inteiro', paymentHead2:'Líbano',
+    paymentText:'Escolha o seu modelo e contacte-nos por email ou WhatsApp. Personalizamos com os seus detalhes e enviamos uma pré-visualização para aprovação — o pagamento só é solicitado quando estiver satisfeito com o resultado.',
+    bank:'Transferência bancária', bankDetails:'Detalhes partilhados a pedido', paypal:'PayPal', paypalDetails:'Link partilhado a pedido', whish:'Whish Money', whishDetails:'Número da conta partilhado a pedido',
+    paymentNote:'O pagamento só é solicitado depois de aprovar a pré-visualização do convite',
+    reviewsTitle:'O que dizem os casais', reviewsSub:'Histórias reais dos nossos clientes felizes', reviewsCount:'Com base em mais de 50 avaliações', prevReviews:'Avaliações anteriores', nextReviews:'Avaliações seguintes',
+    contactTitle:'Vamos criar algo bonito', contactSub:'Contacte-nos', contactCta:'Enviar pedido', footer:'© 2025 Cardia Studios · Convites digitais de casamento · Todos os direitos reservados'
   }
 };
 
@@ -2014,11 +2078,11 @@ function applyLanguage(lang) {
   if(cats[0]) cats[0].innerHTML = `${t.bookTitle} <span>${t.swipe}</span>`;
   if(cats[1]) cats[1].innerHTML = `${t.classicTitle} <span>${t.swipe}</span>`;
   document.querySelectorAll('.card-header-num').forEach(el => {
-    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: )/,'').trim();
+    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: |ID modello: |ID do modelo: )/,'').trim();
     el.textContent = t.templateId + el.dataset.rawId;
   });
   document.querySelectorAll('.template-id-note').forEach(el => {
-    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: )/,'').trim();
+    if (!el.dataset.rawId) el.dataset.rawId = el.textContent.replace(/^(Template ID: |ID du modèle : |ID de plantilla: |ID modello: |ID do modelo: )/,'').trim();
     el.textContent = t.templateId + el.dataset.rawId;
   });
 
@@ -2117,14 +2181,14 @@ window.addEventListener('DOMContentLoaded', () => {
    REVIEW DATA (50 seeded reviews)
 ═══════════════════════════════════ */
 const SEED_REVIEWS = [
-  { name:"Sophie L.", loc:"Paris, France", stars:5, text:"Absolutely magical. Our guests couldn't believe how stunning the invitation was — everyone was asking who made it!" },
+  { name:"Sophie L.", loc:"Paris, France", stars:5, text:"Absolutely magical. Our guests couldn't believe how stunning the invitation was, everyone was asking who made it!" },
   { name:"Marco &amp; Elena R.", loc:"Milan, Italy", stars:5, text:"The Royal Gold theme blew us away. Delivery was faster than expected and the team was super attentive." },
   { name:"Chloe M.", loc:"London, UK", stars:5, text:"Worth every penny. We went with the Premium package and the result was beyond our expectations." },
   { name:"Antoine B.", loc:"Lyon, France", stars:5, text:"On a eu notre invitation en moins de 24h. Le résultat était parfait, exactement comme demandé." },
   { name:"Nadia &amp; Karim H.", loc:"Beirut, Lebanon", stars:5, text:"The Dark blue Garden theme is a dream. All our family in Lebanon were amazed by the invitation link!" },
   { name:"Jessica T.", loc:"New York, USA", stars:5, text:"I've seen digital invitations before but nothing like this. The animations are breathtaking." },
   { name:"Lara &amp; Tom F.", loc:"Brussels, Belgium", stars:5, text:"Incredibly smooth process. We gave them our details and they handled everything beautifully." },
-  { name:"Amira S.", loc:"Dubai, UAE", stars:5, text:"The Luxury package with the invitation generator was a game changer — each guest got their own personalized link!" },
+  { name:"Amira S.", loc:"Dubai, UAE", stars:5, text:"The Luxury package with the invitation generator was a game changer, each guest got their own personalized link!" },
   { name:"Clara V.", loc:"Marseille, France", stars:5, text:"Magnifique travail ! L'invitation française correspondait parfaitement à l'ambiance de notre mariage en Provence." },
   { name:"David &amp; Rachel K.", loc:"Tel Aviv, Israel", stars:5, text:"Responsive team, beautiful outcome. We chose the Midnight Blue and it felt like magic." },
   { name:"Léa &amp; Pierre D.", loc:"Bordeaux, France", stars:5, text:"Le thème Jardin de Fleurs était exactement ce que nous cherchions. Nos invités ont adoré." },
@@ -2138,7 +2202,7 @@ const SEED_REVIEWS = [
   { name:"Priya &amp; Raj M.", loc:"London, UK", stars:5, text:"Elegant, fast and affordable. We got so many compliments from family across India and the UK." },
   { name:"Florian G.", loc:"Strasbourg, France", stars:5, text:"L'équipe a été très à l'écoute. Notre invitation était prête en 20h chrono!" },
   { name:"Alice &amp; Ben H.", loc:"Sydney, Australia", stars:5, text:"Ordered from Australia and the experience was seamless. Communication was prompt and professional." },
-  { name:"Camille R.", loc:"Toulouse, France", stars:5, text:"La section RSVP est géniale — les réponses arrivent directement dans ma boîte mail, zéro stress." },
+  { name:"Camille R.", loc:"Toulouse, France", stars:5, text:"La section RSVP est géniale, les réponses arrivent directement dans ma boîte mail, zéro stress." },
   { name:"Omar &amp; Dina K.", loc:"Cairo, Egypt", stars:5, text:"The Dark Gold Luxury template was majestic. Exactly the grand impression we wanted to make." },
   { name:"Elise M.", loc:"Nantes, France", stars:5, text:"Je recommande à 1000%. L'invitation était tellement belle que certains invités ont voulu l'encadrer." },
   { name:"Lucas &amp; Marie F.", loc:"Lille, France", stars:5, text:"Excellent rapport qualité-prix. Nous avons choisi le pack Premium et nous ne regrettons pas." },
@@ -2148,16 +2212,16 @@ const SEED_REVIEWS = [
   { name:"Julie &amp; Thomas M.", loc:"Rennes, France", stars:5, text:"Notre invitation était tellement élégante. Les photos intégrées rendaient le tout très personnel." },
   { name:"Fatima Z.", loc:"Rabat, Morocco", stars:5, text:"Service impeccable, résultat magnifique. Je recommande Cardia Studios sans hésitation." },
   { name:"Charlotte &amp; Oliver S.", loc:"Edinburgh, UK", stars:5, text:"Gorgeous designs and a really smooth experience from start to finish. Will recommend to everyone." },
-  { name:"Manon B.", loc:"Grenoble, France", stars:5, text:"L'invitation musicale avec fond sonore était un vrai plus — nos invités ont adoré l'effet!" },
+  { name:"Manon B.", loc:"Grenoble, France", stars:5, text:"L'invitation musicale avec fond sonore était un vrai plus, nos invités ont adoré l'effet!" },
   { name:"Anastasia V.", loc:"Athens, Greece", stars:5, text:"The Royal Floral theme was breathtaking. Even my grandmother said it was the most beautiful invitation she'd ever seen." },
-  { name:"Kevin &amp; Laura D.", loc:"Geneva, Switzerland", stars:5, text:"Swiss quality standards — and Cardia Studios met them! Fast, precise, and stunningly beautiful." },
+  { name:"Kevin &amp; Laura D.", loc:"Geneva, Switzerland", stars:5, text:"Swiss quality standards, and Cardia Studios met them! Fast, precise, and stunningly beautiful." },
   { name:"Inès &amp; Julien P.", loc:"Paris, France", stars:5, text:"On a adoré le processus : on envoie nos infos, ils créent la magie. Simple, rapide, parfait." },
   { name:"Sophia N.", loc:"Nairobi, Kenya", stars:5, text:"I wanted something classy for an international wedding. The Soft & Minimal theme was perfection." },
   { name:"Tarek &amp; Hana A.", loc:"Beirut, Lebanon", stars:5, text:"خدمة ممتازة والنتيجة كانت خيالية. كل ضيوفنا سألونا عن مصدر الدعوة الإلكترونية." },
   { name:"Mathilde C.", loc:"Montpellier, France", stars:5, text:"Design recherché, livraison rapide et équipe très sympathique. Que demander de plus?" },
   { name:"Rosa &amp; Diego M.", loc:"Barcelona, Spain", stars:5, text:"The Italian theme was perfect for our Mediterranean wedding. Absolutely gorgeous!" },
   { name:"Claire &amp; Nicolas R.", loc:"Metz, France", stars:5, text:"Habitant à Metz, je suis ravie d'avoir trouvé un service aussi professionnel et élégant." },
-  { name:"Layla T.", loc:"Beirut, Lebanon", stars:5, text:"The Blue Rose Garden was so romantic — every detail was exactly as we described. Thank you!" },
+  { name:"Layla T.", loc:"Beirut, Lebanon", stars:5, text:"The Blue Rose Garden was so romantic, every detail was exactly as we described. Thank you!" },
   { name:"Paul &amp; Emilie G.", loc:"Nîmes, France", stars:5, text:"Parfait de A à Z. L'invitation personnalisée avec musique de fond a fait pleurer nos parents!" },
   { name:"Sandra H.", loc:"Zurich, Switzerland", stars:5, text:"Quick turnaround and stunning result. The invitation set the tone for our entire wedding." },
   { name:"Amal &amp; Joseph N.", loc:"Jounieh, Lebanon", stars:5, text:"الموقع رائع والخدمة أروع. تسليم سريع والنتيجة فاقت توقعاتنا بكثير." },
@@ -2166,7 +2230,7 @@ const SEED_REVIEWS = [
   { name:"Aurélie M.", loc:"Clermont-Ferrand, France", stars:5, text:"J'ai commandé à la dernière minute et l'invitation était prête en moins de 12h. Incroyable!" },
   { name:"Sara &amp; Ali B.", loc:"Abu Dhabi, UAE", stars:5, text:"Luxurious feel, elegant design, and a team that listened to every detail. Highly recommended." },
   { name:"Marine &amp; Alexis D.", loc:"Bordeaux, France", stars:5, text:"Notre mariage était dans deux semaines et ils ont tout livré en temps record. Merci infiniment!" },
-  { name:"Hana &amp; Rami C.", loc:"Beirut, Lebanon", stars:5, text:"The Ciel Divin theme was breathtaking — our guests felt like they were opening a piece of art." },
+  { name:"Hana &amp; Rami C.", loc:"Beirut, Lebanon", stars:5, text:"The Ciel Divin theme was breathtaking, our guests felt like they were opening a piece of art." },
   { name:"Louise &amp; Henri T.", loc:"Tours, France", stars:5, text:"Simple, élégant, efficace. On a reçu exactement ce qu'on voulait. Je recommande à tous les futurs mariés." },
 ];
 
