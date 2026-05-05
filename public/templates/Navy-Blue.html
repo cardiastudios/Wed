@@ -170,8 +170,30 @@
     .cal-cell { position: relative; min-height: 34px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; }
     .cal-cell.hdr { font-family: 'Montserrat', sans-serif; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
     .cal-cell.empty { opacity: 0; }
-    .cal-cell.highlight { color: #fff; font-weight: 700; }
-    .cal-cell.highlight::before { content: ""; position: absolute; width: 34px; height: 34px; border-radius: 50%; z-index: -1; }
+    .cal-cell.highlight {
+      position: relative;
+      color: var(--gold-text);
+      font-weight: 700;
+      overflow: visible;
+      z-index: 2;
+    }
+    .cal-cell.highlight::before { display: none !important; }
+    .cal-cell.highlight::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Dark%20floral%20envelope/Heart.png') center / contain no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .cal-cell.highlight .day-txt {
+      position: relative;
+      z-index: 2;
+    }
 
     .countdown { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 34px; width: 100%; }
     .count-item { min-width: 76px; padding: 0 8px; border-right: 1px solid; }
@@ -368,7 +390,7 @@
     #mainInvite > .section:nth-of-type(odd) .parent-card,
     #mainInvite > .section:nth-of-type(odd) .calendar-card,
     #mainInvite > .section:nth-of-type(odd) .info-card { background: rgba(255,255,255,.70); border: 1px solid var(--border-col); box-shadow: 0 8px 24px rgba(100,70,30,.10); border-radius: 18px; }
-    #mainInvite > .section:nth-of-type(odd) .cal-cell.highlight::before { background: var(--gold-text); }
+    #mainInvite > .section:nth-of-type(odd) .cal-cell.highlight::before { display: none !important; }
     #mainInvite > .section:nth-of-type(odd) .album-dot { background: rgba(140,106,58,.28); }
     #mainInvite > .section:nth-of-type(odd) .album-dot.active { background: var(--gold-text); }
     #mainInvite > .section:nth-of-type(odd) .album-arrow { color: var(--gold-text); border-color: var(--border-col); }
@@ -434,7 +456,7 @@
     #mainInvite > .section.gold .parent-card,
     #mainInvite > .section.gold .info-card { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.32); box-shadow: 0 8px 24px rgba(0,0,0,.10); border-radius: 18px; }
     #mainInvite > .section:nth-of-type(even) .cal-cell.highlight::before,
-    #mainInvite > .section.gold .cal-cell.highlight::before { background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.14); }
+    #mainInvite > .section.gold .cal-cell.highlight::before { display: none !important; }
     #mainInvite > .section:nth-of-type(even) .cal-cell.highlight,
     #mainInvite > .section.gold .cal-cell.highlight { color: var(--gold-text); }
     #mainInvite > .section:nth-of-type(even) .album-dot,
@@ -911,10 +933,10 @@
 
           <div class="album" id="album">
             <div class="album-track" id="albumTrack">
-              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 1" /></div>
-              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 2" /></div>
-              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 3" /></div>
-              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 4" /></div>
+              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Couple photo 1" /></div>
+              <div class="album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1200&auto=format&fit=crop" alt="Couple photo 2" /></div>
+              <div class="album-slide"><img loading="lazy" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/weddd.jpg" alt="Couple photo 3" /></div>
+              <div class="album-slide"><img loading="lazy" src="https://images.pexels.com/photos/182006/pexels-photo-182006.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Couple photo 4" /></div>
             </div>
             <button class="album-arrow prev" type="button" aria-label="Previous album slide" onclick="moveAlbum(-1)">‹</button>
             <button class="album-arrow next" type="button" aria-label="Next album slide" onclick="moveAlbum(1)">›</button>
@@ -1080,7 +1102,11 @@
       for (let day = 1; day <= 31; day++) {
         const el = document.createElement('div');
         el.className = 'cal-cell' + (day === 14 ? ' highlight' : '');
-        el.textContent = day;
+        if (day === 14) {
+          el.innerHTML = '<span class="day-txt">14</span>';
+        } else {
+          el.textContent = day;
+        }
         grid.appendChild(el);
       }
     })();
