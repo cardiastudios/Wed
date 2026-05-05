@@ -201,7 +201,8 @@ video {
 .hero-and {
   font-family: 'Cormorant Garamond', serif;
   font-size: 31px;
-  color: #ead1ac;
+  font-weight: 900;
+  color: #9C7B5A;
   margin: 4px 0;
 }
 
@@ -486,7 +487,7 @@ video {
 /* ===== Venue page ===== */
 .venue-card-page {
   justify-content: flex-start;
-  padding-top: 50px;
+  padding-top: 52px;
   padding-bottom: 54px;
 }
 
@@ -495,8 +496,8 @@ video {
 }
 
 .venue-card-page .subtitle {
-  margin-top: 8px;
-  margin-bottom: 22px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .info-card {
@@ -516,6 +517,7 @@ video {
   box-shadow: none;
   border: none;
   padding: 0;
+  margin-top: 0;
 }
 
 .info-card .venue-name {
@@ -530,6 +532,10 @@ video {
   height: 1px;
   background: var(--border);
   margin: 22px auto;
+}
+
+.venue-card-page .thin-line {
+  margin: 14px auto;
 }
 
 .venue-meta {
@@ -921,7 +927,7 @@ body.fr .block.lang-en {
   }
 
   .venue-card-page {
-    padding-top: 80px;
+    padding-top: 52px;
   }
 
   .album-slide img {
@@ -964,14 +970,7 @@ body.fr .block.lang-en {
     </video>
     <div class="hero-content">
      <div class="hero-top">
-      <p class="hero-small">
-       <span class="lang-en">
-        Together with their families
-       </span>
-       <span class="lang-fr">
-        Avec leurs familles
-       </span>
-      </p>
+ 
       <h1 class="hero-name">
        Thomas
       </h1>
@@ -1562,7 +1561,7 @@ function toggleMusic(){if(musicOn){music.pause();musicOn=false;musicBtn.textCont
 function updateCountdown(){const target=new Date(CONFIG.weddingDate);const now=new Date();const diff=Math.max(0,target-now);const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff/(1000*60*60))%24);const minutes=Math.floor((diff/(1000*60))%60);const seconds=Math.floor((diff/1000)%60);document.getElementById('cdDays').textContent=days;document.getElementById('cdHours').textContent=String(hours).padStart(2,'0');document.getElementById('cdMinutes').textContent=String(minutes).padStart(2,'0');document.getElementById('cdSeconds').textContent=String(seconds).padStart(2,'0')}
 updateCountdown();setInterval(updateCountdown,1000);
 let guests=1;function changeGuests(delta){guests=Math.max(1,Math.min(10,guests+delta));const guestDisplay=document.getElementById('guestCount');if(guestDisplay){guestDisplay.textContent=String(guests);guestDisplay.innerText=String(guests)}}
-function sendRSVP(e){e.preventDefault();const form=document.getElementById('rsvpForm');const status=document.getElementById('formStatus');const sendBtn=form.querySelector('.send-btn');const attendingInput=document.querySelector('input[name="attending"]:checked');const attending=attendingInput?attendingInput.value:'Yes';const fullName=document.getElementById('fullName').value.trim();const message=document.getElementById('message').value.trim();if(!fullName){status.textContent=t('Please enter your name.','Merci d’indiquer votre nom.');return}status.textContent='';sendBtn.textContent=t('Sending...','Envoi en cours...');sendBtn.disabled=true;fetch('https://formsubmit.co/ajax/'+CONFIG.rsvpEmail,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New RSVP - '+CONFIG.coupleName,_template:'table',name:fullName,attending:attending,guests:attending==='Yes'?guests:0,message:message||'(none)'})}).then(r=>r.json()).then(data=>{if(data.success==='true'||data.success===true){form.innerHTML='<div style="text-align:center;padding:28px 0;"><div style="font-size:44px;margin-bottom:10px;">✨</div><h3 style="font-family:Great Vibes,cursive;font-size:46px;color:var(--accent);font-weight:400;margin-bottom:12px;">'+t('Thank you!','Merci !')+'</h3><p style="font-family:Cormorant Garamond,serif;font-size:19px;line-height:1.6;color:var(--ink);">'+t('Your RSVP has been sent successfully.','Votre réponse a bien été envoyée.')+'</p></div>'}else{throw new Error('Formsubmit error')}}).catch(()=>{sendBtn.innerHTML='<span class="lang-en">Send RSVP</span><span class="lang-fr">Envoyer la réponse</span>';sendBtn.disabled=false;status.textContent=t('Something went wrong. Please try again.','Une erreur est survenue. Merci de réessayer.')})}
+function sendRSVP(e){e.preventDefault();const form=document.getElementById('rsvpForm');const status=document.getElementById('formStatus');const sendBtn=form.querySelector('.send-btn');const attendingInput=document.querySelector('input[name="attending"]:checked');const attending=attendingInput?attendingInput.value:'Yes';const fullName=document.getElementById('fullName').value.trim();const message=document.getElementById('message').value.trim();if(!fullName){status.textContent=t('Please enter your name.','Merci d\u2019indiquer votre nom.');return}status.textContent='';sendBtn.textContent=t('Sending...','Envoi en cours...');sendBtn.disabled=true;fetch('https://formsubmit.co/ajax/'+CONFIG.rsvpEmail,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New RSVP - '+CONFIG.coupleName,_template:'table',name:fullName,attending:attending,guests:attending==='Yes'?guests:0,message:message||'(none)'})}).then(r=>r.json()).then(data=>{if(data.success==='true'||data.success===true){form.innerHTML='<div style="text-align:center;padding:28px 0;"><div style="font-size:44px;margin-bottom:10px;">✨</div><h3 style="font-family:Great Vibes,cursive;font-size:46px;color:var(--accent);font-weight:400;margin-bottom:12px;">'+t('Thank you!','Merci !')+'</h3><p style="font-family:Cormorant Garamond,serif;font-size:19px;line-height:1.6;color:var(--ink);">'+t('Your RSVP has been sent successfully.','Votre réponse a bien été envoyée.')+'</p></div>'}else{throw new Error('Formsubmit error')}}).catch(()=>{sendBtn.innerHTML='<span class="lang-en">Send RSVP</span><span class="lang-fr">Envoyer la réponse</span>';sendBtn.disabled=false;status.textContent=t('Something went wrong. Please try again.','Une erreur est survenue. Merci de réessayer.')})}
 let revealObserver;function observeReveals(){if(revealObserver)return;revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el))}
 let albumIndex=0;let albumReady=false;let albumTimer=null;
 function initAlbum(){if(albumReady)return;albumReady=true;const track=document.getElementById('albumTrack');const dotsWrap=document.getElementById('albumDots');const slides=track.children.length;for(let i=0;i<slides;i++){const dot=document.createElement('button');dot.className='album-dot'+(i===0?' active':'');dot.type='button';dot.onclick=()=>albumGo(i);dotsWrap.appendChild(dot)}const album=document.getElementById('album');let startX=0;let startY=0;album.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY},{passive:true});album.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX;const dy=e.changedTouches[0].clientY-startY;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){albumMove(dx<0?1:-1)}},{passive:true});albumTimer=setInterval(()=>albumMove(1),3800)}
