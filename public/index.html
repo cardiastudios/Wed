@@ -1864,6 +1864,52 @@ html, body { background: #F7F7F7 !important; }
   .nav-select { min-width: 58px !important; height: 32px !important; padding: 0 .45rem !important; font-size: .52rem !important; }
 }
 
+
+
+/* Collection layout: the main collection title appears first, then Best Sellers, then Book + Classic rows */
+#templates { scroll-margin-top: 78px; }
+#templates > .section-header { padding-bottom: 1.5rem; }
+#templates #bestsellers { padding-top: 1.5rem; }
+#bestsellers.collection-subsection { background: #F7F7F7; }
+@media (max-width:640px) {
+  #templates { scroll-margin-top: 62px; }
+  #templates #bestsellers { padding-top: 1rem; }
+}
+
+
+
+/* ═══════════════════════════════════════
+   HERO GALLERY SIZE FIX
+   All top-gallery previews now use the exact large, flat placement
+   that was previously only applied to the 4th image.
+═══════════════════════════════════════ */
+.hero-template-track img {
+  width: clamp(155px, 13.5vw, 235px) !important;
+  height: clamp(275px, 24vw, 418px) !important;
+  transform: perspective(900px) rotateY(0deg) rotateZ(0deg) !important;
+  --yaw: 0deg !important;
+  --tilt: 0deg !important;
+}
+.hero-template-track img:nth-child(2n),
+.hero-template-track img:nth-child(3n),
+.hero-template-track img:nth-child(4) {
+  width: clamp(155px, 13.5vw, 235px) !important;
+  height: clamp(275px, 24vw, 418px) !important;
+  transform: perspective(900px) rotateY(0deg) rotateZ(0deg) !important;
+  --yaw: 0deg !important;
+  --tilt: 0deg !important;
+}
+@media (max-width: 600px) {
+  .hero-template-track img,
+  .hero-template-track img:nth-child(2n),
+  .hero-template-track img:nth-child(3n),
+  .hero-template-track img:nth-child(4) {
+    width: 155px !important;
+    height: 275px !important;
+    transform: perspective(900px) rotateY(0deg) rotateZ(0deg) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1872,7 +1918,7 @@ html, body { background: #F7F7F7 !important; }
 <nav class="nav">
   <a href="#" class="nav-logo"><img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/BG/Nlogo3a.png" alt="Cardia Studios"><span class="nav-brand-text">Cardia Studios</span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#bestsellers" class="nav-link" onclick="closeMenu()">Templates</a>
+    <a href="#templates" class="nav-link" onclick="closeMenu()">Templates</a>
     <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
@@ -1916,6 +1962,7 @@ html, body { background: #F7F7F7 !important; }
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_1.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_2.png" alt="Template A2 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_4.png" alt="Template A7 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_3.png" alt="Template A4 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A5_1.png" alt="Template A5 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A6_3.png" alt="Template A6 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
@@ -1924,18 +1971,27 @@ html, body { background: #F7F7F7 !important; }
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_2.png" alt="Template A2 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A4_2.png" alt="Template A4 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
-      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A5_2.png" alt="Template A5 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A5_4.png" alt="Template A5 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A6_2.png" alt="Template A6 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_2.png" alt="Template A7 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+        
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-arrow"></div><span>Scroll</span></div>
 </section>
 
-<!-- ═══ BEST SELLERS ═══ -->
-<section id="bestsellers">
+<!-- TEMPLATES / COLLECTION -->
+<section id="templates">
+  <div class="section-header reveal">
+    <h2>Our Collection</h2>
+    <p>Exclusive designs, one for every love story</p>
+    <div class="gold-line"></div>
+  </div>
+
+  <!-- ═══ BEST SELLERS ═══ -->
+  <section id="bestsellers" class="collection-subsection">
   <div class="bestsellers-header reveal">
-    <h2>Best Sellers</h2>
+    <h3>Best Sellers</h3>
     <p>Our most loved designs — chosen by couples around the world</p>
     <div class="gold-line"></div>
   </div>
@@ -2195,14 +2251,6 @@ html, body { background: #F7F7F7 !important; }
 
   </div>
 </section>
-
-<!-- TEMPLATES -->
-<section id="templates">
-  <div class="section-header reveal">
-    <h2>Our Collection</h2>
-    <p>Exclusive designs, one for every love story</p>
-    <div class="gold-line"></div>
-  </div>
 
   <!-- ══ ROW 1: Book-Style Invitations ══ -->
   <div class="category-block reveal">
