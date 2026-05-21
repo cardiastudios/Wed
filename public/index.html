@@ -1910,6 +1910,50 @@ html, body { background: #F7F7F7 !important; }
   }
 }
 
+
+
+/* ═══════════════════════════════════════
+   BEST SELLERS — PREVIEW EYE BUTTON
+   Adds the round eye preview icon to every Best Seller card.
+   The Template ID is still shown in the text area, so the old top-right ID pill is hidden.
+═══════════════════════════════════════ */
+#bestsellers .bs-template-id {
+  display: none !important;
+}
+
+#bestsellers .bs-card-visual::after {
+  content: "";
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background-color: #6f2638;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23fff7f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 21px 21px;
+  box-shadow: 0 10px 24px rgba(42,32,24,.18);
+  pointer-events: none;
+}
+
+#bestsellers .bs-card:hover .bs-card-visual::after {
+  transform: scale(1.06);
+  box-shadow: 0 14px 30px rgba(42,32,24,.24);
+}
+
+@media (max-width: 640px) {
+  #bestsellers .bs-card-visual::after {
+    width: 38px;
+    height: 38px;
+    top: .95rem;
+    right: .95rem;
+    background-size: 19px 19px;
+  }
+}
+
 </style>
 </head>
 <body>
