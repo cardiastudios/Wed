@@ -29,6 +29,19 @@
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A6_2.png" fetchpriority="high">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_1.png" fetchpriority="high">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_2.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_3.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_4.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_5.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_6.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_7.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_8.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_9.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_10.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_11.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_12.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_13.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_14.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_15.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1954,6 +1967,43 @@ html, body { background: #F7F7F7 !important; }
   }
 }
 
+
+
+/* A7 Quiet Luxury color dots on homepage preview */
+#bestsellers .bs-card[data-template="A7"] .bs-card-visual {
+  position: relative;
+}
+#bestsellers .a7-preview-colors {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(42,32,24,.12);
+  box-shadow: 0 8px 24px rgba(42,32,24,.12);
+}
+#bestsellers .a7-preview-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(42,32,24,.22);
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  background: var(--a7-dot);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+}
+#bestsellers .a7-preview-color.is-active {
+  outline: 2px solid rgba(42,32,24,.48);
+  outline-offset: 2px;
+}
+
 </style>
 </head>
 <body>
@@ -2006,7 +2056,7 @@ html, body { background: #F7F7F7 !important; }
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_1.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_2.png" alt="Template A2 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
-      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_4.png" alt="Template A7 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_9.png" alt="Template A7 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_3.png" alt="Template A4 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A5_1.png" alt="Template A5 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A6_3.png" alt="Template A6 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
@@ -2249,7 +2299,7 @@ html, body { background: #F7F7F7 !important; }
     
    
       <!-- Quiet Luxury-->
-   <a class="bs-card reveal" href="https://www.cardiastudios.com/templates/Quiet_Luxury_Color_Switcher.publish.html" target="_blank"
+   <a class="bs-card reveal" data-template="A7" href="https://www.cardiastudios.com/templates/Quiet_Luxury_Color_Switcher.publish.html" target="_blank"
    style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(180,210,225,.20) 0%, rgba(220,235,245,.10) 70%, transparent 100%);">
   <div class="bs-card-visual">
     <div class="bs-badge">Best Seller</div>
@@ -3612,15 +3662,76 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* Requested homepage preview mapping: A1-A7 PNG files from /AA/ */
 (function(){
   const base = 'https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/';
-  const countByTemplate = { A1: 5, A2: 3, A3: 3, A4: 5, A5: 5, A6: 4, A7: 5 };
+
+  const templateMeta = {
+    A1: { pages: 5 },
+    A2: { pages: 3 },
+    A3: { pages: 3 },
+    A4: { pages: 5 },
+    A5: { pages: 5 },
+    A6: { pages: 4 },
+    A7: {
+      pages: 15,
+      colors: [
+        { name: 'Pale blue', dot: '#97C4D4', start: 1,  grad: 'radial-gradient(ellipse at 50% 70%, rgba(180,210,225,.20) 0%, rgba(220,235,245,.10) 70%, transparent 100%)' },
+        { name: 'Caramel',   dot: '#B9875C', start: 4,  grad: 'radial-gradient(ellipse at 50% 70%, rgba(181,128,79,.22) 0%, rgba(232,215,190,.14) 70%, transparent 100%)' },
+        { name: 'Navy',      dot: '#003F6B', start: 7,  grad: 'radial-gradient(ellipse at 50% 70%, rgba(0,63,107,.22) 0%, rgba(210,225,235,.10) 70%, transparent 100%)' },
+        { name: 'Blush',     dot: '#D4A0B0', start: 10, grad: 'radial-gradient(ellipse at 50% 70%, rgba(212,160,176,.24) 0%, rgba(245,225,232,.14) 70%, transparent 100%)' },
+        { name: 'Slate',     dot: '#516164', start: 13, grad: 'radial-gradient(ellipse at 50% 70%, rgba(81,97,100,.24) 0%, rgba(225,230,228,.12) 70%, transparent 100%)' }
+      ]
+    }
+  };
+
+  function setImg(el, template, index){
+    if(!el) return;
+    el.src = `${base}${template}_${index}.png`;
+  }
 
   function img(template, index, className, alt){
     const el = document.createElement('img');
     el.src = `${base}${template}_${index}.png`;
     el.alt = alt;
     el.loading = 'lazy';
+    el.decoding = 'async';
     el.className = className;
     return el;
+  }
+
+  function setA7PreviewColor(card, colorIndex){
+    const meta = templateMeta.A7.colors[colorIndex] || templateMeta.A7.colors[0];
+    card.dataset.a7Color = String(colorIndex + 1);
+    setImg(card.querySelector('.bs-png-main'), 'A7', meta.start);
+    setImg(card.querySelector('.bs-png-inner.one'), 'A7', meta.start + 1);
+    setImg(card.querySelector('.bs-png-inner.two'), 'A7', meta.start + 2);
+    card.style.setProperty('--bs-grad', meta.grad);
+    card.querySelectorAll('.a7-preview-color').forEach((btn, i) => {
+      btn.classList.toggle('is-active', i === colorIndex);
+      btn.setAttribute('aria-pressed', i === colorIndex ? 'true' : 'false');
+    });
+  }
+
+  function addA7ColorDots(card, visual){
+    if(visual.querySelector('.a7-preview-colors')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'a7-preview-colors';
+    wrap.setAttribute('aria-label', 'Switch Quiet Luxury preview color');
+
+    templateMeta.A7.colors.forEach((color, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'a7-preview-color' + (i === 0 ? ' is-active' : '');
+      btn.style.setProperty('--a7-dot', color.dot);
+      btn.setAttribute('aria-label', color.name);
+      btn.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        setA7PreviewColor(card, i);
+      });
+      wrap.appendChild(btn);
+    });
+
+    visual.appendChild(wrap);
   }
 
   function modernizeBestSellerPreviews(){
@@ -3631,7 +3742,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
       visual.querySelectorAll('.phone-back, .phone-wrap').forEach(el => el.remove());
 
-      const max = countByTemplate[id] || 3;
+      const max = templateMeta[id]?.pages || 3;
       const stack = document.createElement('div');
       stack.className = 'bs-png-stack';
       const phoneFrame = document.createElement('div');
@@ -3641,6 +3752,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       stack.appendChild(img(id, Math.min(2, max), 'bs-png-inner one', `${id} inner page preview`));
       stack.appendChild(img(id, Math.min(3, max), 'bs-png-inner two', `${id} second inner page preview`));
       visual.appendChild(stack);
+
+      if(id === 'A7') {
+        card.dataset.template = 'A7';
+        addA7ColorDots(card, visual);
+        setA7PreviewColor(card, 0);
+      }
     });
   }
 
