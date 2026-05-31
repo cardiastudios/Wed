@@ -635,6 +635,24 @@
     color: #C8522A;
     word-break: break-word;
   }
+
+  .guest-response-input {
+    width: 100% !important;
+    margin-top: 8px !important;
+    padding: 8px 0 !important;
+    border: none !important;
+    border-bottom: 1.5px solid var(--border) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #C8522A !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 18px !important;
+    outline: none !important;
+  }
+  .guest-response-input::placeholder {
+    color: rgba(200,82,42,.62);
+  }
+
   .guest-response-options {
     display: flex;
     gap: 8px;
@@ -677,7 +695,47 @@
     color: #C8522A;
   }
   .manual-guest-list-wrap {
-    display: none;
+    display: block;
+  }
+
+  .guest-slot-name-list {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+    margin: 18px 0 8px;
+  }
+  .guest-slot-name-box {
+    width: 100%;
+    border: 1.5px solid rgba(200,82,42,.62);
+    border-radius: 14px;
+    padding: 14px 14px 12px;
+    background: rgba(255,248,235,.24);
+  }
+  .guest-slot-name-label {
+    display: block;
+    margin: 0 0 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #C8522A;
+  }
+  .guest-slot-name-box input {
+    width: 100%;
+    border: none !important;
+    border-bottom: 1.5px solid rgba(200,82,42,.52) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #C8522A !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 22px !important;
+    outline: none;
+  }
+  .guest-slot-name-box input::placeholder {
+    color: rgba(200,82,42,.58) !important;
   }
   @media (max-width:420px) {
     .guest-response-card { grid-template-columns: 1fr; }
@@ -2080,12 +2138,10 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
           <p id="personalGuestNote" class="guest-welcome-note">Please confirm who can attend from this invitation.</p>
 
           <div id="manualGuestListWrap" class="manual-guest-list-wrap">
-            <label class="form-label" for="guestNamesManual">Guest name(s)</label>
-            <textarea id="guestNamesManual" class="form-field" rows="3" placeholder="Example: Celia, Chbin"></textarea>
-            <p id="guestLimitNote" style="display:none; font-family:'Cormorant Garamond',serif; font-size:16px; line-height:1.45; margin-top:8px; color:#C8522A; text-align:center;"></p>
+            <div id="guestSlotNameList" class="guest-slot-name-list"></div>
           </div>
 
-          <p class="error-msg" id="errName">Please enter at least one guest name.</p>
+          <p class="error-msg" id="errName">Please enter a name for each guest.</p>
           <button class="btn-solid rsvp-main-btn" type="button" onclick="goStep(1,2)">Continue →</button>
         </div>
 
@@ -2239,12 +2295,12 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
   tickCountdown();
   setInterval(tickCountdown, 1000);
 
-  /* Personalized invitation links by guest names + guest limit
-     Examples:
-     invitation.html?guests=Celia%7CChbin&limit=2
-     invitation.html?guest=Celia&limit=1
-
-     The RSVP creates one Yes/No choice per invited person.
+  /* Anonymous per-seat RSVP links
+     The client still writes real names in the generator, but the invitation shows:
+     Guest 1, Guest 2, Guest 3...
+     Each guest enters their own name and chooses Yes/No.
+     Example:
+     invitation.html?invite=Celia%7CChbin&limit=2
   */
   const inviteParams = new URLSearchParams(window.location.search);
 
@@ -2256,64 +2312,75 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       .filter(Boolean);
   }
 
-  const urlGuests = [
-    ...decodeGuestList(inviteParams.get('guests') || ''),
-    ...decodeGuestList(inviteParams.get('guest') || '')
-  ];
-  const uniqueUrlGuests = [...new Set(urlGuests)];
-  const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueUrlGuests.length || 1), 10);
-  const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueUrlGuests.length, 1);
-
-  let invitedGuests = uniqueUrlGuests.slice(0, guestLimit);
-  let guestResponses = invitedGuests.map(name => ({ name, attending: '' }));
-
-  function formatGuestNames(names) {
-    if (!names.length) return 'Guest';
-    if (names.length === 1) return names[0];
-    if (names.length === 2) return names[0] + ' & ' + names[1];
-    return names.slice(0, -1).join(', ') + ' & ' + names[names.length - 1];
-  }
-
   function escapeHTML(value) {
     return String(value).replace(/[&<>"']/g, char => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
     }[char]));
   }
 
+  function formatGuestNames(names) {
+    const clean = names.map(name => String(name || '').trim()).filter(Boolean);
+    if (!clean.length) return 'Guest';
+    if (clean.length === 1) return clean[0];
+    if (clean.length === 2) return clean[0] + ' & ' + clean[1];
+    return clean.slice(0, -1).join(', ') + ' & ' + clean[clean.length - 1];
+  }
+
+  const hiddenInvitedGroup = [
+    ...decodeGuestList(inviteParams.get('invite') || ''),
+    ...decodeGuestList(inviteParams.get('group') || ''),
+    ...decodeGuestList(inviteParams.get('guests') || ''),
+    ...decodeGuestList(inviteParams.get('guest') || '')
+  ];
+
+  const uniqueHiddenInvitedGroup = [...new Set(hiddenInvitedGroup)];
+  const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueHiddenInvitedGroup.length || 1), 10);
+  const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueHiddenInvitedGroup.length, 1);
+
+  const invitedGroupForClient = formatGuestNames(uniqueHiddenInvitedGroup.slice(0, guestLimit));
+  let guestResponses = Array.from({ length: guestLimit }, (_, index) => ({
+    slot: 'Guest ' + (index + 1),
+    name: '',
+    attending: ''
+  }));
+
   function applyPersonalGuestLink() {
     const guestWelcomeName = document.getElementById('guestWelcomeName');
     const personalGuestNote = document.getElementById('personalGuestNote');
     const manualWrap = document.getElementById('manualGuestListWrap');
-    const manualInput = document.getElementById('guestNamesManual');
-    const guestLimitNote = document.getElementById('guestLimitNote');
 
-    if (guestWelcomeName) guestWelcomeName.textContent = formatGuestNames(invitedGuests);
+    if (guestWelcomeName) guestWelcomeName.textContent = 'Guest';
 
-    if (invitedGuests.length) {
-      if (personalGuestNote) {
-        personalGuestNote.textContent = invitedGuests.length === 1
-          ? 'Please confirm if this guest will attend.'
-          : 'Please confirm who can attend from this invitation.';
-      }
-      if (manualWrap) manualWrap.style.display = 'none';
-    } else {
-      if (personalGuestNote) personalGuestNote.textContent = 'Please enter the invited guest names to confirm the RSVP.';
-      if (manualWrap) manualWrap.style.display = 'block';
-      if (manualInput) manualInput.placeholder = guestLimit === 1 ? 'Example: Celia' : 'Example: Celia, Chbin';
-      if (guestLimitNote) {
-        guestLimitNote.style.display = 'block';
-        guestLimitNote.textContent = guestLimit === 1
-          ? 'This invitation allows 1 guest.'
-          : 'This invitation allows up to ' + guestLimit + ' guests.';
-      }
+    if (personalGuestNote) {
+      personalGuestNote.textContent = guestLimit === 1
+        ? 'Please enter your name to confirm the RSVP.'
+        : 'Please enter the guest names to confirm the RSVP.';
     }
 
+    if (manualWrap) manualWrap.style.display = 'block';
+
+    renderGuestNameBoxes();
     renderGuestResponseList();
   }
 
-  function getManualGuestNames() {
-    const manualInput = document.getElementById('guestNamesManual');
-    return decodeGuestList(manualInput ? manualInput.value : '').slice(0, guestLimit);
+  function renderGuestNameBoxes() {
+    const boxList = document.getElementById('guestSlotNameList');
+    if (!boxList) return;
+
+    boxList.innerHTML = guestResponses.map((guest, index) => {
+      const safeName = escapeHTML(guest.name || '');
+      return `
+        <div class="guest-slot-name-box">
+          <label class="guest-slot-name-label" for="guestSlotInput${index}">Guest ${index + 1}</label>
+          <input
+            id="guestSlotInput${index}"
+            type="text"
+            value="${safeName}"
+            placeholder="Write name"
+            oninput="setGuestName(${index}, this.value)"
+          />
+        </div>`;
+    }).join('');
   }
 
   function renderGuestResponseList() {
@@ -2321,12 +2388,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     if (!list) return;
 
     list.innerHTML = guestResponses.map((guest, index) => {
-      const safeName = escapeHTML(guest.name);
+      const safeName = escapeHTML(guest.name || guest.slot);
       const yesChecked = guest.attending === 'Yes' ? ' checked' : '';
       const noChecked = guest.attending === 'No' ? ' checked' : '';
       return `
         <div class="guest-response-card">
-          <div class="guest-response-name">${safeName}</div>
+          <div class="guest-response-name">
+            <div>${safeName}</div>
+          </div>
           <div class="guest-response-options">
             <label>
               <input type="radio" name="guestAttend${index}" value="Yes"${yesChecked} onchange="setGuestResponse(${index}, 'Yes')" />
@@ -2341,6 +2410,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     }).join('');
 
     updateGuestTotal();
+  }
+
+  function setGuestName(index, value) {
+    if (!guestResponses[index]) return;
+    guestResponses[index].name = value.trim();
+    const errName = document.getElementById('errName');
+    if (errName) errName.style.display = 'none';
+    renderGuestResponseList();
   }
 
   function setGuestResponse(index, value) {
@@ -2360,21 +2437,32 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
   applyPersonalGuestLink();
 
   function goStep(from, to) {
-    if (from === 1) {
-      if (!invitedGuests.length) {
-        invitedGuests = getManualGuestNames();
-        if (!invitedGuests.length) { document.getElementById('errName').style.display = 'block'; return; }
-        guestResponses = invitedGuests.map(name => ({ name, attending: '' }));
-        const guestWelcomeName = document.getElementById('guestWelcomeName');
-        if (guestWelcomeName) guestWelcomeName.textContent = formatGuestNames(invitedGuests);
+    if (from === 1 && to === 2) {
+      const allNamed = guestResponses.every(guest => guest.name && guest.name.trim());
+      if (!allNamed) {
+        const errName = document.getElementById('errName');
+        if (errName) {
+          errName.textContent = 'Please enter a name for each guest.';
+          errName.style.display = 'block';
+        }
+        return;
       }
-      document.getElementById('errName').style.display = 'none';
+
+      const errName = document.getElementById('errName');
+      if (errName) errName.style.display = 'none';
       renderGuestResponseList();
     }
 
     if (from === 2 && to === 3) {
-      const allAnswered = guestResponses.length && guestResponses.every(guest => guest.attending === 'Yes' || guest.attending === 'No');
-      if (!allAnswered) { document.getElementById('errAttend').style.display = 'block'; return; }
+      const allAnswered = guestResponses.every(guest => guest.attending === 'Yes' || guest.attending === 'No');
+      if (!allAnswered) {
+        const errAttend = document.getElementById('errAttend');
+        if (errAttend) {
+          errAttend.textContent = 'Please choose Yes or No for each guest.';
+          errAttend.style.display = 'block';
+        }
+        return;
+      }
       document.getElementById('errAttend').style.display = 'none';
     }
 
@@ -2438,14 +2526,15 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     }
 
     const attendingCount = guestResponses.filter(guest => guest.attending === 'Yes').length;
-    const groupName = formatGuestNames(guestResponses.map(guest => guest.name));
-    const responseLines = guestResponses.map(guest => guest.name + ': ' + guest.attending).join('\n');
+    const submittedGuestNames = guestResponses.map(guest => guest.name.trim()).filter(Boolean);
+    const groupName = formatGuestNames(submittedGuestNames);
+    const responseLines = guestResponses.map(guest => guest.slot + ' - ' + guest.name + ': ' + guest.attending).join('\n');
 
     const payload = {
       event: COUPLE_NAME,
       customer_email: CUSTOMER_EMAIL,
       guest_name: groupName,
-      invited_guest_from_link: groupName,
+      invited_guest_from_link: invitedGroupForClient,
       attending: attendingCount > 0 ? 'Yes' : 'No',
       attending_summary: responseLines,
       guest_count: attendingCount,
@@ -2462,6 +2551,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       showRSVPThankYou(groupName, attendingCount);
     }, 650);
   }
+
 </script>
 </body>
 </html>
