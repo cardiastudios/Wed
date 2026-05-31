@@ -2141,7 +2141,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
             <div id="guestSlotNameList" class="guest-slot-name-list"></div>
           </div>
 
-          <p class="error-msg" id="errName">Please enter a name for each guest.</p>
+          <p class="error-msg" id="errName">Please enter at least one guest name.</p>
           <button class="btn-solid rsvp-main-btn" type="button" onclick="goStep(1,2)">Continue →</button>
         </div>
 
@@ -2387,7 +2387,9 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     const list = document.getElementById('guestResponseList');
     if (!list) return;
 
-    list.innerHTML = guestResponses.map((guest, index) => {
+    const namedGuests = getNamedGuestResponses();
+
+    list.innerHTML = namedGuests.map(({ guest, index }) => {
       const safeName = escapeHTML(guest.name || guest.slot);
       const yesChecked = guest.attending === 'Yes' ? ' checked' : '';
       const noChecked = guest.attending === 'No' ? ' checked' : '';
@@ -2412,9 +2414,21 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     updateGuestTotal();
   }
 
+  function getNamedGuestResponses() {
+    return guestResponses
+      .map((guest, index) => ({ guest, index }))
+      .filter(item => item.guest.name && item.guest.name.trim());
+  }
+
   function setGuestName(index, value) {
     if (!guestResponses[index]) return;
+    const hadName = !!(guestResponses[index].name && guestResponses[index].name.trim());
     guestResponses[index].name = value.trim();
+    if (!guestResponses[index].name) {
+      guestResponses[index].attending = 'No';
+    } else if (!hadName && (!guestResponses[index].attending || guestResponses[index].attending === 'No')) {
+      guestResponses[index].attending = 'Yes';
+    }
     const errName = document.getElementById('errName');
     if (errName) errName.style.display = 'none';
     renderGuestResponseList();
@@ -2429,7 +2443,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
   }
 
   function updateGuestTotal() {
-    const total = guestResponses.filter(guest => guest.attending === 'Yes').length;
+    const total = guestResponses.filter(guest => guest.name && guest.name.trim() && guest.attending === 'Yes').length;
     const totalEl = document.getElementById('guestCount');
     if (totalEl) totalEl.textContent = total;
   }
@@ -2438,15 +2452,23 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
 
   function goStep(from, to) {
     if (from === 1 && to === 2) {
-      const allNamed = guestResponses.every(guest => guest.name && guest.name.trim());
-      if (!allNamed) {
+      const namedGuests = getNamedGuestResponses();
+      if (!namedGuests.length) {
         const errName = document.getElementById('errName');
         if (errName) {
-          errName.textContent = 'Please enter a name for each guest.';
+          errName.textContent = 'Please enter at least one guest name.';
           errName.style.display = 'block';
         }
         return;
       }
+
+      guestResponses.forEach(guest => {
+        if (guest.name && guest.name.trim()) {
+          if (!guest.attending) guest.attending = 'Yes';
+        } else {
+          guest.attending = 'No';
+        }
+      });
 
       const errName = document.getElementById('errName');
       if (errName) errName.style.display = 'none';
@@ -2454,7 +2476,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     }
 
     if (from === 2 && to === 3) {
-      const allAnswered = guestResponses.every(guest => guest.attending === 'Yes' || guest.attending === 'No');
+      const allAnswered = getNamedGuestResponses().every(({ guest }) => guest.attending === 'Yes' || guest.attending === 'No');
       if (!allAnswered) {
         const errAttend = document.getElementById('errAttend');
         if (errAttend) {
@@ -2525,10 +2547,17 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       return;
     }
 
-    const attendingCount = guestResponses.filter(guest => guest.attending === 'Yes').length;
+    guestResponses.forEach(guest => {
+      if (!guest.name || !guest.name.trim()) guest.attending = 'No';
+    });
+
+    const attendingCount = guestResponses.filter(guest => guest.name && guest.name.trim() && guest.attending === 'Yes').length;
     const submittedGuestNames = guestResponses.map(guest => guest.name.trim()).filter(Boolean);
     const groupName = formatGuestNames(submittedGuestNames);
-    const responseLines = guestResponses.map(guest => guest.slot + ' - ' + guest.name + ': ' + guest.attending).join('\n');
+    const responseLines = guestResponses
+      .filter(guest => guest.name && guest.name.trim())
+      .map(guest => guest.slot + ' - ' + guest.name + ': ' + guest.attending)
+      .join('\n');
 
     const payload = {
       event: COUPLE_NAME,
