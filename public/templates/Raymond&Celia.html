@@ -711,6 +711,9 @@
     padding: 14px 14px 12px;
     background: rgba(255,248,235,.24);
   }
+  .guest-slot-name-box.locked {
+    background: rgba(255,248,235,.36);
+  }
   .guest-slot-name-label {
     display: block;
     margin: 0 0 8px;
@@ -736,6 +739,10 @@
   }
   .guest-slot-name-box > input::placeholder {
     color: rgba(200,82,42,.58) !important;
+  }
+  .guest-slot-name-box > input[readonly] {
+    cursor: default;
+    color: var(--ink);
   }
   .guest-slot-attendance {
     display: flex;
@@ -2319,12 +2326,9 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
   tickCountdown();
   setInterval(tickCountdown, 1000);
 
-  /* Anonymous per-seat RSVP links
-     The client still writes real names in the generator, but the invitation shows:
-     Guest 1, Guest 2, Guest 3...
-     Each guest enters their own name and chooses Yes/No.
-     Example:
-     invitation.html?invite=Celia%7CChbin&limit=2
+  /* RSVP link modes:
+     ?limit=2 shows editable Guest 1 / Guest 2 fields.
+     ?guests=Marie|Jean&limit=2 pre-fills and locks the named household.
   */
   const inviteParams = new URLSearchParams(window.location.search);
 
@@ -2350,36 +2354,51 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     return clean.slice(0, -1).join(', ') + ' & ' + clean[clean.length - 1];
   }
 
-  const hiddenInvitedGroup = [
+  const namedGuestsFromLink = [
     ...decodeGuestList(inviteParams.get('invite') || ''),
     ...decodeGuestList(inviteParams.get('group') || ''),
     ...decodeGuestList(inviteParams.get('guests') || ''),
     ...decodeGuestList(inviteParams.get('guest') || '')
   ];
 
-  const uniqueHiddenInvitedGroup = [...new Set(hiddenInvitedGroup)];
-  const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueHiddenInvitedGroup.length || 1), 10);
-  const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueHiddenInvitedGroup.length, 1);
+  const uniqueNamedGuestsFromLink = [...new Set(namedGuestsFromLink)];
+  const hasLockedGuestNames = uniqueNamedGuestsFromLink.length > 0;
+  const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueNamedGuestsFromLink.length || 1), 10);
+  const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueNamedGuestsFromLink.length, 1);
+  const lockedGuestNames = hasLockedGuestNames ? uniqueNamedGuestsFromLink.slice(0, guestLimit) : [];
 
-  const invitedGroupForClient = formatGuestNames(uniqueHiddenInvitedGroup.slice(0, guestLimit));
-  let guestResponses = Array.from({ length: guestLimit }, (_, index) => ({
-    slot: 'Guest ' + (index + 1),
-    name: '',
-    attending: 'Yes',
-    manualAttendance: false
-  }));
+  const invitedGroupForClient = formatGuestNames(lockedGuestNames);
+  let guestResponses = hasLockedGuestNames
+    ? lockedGuestNames.map((name, index) => ({
+      slot: 'Guest ' + (index + 1),
+      name: name,
+      attending: 'Yes',
+      manualAttendance: false,
+      locked: true
+    }))
+    : Array.from({ length: guestLimit }, (_, index) => ({
+      slot: 'Guest ' + (index + 1),
+      name: '',
+      attending: 'Yes',
+      manualAttendance: false,
+      locked: false
+    }));
 
   function applyPersonalGuestLink() {
     const guestWelcomeName = document.getElementById('guestWelcomeName');
     const personalGuestNote = document.getElementById('personalGuestNote');
     const manualWrap = document.getElementById('manualGuestListWrap');
 
-    if (guestWelcomeName) guestWelcomeName.textContent = 'Guest';
+    if (guestWelcomeName) {
+      guestWelcomeName.textContent = hasLockedGuestNames ? invitedGroupForClient : 'Guest';
+    }
 
     if (personalGuestNote) {
-      personalGuestNote.textContent = guestLimit === 1
-        ? 'Please enter your name to confirm the RSVP.'
-        : 'Please enter the guest names to confirm the RSVP.';
+      personalGuestNote.textContent = hasLockedGuestNames
+        ? 'Please confirm who can attend from this invitation.'
+        : (guestLimit === 1
+          ? 'Please enter your name to confirm the RSVP.'
+          : 'Please enter the guest names to confirm the RSVP.');
     }
 
     if (manualWrap) manualWrap.style.display = 'block';
@@ -2396,15 +2415,19 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       const safeName = escapeHTML(guest.name || '');
       const yesChecked = guest.attending === 'Yes' ? ' checked' : '';
       const noChecked = guest.attending === 'No' ? ' checked' : '';
+      const lockedClass = guest.locked ? ' locked' : '';
+      const readonlyAttr = guest.locked ? ' readonly aria-readonly="true"' : '';
+      const inputHandler = guest.locked ? '' : ` oninput="setGuestName(${index}, this.value)"`;
+      const labelText = guest.locked ? escapeHTML(guest.name) : 'Guest ' + (index + 1);
       return `
-        <div class="guest-slot-name-box">
-          <label class="guest-slot-name-label" for="guestSlotInput${index}">Guest ${index + 1}</label>
+        <div class="guest-slot-name-box${lockedClass}">
+          <label class="guest-slot-name-label" for="guestSlotInput${index}">${labelText}</label>
           <input
             id="guestSlotInput${index}"
             type="text"
             value="${safeName}"
             placeholder="Write name"
-            oninput="setGuestName(${index}, this.value)"
+            ${readonlyAttr}${inputHandler}
           />
           <div class="guest-slot-attendance" aria-label="Guest ${index + 1} attendance">
             <span>Attending?</span>
