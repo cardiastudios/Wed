@@ -15,6 +15,11 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <!-- CARDIA_HIGH_RES_PRELOADS -->
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_1.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_2.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_3.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_4.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_5.png" fetchpriority="high">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_1.png" fetchpriority="high">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_2.png" fetchpriority="high">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_1.png" fetchpriority="high">
@@ -2004,6 +2009,35 @@ html, body { background: #F7F7F7 !important; }
   outline-offset: 2px;
 }
 
+
+
+/* ═══════════════════════════════════════
+   BEACH BEST SELLER FIX + REVIEWS DISABLED
+   - Removes the white border/background from the PNG previews.
+   - Keeps the reviews section in the code, but removes it from the UI.
+═══════════════════════════════════════ */
+#bestsellers .bs-png-main,
+#bestsellers .bs-png-inner {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+#bestsellers .bs-png-inner {
+  object-fit: cover !important;
+  box-shadow: 0 18px 42px rgba(42,32,24,.16) !important;
+}
+
+#bestsellers .bs-phone-frame {
+  background: #1a1210 !important;
+}
+
+/* REVIEWS SECTION DISABLED — keep this block to hide reviews from the UI.
+   To enable reviews later, delete/comment this rule and uncomment the Reviews nav link. */
+#reviews {
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -2015,7 +2049,9 @@ html, body { background: #F7F7F7 !important; }
     <a href="#templates" class="nav-link" onclick="closeMenu()">Templates</a>
     <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
+    <!-- REVIEWS NAV LINK DISABLED — re-enable when reviews section is active
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
+    -->
     <a href="#share" class="nav-link" onclick="closeMenu()">Share</a>
     <a href="#contact" class="nav-link" onclick="closeMenu()">Contact</a>
   </div>
@@ -2053,15 +2089,27 @@ html, body { background: #F7F7F7 !important; }
 
   <div class="hero-template-marquee" aria-label="Template preview gallery">
     <div class="hero-template-track">
-      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_1.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_1.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+
+<img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      
+      
+      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_1.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_2.png" alt="Template A2 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
-      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+             <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_2.png" alt="Template A1 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+      
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_3.png" alt="Template A3 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_9.png" alt="Template A7 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_2.png" alt="Template A2 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_3.png" alt="Template A4 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+            <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_5.png" alt="Beach template inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A5_1.png" alt="Template A5 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A6_3.png" alt="Template A6 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A7_2.png" alt="Template A7 preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A1_2.png" alt="Template A1 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A0_4.png" alt="Beach template inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A2_2.png" alt="Template A2 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A3_2.png" alt="Template A3 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
       <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/A4_2.png" alt="Template A4 inner preview" decoding="async" loading="eager" fetchpriority="high" width="1080" height="1920">
@@ -2094,6 +2142,41 @@ html, body { background: #F7F7F7 !important; }
 
 
 
+<!-- Beach Theme -->
+<a class="bs-card reveal" href="https://nemerdavid.github.io/Tempo/Beach_protected.html" target="_blank"
+   style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(180,210,225,.20) 0%, rgba(220,235,245,.10) 70%, transparent 100%);">
+  <div class="bs-card-visual">
+    <div class="bs-badge">Best Seller</div>
+    <div class="bs-template-id">A0</div>
+
+    <div class="phone-back">
+      <div class="phone-outer">
+        <div class="phone-screen">
+          <iframe src="https://nemerdavid.github.io/Tempo/Beach_protected.html" loading="lazy" scrolling="no" title="Beach Romance theme preview back"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone-outer">
+        <div class="phone-screen">
+          <iframe src="https://nemerdavid.github.io/Tempo/Beach_protected.html" loading="lazy" scrolling="no" title="Beach Romance theme preview"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bs-card-info">
+    <div class="bs-card-name">Beach Romance</div>
+    <div class="template-id-note">Template ID: A0</div>
+
+    <div class="bs-card-desc">
+      A dreamy beach wedding invitation with golden sunset tones, tropical details and a romantic seaside atmosphere for an unforgettable celebration.
+    </div>
+
+    <span class="bs-card-link">View theme</span>
+  </div>
+</a>
 
 
 
@@ -2836,7 +2919,10 @@ html, body { background: #F7F7F7 !important; }
   <p class="payment-note reveal">Payment is only requested after you have approved your invitation preview</p>
 </section>
 
-<!-- ═══ REVIEWS ═══ -->
+<!-- ═══ REVIEWS SECTION DISABLED / KEPT IN CODE FOR LATER ENABLE ═══
+     To enable again: remove the CSS rule #reviews { display:none!important; }
+     and uncomment the Reviews nav link above.
+-->
 <section id="reviews">
   <div class="reviews-header reveal">
     <h2>What Couples Say</h2>
@@ -3006,7 +3092,7 @@ setupWebsiteShareLinks();
 ════════════════════════════════════ */
 const CARDIA_TRANSLATIONS = {
   en: {
-    nav:['Templates','How it works','Pricing','Reviews','Share','Contact'],
+    nav:['Templates','How it works','Pricing','Share','Contact'],
     heroTag:'Digital Wedding Invitations', heroTitle:'Your love story,', heroEm:'beautifully told.', heroSub:'Exclusive designs · Crafted with care ·', heroCta:'Explore Templates',
     bestTitle:'Best Sellers', bestSub:'Our most loved designs — chosen by couples around the world', bestBadge:'Best Seller', viewTheme:'View theme',
     collectionTitle:'Our Collection', collectionSub:'Exclusive designs, one for every love story',
@@ -3068,7 +3154,7 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Créons quelque chose de beau', contactSub:'Contactez-nous', contactCta:'Envoyer une demande', footer:'© 2025 Cardia Studios · Invitations de mariage digitales · Tous droits réservés'
   },
   es: {
-    nav:['Plantillas','Cómo funciona','Precios','Reseñas','Compartir','Contacto'],
+    nav:['Plantillas','Cómo funciona','Precios','Compartir','Contacto'],
     heroTag:'Invitaciones digitales de boda', heroTitle:'Tu historia de amor,', heroEm:'bellamente contada.', heroSub:'Diseños exclusivos · Hechos con cuidado ·', heroCta:'Ver plantillas',
     bestTitle:'Más vendidos', bestSub:'Nuestros diseños más queridos — elegidos por parejas de todo el mundo', bestBadge:'Más vendido', viewTheme:'Ver plantilla',
     collectionTitle:'Nuestra colección', collectionSub:'Diseños exclusivos para cada historia de amor',
@@ -3130,7 +3216,7 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Creiamo qualcosa di bello', contactSub:'Contattaci', contactCta:'Invia una richiesta', footer:'© 2025 Cardia Studios · Inviti digitali per matrimonio · Tutti i diritti riservati'
   },
   pt: {
-    nav:['Modelos','Como funciona','Preços','Avaliações','Partilhar','Contacto'],
+    nav:['Modelos','Como funciona','Preços','Partilhar','Contacto'],
     heroTag:'Convites digitais de casamento', heroTitle:'A vossa história de amor,', heroEm:'contada com elegância.', heroSub:'Designs exclusivos · Criados com cuidado · ', heroCta:'Explorar modelos',
     bestTitle:'Mais vendidos', bestSub:'Os nossos designs mais adorados — escolhidos por casais em todo o mundo', bestBadge:'Mais vendido', viewTheme:'Ver modelo',
     collectionTitle:'A nossa coleção', collectionSub:'Designs exclusivos para cada história de amor',
@@ -3664,6 +3750,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const base = 'https://raw.githubusercontent.com/NemerDavid/web-des/main/AA/';
 
   const templateMeta = {
+    A0: { pages: 5 },
     A1: { pages: 5 },
     A2: { pages: 3 },
     A3: { pages: 3 },
