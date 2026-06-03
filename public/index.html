@@ -785,6 +785,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 .contact-item { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 2rem; border: 1px solid rgba(200,180,160,.12); background: rgba(255,255,255,.03); transition: border-color .25s; }
 .contact-item:hover { border-color: rgba(200,180,160,.35); }
 .contact-icon { font-size: 1.2rem; opacity: .7; }
+.contact-social-icon { width: 24px; height: 24px; object-fit: contain; display: block; }
 .contact-label { font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,180,160,.4); margin-bottom: .2rem; }
 .contact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #f0ebe0; }
 .contact-value a { color: inherit; text-decoration: none; }
@@ -827,10 +828,46 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   .swiper-btn { background: none; border: 1px solid rgba(200,180,160,.3); color: rgba(200,180,160,.7); width: 36px; height: 36px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
   .swiper-btn:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
   .pricing-cards { display: none; }
-  .pricing-swiper-wrap { display: block; width: 100%; overflow: hidden; position: relative; padding: 0 1.25rem; box-sizing: border-box; }
-  .pricing-swiper-track { display: flex; transition: transform .4s cubic-bezier(.25,1,.4,1); will-change: transform; }
-  .pricing-swiper-track .price-card { flex: 0 0 100%; width: 100%; margin: 0; box-sizing: border-box; }
-  .pricing-swiper-wrap .swiper-dots { margin-top: 1.5rem; margin-bottom: 2rem; }
+  .pricing-swiper-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 2rem;
+    padding: 0 1.15rem;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+  .pricing-swiper-track { display: contents; }
+  .pricing-swiper-wrap .price-card {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 1.35rem 1.15rem 1.45rem;
+    box-sizing: border-box;
+  }
+  .pricing-swiper-wrap .price-card.mobile-open { display: block; }
+  .mobile-price-tab {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid rgba(155,120,90,.24);
+    background: rgba(255,255,255,.72);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: .04em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .65rem 1rem;
+  }
+  .mobile-price-tab::after { content: "+"; font-family: 'Jost', sans-serif; font-size: 1rem; color: var(--gold); }
+  .mobile-price-tab.active { background: var(--ink); color: var(--gold-lt); border-color: var(--ink); }
+  .mobile-price-tab.active::after { content: "−"; color: var(--gold-lt); }
+  .pricing-swiper-wrap .price-card.featured { border-color: var(--gold); }
+  .pricing-swiper-wrap .swiper-dots { display: none !important; }
 }
 
 @media (max-width: 600px) {
@@ -2832,55 +2869,55 @@ html, body { background: #F7F7F7 !important; }
     </div>
   </div>
 
-  <!-- Mobile pricing swiper -->
-  <div class="pricing-swiper-wrap" id="pricingSwiper">
-    <div class="pricing-swiper-track" id="pricingTrack">
-      <div class="price-card">
-        <div class="price-name">Standard</div>
-        <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">The complete digital invitation</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>1 template of your choice</span></li>
-          <li class="price-feature"><span>Fully personalized</span></li>
-          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-          <li class="price-feature"><span>Up to 3 photos included</span></li>
-          <li class="price-feature"><span>Ready in up to 7 days</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-name">Premium</div>
-        <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">The full experience</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>1 template of your choice</span></li>
-          <li class="price-feature"><span>Fully personalized</span></li>
-          <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
-          <li class="price-feature"><span>Up to 6 photos included</span></li>
-          <li class="price-feature"><span>Background music</span></li>
-          <li class="price-feature"><span>Ready in up to 4 days</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <div class="price-name">Luxury</div>
-        <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
-        <div class="price-period">one-time &middot; hosted forever</div>
-        <div class="price-desc">For the perfect wedding</div>
-        <ul class="price-features">
-          <li class="price-feature"><span>Everything in Premium</span></li>
-          <li class="price-feature"><span>Up to 12 photos included</span></li>
-          <li class="price-feature"><span>Priority service — ready in up to 2 days</span></li>
-          <li class="price-feature"><span>Invitation generator</span></li>
-          <li class="price-feature"><span>Hosted forever on our servers</span></li>
-        </ul>
-     
-      </div>
+  <!-- Mobile pricing accordion -->
+  <div class="pricing-swiper-wrap mobile-pricing-accordion" id="pricingSwiper">
+    <button class="mobile-price-tab" type="button" data-plan="standard">Standard</button>
+    <div class="price-card mobile-price-panel" data-plan-panel="standard">
+      <div class="price-name">Standard</div>
+      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">The complete digital invitation</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>1 template of your choice</span></li>
+        <li class="price-feature"><span>Fully personalized</span></li>
+        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+        <li class="price-feature"><span>Up to 3 photos included</span></li>
+        <li class="price-feature"><span>Ready in up to 7 days</span></li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
     </div>
-    <div class="swiper-dots" id="pricingDots"></div>
+
+    <button class="mobile-price-tab active" type="button" data-plan="premium">Premium</button>
+    <div class="price-card featured mobile-price-panel mobile-open" data-plan-panel="premium">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Premium</div>
+      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">The full experience</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>1 template of your choice</span></li>
+        <li class="price-feature"><span>Fully personalized</span></li>
+        <li class="price-feature"><span>RSVP form &mdash; replies go to your inbox</span></li>
+        <li class="price-feature"><span>Up to 6 photos included</span></li>
+        <li class="price-feature"><span>Background music</span></li>
+        <li class="price-feature"><span>Ready in up to 4 days</span></li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
+    </div>
+
+    <button class="mobile-price-tab" type="button" data-plan="luxury">Luxury</button>
+    <div class="price-card mobile-price-panel" data-plan-panel="luxury">
+      <div class="price-name">Luxury</div>
+      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
+      <div class="price-period">one-time &middot; hosted forever</div>
+      <div class="price-desc">For the perfect wedding</div>
+      <ul class="price-features">
+        <li class="price-feature"><span>Everything in Premium</span></li>
+        <li class="price-feature"><span>Up to 12 photos included</span></li>
+        <li class="price-feature"><span>Priority service — ready in up to 2 days</span></li>
+        <li class="price-feature"><span>Hosted forever on our servers</span></li>
+      </ul>
+    </div>
   </div>
 
   <!-- PAYMENT METHODS -->
@@ -2999,15 +3036,11 @@ html, body { background: #F7F7F7 !important; }
     <h3 class="reveal">Get in touch</h3>
     <div class="contact-items">
       <div class="contact-item reveal">
-        <span class="contact-icon">&#128241;</span>
-        <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/33752807727">+33 07 52 80 77 27</a></div></div>
-      </div>
-      <div class="contact-item reveal">
         <span class="contact-icon">&#9993;</span>
         <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:cardia.studios@gmail.com">cardia.studios@gmail.com</a></div></div>
       </div>
       <div class="contact-item reveal">
-        <span class="contact-icon">&#128247;</span>
+        <span class="contact-icon"><img class="contact-social-icon" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Icon/Instragram_logo.png" alt="Instagram logo"></span>
         <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/cardiastudios" target="_blank">@cardiastudios</a></div></div>
       </div>
     </div>
@@ -3322,7 +3355,7 @@ function applyLanguage(lang) {
   setFeatureList(desktopPriceCards[0], t.features.standard, t.tooltip);
   setFeatureList(desktopPriceCards[1], t.features.premium, t.tooltip);
   setFeatureList(desktopPriceCards[2], t.features.luxury, t.tooltip);
-  const mobilePriceCards = document.querySelectorAll('.pricing-swiper-track .price-card');
+  const mobilePriceCards = document.querySelectorAll('.pricing-swiper-wrap .price-card');
   setFeatureList(mobilePriceCards[0], t.features.standard, null);
   setFeatureList(mobilePriceCards[1], t.features.premium, null);
   setFeatureList(mobilePriceCards[2], t.features.luxuryMobile, null);
@@ -3725,7 +3758,20 @@ function makeSwiper(trackId, dotsId, opts){
 const howSw = makeSwiper('howTrack','howDots',{ start:0 });
 function howNext(){ howSw.next(); }
 function howPrev(){ howSw.prev(); }
-const pricingSw = makeSwiper('pricingTrack','pricingDots',{ start:0, getOffset(cur){ return cur*100; } });
+// Mobile pricing is now an accordion instead of a swiper.
+document.querySelectorAll('.mobile-price-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const plan = tab.dataset.plan;
+    const alreadyOpen = tab.classList.contains('active');
+    document.querySelectorAll('.mobile-price-tab').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.mobile-price-panel').forEach(panel => panel.classList.remove('mobile-open'));
+    if (!alreadyOpen) {
+      tab.classList.add('active');
+      const panel = document.querySelector(`.mobile-price-panel[data-plan-panel="${plan}"]`);
+      if (panel) panel.classList.add('mobile-open');
+    }
+  });
+});
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
