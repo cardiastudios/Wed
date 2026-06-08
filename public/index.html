@@ -641,6 +641,10 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--ink)
 .payment-region h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: .5rem; display: flex; align-items: center; gap: .6rem; }
 .payment-region h4 img { height: 33px; width: auto; border-radius: 2px; object-fit: cover; flex-shrink: 0; }
 .payment-region p { font-size: .68rem; line-height: 1.7; color: var(--ink-lt); margin-bottom: .8rem; }
+.payment-bullets { list-style: none; margin: .75rem 0 1rem; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
+.payment-bullets li { font-size: .68rem; line-height: 1.55; color: var(--ink-lt); display: flex; align-items: flex-start; gap: .45rem; }
+.payment-bullets li::before { content: "✦"; color: var(--gold); font-size: .48rem; line-height: 1.55; margin-top: .08rem; flex-shrink: 0; }
+
 .payment-methods { display: flex; flex-direction: column; gap: .5rem; }
 .pay-method { display: flex; align-items: center; gap: .75rem; font-size: .7rem; color: var(--ink-lt); padding: .6rem .9rem; background: rgba(255,255,255,.45); border: 1px solid var(--border); }
 .pay-method strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 1px; }
@@ -2037,11 +2041,11 @@ html, body { background: #F7F7F7 !important; }
 
 
 /* Fixed navigation scroll correction */
-#bestsellers, #how, #pricing, #reviews, #share, #contact, #templates {
+#bestsellers, #how, #pricing, #faq, #reviews, #share, #contact, #templates {
   scroll-margin-top: 92px;
 }
 @media (max-width: 640px) {
-  #bestsellers, #how, #pricing, #reviews, #share, #contact, #templates {
+  #bestsellers, #how, #pricing, #faq, #reviews, #share, #contact, #templates {
     scroll-margin-top: 78px;
   }
 }
@@ -2495,6 +2499,163 @@ html, body { background: #F7F7F7 !important; }
   .rsvp-demo-btn { width: 100%; }
 }
 
+
+/* ═══════════════════════════════════════
+   FAQ SECTION
+═══════════════════════════════════════ */
+.faq-section {
+  background: var(--bg);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.faq-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(154,106,88,.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(184,144,60,.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+.faq-content {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.faq-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+.faq-kicker {
+  display: inline-block;
+  font-size: .62rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--rose-lt);
+  margin-bottom: .7rem;
+}
+.faq-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem,5vw,3rem);
+  color: var(--ink);
+  margin-bottom: .65rem;
+}
+.faq-header p {
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: .78rem;
+  line-height: 1.8;
+  color: var(--ink-lt);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.faq-item {
+  background: rgba(255,255,255,.72);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 38px rgba(42,32,24,.055);
+  padding: 0;
+  border-radius: 18px;
+  text-align: left;
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 1.2rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.faq-question::after {
+  content: "+";
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,144,60,.28);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+.faq-item.open .faq-question::after { content: "−"; }
+.faq-answer {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  font-size: .76rem;
+  line-height: 1.8;
+  color: rgba(42,32,24,.66);
+}
+.faq-item.open .faq-answer { display: block; }
+@media (max-width: 760px) {
+  .faq-section { padding: 4rem 1rem; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-item { border-radius: 16px; }
+  .faq-question { padding: 1.05rem 1.1rem; font-size: 1.22rem; }
+  .faq-answer { padding: 0 1.1rem 1.1rem; }
+}
+
+
+
+/* FAQ accordion fix — answers are closed by default and open only after clicking + */
+.faq-item {
+  overflow: hidden !important;
+}
+.faq-question {
+  position: relative !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 1.2rem 3.8rem 1.2rem 1.25rem !important;
+}
+.faq-question::after {
+  position: absolute !important;
+  right: 1.25rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  content: "+" !important;
+}
+.faq-item.open .faq-question::after {
+  content: "−" !important;
+}
+.faq-answer {
+  display: block !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 1.25rem !important;
+  transition: max-height .35s ease, opacity .25s ease, padding .25s ease !important;
+}
+.faq-item.open .faq-answer {
+  max-height: 260px !important;
+  opacity: 1 !important;
+  padding: 0 1.25rem 1.25rem !important;
+}
+@media (max-width: 760px) {
+  .faq-question { padding: 1.05rem 3.4rem 1.05rem 1.1rem !important; }
+  .faq-question::after { right: 1.1rem !important; }
+  .faq-answer { padding: 0 1.1rem !important; }
+  .faq-item.open .faq-answer { padding: 0 1.1rem 1.1rem !important; }
+}
+
 </style>
 </head>
 <body>
@@ -2507,6 +2668,7 @@ html, body { background: #F7F7F7 !important; }
     <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
     <a href="#rsvp-demo" class="nav-link" onclick="closeMenu()">RSVP Demo</a>
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
+    <a href="#faq" class="nav-link" onclick="closeMenu()">FAQ</a>
     <!-- REVIEWS NAV LINK DISABLED — re-enable when reviews section is active
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
     -->
@@ -3409,10 +3571,32 @@ html, body { background: #F7F7F7 !important; }
   <div class="payment-info reveal">
     <div class="payment-region">
       <h4>
+        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/Lebanon.png" alt="Lebanon flag">
+        Lebanon
+      </h4>
+      <ul class="payment-bullets">
+        <li>For couples in Lebanon.</li>
+        <li>Outside Lebanon? Please look at the France, EU &amp; Worldwide option.</li>
+        <li>Contact us by email or Instagram DM.</li>
+        <li>Preview sent before payment.</li>
+      </ul>
+      <div class="payment-methods">
+        <div class="pay-method">
+          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/WHISH.png" alt="Whish Money" class="pay-icon">
+          <div><strong>Whish Money</strong>Account number shared on request</div>
+        </div>
+      </div>
+    </div>
+    <div class="payment-region">
+      <h4>
         <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/France.png" alt="France flag">
         France, EU &amp; Worldwide
       </h4>
-      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
+      <ul class="payment-bullets">
+        <li>For couples outside Lebanon.</li>
+        <li>Contact us by email or Instagram DM.</li>
+        <li>Preview sent before payment.</li>
+      </ul>
       <div class="payment-methods">
         <div class="pay-method">
           <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/virement.png" alt="Virement bancaire" class="pay-icon">
@@ -3421,19 +3605,6 @@ html, body { background: #F7F7F7 !important; }
         <div class="pay-method">
           <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/paypal.png" alt="PayPal" class="pay-icon">
           <div><strong>PayPal</strong>Link shared on request</div>
-        </div>
-      </div>
-    </div>
-    <div class="payment-region">
-      <h4>
-        <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/flags/Lebanon.png" alt="Lebanon flag">
-        Lebanon
-      </h4>
-      <p>Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.</p>
-      <div class="payment-methods">
-        <div class="pay-method">
-          <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Payment/WHISH.png" alt="Whish Money" class="pay-icon">
-          <div><strong>Whish Money</strong>Account number shared on request</div>
         </div>
       </div>
     </div>
@@ -3510,6 +3681,46 @@ html, body { background: #F7F7F7 !important; }
 
         <div id="copyMessage" class="copy-message">Link copied</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-content">
+    <div class="faq-header reveal">
+      <span class="faq-kicker">Questions couples ask</span>
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know before choosing your digital wedding invitation.</p>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="faq-grid">
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">How does the digital invitation work?</button>
+        <p class="faq-answer">You receive a private wedding link that you can send by WhatsApp, Instagram, or email. Guests open it on their phone, enjoy the invitation, and submit their RSVP directly online.</p>
+      </article>
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">Can I customize the design?</button>
+        <p class="faq-answer">Yes. We personalize your names, date, venue, schedule, photos, wording, music, sections, and small details so the invitation feels like your wedding, not a generic template.</p>
+      </article>
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">Will I know who is attending?</button>
+        <p class="faq-answer">Yes. RSVP replies can be sent to your email and collected in a live Google Sheet, so you can easily see who is attending, who declined, and how many guests are coming.</p>
+      </article>
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">Can each guest receive a personal link?</button>
+        <p class="faq-answer">Yes. You can create personalized guest or family links with pre-filled names and any number of allowed guests. This makes the RSVP cleaner and easier to manage.</p>
+      </article>
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">Do you support guests in different countries?</button>
+        <p class="faq-answer">Absolutely. The invitation is online, mobile-friendly, and easy to share anywhere. It is perfect for couples with family and friends spread across different cities or countries.</p>
+      </article>
+      <article class="faq-item reveal">
+        <button class="faq-question" type="button" aria-expanded="false">What happens after I choose a plan?</button>
+        <p class="faq-answer">Send us your template ID and wedding details. We customize the invitation, send you a preview, make final edits if needed, then give you the final link to share with your guests.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -3614,7 +3825,7 @@ setupWebsiteShareLinks();
 ════════════════════════════════════ */
 const CARDIA_TRANSLATIONS = {
   en: {
-    nav:['Templates','How it works','RSVP Demo','Pricing','Share','Contact'],
+    nav:['Templates','How it works','RSVP Demo','Pricing','FAQ','Share','Contact'],
     heroTag:'Digital Wedding Invitations', heroTitle:'Your love story,', heroEm:'beautifully told.', heroSub:'Exclusive designs · Crafted with care ·', heroCta:'Explore Templates',
     bestTitle:'Best Sellers', bestSub:'Our most loved designs — chosen by couples around the world', bestBadge:'Best Seller', viewTheme:'View theme',
     collectionTitle:'Our Collection', collectionSub:'Exclusive designs, one for every love story',
@@ -3638,15 +3849,15 @@ const CARDIA_TRANSLATIONS = {
     },
     tooltip:'We customize your chosen template with your names, date, venue, schedule and personal details. You can add or remove sections, reorder content, replace any icons with your own icons, and adapt the template to match your event style.',
     generator:'',
-    paymentHead1:'France, EU & Worldwide', paymentHead2:'Lebanon',
-    paymentText:"Pick your template and reach out by email or WhatsApp. We'll customize it with your details and send you a preview to approve — payment is only requested once you're happy with the result.",
+    paymentHead1:'Lebanon', paymentHead2:'France, EU & Worldwide',
+    paymentLebanon:['For couples in Lebanon.','Outside Lebanon? Please look at the France, EU & Worldwide option.','Contact us by email or Instagram DM.','Preview sent before payment.'], paymentWorld:['For couples outside Lebanon.','Contact us by email or Instagram DM.','Preview sent before payment.'],
     bank:'Virement bancaire (Bank Transfer)', bankDetails:'Details shared on request', paypal:'PayPal', paypalDetails:'Link shared on request', whish:'Whish Money', whishDetails:'Account number shared on request',
     paymentNote:'Payment is only requested after you have approved your invitation preview',
     reviewsTitle:'What Couples Say', reviewsSub:'Real stories from our happiest clients', reviewsCount:'Based on 50+ reviews', prevReviews:'Previous reviews', nextReviews:'Next reviews',
     contactTitle:'Let’s create something beautiful', contactSub:'Get in touch', contactCta:'Send an Enquiry', footer:'© 2025 Cardia Studios · Digital Wedding Invitations · All rights reserved'
   },
   fr: {
-    nav:['Modèles','Fonctionnement','Démo RSVP','Tarifs','Partager','Contact'],
+    nav:['Modèles','Fonctionnement','Démo RSVP','Tarifs','FAQ','Partager','Contact'],
     heroTag:'Invitations de mariage digitales', heroTitle:'Votre histoire d’amour,', heroEm:'magnifiquement racontée.', heroSub:'Designs exclusifs · Créés avec soin ·', heroCta:'Voir les modèles',
     bestTitle:'Meilleures ventes', bestSub:'Nos designs les plus aimés — choisis par des couples du monde entier', bestBadge:'Meilleure vente', viewTheme:'Voir le modèle',
     collectionTitle:'Notre collection', collectionSub:'Des designs exclusifs pour chaque histoire d’amour',
@@ -3670,15 +3881,15 @@ const CARDIA_TRANSLATIONS = {
     },
     tooltip:'Nous personnalisons le modèle choisi avec vos noms, la date, le lieu et le programme. Vous pouvez ajouter ou supprimer des étapes (cérémonie, cocktail, dîner, soirée, etc.).',
     generator:'',
-    paymentHead1:'France, UE et monde entier', paymentHead2:'Liban',
-    paymentText:'Choisissez votre modèle et contactez-nous par email ou WhatsApp. Nous le personnalisons avec vos informations et vous envoyons un aperçu à valider — le paiement est demandé uniquement lorsque le résultat vous convient.',
+    paymentHead1:'Liban', paymentHead2:'France, UE et monde entier',
+    paymentLebanon:['Pour les couples au Liban.','Hors du Liban ? Veuillez consulter l’option France, UE et monde entier.','Contactez-nous par email ou DM Instagram.','Aperçu envoyé avant paiement.'], paymentWorld:['Pour les couples hors du Liban.','Contactez-nous par email ou DM Instagram.','Aperçu envoyé avant paiement.'],
     bank:'Virement bancaire', bankDetails:'Détails partagés sur demande', paypal:'PayPal', paypalDetails:'Lien partagé sur demande', whish:'Whish Money', whishDetails:'Numéro de compte partagé sur demande',
     paymentNote:'Le paiement est demandé uniquement après validation de l’aperçu de votre invitation',
     reviewsTitle:'Ce que disent les couples', reviewsSub:'De vraies histoires de nos clients heureux', reviewsCount:'Basé sur plus de 50 avis', prevReviews:'Avis précédents', nextReviews:'Avis suivants',
     contactTitle:'Créons quelque chose de beau', contactSub:'Contactez-nous', contactCta:'Envoyer une demande', footer:'© 2025 Cardia Studios · Invitations de mariage digitales · Tous droits réservés'
   },
   es: {
-    nav:['Plantillas','Cómo funciona','Demo RSVP','Precios','Compartir','Contacto'],
+    nav:['Plantillas','Cómo funciona','Demo RSVP','Precios','FAQ','Compartir','Contacto'],
     heroTag:'Invitaciones digitales de boda', heroTitle:'Tu historia de amor,', heroEm:'bellamente contada.', heroSub:'Diseños exclusivos · Hechos con cuidado ·', heroCta:'Ver plantillas',
     bestTitle:'Más vendidos', bestSub:'Nuestros diseños más queridos — elegidos por parejas de todo el mundo', bestBadge:'Más vendido', viewTheme:'Ver plantilla',
     collectionTitle:'Nuestra colección', collectionSub:'Diseños exclusivos para cada historia de amor',
@@ -3702,15 +3913,15 @@ const CARDIA_TRANSLATIONS = {
     },
     tooltip:'Personalizamos la plantilla elegida con nombres, fecha, lugar, programa y detalles personales. Puedes añadir o quitar secciones, reorganizar el contenido, reemplazar iconos por los tuyos y adaptar el estilo a tu evento.',
     generator:'',
-    paymentHead1:'Francia, UE y todo el mundo', paymentHead2:'Líbano',
-    paymentText:'Elige tu plantilla y contáctanos por email o WhatsApp. La personalizamos con tus datos y te enviamos una vista previa para aprobar — el pago solo se solicita cuando estés feliz con el resultado.',
+    paymentHead1:'Líbano', paymentHead2:'Francia, UE y todo el mundo',
+    paymentLebanon:['Para parejas en Líbano.','¿Fuera de Líbano? Mira la opción Francia, UE y todo el mundo.','Contáctanos por email o DM de Instagram.','Vista previa enviada antes del pago.'], paymentWorld:['Para parejas fuera de Líbano.','Contáctanos por email o DM de Instagram.','Vista previa enviada antes del pago.'],
     bank:'Transferencia bancaria', bankDetails:'Detalles compartidos bajo solicitud', paypal:'PayPal', paypalDetails:'Enlace compartido bajo solicitud', whish:'Whish Money', whishDetails:'Número de cuenta compartido bajo solicitud',
     paymentNote:'El pago solo se solicita después de aprobar la vista previa de tu invitación',
     reviewsTitle:'Lo que dicen las parejas', reviewsSub:'Historias reales de nuestros clientes felices', reviewsCount:'Basado en más de 50 reseñas', prevReviews:'Reseñas anteriores', nextReviews:'Reseñas siguientes',
     contactTitle:'Creemos algo hermoso', contactSub:'Contáctanos', contactCta:'Enviar consulta', footer:'© 2025 Cardia Studios · Invitaciones digitales de boda · Todos los derechos reservados'
   },
   it: {
-    nav:['Modelli','Come funziona','Demo RSVP','Prezzi','Condividi','Contatto'],
+    nav:['Modelli','Come funziona','Demo RSVP','Prezzi','FAQ','Condividi','Contatto'],
     heroTag:'Inviti digitali per matrimonio', heroTitle:'La vostra storia d’amore,', heroEm:'raccontata con eleganza.', heroSub:'Design esclusivi · Creati con cura · ', heroCta:'Esplora i modelli',
     bestTitle:'Più venduti', bestSub:'I nostri design più amati — scelti da coppie in tutto il mondo', bestBadge:'Più venduto', viewTheme:'Vedi modello',
     collectionTitle:'La nostra collezione', collectionSub:'Design esclusivi per ogni storia d’amore',
@@ -3734,15 +3945,15 @@ const CARDIA_TRANSLATIONS = {
     },
     tooltip:'Personalizziamo il modello scelto con nomi, data, luogo, programma e dettagli personali. Puoi aggiungere o rimuovere sezioni, riorganizzare i contenuti, sostituire le icone con le tue e adattare lo stile al tuo evento.',
     generator:'',
-    paymentHead1:'Francia, UE e tutto il mondo', paymentHead2:'Libano',
-    paymentText:'Scegli il tuo modello e contattaci via email o WhatsApp. Lo personalizziamo con i tuoi dettagli e ti inviamo un’anteprima da approvare — il pagamento viene richiesto solo quando sei soddisfatto del risultato.',
+    paymentHead1:'Libano', paymentHead2:'Francia, UE e tutto il mondo',
+    paymentLebanon:['Per coppie in Libano.','Fuori dal Libano? Guarda l’opzione Francia, UE e tutto il mondo.','Contattaci via email o DM Instagram.','Anteprima inviata prima del pagamento.'], paymentWorld:['Per coppie fuori dal Libano.','Contattaci via email o DM Instagram.','Anteprima inviata prima del pagamento.'],
     bank:'Bonifico bancario', bankDetails:'Dettagli condivisi su richiesta', paypal:'PayPal', paypalDetails:'Link condiviso su richiesta', whish:'Whish Money', whishDetails:'Numero di conto condiviso su richiesta',
     paymentNote:'Il pagamento viene richiesto solo dopo l’approvazione dell’anteprima dell’invito',
     reviewsTitle:'Cosa dicono le coppie', reviewsSub:'Storie reali dei nostri clienti felici', reviewsCount:'Basato su oltre 50 recensioni', prevReviews:'Recensioni precedenti', nextReviews:'Recensioni successive',
     contactTitle:'Creiamo qualcosa di bello', contactSub:'Contattaci', contactCta:'Invia una richiesta', footer:'© 2025 Cardia Studios · Inviti digitali per matrimonio · Tutti i diritti riservati'
   },
   pt: {
-    nav:['Modelos','Como funciona','Demo RSVP','Preços','Partilhar','Contacto'],
+    nav:['Modelos','Como funciona','Demo RSVP','Preços','FAQ','Partilhar','Contacto'],
     heroTag:'Convites digitais de casamento', heroTitle:'A vossa história de amor,', heroEm:'contada com elegância.', heroSub:'Designs exclusivos · Criados com cuidado · ', heroCta:'Explorar modelos',
     bestTitle:'Mais vendidos', bestSub:'Os nossos designs mais adorados — escolhidos por casais em todo o mundo', bestBadge:'Mais vendido', viewTheme:'Ver modelo',
     collectionTitle:'A nossa coleção', collectionSub:'Designs exclusivos para cada história de amor',
@@ -3766,14 +3977,96 @@ const CARDIA_TRANSLATIONS = {
     },
     tooltip:'Personalizamos o modelo escolhido com nomes, data, local, programa e detalhes pessoais. Pode adicionar ou remover secções, reorganizar o conteúdo, substituir ícones pelos seus e adaptar o estilo ao evento.',
     generator:'',
-    paymentHead1:'França, UE e mundo inteiro', paymentHead2:'Líbano',
-    paymentText:'Escolha o seu modelo e contacte-nos por email ou WhatsApp. Personalizamos com os seus detalhes e enviamos uma pré-visualização para aprovação — o pagamento só é solicitado quando estiver satisfeito com o resultado.',
+    paymentHead1:'Líbano', paymentHead2:'França, UE e mundo inteiro',
+    paymentLebanon:['Para casais no Líbano.','Fora do Líbano? Veja a opção França, UE e mundo inteiro.','Contacte-nos por email ou DM no Instagram.','Pré-visualização enviada antes do pagamento.'], paymentWorld:['Para casais fora do Líbano.','Contacte-nos por email ou DM no Instagram.','Pré-visualização enviada antes do pagamento.'],
     bank:'Transferência bancária', bankDetails:'Detalhes partilhados a pedido', paypal:'PayPal', paypalDetails:'Link partilhado a pedido', whish:'Whish Money', whishDetails:'Número da conta partilhado a pedido',
     paymentNote:'O pagamento só é solicitado depois de aprovar a pré-visualização do convite',
     reviewsTitle:'O que dizem os casais', reviewsSub:'Histórias reais dos nossos clientes felizes', reviewsCount:'Com base em mais de 50 avaliações', prevReviews:'Avaliações anteriores', nextReviews:'Avaliações seguintes',
     contactTitle:'Vamos criar algo bonito', contactSub:'Contacte-nos', contactCta:'Enviar pedido', footer:'© 2025 Cardia Studios · Convites digitais de casamento · Todos os direitos reservados'
   }
 };
+
+
+const CARDIA_FAQ_TRANSLATIONS = {
+  en: {
+    kicker:'Questions couples ask', title:'Frequently Asked Questions', intro:'Everything you need to know before choosing your digital wedding invitation.',
+    items:[
+      ['How does the digital invitation work?','You receive a private wedding link that you can send by WhatsApp, Instagram, or email. Guests open it on their phone, enjoy the invitation, and submit their RSVP directly online.'],
+      ['Can I customize the design?','Yes. We personalize your names, date, venue, schedule, photos, wording, music, sections, and small details so the invitation feels like your wedding, not a generic template.'],
+      ['Will I know who is attending?','Yes. RSVP replies can be sent to your email and collected in a live Google Sheet, so you can easily see who is attending, who declined, and how many guests are coming.'],
+      ['Can each guest receive a personal link?','Yes. You can create personalized guest or family links with pre-filled names and any number of allowed guests. This makes the RSVP cleaner and easier to manage.'],
+      ['Do you support guests in different countries?','Absolutely. The invitation is online, mobile-friendly, and easy to share anywhere. It is perfect for couples with family and friends spread across different cities or countries.'],
+      ['What happens after I choose a plan?','Send us your template ID and wedding details. We customize the invitation, send you a preview, make final edits if needed, then give you the final link to share with your guests.']
+    ]
+  },
+  fr: {
+    kicker:'Questions fréquentes', title:'Foire aux questions', intro:'Tout ce qu’il faut savoir avant de choisir votre invitation de mariage digitale.',
+    items:[
+      ['Comment fonctionne l’invitation digitale ?','Vous recevez un lien privé que vous pouvez envoyer par WhatsApp, Instagram ou email. Les invités l’ouvrent sur leur téléphone et répondent directement en ligne.'],
+      ['Puis-je personnaliser le design ?','Oui. Nous personnalisons les noms, la date, le lieu, le programme, les photos, les textes, la musique, les sections et les petits détails.'],
+      ['Est-ce que je saurai qui vient ?','Oui. Les réponses RSVP peuvent arriver par email et être enregistrées dans un Google Sheet en direct pour suivre les présents, les absents et le nombre d’invités.'],
+      ['Chaque invité peut-il recevoir un lien personnel ?','Oui. Vous pouvez créer des liens personnalisés pour un invité ou une famille, avec les noms préremplis et le nombre d’accompagnants autorisé.'],
+      ['Est-ce adapté aux invités à l’étranger ?','Absolument. L’invitation est en ligne, adaptée au mobile et facile à partager partout, idéale pour les familles réparties dans plusieurs pays.'],
+      ['Que se passe-t-il après le choix d’un plan ?','Envoyez-nous l’ID du modèle et les détails du mariage. Nous personnalisons l’invitation, envoyons un aperçu, faisons les derniers ajustements, puis vous recevrez le lien final.']
+    ]
+  },
+  es: {
+    kicker:'Preguntas de las parejas', title:'Preguntas frecuentes', intro:'Todo lo que necesitas saber antes de elegir tu invitación digital de boda.',
+    items:[
+      ['¿Cómo funciona la invitación digital?','Recibes un enlace privado que puedes enviar por WhatsApp, Instagram o email. Los invitados lo abren en el móvil y responden al RSVP directamente online.'],
+      ['¿Puedo personalizar el diseño?','Sí. Personalizamos nombres, fecha, lugar, horario, fotos, textos, música, secciones y pequeños detalles para que encaje con tu boda.'],
+      ['¿Sabré quién asistirá?','Sí. Las respuestas RSVP pueden llegar a tu email y guardarse en un Google Sheet en vivo para ver quién viene, quién no y cuántos invitados asistirán.'],
+      ['¿Cada invitado puede recibir un enlace personal?','Sí. Puedes crear enlaces personalizados para invitados o familias, con nombres ya escritos y cualquier número de invitados permitidos.'],
+      ['¿Sirve para invitados en otros países?','Por supuesto. La invitación es online, funciona muy bien en móvil y se comparte fácilmente en cualquier país.'],
+      ['¿Qué pasa después de elegir un plan?','Nos envías el ID del modelo y los detalles de la boda. Personalizamos la invitación, enviamos una vista previa, hacemos los ajustes finales y te damos el enlace definitivo.']
+    ]
+  },
+  it: {
+    kicker:'Domande delle coppie', title:'Domande frequenti', intro:'Tutto quello che devi sapere prima di scegliere il tuo invito digitale di matrimonio.',
+    items:[
+      ['Come funziona l’invito digitale?','Ricevi un link privato da inviare tramite WhatsApp, Instagram o email. Gli ospiti lo aprono dal telefono e confermano la presenza online.'],
+      ['Posso personalizzare il design?','Sì. Personalizziamo nomi, data, luogo, programma, foto, testi, musica, sezioni e dettagli per adattarlo al tuo matrimonio.'],
+      ['Sapremo chi partecipa?','Sì. Le risposte RSVP possono arrivare via email ed essere raccolte in un Google Sheet live, così vedi chi partecipa, chi no e quanti ospiti verranno.'],
+      ['Ogni ospite può ricevere un link personale?','Sì. Puoi creare link personalizzati per ospiti o famiglie, con nomi precompilati e qualsiasi numero di invitati consentiti.'],
+      ['Funziona per ospiti in paesi diversi?','Assolutamente. L’invito è online, ottimizzato per mobile e facile da condividere ovunque.'],
+      ['Cosa succede dopo aver scelto un piano?','Ci invii l’ID del modello e i dettagli del matrimonio. Personalizziamo l’invito, mandiamo un’anteprima, facciamo le ultime modifiche e ti diamo il link finale.']
+    ]
+  },
+  pt: {
+    kicker:'Perguntas dos casais', title:'Perguntas frequentes', intro:'Tudo o que precisa de saber antes de escolher o seu convite digital de casamento.',
+    items:[
+      ['Como funciona o convite digital?','Recebe um link privado que pode enviar por WhatsApp, Instagram ou email. Os convidados abrem no telemóvel e respondem ao RSVP online.'],
+      ['Posso personalizar o design?','Sim. Personalizamos nomes, data, local, programa, fotos, textos, música, secções e pequenos detalhes para combinar com o casamento.'],
+      ['Vou saber quem vai comparecer?','Sim. As respostas RSVP podem ser enviadas por email e recolhidas num Google Sheet ao vivo, para ver quem vem, quem recusou e quantos convidados virão.'],
+      ['Cada convidado pode receber um link pessoal?','Sim. Pode criar links personalizados para convidados ou famílias, com nomes preenchidos e qualquer número de convidados permitido.'],
+      ['Funciona para convidados noutros países?','Claro. O convite é online, adaptado ao telemóvel e fácil de partilhar em qualquer país.'],
+      ['O que acontece depois de escolher um plano?','Envia-nos o ID do modelo e os detalhes do casamento. Personalizamos o convite, enviamos uma pré-visualização, fazemos os ajustes finais e entregamos o link final.']
+    ]
+  }
+};
+
+function initFaqAccordion() {
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    item.classList.remove('open');
+    const answer = item.querySelector('.faq-answer');
+    const question = item.querySelector('.faq-question');
+    if (answer) answer.setAttribute('aria-hidden', 'true');
+    if (question) question.setAttribute('aria-expanded', 'false');
+  });
+
+  document.querySelectorAll('.faq-question').forEach((button) => {
+    if (button.dataset.faqReady === 'true') return;
+    button.dataset.faqReady = 'true';
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      if (!item) return;
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (answer) answer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    });
+  });
+}
 
 function setText(selector, text) {
   const el = document.querySelector(selector);
@@ -3872,12 +4165,35 @@ function applyLanguage(lang) {
   const paymentHeads = document.querySelectorAll('.payment-region h4');
   if(paymentHeads[0]) paymentHeads[0].lastChild.textContent = ' ' + t.paymentHead1;
   if(paymentHeads[1]) paymentHeads[1].lastChild.textContent = ' ' + t.paymentHead2;
-  document.querySelectorAll('.payment-region p').forEach(p => p.textContent = t.paymentText);
+  const paymentBulletLists = document.querySelectorAll('.payment-bullets');
+  [t.paymentLebanon, t.paymentWorld].forEach((bullets, listIndex) => {
+    const list = paymentBulletLists[listIndex];
+    if (!list || !bullets) return;
+    list.innerHTML = bullets.map(item => `<li>${item}</li>`).join('');
+  });
   const payMethods = document.querySelectorAll('.pay-method');
-  if(payMethods[0]) payMethods[0].querySelector('div').innerHTML = `<strong>${t.bank}</strong>${t.bankDetails}`;
-  if(payMethods[1]) payMethods[1].querySelector('div').innerHTML = `<strong>${t.paypal}</strong>${t.paypalDetails}`;
-  if(payMethods[2]) payMethods[2].querySelector('div').innerHTML = `<strong>${t.whish}</strong>${t.whishDetails}`;
+  if(payMethods[0]) payMethods[0].querySelector('div').innerHTML = `<strong>${t.whish}</strong>${t.whishDetails}`;
+  if(payMethods[1]) payMethods[1].querySelector('div').innerHTML = `<strong>${t.bank}</strong>${t.bankDetails}`;
+  if(payMethods[2]) payMethods[2].querySelector('div').innerHTML = `<strong>${t.paypal}</strong>${t.paypalDetails}`;
   setText('.payment-note', t.paymentNote);
+
+
+  const faqT = CARDIA_FAQ_TRANSLATIONS[lang] || CARDIA_FAQ_TRANSLATIONS.en;
+  setText('.faq-kicker', faqT.kicker);
+  setText('.faq-header h2', faqT.title);
+  setText('.faq-header p', faqT.intro);
+  document.querySelectorAll('.faq-item').forEach((item, i) => {
+    if (!faqT.items[i]) return;
+    const q = item.querySelector('.faq-question');
+    const a = item.querySelector('.faq-answer');
+    item.classList.remove('open');
+    if (q) q.textContent = faqT.items[i][0];
+    if (a) {
+      a.textContent = faqT.items[i][1];
+      a.setAttribute('aria-hidden', 'true');
+    }
+    if (q) q.setAttribute('aria-expanded', 'false');
+  });
 
   setText('.reviews-header h2', t.reviewsTitle);
   setText('.reviews-header p', t.reviewsSub);
@@ -4406,6 +4722,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     modernizeBestSellerPreviews();
   }
 })();
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFaqAccordion);
+} else {
+  initFaqAccordion();
+}
 </script>
 </body>
 </html>
