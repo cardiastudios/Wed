@@ -2264,6 +2264,237 @@ html, body { background: #F7F7F7 !important; }
   display: none !important;
 }
 
+
+
+/* ═══════════════════════════════════════
+   RSVP LIVE DEMO / TUTORIAL SECTION
+═══════════════════════════════════════ */
+.rsvp-demo-section {
+  background: var(--bg);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.rsvp-demo-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(154,106,88,.12) 0%, transparent 52%),
+    radial-gradient(ellipse at 88% 82%, rgba(184,144,60,.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+.rsvp-demo-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.rsvp-demo-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+.rsvp-demo-kicker {
+  display: inline-block;
+  padding: .38rem 1rem;
+  border: 1px solid rgba(184,144,60,.36);
+  color: var(--gold);
+  font-size: .58rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  background: rgba(255,255,255,.42);
+}
+.rsvp-demo-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem,5vw,3rem);
+  color: var(--ink);
+  margin-bottom: .75rem;
+}
+.rsvp-demo-header p {
+  font-size: .82rem;
+  line-height: 1.85;
+  color: rgba(42,32,24,.68);
+}
+.rsvp-demo-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, .82fr) minmax(300px, 1.18fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+.rsvp-demo-visual {
+  background: rgba(255,255,255,.68);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 55px rgba(42,32,24,.08);
+  border-radius: 22px;
+  padding: 2rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.rsvp-demo-phone {
+  position: relative;
+  width: 190px;
+  height: 386px;
+  background: #1a1210;
+  border-radius: 34px;
+  padding: 8px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
+  flex: 0 0 auto;
+}
+.rsvp-demo-phone::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 7px;
+  background: #111;
+  border-radius: 99px;
+  z-index: 3;
+}
+.rsvp-demo-screen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #111;
+  position: relative;
+}
+.rsvp-demo-screen iframe {
+  width: 390px;
+  height: 844px;
+  border: 0;
+  transform-origin: top left;
+  transform: scale(calc(174/390));
+  pointer-events: none;
+  display: block;
+}
+.rsvp-demo-mini-caption {
+  margin-top: 1.35rem;
+  font-size: .62rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--rose-lt);
+  text-align: center;
+}
+.rsvp-demo-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 55px rgba(42,32,24,.08);
+  border-radius: 22px;
+  padding: clamp(1.4rem,3vw,2.25rem);
+}
+.rsvp-demo-steps {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.rsvp-demo-step {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid rgba(155,120,90,.14);
+  background: rgba(247,247,247,.72);
+  border-radius: 16px;
+}
+.rsvp-demo-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--gold-lt);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.rsvp-demo-step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: .25rem;
+}
+.rsvp-demo-copy-body p,
+.rsvp-demo-list {
+  font-size: .74rem;
+  line-height: 1.75;
+  color: var(--ink-lt);
+}
+.rsvp-demo-list {
+  margin: .25rem 0 0;
+  padding-left: 1.05rem;
+}
+.rsvp-demo-list li {
+  margin-bottom: .28rem;
+}
+.rsvp-demo-list li:last-child {
+  margin-bottom: 0;
+}
+.rsvp-demo-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+.rsvp-demo-btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: .75rem .85rem;
+  border: 1px solid rgba(184,144,60,.38);
+  background: transparent;
+  color: var(--ink);
+  font-size: .62rem;
+  letter-spacing: .14em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .25s ease;
+}
+.rsvp-demo-btn:hover {
+  background: var(--ink);
+  color: var(--gold-lt);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.rsvp-demo-btn.primary {
+  background: var(--ink);
+  color: var(--gold-lt);
+  border-color: var(--ink);
+}
+.rsvp-demo-note {
+  margin-top: 1rem;
+  font-size: .68rem;
+  line-height: 1.65;
+  color: rgba(42,32,24,.56);
+  text-align: center;
+}
+@media (max-width: 860px) {
+  .rsvp-demo-grid { grid-template-columns: 1fr; }
+  .rsvp-demo-visual { padding-top: 1.6rem; }
+}
+@media (max-width: 640px) {
+  .rsvp-demo-section { padding: 4rem 1rem; }
+  .rsvp-demo-header { margin-bottom: 2rem; }
+  .rsvp-demo-panel { padding: 1.1rem; border-radius: 18px; }
+  .rsvp-demo-step { grid-template-columns: 38px 1fr; gap: .8rem; padding: .9rem; }
+  .rsvp-demo-num { width: 38px; height: 38px; font-size: 1.08rem; }
+  .rsvp-demo-actions { grid-template-columns: 1fr; }
+  .rsvp-demo-btn { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -2274,6 +2505,7 @@ html, body { background: #F7F7F7 !important; }
   <div class="nav-links" id="navLinks">
     <a href="#templates" class="nav-link" onclick="closeMenu()">Templates</a>
     <a href="#how" class="nav-link" onclick="closeMenu()">How it works</a>
+    <a href="#rsvp-demo" class="nav-link" onclick="closeMenu()">RSVP Demo</a>
     <a href="#pricing" class="nav-link" onclick="closeMenu()">Pricing</a>
     <!-- REVIEWS NAV LINK DISABLED — re-enable when reviews section is active
     <a href="#reviews" class="nav-link" onclick="closeMenu()">Reviews</a>
@@ -3007,6 +3239,65 @@ html, body { background: #F7F7F7 !important; }
 </section>
 
 <!-- PRICING -->
+
+
+<!-- RSVP LIVE DEMO / TUTORIAL -->
+<section class="rsvp-demo-section" id="rsvp-demo">
+  <div class="rsvp-demo-content">
+    <div class="rsvp-demo-header reveal">
+      <div class="rsvp-demo-kicker">Live RSVP Demo</div>
+      <h2>See how the RSVP system works</h2>
+      <p>Visitors can create a personal guest link, open the generated invitation, submit an RSVP, and watch the connected Google Sheet update with the response.</p>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="rsvp-demo-grid">
+      <div class="rsvp-demo-visual reveal">
+        <div class="rsvp-demo-phone" aria-label="Thomas and Sarah invitation preview">
+          <div class="rsvp-demo-screen">
+            <iframe src="https://www.cardiastudios.com/templates/Thomas&Sarah.html" loading="lazy" scrolling="no" title="Thomas and Sarah RSVP invitation demo"></iframe>
+          </div>
+        </div>
+        <div class="rsvp-demo-mini-caption">Try out our RSVP system</div>
+      </div>
+
+      <div class="rsvp-demo-panel reveal">
+        <div class="rsvp-demo-steps">
+          <div class="rsvp-demo-step">
+            <div class="rsvp-demo-num">1</div>
+            <div>
+              <h3>Create a guest link</h3>
+              <div class="rsvp-demo-copy-body">
+                <ul class="rsvp-demo-list">
+                  <li>Create a personalized guest or family link.</li>
+                  <li>Click the generated link to open the Thomas &amp; Sarah invitation.</li>
+                  <li>See how it changes with your settings: 1, 2, or any number of guests, pre-filled names, or blank fields.</li>
+                  <li>Send a test RSVP like a real guest.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="rsvp-demo-step">
+            <div class="rsvp-demo-num">2</div>
+            <div>
+              <h3>Watch the dashboard update</h3>
+              <div class="rsvp-demo-copy-body">
+                <p>After submitting the RSVP, open the Google Sheet dashboard to see how every answer is collected automatically.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-demo-actions">
+          <a class="rsvp-demo-btn primary" href="https://cardiastudios.github.io/Tempo/T_S_link_generator.html" target="_blank" rel="noopener">Try link generator</a>
+          <a class="rsvp-demo-btn" href="https://docs.google.com/spreadsheets/d/1xmPwqlGeVDZvJVEZnsJdAkKCvLzRulKqgNELnE2-Ass/edit?gid=78774066#gid=78774066" target="_blank" rel="noopener">View dashboard</a>
+        </div>
+        <p class="rsvp-demo-note">This is a live demo, so test answers may appear in the demo dashboard. For your own wedding, you will also receive an email notification for every RSVP in addition to the dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="pricing-section" id="pricing">
   <h2 class="reveal">Simple Pricing</h2>
   <p class="reveal">No hidden fees &middot; Contact us to get started</p>
@@ -3323,12 +3614,13 @@ setupWebsiteShareLinks();
 ════════════════════════════════════ */
 const CARDIA_TRANSLATIONS = {
   en: {
-    nav:['Templates','How it works','Pricing','Share','Contact'],
+    nav:['Templates','How it works','RSVP Demo','Pricing','Share','Contact'],
     heroTag:'Digital Wedding Invitations', heroTitle:'Your love story,', heroEm:'beautifully told.', heroSub:'Exclusive designs · Crafted with care ·', heroCta:'Explore Templates',
     bestTitle:'Best Sellers', bestSub:'Our most loved designs — chosen by couples around the world', bestBadge:'Best Seller', viewTheme:'View theme',
     collectionTitle:'Our Collection', collectionSub:'Exclusive designs, one for every love story',
     bookTitle:'Book Invitations', classicTitle:'Classic Invitations', swipe:'Swipe to view ›', templateId:'Template ID: ',
     howTitle:'How It Works', howSub:'Simple, fast, beautiful',
+    rsvpKicker:'Live RSVP Demo', rsvpTitle:'See how the RSVP system works', rsvpIntro:'Visitors can create a personal guest link, open the generated invitation, submit an RSVP, and watch the connected Google Sheet update with the response.', rsvpCaption:'Try out our RSVP system', rsvpStepTitles:['Create a guest link','Watch the dashboard update'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Create a personalized guest or family link.</li><li>Click the generated link to open the Thomas & Sarah invitation.</li><li>See how it changes with your settings: 1, 2, or any number of guests, pre-filled names, or blank fields.</li><li>Send a test RSVP like a real guest.</li></ul>','<p>After submitting the RSVP, open the Google Sheet dashboard to see how every answer is collected automatically.</p>'], rsvpButtons:['Try link generator','View dashboard'], rsvpNote:'This is a live demo, so test answers may appear in the demo dashboard. For your own wedding, you will also receive an email notification for every RSVP in addition to the dashboard.',
     steps:[
       ['Choose a design','Browse our exclusive templates and pick the one that speaks to your love story. Each design has an ID: A for Best Sellers, B for Book Invitations, and C for Classic Invitations.'],
       ['Send your details',"Share your template ID, names, date, venue, schedule, and any personal touches you'd like included."],
@@ -3354,12 +3646,13 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Let’s create something beautiful', contactSub:'Get in touch', contactCta:'Send an Enquiry', footer:'© 2025 Cardia Studios · Digital Wedding Invitations · All rights reserved'
   },
   fr: {
-    nav:['Modèles','Fonctionnement','Tarifs','Avis','Partager','Contact'],
+    nav:['Modèles','Fonctionnement','Démo RSVP','Tarifs','Partager','Contact'],
     heroTag:'Invitations de mariage digitales', heroTitle:'Votre histoire d’amour,', heroEm:'magnifiquement racontée.', heroSub:'Designs exclusifs · Créés avec soin ·', heroCta:'Voir les modèles',
     bestTitle:'Meilleures ventes', bestSub:'Nos designs les plus aimés — choisis par des couples du monde entier', bestBadge:'Meilleure vente', viewTheme:'Voir le modèle',
     collectionTitle:'Notre collection', collectionSub:'Des designs exclusifs pour chaque histoire d’amour',
     bookTitle:'Invitations livre', classicTitle:'Invitations classiques', swipe:'Faites glisser ›', templateId:'ID du modèle : ',
     howTitle:'Comment ça marche', howSub:'Simple, rapide, élégant',
+    rsvpKicker:'Démo RSVP en direct', rsvpTitle:'Voyez comment fonctionne le système RSVP', rsvpIntro:'Les visiteurs peuvent tester une vraie invitation, créer un lien invité personnalisé, envoyer une réponse RSVP et voir le Google Sheet se mettre à jour.', rsvpCaption:'Testez notre système RSVP', rsvpStepTitles:['Créer un lien invité','Voir le tableau se mettre à jour'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Créez un lien personnalisé pour un invité ou une famille.</li><li>Cliquez sur le lien généré pour ouvrir l’invitation Thomas & Sarah.</li><li>Voyez comment le RSVP change selon vos réglages : 1, 2 ou autant d’invités que nécessaire, noms préremplis ou champs vides.</li><li>Envoyez un RSVP test comme un vrai invité.</li></ul>','<p>Après l’envoi du RSVP, ouvrez le Google Sheet pour voir comment chaque réponse est collectée automatiquement.</p>'], rsvpButtons:['Tester le générateur','Voir le tableau'], rsvpNote:'Ceci est une démo en direct, les réponses test peuvent apparaître dans le tableau. Pour votre propre mariage, vous recevrez aussi une notification par email pour chaque RSVP, en plus du tableau.',
     steps:[
       ['Choisissez un design','Parcourez nos modèles exclusifs et choisissez celui qui correspond à votre histoire. Chaque design possède un ID : A pour les meilleures ventes, B pour les invitations livre et C pour les invitations classiques.'],
       ['Envoyez vos informations','Partagez l’ID du modèle, les noms, la date, le lieu, le programme et les détails personnels à ajouter.'],
@@ -3385,12 +3678,13 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Créons quelque chose de beau', contactSub:'Contactez-nous', contactCta:'Envoyer une demande', footer:'© 2025 Cardia Studios · Invitations de mariage digitales · Tous droits réservés'
   },
   es: {
-    nav:['Plantillas','Cómo funciona','Precios','Compartir','Contacto'],
+    nav:['Plantillas','Cómo funciona','Demo RSVP','Precios','Compartir','Contacto'],
     heroTag:'Invitaciones digitales de boda', heroTitle:'Tu historia de amor,', heroEm:'bellamente contada.', heroSub:'Diseños exclusivos · Hechos con cuidado ·', heroCta:'Ver plantillas',
     bestTitle:'Más vendidos', bestSub:'Nuestros diseños más queridos — elegidos por parejas de todo el mundo', bestBadge:'Más vendido', viewTheme:'Ver plantilla',
     collectionTitle:'Nuestra colección', collectionSub:'Diseños exclusivos para cada historia de amor',
     bookTitle:'Invitaciones libro', classicTitle:'Invitaciones clásicas', swipe:'Desliza para ver ›', templateId:'ID de plantilla: ',
     howTitle:'Cómo funciona', howSub:'Simple, rápido, hermoso',
+    rsvpKicker:'Demo RSVP en vivo', rsvpTitle:'Mira cómo funciona el sistema RSVP', rsvpIntro:'Los visitantes pueden crear un enlace personalizado para invitados, abrir la invitación generada, enviar un RSVP y ver cómo se actualiza el Google Sheet con la respuesta.', rsvpCaption:'Prueba nuestro sistema RSVP', rsvpStepTitles:['Crear un enlace de invitado','Ver cómo se actualiza el panel'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Crea un enlace personalizado para un invitado o una familia.</li><li>Haz clic en el enlace generado para abrir la invitación Thomas & Sarah.</li><li>Mira cómo cambia con tus ajustes: cualquier número de invitados, nombres prellenados o campos en blanco.</li><li>Envía un RSVP de prueba como un invitado real.</li></ul>','<p>Después de enviar el RSVP, abre el Google Sheet para ver cómo cada respuesta se recoge automáticamente.</p>'], rsvpButtons:['Probar generador','Ver panel'], rsvpNote:'Esta es una demo en vivo, por lo que las respuestas de prueba pueden aparecer en el panel. Para tu propia boda, también recibirás una notificación por email por cada RSVP, además del panel.',
     steps:[
       ['Elige un diseño','Explora nuestras plantillas exclusivas y elige la que mejor represente tu historia. Cada diseño tiene un ID: A para más vendidos, B para invitaciones libro y C para invitaciones clásicas.'],
       ['Envía tus detalles','Comparte el ID de la plantilla, nombres, fecha, lugar, programa y cualquier toque personal que quieras incluir.'],
@@ -3416,12 +3710,13 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Creemos algo hermoso', contactSub:'Contáctanos', contactCta:'Enviar consulta', footer:'© 2025 Cardia Studios · Invitaciones digitales de boda · Todos los derechos reservados'
   },
   it: {
-    nav:['Modelli','Come funziona','Prezzi','Recensioni','Condividi','Contatto'],
+    nav:['Modelli','Come funziona','Demo RSVP','Prezzi','Condividi','Contatto'],
     heroTag:'Inviti digitali per matrimonio', heroTitle:'La vostra storia d’amore,', heroEm:'raccontata con eleganza.', heroSub:'Design esclusivi · Creati con cura · ', heroCta:'Esplora i modelli',
     bestTitle:'Più venduti', bestSub:'I nostri design più amati — scelti da coppie in tutto il mondo', bestBadge:'Più venduto', viewTheme:'Vedi modello',
     collectionTitle:'La nostra collezione', collectionSub:'Design esclusivi per ogni storia d’amore',
     bookTitle:'Inviti libro', classicTitle:'Inviti classici', swipe:'Scorri per vedere ›', templateId:'ID modello: ',
     howTitle:'Come funziona', howSub:'Semplice, veloce, elegante',
+    rsvpKicker:'Demo RSVP live', rsvpTitle:'Scopri come funziona il sistema RSVP', rsvpIntro:'I visitatori possono creare un link ospite personalizzato, aprire l’invito generato, inviare un RSVP e vedere il Google Sheet aggiornarsi con la risposta.', rsvpCaption:'Prova il nostro sistema RSVP', rsvpStepTitles:['Crea un link ospite','Guarda il pannello aggiornarsi'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Crea un link personalizzato per un ospite o una famiglia.</li><li>Clicca sul link generato per aprire l’invito Thomas & Sarah.</li><li>Guarda come cambia con le tue impostazioni: qualsiasi numero di ospiti, nomi precompilati o campi vuoti.</li><li>Invia un RSVP di prova come un vero ospite.</li></ul>','<p>Dopo aver inviato l’RSVP, apri il Google Sheet per vedere come ogni risposta viene raccolta automaticamente.</p>'], rsvpButtons:['Prova generatore','Vedi pannello'], rsvpNote:'Questa è una demo live, quindi le risposte di prova potrebbero apparire nel pannello. Per il tuo matrimonio, riceverai anche una notifica email per ogni RSVP, oltre al pannello.',
     steps:[
       ['Scegli un design','Sfoglia i nostri modelli esclusivi e scegli quello che racconta meglio la vostra storia. Ogni design ha un ID: A per i più venduti, B per gli inviti libro e C per gli inviti classici.'],
       ['Invia i dettagli','Condividi l’ID del modello, i nomi, la data, il luogo, il programma e ogni dettaglio personale che vuoi includere.'],
@@ -3447,12 +3742,13 @@ const CARDIA_TRANSLATIONS = {
     contactTitle:'Creiamo qualcosa di bello', contactSub:'Contattaci', contactCta:'Invia una richiesta', footer:'© 2025 Cardia Studios · Inviti digitali per matrimonio · Tutti i diritti riservati'
   },
   pt: {
-    nav:['Modelos','Como funciona','Preços','Partilhar','Contacto'],
+    nav:['Modelos','Como funciona','Demo RSVP','Preços','Partilhar','Contacto'],
     heroTag:'Convites digitais de casamento', heroTitle:'A vossa história de amor,', heroEm:'contada com elegância.', heroSub:'Designs exclusivos · Criados com cuidado · ', heroCta:'Explorar modelos',
     bestTitle:'Mais vendidos', bestSub:'Os nossos designs mais adorados — escolhidos por casais em todo o mundo', bestBadge:'Mais vendido', viewTheme:'Ver modelo',
     collectionTitle:'A nossa coleção', collectionSub:'Designs exclusivos para cada história de amor',
     bookTitle:'Convites livro', classicTitle:'Convites clássicos', swipe:'Deslize para ver ›', templateId:'ID do modelo: ',
     howTitle:'Como funciona', howSub:'Simples, rápido, bonito',
+    rsvpKicker:'Demo RSVP ao vivo', rsvpTitle:'Veja como funciona o sistema RSVP', rsvpIntro:'Os visitantes podem testar um convite real, criar um link personalizado, enviar um RSVP e ver o Google Sheet atualizar.', rsvpCaption:'Teste o nosso sistema RSVP', rsvpStepTitles:['Criar um link de convidado','Ver o painel atualizar'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Crie um link personalizado para um convidado ou família.</li><li>Clique no link gerado para abrir o convite Thomas & Sarah.</li><li>Veja como o RSVP muda com as suas definições: 1, 2 ou qualquer número de convidados, nomes preenchidos ou campos em branco.</li><li>Envie um RSVP de teste como um convidado real.</li></ul>','<p>Depois de enviar o RSVP, abra o Google Sheet para ver como cada resposta é recolhida automaticamente.</p>'], rsvpButtons:['Testar gerador','Ver painel'], rsvpNote:'Esta é uma demo ao vivo, por isso respostas de teste podem aparecer no painel. Para o seu casamento, também receberá uma notificação por email para cada RSVP, além do painel.',
     steps:[
       ['Escolha um design','Explore os nossos modelos exclusivos e escolha aquele que melhor conta a vossa história. Cada design tem um ID: A para mais vendidos, B para convites livro e C para convites clássicos.'],
       ['Envie os detalhes','Partilhe o ID do modelo, nomes, data, local, programa e qualquer toque pessoal que queira incluir.'],
@@ -3540,6 +3836,21 @@ function applyLanguage(lang) {
       if(step){ const h=step.querySelector('h3'); const p=step.querySelector('p'); if(h) h.textContent=pair[0]; if(p) p.textContent=pair[1]; }
     });
   });
+
+  setText('.rsvp-demo-kicker', t.rsvpKicker);
+  setText('.rsvp-demo-header h2', t.rsvpTitle);
+  setText('.rsvp-demo-header p', t.rsvpIntro);
+  setText('.rsvp-demo-mini-caption', t.rsvpCaption);
+  document.querySelectorAll('.rsvp-demo-step').forEach((step,i)=>{
+    const h = step.querySelector('h3');
+    const body = step.querySelector('.rsvp-demo-copy-body');
+    if (h && t.rsvpStepTitles && t.rsvpStepTitles[i]) h.textContent = t.rsvpStepTitles[i];
+    if (body && t.rsvpStepText && t.rsvpStepText[i]) body.innerHTML = t.rsvpStepText[i];
+  });
+  document.querySelectorAll('.rsvp-demo-btn').forEach((btn,i)=>{
+    if (t.rsvpButtons && t.rsvpButtons[i]) btn.textContent = t.rsvpButtons[i];
+  });
+  setText('.rsvp-demo-note', t.rsvpNote);
 
   setText('.pricing-section > h2', t.pricingTitle);
   setText('.pricing-section > p', t.pricingSub);
