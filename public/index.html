@@ -2657,6 +2657,97 @@ html, body { background: #F7F7F7 !important; }
 }
 
 </style>
+
+
+
+
+
+
+<style>
+/* ── Special offer banner ── */
+.special-offer-banner {
+  max-width: 820px;
+  margin: 0 auto 2rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #b8903c, #d4b870);
+  color: #2a2018;
+  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+}
+.special-offer-banner strong {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: .35rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+}
+.special-offer-banner span {
+  display: block;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* ── Offer price layout ── */
+.price-amount {
+  display: flex !important;
+  align-items: baseline;
+  justify-content: center;
+  gap: .12em;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  line-height: 1.05;
+}
+.price-amount .price-currency {
+  font-size: .38em;
+  align-self: flex-start;
+  margin-top: .28em;
+  flex-shrink: 0;
+}
+.price-amount .old-price {
+  position: relative;
+  opacity: .45;
+  font-size: .44em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.price-amount .old-price::after {
+  content: "";
+  position: absolute;
+  left: -2px; right: -2px;
+  top: 50%;
+  height: 1.5px;
+  background: currentColor;
+  transform: translateY(-50%) rotate(-8deg);
+}
+.price-amount .offer-price {
+  font-size: 1em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Mobile: prevent numbers overflowing the card */
+@media (max-width: 640px) {
+  .pricing-swiper-wrap .price-card .price-amount {
+    font-size: 2.6rem !important;
+    gap: .08em;
+    overflow: hidden;
+    max-width: 100%;
+    letter-spacing: 0 !important;
+  }
+  .pricing-swiper-wrap .price-card {
+    overflow: hidden;
+  }
+  .pricing-swiper-wrap .price-card .price-amount .old-price  { font-size: .42em; }
+  .pricing-swiper-wrap .price-card .price-amount .offer-price { font-size: .92em; }
+  .pricing-swiper-wrap .price-card .price-amount .price-currency { font-size: .36em; }
+}
+@media (max-width: 390px) {
+  .pricing-swiper-wrap .price-card .price-amount { font-size: 2.1rem !important; }
+}
+</style>
+
 </head>
 <body>
 
@@ -3469,10 +3560,14 @@ html, body { background: #F7F7F7 !important; }
     <div class="pricing-choice-kicker">Choose from 3 simple plans</div>
     <p class="pricing-choice-text">Select the plan that fits your celebration. Open Standard, Premium, or Luxury to compare what each one includes.</p>
   </div>
-  <div class="pricing-cards">
+  <div class="special-offer-banner">
+<strong data-i18n="offerTitle">🎉 Special 20% OFF on All Plans</strong>
+<span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
+</div>
+<div class="pricing-cards">
     <div class="price-card reveal">
       <div class="price-name">Standard</div>
-      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
+      <div class="price-amount" data-base-price="100"><span class="price-currency">$</span><span class="old-price">100</span><span class="offer-price">80</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The complete digital invitation</div>
       <ul class="price-features">
@@ -3486,7 +3581,7 @@ html, body { background: #F7F7F7 !important; }
     </div>
     <div class="price-card reveal">
       <div class="price-name">Premium</div>
-      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
+      <div class="price-amount" data-base-price="159"><span class="price-currency">$</span><span class="old-price">159</span><span class="offer-price">127</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The full experience</div>
       <ul class="price-features">
@@ -3502,7 +3597,7 @@ html, body { background: #F7F7F7 !important; }
     <div class="price-card featured reveal">
       <div class="price-badge">Most Popular</div>
       <div class="price-name">Luxury</div>
-      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
+      <div class="price-amount" data-base-price="189"><span class="price-currency">$</span><span class="old-price">189</span><span class="offer-price">151</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">For the perfect wedding</div>
       <ul class="price-features">
@@ -3521,7 +3616,7 @@ html, body { background: #F7F7F7 !important; }
     <button class="mobile-price-tab" type="button" data-plan="standard"><span class="mobile-plan-main"><span class="mobile-plan-icon">☆</span><span class="mobile-plan-copy"><span class="mobile-plan-name">Standard</span><span class="mobile-plan-tag">Essential & beautiful</span><span class="mobile-plan-short">Everything you need for a stunning invitation.</span></span></span><span class="mobile-plan-plus">+</span></button>
     <div class="price-card mobile-price-panel" data-plan-panel="standard">
       <div class="price-name">Standard</div>
-      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
+      <div class="price-amount" data-base-price="100"></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The complete digital invitation</div>
       <ul class="price-features">
@@ -3537,7 +3632,7 @@ html, body { background: #F7F7F7 !important; }
     <button class="mobile-price-tab" type="button" data-plan="premium"><span class="mobile-plan-main"><span class="mobile-plan-icon">◇</span><span class="mobile-plan-copy"><span class="mobile-plan-name">Premium</span><span class="mobile-plan-tag">More features & personalization</span><span class="mobile-plan-short">Advanced options for a more elevated experience.</span></span></span><span class="mobile-plan-plus">+</span></button>
     <div class="price-card mobile-price-panel" data-plan-panel="premium">
       <div class="price-name">Premium</div>
-      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
+      <div class="price-amount" data-base-price="159"></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The full experience</div>
       <ul class="price-features">
@@ -3555,7 +3650,7 @@ html, body { background: #F7F7F7 !important; }
     <div class="price-card featured mobile-price-panel" data-plan-panel="luxury">
       <div class="price-badge">Most Popular</div>
       <div class="price-name">Luxury</div>
-      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
+      <div class="price-amount" data-base-price="189"></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">For the perfect wedding</div>
       <ul class="price-features">
@@ -4729,5 +4824,108 @@ if (document.readyState === 'loading') {
   initFaqAccordion();
 }
 </script>
+
+<script>
+/* =======================================================
+   UNIFIED PRICE + OFFER BANNER SCRIPT
+   - Handles all .price-amount[data-base-price] elements
+     (desktop cards AND mobile accordion panels)
+   - Applies 20% discount and currency conversion
+   - Updates the offer banner text on language change
+======================================================= */
+(function(){
+
+  /* -- Currency table (matches nav select options) -- */
+  var CURRENCIES = {
+    USD: { symbol: '$',  rate: 1    },
+    EUR: { symbol: '\u20ac',  rate: 0.93 },
+    GBP: { symbol: '\u00a3',  rate: 0.80 },
+    CAD: { symbol: 'C$', rate: 1.37 },
+    AUD: { symbol: 'A$', rate: 1.53 }
+  };
+
+  var DISCOUNT = 0.80; /* 20% off */
+
+  function getSelectedCurrency() {
+    var sel = document.getElementById('currencySelect');
+    return (sel && CURRENCIES[sel.value]) ? sel.value : 'USD';
+  }
+
+  function fmt(value) {
+    return Math.round(value).toLocaleString('en-US');
+  }
+
+  function renderAmount(el, basePriceUSD, currencyCode) {
+    var cfg = CURRENCIES[currencyCode] || CURRENCIES.USD;
+    var full  = basePriceUSD * cfg.rate;
+    var offer = full * DISCOUNT;
+
+    el.innerHTML = '';
+
+    var cur = document.createElement('span');
+    cur.className = 'price-currency';
+    cur.textContent = cfg.symbol;
+
+    var old = document.createElement('span');
+    old.className = 'old-price';
+    old.textContent = fmt(full);
+
+    var disc = document.createElement('span');
+    disc.className = 'offer-price';
+    disc.textContent = fmt(offer);
+
+    el.appendChild(cur);
+    el.appendChild(old);
+    el.appendChild(disc);
+  }
+
+  function updateAllPrices() {
+    var currency = getSelectedCurrency();
+    document.querySelectorAll('.price-amount[data-base-price]').forEach(function(el) {
+      var base = parseFloat(el.getAttribute('data-base-price'));
+      if (!isNaN(base) && base > 0) renderAmount(el, base, currency);
+    });
+  }
+
+  /* -- Offer banner i18n -- */
+  var OFFER_I18N = {
+    en: { title: '🎉 Special 20% OFF on All Plans',                         sub: 'Limited offer until July 20 \u00b7 Preview sent before payment' },
+    fr: { title: '🎉 Offre sp\u00e9ciale\u00a0: -20\u00a0% sur tous les forfaits', sub: "Offre limit\u00e9e jusqu'au 20 juillet \u00b7 Aper\u00e7u envoy\u00e9 avant paiement" },
+    es: { title: '🎉 Oferta especial: 20% de descuento en todos los planes', sub: 'Oferta limitada hasta el 20 de julio \u00b7 Vista previa antes del pago' },
+    it: { title: '🎉 Offerta speciale: 20% di sconto su tutti i pacchetti',   sub: 'Offerta limitata fino al 20 luglio \u00b7 Anteprima inviata prima del pagamento' },
+    pt: { title: '🎉 Oferta especial: 20% de desconto em todos os planos',   sub: 'Oferta limitada at\u00e9 20 de julho \u00b7 Pr\u00e9-visualiza\u00e7\u00e3o antes do pagamento' }
+  };
+
+  function updateOfferBanner() {
+    var langSel = document.getElementById('languageSelect');
+    var lang = langSel ? langSel.value : 'en';
+    var t = OFFER_I18N[lang] || OFFER_I18N.en;
+    document.querySelectorAll('[data-i18n="offerTitle"]').forEach(function(e)    { e.textContent = t.title; });
+    document.querySelectorAll('[data-i18n="offerSubtitle"]').forEach(function(e) { e.textContent = t.sub;   });
+  }
+
+  /* -- Boot -- */
+  function init() {
+    updateAllPrices();
+    updateOfferBanner();
+
+    var currSel = document.getElementById('currencySelect');
+    if (currSel) currSel.addEventListener('change', updateAllPrices);
+
+    var langSel = document.getElementById('languageSelect');
+    if (langSel) langSel.addEventListener('change', updateOfferBanner);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  window.updateOfferPrices = updateAllPrices; /* public alias kept for compatibility */
+
+})();
+</script>
+
 </body>
 </html>
