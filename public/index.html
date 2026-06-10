@@ -2657,63 +2657,6 @@ html, body { background: #F7F7F7 !important; }
 }
 
 </style>
-
-
-
-
-
-
-<style>
-.special-offer-banner{
-  max-width:820px;
-  margin:0 auto 2rem;
-  padding:1rem 1.5rem;
-  background:linear-gradient(135deg,#b8903c,#d4b870);
-  color:#2a2018;
-  text-align:center;
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
-.special-offer-banner strong{
-  display:block;
-  font-size:1.3rem;
-  margin-bottom:.35rem;
-  font-family:'Cormorant Garamond',serif;
-  font-weight:400;
-}
-.special-offer-banner span{
-  display:block;
-  font-size:.72rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.price-amount{
-  white-space:nowrap;
-}
-.price-amount .old-price{
-  display:inline-block;
-  position:relative;
-  opacity:.55;
-  font-size:.56em;
-  margin-right:.18em;
-  vertical-align:middle;
-}
-.price-amount .old-price::after{
-  content:"";
-  position:absolute;
-  left:-3px;
-  right:-3px;
-  top:50%;
-  height:1.5px;
-  background:currentColor;
-  transform:translateY(-50%) rotate(-8deg);
-}
-.price-amount .offer-price{
-  display:inline-block;
-  vertical-align:middle;
-}
-</style>
-
 </head>
 <body>
 
@@ -3526,14 +3469,10 @@ html, body { background: #F7F7F7 !important; }
     <div class="pricing-choice-kicker">Choose from 3 simple plans</div>
     <p class="pricing-choice-text">Select the plan that fits your celebration. Open Standard, Premium, or Luxury to compare what each one includes.</p>
   </div>
-  <div class="special-offer-banner">
-<strong data-i18n="offerTitle">🎉 Special 20% OFF on All Plans</strong>
-<span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
-</div>
-<div class="pricing-cards">
+  <div class="pricing-cards">
     <div class="price-card reveal">
       <div class="price-name">Standard</div>
-      <div class="price-amount" data-base-price="100"><span class="price-currency">$</span><span class="old-price">100</span><span class="offer-price">80</span></div>
+      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The complete digital invitation</div>
       <ul class="price-features">
@@ -3547,7 +3486,7 @@ html, body { background: #F7F7F7 !important; }
     </div>
     <div class="price-card reveal">
       <div class="price-name">Premium</div>
-      <div class="price-amount" data-base-price="159"><span class="price-currency">$</span><span class="old-price">159</span><span class="offer-price">127</span></div>
+      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The full experience</div>
       <ul class="price-features">
@@ -3563,7 +3502,7 @@ html, body { background: #F7F7F7 !important; }
     <div class="price-card featured reveal">
       <div class="price-badge">Most Popular</div>
       <div class="price-name">Luxury</div>
-      <div class="price-amount" data-base-price="189"><span class="price-currency">$</span><span class="old-price">189</span><span class="offer-price">151</span></div>
+      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">For the perfect wedding</div>
       <ul class="price-features">
@@ -3582,7 +3521,7 @@ html, body { background: #F7F7F7 !important; }
     <button class="mobile-price-tab" type="button" data-plan="standard"><span class="mobile-plan-main"><span class="mobile-plan-icon">☆</span><span class="mobile-plan-copy"><span class="mobile-plan-name">Standard</span><span class="mobile-plan-tag">Essential & beautiful</span><span class="mobile-plan-short">Everything you need for a stunning invitation.</span></span></span><span class="mobile-plan-plus">+</span></button>
     <div class="price-card mobile-price-panel" data-plan-panel="standard">
       <div class="price-name">Standard</div>
-      <div class="price-amount" data-usd="<span class=\"old-price\">100</span><span class=\"offer-price\">80</span>"><span class="price-currency">$</span><span class="price-value">100</span></div>
+      <div class="price-amount" data-usd="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The complete digital invitation</div>
       <ul class="price-features">
@@ -3598,7 +3537,7 @@ html, body { background: #F7F7F7 !important; }
     <button class="mobile-price-tab" type="button" data-plan="premium"><span class="mobile-plan-main"><span class="mobile-plan-icon">◇</span><span class="mobile-plan-copy"><span class="mobile-plan-name">Premium</span><span class="mobile-plan-tag">More features & personalization</span><span class="mobile-plan-short">Advanced options for a more elevated experience.</span></span></span><span class="mobile-plan-plus">+</span></button>
     <div class="price-card mobile-price-panel" data-plan-panel="premium">
       <div class="price-name">Premium</div>
-      <div class="price-amount" data-usd="<span class=\"old-price\">159</span><span class=\"offer-price\">127</span>"><span class="price-currency">$</span><span class="price-value">159</span></div>
+      <div class="price-amount" data-usd="159"><span class="price-currency">$</span><span class="price-value">159</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">The full experience</div>
       <ul class="price-features">
@@ -3616,7 +3555,7 @@ html, body { background: #F7F7F7 !important; }
     <div class="price-card featured mobile-price-panel" data-plan-panel="luxury">
       <div class="price-badge">Most Popular</div>
       <div class="price-name">Luxury</div>
-      <div class="price-amount" data-usd="<span class=\"old-price\">189</span><span class=\"offer-price\">151</span>"><span class="price-currency">$</span><span class="price-value">189</span></div>
+      <div class="price-amount" data-usd="189"><span class="price-currency">$</span><span class="price-value">189</span></div>
       <div class="price-period">one-time &middot; hosted forever</div>
       <div class="price-desc">For the perfect wedding</div>
       <ul class="price-features">
@@ -4790,91 +4729,5 @@ if (document.readyState === 'loading') {
   initFaqAccordion();
 }
 </script>
-
-<script>
-(function(){
-  const offerTranslations = {
-    en:{offerTitle:"🎉 Special 20% OFF on All Plans",offerSubtitle:"Limited offer until July 20 · Preview sent before payment"},
-    fr:{offerTitle:"🎉 Offre spéciale : -20 % sur tous les forfaits",offerSubtitle:"Offre limitée jusqu’au 20 juillet · Aperçu envoyé avant paiement"},
-    es:{offerTitle:"🎉 Oferta especial: 20% de descuento en todos los planes",offerSubtitle:"Oferta limitada hasta el 20 de julio · Vista previa antes del pago"},
-    it:{offerTitle:"🎉 Offerta speciale: 20% di sconto su tutti i pacchetti",offerSubtitle:"Offerta limitata fino al 20 luglio · Anteprima inviata prima del pagamento"}
-  };
-  function updateOffer(){
-    const sel=document.querySelector('#languageSelect,[data-language-select],select[name="language"]');
-    const lang=(sel&&sel.value)||document.documentElement.lang||'en';
-    document.querySelectorAll('[data-i18n="offerTitle"]').forEach(e=>e.textContent=(offerTranslations[lang]||offerTranslations.en).offerTitle);
-    document.querySelectorAll('[data-i18n="offerSubtitle"]').forEach(e=>e.textContent=(offerTranslations[lang]||offerTranslations.en).offerSubtitle);
-  }
-  document.addEventListener('DOMContentLoaded',function(){
-    updateOffer();
-    document.querySelectorAll('select').forEach(s=>s.addEventListener('change',updateOffer));
-  });
-})();
-</script>
-
-
-<script>
-(function(){
-  const currencyRates = {
-    USD: { symbol: "$", rate: 1 },
-    EUR: { symbol: "€", rate: 0.92 },
-    GBP: { symbol: "£", rate: 0.79 },
-    AED: { symbol: "AED ", rate: 3.67 },
-    LBP: { symbol: "LBP ", rate: 90000 }
-  };
-
-  function formatPrice(value, currency){
-    const rounded = Math.round(value);
-    if(currency === "LBP"){
-      return rounded.toLocaleString("en-US");
-    }
-    return String(rounded);
-  }
-
-  function getSelectedCurrency(){
-    const selector =
-      document.querySelector('#currencySelect') ||
-      document.querySelector('select[data-currency-select]') ||
-      document.querySelector('select[name="currency"]') ||
-      Array.from(document.querySelectorAll('select')).find(s =>
-        Array.from(s.options).some(o => ["USD","EUR","GBP","AED","LBP"].includes(o.value))
-      );
-    return selector ? selector.value : "USD";
-  }
-
-  function updateOfferPrices(){
-    const currency = getSelectedCurrency();
-    const cfg = currencyRates[currency] || currencyRates.USD;
-
-    document.querySelectorAll(".price-amount[data-base-price]").forEach(function(el){
-      const base = Number(el.getAttribute("data-base-price"));
-      if(!base) return;
-
-      const discounted = base * 0.8;
-
-      const currencyEl = el.querySelector(".price-currency");
-      const oldEl = el.querySelector(".old-price");
-      const offerEl = el.querySelector(".offer-price");
-
-      if(currencyEl) currencyEl.textContent = cfg.symbol;
-      if(oldEl) oldEl.textContent = formatPrice(base * cfg.rate, currency);
-      if(offerEl) offerEl.textContent = formatPrice(discounted * cfg.rate, currency);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function(){
-    updateOfferPrices();
-    document.querySelectorAll("select").forEach(function(sel){
-      sel.addEventListener("change", function(){
-        setTimeout(updateOfferPrices, 0);
-        setTimeout(updateOfferPrices, 80);
-      });
-    });
-  });
-
-  window.updateOfferPrices = updateOfferPrices;
-})();
-</script>
-
 </body>
 </html>
