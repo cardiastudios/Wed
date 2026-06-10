@@ -2689,6 +2689,41 @@ html, body { background: #F7F7F7 !important; }
   text-transform: uppercase;
 }
 
+/* Same offer banner at the top of the homepage.
+   It is added as a small hero item so it does not change the navigation or template layout. */
+.hero .hero-top-offer {
+  position: relative;
+  z-index: 2;
+  width: min(820px, calc(100% - 2rem));
+  margin: 0 auto -.95rem;
+  padding: .9rem 1.35rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(42,32,24,.10);
+}
+.hero .hero-top-offer strong {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+.hero .hero-top-offer span {
+  font-size: clamp(.56rem, 1vw, .7rem);
+  line-height: 1.45;
+  letter-spacing: .13em;
+}
+@media (max-width: 640px) {
+  .hero .hero-top-offer {
+    width: calc(100% - 1.5rem);
+    margin-bottom: -.55rem;
+    padding: .78rem .85rem;
+    border-radius: 14px;
+  }
+  .hero .hero-top-offer strong {
+    font-size: 1.05rem;
+  }
+  .hero .hero-top-offer span {
+    font-size: .54rem;
+    letter-spacing: .10em;
+  }
+}
+
 /* ── Offer price layout ── */
 .price-amount {
   display: flex !important;
@@ -2791,6 +2826,10 @@ html, body { background: #F7F7F7 !important; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="special-offer-banner hero-top-offer" role="note" aria-label="Special offer">
+    <strong data-i18n="offerTitle">Special 20% OFF on All Plans</strong>
+    <span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
+  </div>
   <div class="hero-content">
     <div class="hero-tag">Digital Wedding Invitations</div>
     <h1>Your love story,<em>beautifully told.</em></h1>
@@ -3561,7 +3600,7 @@ html, body { background: #F7F7F7 !important; }
     <p class="pricing-choice-text">Select the plan that fits your celebration. Open Standard, Premium, or Luxury to compare what each one includes.</p>
   </div>
   <div class="special-offer-banner">
-<strong data-i18n="offerTitle">🎉 Special 20% OFF on All Plans</strong>
+<strong data-i18n="offerTitle">Special 20% OFF on All Plans</strong>
 <span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
 </div>
 <div class="pricing-cards">
@@ -4889,11 +4928,11 @@ if (document.readyState === 'loading') {
 
   /* -- Offer banner i18n -- */
   var OFFER_I18N = {
-    en: { title: '🎉 Special 20% OFF on All Plans',                         sub: 'Limited offer until July 20 \u00b7 Preview sent before payment' },
-    fr: { title: '🎉 Offre sp\u00e9ciale\u00a0: -20\u00a0% sur tous les forfaits', sub: "Offre limit\u00e9e jusqu'au 20 juillet \u00b7 Aper\u00e7u envoy\u00e9 avant paiement" },
-    es: { title: '🎉 Oferta especial: 20% de descuento en todos los planes', sub: 'Oferta limitada hasta el 20 de julio \u00b7 Vista previa antes del pago' },
-    it: { title: '🎉 Offerta speciale: 20% di sconto su tutti i pacchetti',   sub: 'Offerta limitata fino al 20 luglio \u00b7 Anteprima inviata prima del pagamento' },
-    pt: { title: '🎉 Oferta especial: 20% de desconto em todos os planos',   sub: 'Oferta limitada at\u00e9 20 de julho \u00b7 Pr\u00e9-visualiza\u00e7\u00e3o antes do pagamento' }
+    en: { title: 'Special 20% OFF on All Plans',                         sub: 'Limited offer until July 20 \u00b7 Preview sent before payment' },
+    fr: { title: '\U0001f389 Offre sp\u00e9ciale\u00a0: -20\u00a0% sur tous les forfaits', sub: "Offre limit\u00e9e jusqu'au 20 juillet \u00b7 Aper\u00e7u envoy\u00e9 avant paiement" },
+    es: { title: 'Oferta especial: 20% de descuento en todos los planes', sub: 'Oferta limitada hasta el 20 de julio \u00b7 Vista previa antes del pago' },
+    it: { title: 'Offerta speciale: 20% di sconto su tutti i pacchetti',   sub: 'Offerta limitata fino al 20 luglio \u00b7 Anteprima inviata prima del pagamento' },
+    pt: { title: 'Oferta especial: 20% de desconto em todos os planos',   sub: 'Oferta limitada at\u00e9 20 de julho \u00b7 Pr\u00e9-visualiza\u00e7\u00e3o antes do pagamento' }
   };
 
   function updateOfferBanner() {
