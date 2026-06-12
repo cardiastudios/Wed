@@ -1,6 +1,56 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-    <loc>https://cardiastudios.com/</loc>
-    </url>
-    </urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.cardiastudios.com/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/digital-wedding-invitations/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cardiastudios.com/fr/faire-part-mariage-digital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.cardiastudios.com/es/invitaciones-digitales-boda/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.cardiastudios.com/it/partecipazioni-matrimonio-digitali/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/online-wedding-invitations/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/online-rsvp-wedding-invitations/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/wedding-invitation-designer/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/fr/faire-part-mariage-digital/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cardiastudios.com/fr/faire-part-mariage-digital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.cardiastudios.com/es/invitaciones-digitales-boda/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.cardiastudios.com/it/partecipazioni-matrimonio-digitali/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/es/invitaciones-digitales-boda/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cardiastudios.com/fr/faire-part-mariage-digital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.cardiastudios.com/es/invitaciones-digitales-boda/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.cardiastudios.com/it/partecipazioni-matrimonio-digitali/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cardiastudios.com/it/partecipazioni-matrimonio-digitali/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cardiastudios.com/fr/faire-part-mariage-digital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.cardiastudios.com/es/invitaciones-digitales-boda/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.cardiastudios.com/it/partecipazioni-matrimonio-digitali/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cardiastudios.com/digital-wedding-invitations/"/>
+    <priority>0.8</priority>
+  </url>
+</urlset>
