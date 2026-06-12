@@ -6464,56 +6464,108 @@ body {
 }
 
 
-/* CARDIA FIX 2026-06-12 — restore Book + Classic invitation previews.
-   The iframe previews now have CSS fallback positions, so they still render correctly
-   even if the first scaling script is delayed by other homepage scripts. */
+
+/* CARDIA FIX 2026-06-12 — Book + Classic template covers now use PNG previews.
+   The real template still opens on click, but the homepage card preview is a fast static PNG from /AB/. */
 #templates #row1 .template-card,
 #templates #row2 .template-card {
   isolation: isolate;
 }
 
-#templates #row1 .template-card .card-preview,
-#templates #row2 .template-card .card-preview {
-  opacity: 1;
-  visibility: visible;
-  display: block;
+#templates #row1 .template-card iframe.card-preview,
+#templates #row2 .template-card iframe.card-preview {
+  display: none !important;
+}
+
+#templates #row1 .template-card .template-cover-img,
+#templates #row2 .template-card .template-cover-img {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--mock-top) + var(--mock-border));
+  width: calc(var(--mock-w) - var(--mock-border) - var(--mock-border));
+  height: calc(var(--mock-h) - var(--mock-border) - var(--mock-border));
+  transform: translateX(-50%);
   z-index: 1;
-  background: transparent;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
   border: 0;
-  transform-origin: top left;
+  border-radius: calc(var(--mock-radius) - 10px);
+  background: #111;
+  box-shadow: none;
+  pointer-events: none;
 }
 
-/* Desktop/tablet fallback values match the phone-frame math used by the JS scaler. */
-#templates #row2 .template-card .card-preview {
-  left: calc(50% - 84px);
-  top: 58px;
-  width: 390px;
-  height: 844px;
-  transform: scale(.431);
+#templates #row1 .template-card::before,
+#templates #row2 .template-card::before {
+  z-index: 2;
 }
 
-#templates #row1 .template-card .card-preview {
-  left: calc(50% - 88px);
-  top: 50px;
-  width: 390px;
-  height: 844px;
-  transform: scale(.450);
+#templates #row1 .template-card::after,
+#templates #row2 .template-card::after {
+  z-index: 3;
 }
 
-@media (max-width: 640px) {
-  #templates #row2 .template-card .card-preview {
-    left: calc(50% - 95px);
-    top: 64px;
-    transform: scale(.485);
-  }
 
-  #templates #row1 .template-card .card-preview {
-    left: calc(50% - 88px);
-    top: 50px;
-    transform: scale(.450);
-  }
+
+/* CARDIA FINAL FIX — Book + Classic template cards use static PNG covers and keep real template links.
+   PNGs are loaded from https://www.cardiastudios.com/AB/B1.png ... B6.png and C1.png ... C8.png. */
+#templates #row1 a.card-wrap,
+#templates #row2 a.card-wrap,
+#templates #row1 .template-link-card,
+#templates #row2 .template-link-card {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
 }
 
+#templates #row1 .template-card,
+#templates #row2 .template-card {
+  isolation: isolate !important;
+  overflow: hidden !important;
+}
+
+#templates #row1 .template-card iframe.card-preview,
+#templates #row2 .template-card iframe.card-preview {
+  display: none !important;
+}
+
+#templates #row1 .template-card .template-cover-img,
+#templates #row2 .template-card .template-cover-img {
+  position: absolute !important;
+  left: 50% !important;
+  top: calc(var(--mock-top) + var(--mock-border)) !important;
+  width: calc(var(--mock-w) - (var(--mock-border) * 2)) !important;
+  height: calc(var(--mock-h) - (var(--mock-border) * 2)) !important;
+  transform: translateX(-50%) !important;
+  z-index: 2 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border: 0 !important;
+  border-radius: calc(var(--mock-radius) - 10px) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+/* A later theme rule gives .template-card::before a black background.
+   That was covering the PNG covers. Keep the phone border/shadow, but make the inside transparent. */
+#templates #row1 .template-card::before,
+#templates #row2 .template-card::before {
+  background: transparent !important;
+  border: var(--mock-border) solid #1a1210 !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+#templates #row1 .template-card::after,
+#templates #row2 .template-card::after {
+  z-index: 4 !important;
+  pointer-events: none !important;
+}
 </style>
 
 <meta name="theme-color" content="#fffdf8"/>
@@ -7046,120 +7098,132 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="cards-track-wrap">
 <div class="cards-track" id="row2">
 <div class="cards-inner" id="row2-inner" style="--scroll-dur:32s">
-<!-- Garden_in_Bloom ══ -->
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/Garden_in_Bloom.html','_blank')">
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/Garden_in_Bloom.html" target="_blank" rel="noopener" aria-label="View Blue Rose Garden template">
+<div class="card-header">
 <span class="card-header-num">B1</span><span class="card-header-name">Blue Rose Garden</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/Garden_in_Bloom.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/Garden_in_Bloom.html" title="Blue Rose Garden"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B1.png" alt="Blue Rose Garden digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Blue Rose Garden</div>
 <div class="card-desc">Romantic · Watercolor · Enchanted</div>
-<a class="card-btn" href="templates/Garden_in_Bloom.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#8a9bb5;"></div>
 </div>
-</div>
-<!-- Dark_floral_book ══ -->
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/Dark_floral_book.html','_blank')">
+</a>
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/Dark_floral_book.html" target="_blank" rel="noopener" aria-label="View Dark blue Garden template">
+<div class="card-header">
 <span class="card-header-num">B2</span><span class="card-header-name">Dark blue Garden</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/Dark_floral_book.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/Dark_floral_book.html" title="Dark blue Garden"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B2.png" alt="Dark blue Garden digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
-<div class="card-name">Dark blue &amp; gold Rose garden</div>
+<div class="card-name">Dark blue Garden</div>
 <div class="card-desc">Romantic · gold · Enchanted</div>
-<a class="card-btn" href="templates/Dark_floral_book.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#8a9bb5;"></div>
 </div>
-</div>
-<!-- French_village_book ══ -->
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/French_village_book.html','_blank')">
+</a>
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/French_village_book.html" target="_blank" rel="noopener" aria-label="View French Village template">
+<div class="card-header">
 <span class="card-header-num">B3</span><span class="card-header-name">French Village</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/French_village_book.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/French_village_book.html" title="French Village"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B3.png" alt="French Village digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
-<div class="card-name">Jardin de Fleurs — French Village</div>
+<div class="card-name">French Village</div>
 <div class="card-desc">Romantic · Watercolor · Pastel bloom</div>
-<a class="card-btn" href="templates/French_village_book.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c4848a;"></div>
 </div>
-</div>
-<!-- Die_cut Book ══ -->
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/Die_cut Book.html','_blank')">
+</a>
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/Die_cut%20Book.html" target="_blank" rel="noopener" aria-label="View Jardin de Fleurs template">
+<div class="card-header">
 <span class="card-header-num">B4</span><span class="card-header-name">Jardin de Fleurs</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/Die_cut Book.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/Die_cut Book.html" title="Jardin de Fleurs"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B4.png" alt="Jardin de Fleurs digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
-<div class="card-name">Jardin de Fleurs — Engraving Edition</div>
+<div class="card-name">Jardin de Fleurs</div>
 <div class="card-desc">Vintage · Sepia · Hand-engraved</div>
-<a class="card-btn" href="templates/Die_cut Book.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#8a5a2a;"></div>
 </div>
-</div>
-<!-- Blue book ══ -->
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/Blue_wed_book.html','_blank')">
+</a>
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/Blue_wed_book.html" target="_blank" rel="noopener" aria-label="View Soft Floral Book template">
+<div class="card-header">
 <span class="card-header-num">B5</span><span class="card-header-name">Soft Floral Book</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/Blue_wed_book.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/Blue_wed_book.html" title="Soft Floral Book"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B5.png" alt="Soft Floral Book digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Soft Floral Book</div>
 <div class="card-desc">Elegant · Floral · Timeless</div>
-<a class="card-btn" href="templates/Blue_wed_book.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#8a9bb5;"></div>
 </div>
-</div>
-<!-- Blue skye ══ -->
-<div class="card-wrap">
-<div class="card-header" onclick="window.open('templates/skyblue_book.html','_blank')">
+</a>
+<a class="card-wrap template-link-card" href="https://www.cardiastudios.com/templates/skyblue_book.html" target="_blank" rel="noopener" aria-label="View Ciel Divin template">
+<div class="card-header">
 <span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span>
 </div>
-<div class="template-card" onclick="window.open('templates/skyblue_book.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/skyblue_book.html" title="Ciel Divin"></iframe>
+<div class="template-card ">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B6.png" alt="Ciel Divin digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
-<div class="card-name">Ciel Divin — Heavenly Sky</div>
+<div class="card-name">Ciel Divin</div>
 <div class="card-desc">Divine · Sky blue · Gold banner</div>
-<a class="card-btn" href="templates/skyblue_book.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#4a7ab5;"></div>
 </div>
-</div>
+</a>
 <!-- Duplicates for seamless loop -->
 <div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">B1</span><span class="card-header-name">Soft Floral Book</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Blue_wed_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="card-header"><span class="card-header-num">B1</span><span class="card-header-name">Blue Rose Garden</span></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B1.png" alt="Blue Rose Garden digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#8a9bb5;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">B2</span><span class="card-header-name">Blue Rose Garden</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Garden_in_Bloom.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="card-header"><span class="card-header-num">B2</span><span class="card-header-name">Dark blue Garden</span></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B2.png" alt="Dark blue Garden digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#8a9bb5;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">B3</span><span class="card-header-name">Dark blue Garden</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Dark_floral_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="card-header"><span class="card-header-num">B3</span><span class="card-header-name">French Village</span></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B3.png" alt="French Village digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c4848a;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">B4</span><span class="card-header-name">French Village</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/French_village_book.html"></iframe><div class="card-strip" style="--accent:#c4848a;"></div></div>
+<div class="card-header"><span class="card-header-num">B4</span><span class="card-header-name">Jardin de Fleurs</span></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B4.png" alt="Jardin de Fleurs digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#8a5a2a;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">B5</span><span class="card-header-name">Jardin de Fleurs</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Die_cut Book.html"></iframe><div class="card-strip" style="--accent:#8a5a2a;"></div></div>
+<div class="card-header"><span class="card-header-num">B5</span><span class="card-header-name">Soft Floral Book</span></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B5.png" alt="Soft Floral Book digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#8a9bb5;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap">
 <div class="card-header"><span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span></div>
-<div class="template-card"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/skyblue_book.html"></iframe><div class="card-strip" style="--accent:#4a7ab5;"></div></div>
+<div class="template-card " aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/B6.png" alt="Ciel Divin digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#4a7ab5;"></div>
+</div>
 </div>
 </div><!-- end cards-inner -->
 </div>
@@ -7181,154 +7245,174 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="cards-track-wrap">
 <div class="cards-track" id="row1">
 <div class="cards-inner" id="row1-inner" style="--scroll-dur:42s">
-<div class="card-wrap card-terracotta">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
+<a class="card-wrap card-terracotta template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_terracotta.html" target="_blank" rel="noopener" aria-label="View Dark Gold Luxury template">
+<div class="card-header">
 <span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span>
 </div>
-<div class="template-card card-terracotta" onclick="window.open('templates/wedding-invitation_terracotta.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_terracotta.html" title="Dark Gold Luxury"></iframe>
+<div class="template-card card-terracotta">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C1.png" alt="Dark Gold Luxury digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Dark Gold Luxury</div>
 <div class="card-desc">Dark · Gold · Floral · Luxurious</div>
-<a class="card-btn" href="templates/wedding-invitation_terracotta.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c4674a;"></div>
 </div>
-</div>
-<div class="card-wrap card-vintage">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_vintage.html','_blank')">
+</a>
+<a class="card-wrap card-vintage template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_vintage.html" target="_blank" rel="noopener" aria-label="View Vintage template">
+<div class="card-header">
 <span class="card-header-num">C2</span><span class="card-header-name">Vintage</span>
 </div>
-<div class="template-card card-vintage" onclick="window.open('templates/wedding-invitation_vintage.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_vintage.html" title="Vintage"></iframe>
+<div class="template-card card-vintage">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C2.png" alt="Vintage digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
-<div class="card-name">Vintage &amp; Romantic</div>
+<div class="card-name">Vintage</div>
 <div class="card-desc">Aged parchment · Sepia · Ornate frames</div>
-<a class="card-btn" href="templates/wedding-invitation_vintage.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c4a456;"></div>
 </div>
-</div>
-<div class="card-wrap card-garden">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_garden.html','_blank')">
+</a>
+<a class="card-wrap card-garden template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_garden.html" target="_blank" rel="noopener" aria-label="View Garden and Floral template">
+<div class="card-header">
 <span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span>
 </div>
-<div class="template-card card-garden" onclick="window.open('templates/wedding-invitation_garden.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_garden.html" title="Garden"></iframe>
+<div class="template-card card-garden">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C3.png" alt="Garden and Floral digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Garden &amp; Floral</div>
 <div class="card-desc">Sage green · Botanical · Fresh</div>
-<a class="card-btn" href="templates/wedding-invitation_garden.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#7a9e7e;"></div>
 </div>
-</div>
-<div class="card-wrap card-soft">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
+</a>
+<a class="card-wrap card-soft template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_soft.html" target="_blank" rel="noopener" aria-label="View Soft and Minimal template">
+<div class="card-header">
 <span class="card-header-num">C4</span><span class="card-header-name">Soft &amp; Minimal</span>
 </div>
-<div class="template-card card-soft" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_soft.html" title="Soft"></iframe>
+<div class="template-card card-soft">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C4.png" alt="Soft and Minimal digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Soft &amp; Minimal</div>
 <div class="card-desc">Blush · Minimal · Pure elegance</div>
-<a class="card-btn" href="templates/wedding-invitation_soft.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c9958a;"></div>
 </div>
-</div>
-<div class="card-wrap card-dark">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
+</a>
+<a class="card-wrap card-dark template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_dark.html" target="_blank" rel="noopener" aria-label="View Dark and Moody template">
+<div class="card-header">
 <span class="card-header-num">C5</span><span class="card-header-name">Dark &amp; Moody</span>
 </div>
-<div class="template-card card-dark" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_dark.html" title="Dark"></iframe>
+<div class="template-card card-dark">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C5.png" alt="Dark and Moody digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Dark &amp; Moody</div>
 <div class="card-desc">Deep charcoal · Gold · Dramatic</div>
-<a class="card-btn" href="templates/wedding-invitation_dark.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c9a84c;"></div>
 </div>
-</div>
-<div class="card-wrap card-midnight">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
+</a>
+<a class="card-wrap card-midnight template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_night.html" target="_blank" rel="noopener" aria-label="View Midnight Blue template">
+<div class="card-header">
 <span class="card-header-num">C6</span><span class="card-header-name">Midnight Blue</span>
 </div>
-<div class="template-card card-midnight" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_night.html" title="Midnight"></iframe>
+<div class="template-card card-midnight">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C6.png" alt="Midnight Blue digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Midnight Blue</div>
 <div class="card-desc">Navy · Silver · Twinkling stars</div>
-<a class="card-btn" href="templates/wedding-invitation_night.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#8aaa98;"></div>
 </div>
-</div>
-<div class="card-wrap card-classic">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
+</a>
+<a class="card-wrap card-classic template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_classic.html" target="_blank" rel="noopener" aria-label="View Classic template">
+<div class="card-header">
 <span class="card-header-num">C7</span><span class="card-header-name">Classic</span>
 </div>
-<div class="template-card card-classic" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_classic.html" title="Classic"></iframe>
+<div class="template-card card-classic">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C7.png" alt="Classic digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Classic</div>
 <div class="card-desc">Warm paper · Torn edges · Gold accents</div>
-<a class="card-btn" href="templates/wedding-invitation_classic.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#c9a96e;"></div>
 </div>
-</div>
-<div class="card-wrap card-elvish">
-<div class="card-header" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
+</a>
+<a class="card-wrap card-elvish template-link-card" href="https://www.cardiastudios.com/templates/wedding-invitation_lotr.html" target="_blank" rel="noopener" aria-label="View Elvish Fantasy template">
+<div class="card-header">
 <span class="card-header-num">C8</span><span class="card-header-name">Elvish Fantasy</span>
 </div>
-<div class="template-card card-elvish" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-<iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="eager" scrolling="no" src="templates/wedding-invitation_lotr.html" title="Elvish"></iframe>
+<div class="template-card card-elvish">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C8.png" alt="Elvish Fantasy digital wedding invitation cover preview" loading="lazy" decoding="async"/>
 <div class="card-overlay">
 <div class="card-name">Elvish Fantasy</div>
 <div class="card-desc">Forest green · Gold · Fireflies · LOTR</div>
-<a class="card-btn" href="templates/wedding-invitation_lotr.html" target="_blank">View Template →</a>
+<span class="card-btn">View Template →</span>
 </div>
 <div class="card-strip" style="--accent:#2d6e3a;"></div>
 </div>
-</div>
+</a>
 <!-- Duplicates for seamless loop -->
 <div aria-hidden="true" class="card-wrap card-terracotta">
 <div class="card-header"><span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span></div>
-<div class="template-card card-terracotta"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_terracotta.html"></iframe><div class="card-strip" style="--accent:#c4674a;"></div></div>
+<div class="template-card card-terracotta" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C1.png" alt="Dark Gold Luxury digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c4674a;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-vintage">
 <div class="card-header"><span class="card-header-num">C2</span><span class="card-header-name">Vintage</span></div>
-<div class="template-card card-vintage"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_vintage.html"></iframe><div class="card-strip" style="--accent:#c4a456;"></div></div>
+<div class="template-card card-vintage" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C2.png" alt="Vintage digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c4a456;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_garden.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
+<div class="template-card card-garden" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C3.png" alt="Garden and Floral digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#7a9e7e;"></div>
 </div>
-<div aria-hidden="true" class="card-wrap card-garden">
-<div class="card-header"><span class="card-header-num">C4</span><span class="card-header-name">Classy</span></div>
-<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Classy.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-soft">
-<div class="card-header"><span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span></div>
-<div class="template-card card-soft"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_soft.html"></iframe><div class="card-strip" style="--accent:#c9958a;"></div></div>
+<div class="card-header"><span class="card-header-num">C4</span><span class="card-header-name">Soft &amp; Minimal</span></div>
+<div class="template-card card-soft" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C4.png" alt="Soft and Minimal digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c9958a;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-dark">
-<div class="card-header"><span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span></div>
-<div class="template-card card-dark"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_dark.html"></iframe><div class="card-strip" style="--accent:#c9a84c;"></div></div>
+<div class="card-header"><span class="card-header-num">C5</span><span class="card-header-name">Dark &amp; Moody</span></div>
+<div class="template-card card-dark" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C5.png" alt="Dark and Moody digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c9a84c;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-midnight">
-<div class="card-header"><span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span></div>
-<div class="template-card card-midnight"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_night.html"></iframe><div class="card-strip" style="--accent:#8aaa98;"></div></div>
+<div class="card-header"><span class="card-header-num">C6</span><span class="card-header-name">Midnight Blue</span></div>
+<div class="template-card card-midnight" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C6.png" alt="Midnight Blue digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#8aaa98;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-classic">
-<div class="card-header"><span class="card-header-num">C8</span><span class="card-header-name">Classic</span></div>
-<div class="template-card card-classic"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_classic.html"></iframe><div class="card-strip" style="--accent:#c9a96e;"></div></div>
+<div class="card-header"><span class="card-header-num">C7</span><span class="card-header-name">Classic</span></div>
+<div class="template-card card-classic" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C7.png" alt="Classic digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#c9a96e;"></div>
+</div>
 </div>
 <div aria-hidden="true" class="card-wrap card-elvish">
-<div class="card-header"><span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span></div>
-<div class="template-card card-elvish"><iframe sandbox="allow-scripts allow-same-origin allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_lotr.html"></iframe><div class="card-strip" style="--accent:#2d6e3a;"></div></div>
+<div class="card-header"><span class="card-header-num">C8</span><span class="card-header-name">Elvish Fantasy</span></div>
+<div class="template-card card-elvish" aria-hidden="true">
+<img class="template-cover-img" src="https://www.cardiastudios.com/AB/C8.png" alt="Elvish Fantasy digital wedding invitation cover preview" loading="lazy" decoding="async"/>
+<div class="card-strip" style="--accent:#2d6e3a;"></div>
+</div>
 </div>
 </div><!-- end cards-inner -->
 </div>
@@ -9644,80 +9728,6 @@ if (document.readyState === 'loading') {
 
   window.addEventListener('storage', function(e){
     if (e.key === 'cardiaLang') syncSoon();
-  });
-})();
-</script>
-
-
-<script>
-/* CARDIA FIX 2026-06-12 — Book + Classic live iframe previews.
-   The previews are real HTML templates from /templates, not PNG screenshots.
-   Visible preview iframes are loaded eagerly so they do not stay black.
-   sandbox keeps popups/top-navigation blocked, while allow-same-origin lets the template CSS/JS/assets render correctly.
-   This script only scales the phone preview; it does not reload iframe src values. */
-(function () {
-  function scaleTemplateCard(card) {
-    var iframe = card && card.querySelector ? card.querySelector('.card-preview') : null;
-    if (!iframe) return;
-
-    var styles = window.getComputedStyle(card);
-    var mockW = parseFloat(styles.getPropertyValue('--mock-w')) || 188;
-    var mockH = parseFloat(styles.getPropertyValue('--mock-h')) || 376;
-    var mockTop = parseFloat(styles.getPropertyValue('--mock-top')) || 38;
-    var mockBorder = parseFloat(styles.getPropertyValue('--mock-border')) || 8;
-    var innerW = mockW - (mockBorder * 2);
-    var innerH = mockH - (mockBorder * 2);
-    var phoneLeft = (card.clientWidth - mockW) / 2 + mockBorder;
-    var phoneTop = mockTop + mockBorder;
-
-    var isBookRow = !!card.closest('#row2');
-    var previewZoom = parseFloat(styles.getPropertyValue('--preview-zoom')) || 1;
-    var previewShiftX = parseFloat(styles.getPropertyValue('--preview-shift-x')) || 0;
-    var previewShiftY = parseFloat(styles.getPropertyValue('--preview-shift-y')) || 0;
-
-    var scale;
-    if (isBookRow) {
-      var coverW = parseFloat(styles.getPropertyValue('--book-cover-w')) || 399;
-      var coverH = parseFloat(styles.getPropertyValue('--book-cover-h')) || 538;
-      scale = Math.min(innerW / coverW, innerH / coverH) * previewZoom;
-    } else {
-      scale = Math.max(innerW / 390, innerH / 844) * previewZoom;
-    }
-
-    var scaledW = 390 * scale;
-    var scaledH = 844 * scale;
-
-    iframe.style.width = '390px';
-    iframe.style.height = '844px';
-    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2 + previewShiftX) + 'px';
-    iframe.style.top = (phoneTop + (innerH - scaledH) / 2 + previewShiftY) + 'px';
-    iframe.style.transformOrigin = 'top left';
-    iframe.style.transform = 'scale(' + scale + ')';
-    iframe.style.opacity = '1';
-    iframe.style.visibility = 'visible';
-  }
-
-  function scaleAllTemplatePreviews() {
-    document.querySelectorAll('#row1 .template-card, #row2 .template-card').forEach(scaleTemplateCard);
-  }
-
-  function runSafeFix() {
-    scaleAllTemplatePreviews();
-    setTimeout(scaleAllTemplatePreviews, 80);
-    setTimeout(scaleAllTemplatePreviews, 350);
-    setTimeout(scaleAllTemplatePreviews, 900);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', runSafeFix);
-  } else {
-    runSafeFix();
-  }
-
-  window.addEventListener('load', runSafeFix);
-  window.addEventListener('resize', scaleAllTemplatePreviews);
-  document.querySelectorAll('#row1 iframe.card-preview, #row2 iframe.card-preview').forEach(function (iframe) {
-    iframe.addEventListener('load', scaleAllTemplatePreviews);
   });
 })();
 </script>
