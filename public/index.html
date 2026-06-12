@@ -6463,6 +6463,57 @@ body {
   }
 }
 
+
+/* CARDIA FIX 2026-06-12 — restore Book + Classic invitation previews.
+   The iframe previews now have CSS fallback positions, so they still render correctly
+   even if the first scaling script is delayed by other homepage scripts. */
+#templates #row1 .template-card,
+#templates #row2 .template-card {
+  isolation: isolate;
+}
+
+#templates #row1 .template-card .card-preview,
+#templates #row2 .template-card .card-preview {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+  z-index: 1;
+  background: transparent;
+  border: 0;
+  transform-origin: top left;
+}
+
+/* Desktop/tablet fallback values match the phone-frame math used by the JS scaler. */
+#templates #row2 .template-card .card-preview {
+  left: calc(50% - 84px);
+  top: 58px;
+  width: 390px;
+  height: 844px;
+  transform: scale(.431);
+}
+
+#templates #row1 .template-card .card-preview {
+  left: calc(50% - 88px);
+  top: 50px;
+  width: 390px;
+  height: 844px;
+  transform: scale(.450);
+}
+
+@media (max-width: 640px) {
+  #templates #row2 .template-card .card-preview {
+    left: calc(50% - 95px);
+    top: 64px;
+    transform: scale(.485);
+  }
+
+  #templates #row1 .template-card .card-preview {
+    left: calc(50% - 88px);
+    top: 50px;
+    transform: scale(.450);
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#fffdf8"/>
@@ -7001,7 +7052,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B1</span><span class="card-header-name">Blue Rose Garden</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('templates/Garden_in_Bloom.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Garden_in_Bloom.html" title="Blue Rose Garden"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Garden_in_Bloom.html" title="Blue Rose Garden"></iframe>
 <div class="card-overlay">
 <div class="card-name">Blue Rose Garden</div>
 <div class="card-desc">Romantic · Watercolor · Enchanted</div>
@@ -7016,7 +7067,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B2</span><span class="card-header-name">Dark blue Garden</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('templates/Dark_floral_book.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Dark_floral_book.html" title="Dark blue Garden"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Dark_floral_book.html" title="Dark blue Garden"></iframe>
 <div class="card-overlay">
 <div class="card-name">Dark blue &amp; gold Rose garden</div>
 <div class="card-desc">Romantic · gold · Enchanted</div>
@@ -7031,7 +7082,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B3</span><span class="card-header-name">French Village</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('templates/French_village_book.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/French_village_book.html" title="French Village"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/French_village_book.html" title="French Village"></iframe>
 <div class="card-overlay">
 <div class="card-name">Jardin de Fleurs — French Village</div>
 <div class="card-desc">Romantic · Watercolor · Pastel bloom</div>
@@ -7046,7 +7097,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B4</span><span class="card-header-name">Jardin de Fleurs</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('templates/Die_cut Book.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Die_cut Book.html" title="Jardin de Fleurs"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Die_cut Book.html" title="Jardin de Fleurs"></iframe>
 <div class="card-overlay">
 <div class="card-name">Jardin de Fleurs — Engraving Edition</div>
 <div class="card-desc">Vintage · Sepia · Hand-engraved</div>
@@ -7061,7 +7112,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B5</span><span class="card-header-name">Soft Floral Book</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('https://www.cardiastudios.com/templates/Blue_wed_book','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Blue_wed_book" title="Soft Floral Book"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Blue_wed_book" title="Soft Floral Book"></iframe>
 <div class="card-overlay">
 <div class="card-name">Soft Floral Book</div>
 <div class="card-desc">Elegant · Floral · Timeless</div>
@@ -7076,7 +7127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span>
 </div>
 <div class="template-card" onclick="window.open('templates/skyblue_book.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/skyblue_book.html" title="Ciel Divin"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/skyblue_book.html" title="Ciel Divin"></iframe>
 <div class="card-overlay">
 <div class="card-name">Ciel Divin — Heavenly Sky</div>
 <div class="card-desc">Divine · Sky blue · Gold banner</div>
@@ -7088,27 +7139,27 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Duplicates for seamless loop -->
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">B1</span><span class="card-header-name">Soft Floral Book</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Blue_wed_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Blue_wed_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">B2</span><span class="card-header-name">Blue Rose Garden</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Garden_in_Bloom.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Garden_in_Bloom.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">B3</span><span class="card-header-name">Dark blue Garden</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Dark_floral_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Dark_floral_book.html"></iframe><div class="card-strip" style="--accent:#8a9bb5;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">B4</span><span class="card-header-name">French Village</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/French_village_book.html"></iframe><div class="card-strip" style="--accent:#c4848a;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/French_village_book.html"></iframe><div class="card-strip" style="--accent:#c4848a;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">B5</span><span class="card-header-name">Jardin de Fleurs</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Die_cut Book.html"></iframe><div class="card-strip" style="--accent:#8a5a2a;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Die_cut Book.html"></iframe><div class="card-strip" style="--accent:#8a5a2a;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap">
 <div class="card-header"><span class="card-header-num">B6</span><span class="card-header-name">Ciel Divin</span></div>
-<div class="template-card"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/skyblue_book.html"></iframe><div class="card-strip" style="--accent:#4a7ab5;"></div></div>
+<div class="template-card"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/skyblue_book.html"></iframe><div class="card-strip" style="--accent:#4a7ab5;"></div></div>
 </div>
 </div><!-- end cards-inner -->
 </div>
@@ -7135,7 +7186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span>
 </div>
 <div class="template-card card-terracotta" onclick="window.open('https://www.cardiastudios.com/templates/wedding-invitation_terracotta','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/wedding-invitation_terracotta" title="Dark Gold Luxury"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/wedding-invitation_terracotta" title="Dark Gold Luxury"></iframe>
 <div class="card-overlay">
 <div class="card-name">Dark Gold Luxury</div>
 <div class="card-desc">Dark · Gold · Floral · Luxurious</div>
@@ -7149,7 +7200,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C2</span><span class="card-header-name">Vintage</span>
 </div>
 <div class="template-card card-vintage" onclick="window.open('templates/wedding-invitation_vintage.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_vintage.html" title="Vintage"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_vintage.html" title="Vintage"></iframe>
 <div class="card-overlay">
 <div class="card-name">Vintage &amp; Romantic</div>
 <div class="card-desc">Aged parchment · Sepia · Ornate frames</div>
@@ -7163,7 +7214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span>
 </div>
 <div class="template-card card-garden" onclick="window.open('templates/wedding-invitation_garden.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_garden.html" title="Garden"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_garden.html" title="Garden"></iframe>
 <div class="card-overlay">
 <div class="card-name">Garden &amp; Floral</div>
 <div class="card-desc">Sage green · Botanical · Fresh</div>
@@ -7177,7 +7228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C4</span><span class="card-header-name">Soft &amp; Minimal</span>
 </div>
 <div class="template-card card-soft" onclick="window.open('templates/wedding-invitation_soft.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_soft.html" title="Soft"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_soft.html" title="Soft"></iframe>
 <div class="card-overlay">
 <div class="card-name">Soft &amp; Minimal</div>
 <div class="card-desc">Blush · Minimal · Pure elegance</div>
@@ -7191,7 +7242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C5</span><span class="card-header-name">Dark &amp; Moody</span>
 </div>
 <div class="template-card card-dark" onclick="window.open('templates/wedding-invitation_dark.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_dark.html" title="Dark"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_dark.html" title="Dark"></iframe>
 <div class="card-overlay">
 <div class="card-name">Dark &amp; Moody</div>
 <div class="card-desc">Deep charcoal · Gold · Dramatic</div>
@@ -7205,7 +7256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C6</span><span class="card-header-name">Midnight Blue</span>
 </div>
 <div class="template-card card-midnight" onclick="window.open('templates/wedding-invitation_night.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_night.html" title="Midnight"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_night.html" title="Midnight"></iframe>
 <div class="card-overlay">
 <div class="card-name">Midnight Blue</div>
 <div class="card-desc">Navy · Silver · Twinkling stars</div>
@@ -7219,7 +7270,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C7</span><span class="card-header-name">Classic</span>
 </div>
 <div class="template-card card-classic" onclick="window.open('templates/wedding-invitation_classic.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_classic.html" title="Classic"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_classic.html" title="Classic"></iframe>
 <div class="card-overlay">
 <div class="card-name">Classic</div>
 <div class="card-desc">Warm paper · Torn edges · Gold accents</div>
@@ -7233,7 +7284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="card-header-num">C8</span><span class="card-header-name">Elvish Fantasy</span>
 </div>
 <div class="template-card card-elvish" onclick="window.open('templates/wedding-invitation_lotr.html','_blank')">
-<iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_lotr.html" title="Elvish"></iframe>
+<iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_lotr.html" title="Elvish"></iframe>
 <div class="card-overlay">
 <div class="card-name">Elvish Fantasy</div>
 <div class="card-desc">Forest green · Gold · Fireflies · LOTR</div>
@@ -7245,39 +7296,39 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Duplicates for seamless loop -->
 <div aria-hidden="true" class="card-wrap card-terracotta">
 <div class="card-header"><span class="card-header-num">C1</span><span class="card-header-name">Dark Gold Luxury</span></div>
-<div class="template-card card-terracotta"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_terracotta.html"></iframe><div class="card-strip" style="--accent:#c4674a;"></div></div>
+<div class="template-card card-terracotta"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_terracotta.html"></iframe><div class="card-strip" style="--accent:#c4674a;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-vintage">
 <div class="card-header"><span class="card-header-num">C2</span><span class="card-header-name">Vintage</span></div>
-<div class="template-card card-vintage"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_vintage.html"></iframe><div class="card-strip" style="--accent:#c4a456;"></div></div>
+<div class="template-card card-vintage"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_vintage.html"></iframe><div class="card-strip" style="--accent:#c4a456;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">C3</span><span class="card-header-name">Garden &amp; Floral</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_garden.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_garden.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-garden">
 <div class="card-header"><span class="card-header-num">C4</span><span class="card-header-name">Classy</span></div>
-<div class="template-card card-garden"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/Classy.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
+<div class="template-card card-garden"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/Classy.html"></iframe><div class="card-strip" style="--accent:#7a9e7e;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-soft">
 <div class="card-header"><span class="card-header-num">C5</span><span class="card-header-name">Soft &amp; Minimal</span></div>
-<div class="template-card card-soft"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_soft.html"></iframe><div class="card-strip" style="--accent:#c9958a;"></div></div>
+<div class="template-card card-soft"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_soft.html"></iframe><div class="card-strip" style="--accent:#c9958a;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-dark">
 <div class="card-header"><span class="card-header-num">C6</span><span class="card-header-name">Dark &amp; Moody</span></div>
-<div class="template-card card-dark"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_dark.html"></iframe><div class="card-strip" style="--accent:#c9a84c;"></div></div>
+<div class="template-card card-dark"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_dark.html"></iframe><div class="card-strip" style="--accent:#c9a84c;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-midnight">
 <div class="card-header"><span class="card-header-num">C7</span><span class="card-header-name">Midnight Blue</span></div>
-<div class="template-card card-midnight"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_night.html"></iframe><div class="card-strip" style="--accent:#8aaa98;"></div></div>
+<div class="template-card card-midnight"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_night.html"></iframe><div class="card-strip" style="--accent:#8aaa98;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-classic">
 <div class="card-header"><span class="card-header-num">C8</span><span class="card-header-name">Classic</span></div>
-<div class="template-card card-classic"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_classic.html"></iframe><div class="card-strip" style="--accent:#c9a96e;"></div></div>
+<div class="template-card card-classic"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_classic.html"></iframe><div class="card-strip" style="--accent:#c9a96e;"></div></div>
 </div>
 <div aria-hidden="true" class="card-wrap card-elvish">
 <div class="card-header"><span class="card-header-num">C9</span><span class="card-header-name">Elvish Fantasy</span></div>
-<div class="template-card card-elvish"><iframe class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_lotr.html"></iframe><div class="card-strip" style="--accent:#2d6e3a;"></div></div>
+<div class="template-card card-elvish"><iframe sandbox="allow-scripts allow-forms" class="card-preview" loading="lazy" scrolling="no" src="templates/wedding-invitation_lotr.html"></iframe><div class="card-strip" style="--accent:#2d6e3a;"></div></div>
 </div>
 </div><!-- end cards-inner -->
 </div>
@@ -9593,6 +9644,78 @@ if (document.readyState === 'loading') {
 
   window.addEventListener('storage', function(e){
     if (e.key === 'cardiaLang') syncSoon();
+  });
+})();
+</script>
+
+
+<script>
+/* CARDIA FIX 2026-06-12 — safe Book + Classic template preview scaler.
+   Important: this version does NOT force iframes to eager-load and does NOT reload iframe src.
+   That prevents the template preview pages from opening themselves in new browser tabs. */
+(function () {
+  function scaleTemplateCard(card) {
+    var iframe = card && card.querySelector ? card.querySelector('.card-preview') : null;
+    if (!iframe) return;
+
+    var styles = window.getComputedStyle(card);
+    var mockW = parseFloat(styles.getPropertyValue('--mock-w')) || 188;
+    var mockH = parseFloat(styles.getPropertyValue('--mock-h')) || 376;
+    var mockTop = parseFloat(styles.getPropertyValue('--mock-top')) || 38;
+    var mockBorder = parseFloat(styles.getPropertyValue('--mock-border')) || 8;
+    var innerW = mockW - (mockBorder * 2);
+    var innerH = mockH - (mockBorder * 2);
+    var phoneLeft = (card.clientWidth - mockW) / 2 + mockBorder;
+    var phoneTop = mockTop + mockBorder;
+
+    var isBookRow = !!card.closest('#row2');
+    var previewZoom = parseFloat(styles.getPropertyValue('--preview-zoom')) || 1;
+    var previewShiftX = parseFloat(styles.getPropertyValue('--preview-shift-x')) || 0;
+    var previewShiftY = parseFloat(styles.getPropertyValue('--preview-shift-y')) || 0;
+
+    var scale;
+    if (isBookRow) {
+      var coverW = parseFloat(styles.getPropertyValue('--book-cover-w')) || 399;
+      var coverH = parseFloat(styles.getPropertyValue('--book-cover-h')) || 538;
+      scale = Math.min(innerW / coverW, innerH / coverH) * previewZoom;
+    } else {
+      scale = Math.max(innerW / 390, innerH / 844) * previewZoom;
+    }
+
+    var scaledW = 390 * scale;
+    var scaledH = 844 * scale;
+
+    iframe.style.width = '390px';
+    iframe.style.height = '844px';
+    iframe.style.left = (phoneLeft + (innerW - scaledW) / 2 + previewShiftX) + 'px';
+    iframe.style.top = (phoneTop + (innerH - scaledH) / 2 + previewShiftY) + 'px';
+    iframe.style.transformOrigin = 'top left';
+    iframe.style.transform = 'scale(' + scale + ')';
+    iframe.style.opacity = '1';
+    iframe.style.visibility = 'visible';
+  }
+
+  function scaleAllTemplatePreviews() {
+    document.querySelectorAll('#row1 .template-card, #row2 .template-card').forEach(scaleTemplateCard);
+  }
+
+  function runSafeFix() {
+    scaleAllTemplatePreviews();
+    setTimeout(scaleAllTemplatePreviews, 80);
+    setTimeout(scaleAllTemplatePreviews, 350);
+    setTimeout(scaleAllTemplatePreviews, 900);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runSafeFix);
+  } else {
+    runSafeFix();
+  }
+
+  window.addEventListener('load', runSafeFix);
+  window.addEventListener('resize', scaleAllTemplatePreviews);
+  document.querySelectorAll('#row1 iframe.card-preview, #row2 iframe.card-preview').forEach(function (iframe) {
+    iframe.addEventListener('load', scaleAllTemplatePreviews);
   });
 })();
 </script>
