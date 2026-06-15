@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no" />
 <title>Raymond & Celia — Gerbera Garden Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@200;300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -2234,6 +2235,128 @@ color:rgba(255,224,130,.98);
   }
 
 
+
+  /* ═════════ CLIENT FINAL FIXES — parents, account auto-link, scroll cue ═════════ */
+  .page1-invitation .parents-line {
+    grid-template-columns: minmax(0,1fr) 5.6cqw minmax(0,1fr) !important;
+    column-gap: 1.8cqw !important;
+  }
+
+  .page1-invitation .parent-script:first-child {
+    transform: translateX(2.3cqw) !important;
+  }
+
+  .page1-invitation .parent-script:last-child {
+    transform: translateX(-2.3cqw) !important;
+  }
+
+  .page1-invitation .parent-amp {
+    width: 5.6cqw !important;
+  }
+
+  #page7Gift .no-auto-link,
+  #page7Gift .no-auto-link *,
+  #page7Gift .bank-line a,
+  #page7Gift a[x-apple-data-detectors],
+  #page7Gift a[x-apple-data-detectors="true"] {
+    color: #C8522A !important;
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    -webkit-text-decoration-color: transparent !important;
+    text-decoration-color: transparent !important;
+    cursor: default !important;
+  }
+
+  #page7Gift .no-auto-link {
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  .page-scroll-cue {
+    position: relative;
+    z-index: 320;
+    width: 100%;
+    max-width: 520px;
+    height: 0;
+    margin: 0 auto;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .page-scroll-cue span {
+    position: absolute;
+    left: 50%;
+    top: -37px;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #C8522A;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0;
+    line-height: 1;
+    font-weight: 500;
+    text-shadow: 0 1px 8px rgba(255,248,235,.72);
+    animation: seamArrowFloat 1.8s ease-in-out infinite;
+  }
+
+  .page-scroll-cue span::before,
+  .page-scroll-cue span::after {
+    content: '⌄';
+    display: block;
+    font-size: 30px;
+    line-height: .48;
+    color: #C8522A;
+  }
+
+  @keyframes seamArrowFloat {
+    0%, 100% { transform: translate(-50%, 0); opacity: .78; }
+    50% { transform: translate(-50%, 5px); opacity: 1; }
+  }
+
+  @media (max-width: 420px) {
+    .page1-invitation .parents-line {
+      grid-template-columns: minmax(0,1fr) 5.3cqw minmax(0,1fr) !important;
+      column-gap: 1.5cqw !important;
+    }
+
+    .page1-invitation .parent-script:first-child {
+      transform: translateX(2.5cqw) !important;
+    }
+
+    .page1-invitation .parent-script:last-child {
+      transform: translateX(-2.5cqw) !important;
+    }
+
+    .page1-invitation .parent-amp {
+      width: 5.3cqw !important;
+    }
+
+    .page-scroll-cue span {
+      top: -34px;
+      width: 32px;
+      height: 32px;
+      font-size: 0;
+    }
+
+    .page-scroll-cue span::before,
+    .page-scroll-cue span::after {
+      font-size: 28px;
+    }
+  }
+
+
 </style>
 </head>
 
@@ -2362,6 +2485,8 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     </div>
   </section>
 
+  <div class="page-scroll-cue" aria-hidden="true"><span></span></div>
+
   <!-- PAGE 3 — CALENDAR + COUNTDOWN -->
   <section class="section rose-controlled-page page3-calendar" id="page3Calendar" style="--page-bg:url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png');">
    
@@ -2414,13 +2539,13 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     <!-- Road / path image -->
 
 
- <img class="rose-control-png page7-torn-top" style="--x:14%;--y:25%;--w:70%;--z:1;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Road9.png" alt="" />
+ <img class="rose-control-png page7-torn-top" style="--x:14%;--y:25%;--w:70%;--z:1;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Road11.png" alt="" />
 
     <!-- Transparent clickable Google Maps areas over the locations inside Road3.png -->
     <a class="programme-map-link" style="--x:60%;--y:33.5%;--w:22%;--h:7%;" href="https://maps.app.goo.gl/HHeDGPr5z7EL4SSY8" target="_blank" rel="noopener noreferrer" aria-label="Open Twinz Hotel location in Google Maps" title="Twinz Hotel"></a>
-    <a class="programme-map-link" style="--x:20%;--y:45.5%;--w:28%;--h:8%;" href="https://maps.app.goo.gl/RwttC9VszZsJWRVa9" target="_blank" rel="noopener noreferrer" aria-label="Open Groom's House location in Google Maps" title="Groom's House"></a>
-    <a class="programme-map-link" style="--x:62%;--y:57%;--w:24%;--h:10%;" href="https://maps.app.goo.gl/JdJW2dH1bbhMgSdD9" target="_blank" rel="noopener noreferrer" aria-label="Open Saydet el Hosn church location in Google Maps" title="Saydet el Hosn"></a>
-    <a class="programme-map-link" style="--x:20%;--y:69%;--w:27%;--h:9%;" href="https://maps.app.goo.gl/EaUygvdHE7Cihzkf8" target="_blank" rel="noopener noreferrer" aria-label="Open Splend'Or welcome drink location in Google Maps" title="Splend'Or"></a>
+    <a class="programme-map-link" style="--x:20%;--y:47.5%;--w:28%;--h:8%;" href="https://maps.app.goo.gl/RwttC9VszZsJWRVa9" target="_blank" rel="noopener noreferrer" aria-label="Open Groom's House location in Google Maps" title="Groom's House"></a>
+    <a class="programme-map-link" style="--x:62%;--y:59%;--w:24%;--h:10%;" href="https://maps.app.goo.gl/JdJW2dH1bbhMgSdD9" target="_blank" rel="noopener noreferrer" aria-label="Open Saydet el Hosn church location in Google Maps" title="Saydet el Hosn"></a>
+    <a class="programme-map-link" style="--x:20%;--y:72%;--w:27%;--h:9%;" href="https://maps.app.goo.gl/EaUygvdHE7Cihzkf8" target="_blank" rel="noopener noreferrer" aria-label="Open Splend'Or welcome drink location in Google Maps" title="Splend'Or"></a>
     <a class="programme-map-link" style="--x:62%;--y:81%;--w:24%;--h:9%;" href="https://maps.app.goo.gl/EaUygvdHE7Cihzkf8" target="_blank" rel="noopener noreferrer" aria-label="Open Splend'Or dinner location in Google Maps" title="Splend'Or"></a>
 
 
@@ -2463,7 +2588,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       <p class="kicker">With love</p>
       <h2 class="section-title">Gift Registry</h2>
       <p class="body-text">Your love, laughter, and presence are all we could wish for. For those who wish, you can contribute through Whish Money or the ADCB bank account below.</p>
-      <div class="info-card"><h3 class="bank-name">Gift Options</h3><div class="thin-line"></div><p class="bank-line"><strong>Whish Money:</strong><br />ACC# 31424431-03</p><div class="thin-line"></div><p class="bank-line"><strong>ADCB:</strong><br />AE160030014556464920001</p></div>
+      <div class="info-card"><h3 class="bank-name">Gift Options</h3><div class="thin-line"></div><p class="bank-line"><strong>Whish Money:</strong><br /><span class="no-auto-link">ACC# <span>31424431</span><span>-</span><span>03</span></span></p><div class="thin-line"></div><p class="bank-line"><strong>ADCB:</strong><br /><span class="no-auto-link"><span>AE160030014556464920001</span></span></p></div>
     </div>
   </section>
 
