@@ -34,6 +34,101 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
   }
+  body.invitation-loading { overflow: hidden; }
+
+  body.invitation-loading .page {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  /* Lock the invitation so guests cannot scroll past the cover before opening */
+  body.intro-locked {
+    overflow: hidden !important;
+    height: 100vh;
+    height: 100svh;
+    touch-action: none;
+  }
+
+  body.intro-locked .page {
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden !important;
+  }
+
+  .invitation-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background:
+      linear-gradient(180deg, rgba(255,250,240,.86), rgba(244,239,227,.92)),
+      url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png') center center / cover no-repeat;
+    color: #C8522A;
+    transition: opacity .55s ease, visibility .55s ease;
+  }
+
+  body:not(.invitation-loading) .invitation-loader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-card {
+    width: min(86vw, 360px);
+    padding: 34px 30px 32px;
+    border-radius: 28px;
+    background: rgba(255,248,235,.72);
+    border: 1px solid rgba(200,82,42,.24);
+    box-shadow: 0 22px 54px rgba(200,82,42,.16);
+    backdrop-filter: blur(8px);
+    text-align: center;
+  }
+
+  .loader-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(46px, 13vw, 66px);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .loader-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .loader-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(200,82,42,.14);
+  }
+
+  .loader-bar span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: #C8522A;
+    transition: width .25s ease;
+  }
+
+  .loader-percent {
+    margin-top: 13px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+
   img, video { max-width: 100%; display: block; }
   button, input, textarea { font: inherit; }
 
@@ -109,14 +204,14 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.18));
+    background: linear-gradient(180deg, rgba(255,255,255,.01), rgba(0,0,0,.10));
     z-index: 1;
     pointer-events: none;
   }
 
   .intro-cover-text {
     position: absolute;
-    top: 14%;
+    top: 18%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -137,7 +232,7 @@
 
   .intro-cover-names {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(58px, 15vw, 88px);
+    font-size: clamp(52px, 13vw, 78px);
     line-height: .9;
     margin-top: -3px;
     font-weight: 400;
@@ -224,7 +319,6 @@
     min-height: 0;
     height: auto;
     overflow: hidden;
-    cursor: pointer;
   }
   .hero-bg {
     position: absolute;
@@ -782,12 +876,12 @@
     text-align: center;
     background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P5.png') center center / cover no-repeat;
   }
-  .footer .names { color: rgba(255,255,255); font-size: 58px; }
-  .footer .date-line { color: rgba(255,255,255); font-weight: 800; }
-  .footer .thin-line { background: rgba(255,255,255); }
+  .footer .names { color: #C8522A; font-size: 58px; }
+  .footer .date-line { color: #C8522A; font-weight: 800; }
+  .footer .thin-line { background: #C8522A; }
   .cardia-credit { margin-top: 34px; text-align: center; }
-  .cardia-credit a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255); text-decoration: none; }
-  .cardia-credit a:hover { color: #fff; }
+  .cardia-credit a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #C8522A; text-decoration: none; }
+  .cardia-credit a:hover { color: #C8522A; }
 
   .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; }
   .reveal.visible { opacity: 1; transform: none; }
@@ -855,6 +949,30 @@
   .rose-controlled-page { min-height:100vh; min-height:100svh; padding:var(--page-pad-y,74px) var(--page-pad-x,22px); background:var(--page-bg,var(--paper-bg)) center/cover no-repeat !important; }
   .rose-controlled-page .page-card { max-width:var(--card-w,440px); padding:var(--card-pad-y,50px) var(--card-pad-x,28px); margin-top:var(--card-mt,0px); margin-bottom:var(--card-mb,0px); border-radius:var(--card-radius,26px); background:var(--card-bg,rgba(255,255,255,.82)); border:var(--card-border,1px solid rgba(255,255,255,.86)); box-shadow:var(--card-shadow,0 18px 48px rgba(48,65,72,.16)); backdrop-filter:blur(var(--card-blur,4px)); z-index:3; }
   .rose-control-png { position:absolute; pointer-events:none; user-select:none; z-index:var(--z,2); width:var(--w,auto); height:var(--h,auto); left:var(--x,auto); right:var(--r,auto); top:var(--y,auto); bottom:var(--b,auto); opacity:var(--o,1); transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--rot,0deg)) scale(var(--scale,1)); max-width:none !important; }
+
+
+  /* Clickable Google Maps hotspots over Road3.png locations */
+  #page5Programme .programme-map-link {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    height: var(--h);
+    z-index: 30;
+    display: block;
+    background: transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    pointer-events: auto;
+    text-indent: -9999px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(200,82,42,.18);
+  }
+
+  #page5Programme .programme-map-link:focus-visible {
+    outline: 2px solid rgba(200,82,42,.75);
+    outline-offset: 3px;
+  }
 
   /* ═══════════════════════════════════════════════════
      PAGE 5 — PROGRAMME (fully responsive %)
@@ -1138,7 +1256,7 @@
     margin: 48px auto 0 !important;
     left: 50%;
     transform: translateX(-50%);
-    padding: 58px 0 0 !important;
+    padding: 44px 0 0 !important;
     overflow: visible !important;
   }
 
@@ -1277,7 +1395,7 @@
     #page3Calendar .section-title { font-size: 62px !important; }
     #page3Calendar .count-item { min-width: 0 !important; padding: 0 !important; }
     #page3Calendar .count-num { font-size: clamp(34px, 11vw, 52px) !important; }
-    #page3Calendar .flower-countdown { width: 132% !important; padding-top: 50px !important; margin-top: 36px !important; }
+    #page3Calendar .flower-countdown { width: 132% !important; padding-top: 42px !important; margin-top: 36px !important; }
     #page3Calendar .flower-count-grid { width: 70% !important; left: 50% !important; transform: translateX(-50%) !important; }
     #page7Gift { min-height: 720px !important; padding-top: 88px !important; padding-bottom: 78px !important; }
     #page7Gift .page-card { max-width: 100% !important; padding: 76px 18px 50px !important; margin-top: 22px !important; }
@@ -1820,7 +1938,7 @@ color:rgba(255,224,130,.98);
   }
 
   .footer {
-    background-image: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P5.png') !important;
+    background-image: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png') !important;
     background-position: center center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -1870,16 +1988,32 @@ color:rgba(255,224,130,.98);
   .page-transition-girland {
     position: absolute;
     left: 50%;
-    top: 0;
-    width: 124%;
+
+    /*
+      Keep Girland15.png locked to the invitation page size, not the viewport.
+      The page is max 520px wide, so these values scale from the real page width
+      on mobile and stay identical on desktop.
+    */
+    --girland-page-w: min(100vw, 520px);
+    top: calc(var(--girland-page-w) * 0.67);
+    width: calc(var(--girland-page-w) * 1.24);
+
     height: auto;
     max-width: none !important;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scaleX(-1);
     z-index: 120;
     pointer-events: none;
     user-select: none;
     filter: drop-shadow(0 8px 14px rgba(200,82,42,.16));
   }
+
+
+
+
+
+
+
+
 
   /* allow the seam decoration to extend above and below the boundary */
   .page1-invitation,
@@ -1891,24 +2025,235 @@ color:rgba(255,224,130,.98);
     z-index: 1;
   }
 
-  @media (max-width: 420px) {
+   @media (max-width: 420px) {
     .page-transition-girland {
-      width: 132%;
+      /* width and top are already tied to the page width above */
     }
   }
+
+
+
+  /* ═════════ USER REQUEST FINAL ADJUSTMENTS ═════════
+     1) Push the Save the Date / calendar section further down.
+     2) Make the footer shorter and less empty. */
+  #page3Calendar {
+    padding-top: 218px !important;
+    padding-bottom: 58px !important;
+  }
+
+  #page3Calendar .page-card {
+    transform: translateY(0) !important;
+  }
+
+  .footer {
+    padding: 245px 28px 48px !important;
+    min-height: auto !important;
+  }
+
+  .footer .names {
+    font-size: 50px !important;
+    line-height: .95 !important;
+  }
+
+  .footer .date-line {
+    margin-top: 10px !important;
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+
+  .footer .thin-line {
+    margin: 18px auto !important;
+  }
+
+  .cardia-credit {
+    margin-top: 22px !important;
+  }
+
+  @media (max-width: 560px) {
+    #page3Calendar {
+      padding-top: 118px !important;
+      padding-bottom: 52px !important;
+    }
+
+    .footer {
+      padding: 220px 24px 42px !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    #page3Calendar {
+      padding-top: 106px !important;
+      padding-bottom: 46px !important;
+    }
+
+    .footer {
+      padding: 205px 20px 38px !important;
+    }
+
+    .footer .names {
+      font-size: 44px !important;
+    }
+
+    .footer .date-line {
+      font-size: 12px !important;
+      letter-spacing: .16em !important;
+    }
+
+    .cardia-credit a {
+      font-size: 10px !important;
+      letter-spacing: .16em !important;
+    }
+  }
+
+
+
+  /* ═════════ FINAL REQUEST UPDATES ═════════ */
+.footer {
+    position: relative;
+    min-height: 46svh !important;
+    padding: 84px 28px 80px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png') center center / cover no-repeat !important;
+  }
+
+  .footer::before,
+  .footer::after {
+    content: none !important;
+  }
+
+  .footer .names,
+  .footer .date-line,
+  .footer .cardia-credit a {
+    color: #C8522A !important;
+    text-shadow: none !important;
+  }
+
+  .footer .thin-line {
+    display: none !important;
+  }
+
+  .footer .names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(58px, 13vw, 82px) !important;
+    line-height: .95;
+    margin-bottom: 18px;
+  }
+
+  .footer .date-line {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: .24em !important;
+    text-transform: uppercase;
+    margin-top: 0 !important;
+  }
+
+  .cardia-credit {
+    margin-top: 34px !important;
+    position: relative;
+  }
+
+  .cardia-credit::before {
+    content: '✦';
+    display: block;
+    margin: 0 auto 20px;
+    font-size: 13px;
+    line-height: 1;
+    color: rgba(200,82,42,.62);
+    letter-spacing: 0;
+  }
+
+  .cardia-credit .powered-label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: #C8522A;
+    text-shadow: none;
+  }
+
+  .cardia-credit a {
+    position: relative;
+    display: inline-block !important;
+    font-size: 13px !important;
+    letter-spacing: .24em !important;
+    text-decoration: none !important;
+    padding-bottom: 7px;
+  }
+
+  .cardia-credit a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 82%;
+    height: 1px;
+    transform: translateX(-50%);
+    background: rgba(200,82,42,.58);
+  }
+
+  .cardia-credit a u {
+    text-decoration: none !important;
+  }
+
+  .cardia-credit .instagram-underline {
+    display: none !important;
+  }
+
+  .final-photo-section {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .final-photo-section img {
+    width: 100%;
+    height: 100svh;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  @media (max-width: 560px) {
+    .footer {
+      min-height: 44svh !important;
+      padding: 76px 22px 72px !important;
+    }
+
+    .footer::before { top: 48px; }
+    .footer::after { bottom: 48px; }
+  }
+
 
 </style>
 </head>
 
-<body>
+<body class="invitation-loading intro-locked">
+<div class="invitation-loader" id="invitationLoader" role="status" aria-live="polite" aria-label="Loading invitation">
+  <div class="loader-card">
+    <div class="loader-script">Raymond &amp; Celia</div>
+    <div class="loader-text">Loading invitation</div>
+    <div class="loader-bar" aria-hidden="true"><span id="loaderBarFill"></span></div>
+    <div class="loader-percent" id="loaderPercent">0%</div>
+  </div>
+</div>
 <div class="page">
 
   <section class="intro-cover" id="introCover" aria-label="Invitation cover">
     <img class="intro-cover-img" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Envelope3.png" alt="Wedding invitation cover" />
     <div class="intro-cover-text">
-      <div class="intro-cover-names">Thomas</div>
+      <div class="intro-cover-names">Raymond</div>
       <div class="intro-cover-amp">&amp;</div>
-      <div class="intro-cover-names">Sarah</div>
+      <div class="intro-cover-names">Celia</div>
     </div>
     <button class="intro-open-btn" id="introOpenBtn" type="button">Open Invitation</button>
   </section>
@@ -1921,7 +2266,7 @@ color:rgba(255,224,130,.98);
   </section>
 
   <audio id="bgMusic" preload="auto" loop>
-    <source src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Music/paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg" />
+    <source src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Ray.mp3" type="audio/mpeg" />
   </audio>
 
   <button class="music-toggle-btn" id="musicToggleBtn" type="button" aria-label="Pause music">♫</button>
@@ -1948,10 +2293,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
 
 
     <!-- Dense Raymond garden flowers — intro page only -->
-    <img class="raymond-flower wind-slow" style="--x:-5%;--y:-6%;--w:105%;--z:5;--rot:-3deg;--dur:9.5s;--origin:38% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland1.png" alt="" />
-    
-    
+  <img class="raymond-flower" style="--x:-10%;--y:-12.1%;--w:112%;--z:5;--rot:-2deg;--dur:9.5s;--origin:38% 0%; transform: rotate(var(--rot));" 
+  src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland15.png" alt="" />
+        
+        
 
+    <img class="raymond-flower" style="--r:-9%;--y:5%;--w:35%;--z:8;--rot:-2deg;--delay:-1.5s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F13.png" alt="" />
+        
+        
     
     
         <img class="raymond-flower wind-slow" style="--x:-18%;--y:45%;--w:70%;--z:5;--rot:1deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12.png" alt="" />
@@ -1977,17 +2326,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     <img class="raymond-flower wind-med" style="--x:-12%;--y:18%;--w:38%;--z:6;--rot:-4deg;--dur:6.2s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F9.png" alt="" />
     <img class="raymond-flower wind-med" style="--r:-13%;--y:18%;--w:38%;--z:6;--rot:4deg;--dur:6.6s;--delay:-1.2s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F9a.png" alt="" />
 
-    <img class="raymond-flower wind-soft" style="--x:-10%;--b:-1%;--w:45%;--z:8;--rot:2deg;--delay:-.4s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F11.png" alt="" />
-    <img class="raymond-flower wind-soft" style="--r:-5%;--b:-1%;--w:35%;--z:8;--rot:-2deg;--delay:-1.5s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F11a.png" alt="" />
+    <img class="raymond-flower wind-soft" style="--x:-10%;--b:-1%;--w:45%;--z:8;--rot:2deg;--delay:-.4s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F14.png" alt="" />
+    <img class="raymond-flower wind-soft" style="--r:-5%;--b:-1%;--w:35%;--z:8;--rot:-2deg;--delay:-1.5s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F14a.png" alt="" />
 
     <img class="raymond-flower wind-med" style="--x:-8%;--b:14%;--w:34%;--z:7;--rot:-10deg;--delay:-.6s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F11.png" alt="" />
     <img class="raymond-flower wind-med" style="--r:-9%;--b:14%;--w:34%;--z:7;--rot:10deg;--delay:-1.4s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F11a.png" alt="" />
 
-    <img class="raymond-flower wind-soft" style="--x:-18%;--b:1%;--w:31%;--z:2;--rot:44deg;--delay:-.9s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F1.png" alt="" />
-    <img class="raymond-flower wind-soft" style="--r:-14%;--b:1%;--w:31%;--z:2;--rot:-24deg;--delay:-1.8s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F2.png" alt="" />
+    <img class="raymond-flower wind-soft" style="--x:-22%;--b:1%;--w:31%;--z:2;--rot:44deg;--delay:-.9s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F1.png" alt="" />
 
-    <img class="raymond-flower wind-soft" style="--x:3%;--b:5%;--w:24%;--z:2;--rot:12deg;--delay:-.8s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F3.png" alt="" />
-    <img class="raymond-flower wind-soft" style="--r:1%;--b:18%;--w:24%;--z:2;--rot:12deg;--delay:-1.9s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F4a.png" alt="" />
 
 
     <img class="raymond-flower wind-med mobile-hide" style="--r:-23%;--y:53%;--w:32%;--z:1;--rot:-20deg;--delay:-1.6s;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F6.png" alt="" />
@@ -2003,54 +2349,38 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       <div class="invite-heart-line"><span>♥</span></div>
       <p class="family-kicker">TOGETHER WITH THEIR FAMILIES</p>
       <div class="parents-line">
-        <div class="parent-script"><span><strong>Robert &amp; Tina</strong></span><strong>Martin</strong></div>
+        <div class="parent-script"><span><strong>Michael &amp; Salma</strong></span><strong>Dahdah</strong></div>
         <div class="parent-amp">&amp;</div>
-        <div class="parent-script"><span><strong>Michael &amp; Anne</strong></span><strong>Clarke</strong></div>
+        <div class="parent-script"><span><strong>Georges  &amp; Lara</strong></span><strong>Hasrouny</strong></div>
       </div>
       <p class="request-line">Request the honor of your presence at the wedding of their son and daughter</p>
       <div class="couple-script">
-        <span>Thomas</span>
+        <span>Raymond</span>
         <div class="intro-cover-amp">&amp;</div>
-        <span>Sarah</span>
+        <span>Celia</span>
       </div>
     </div>
   </section>
-
-
-  <!-- Seam decoration: centered exactly on the transition line between Page 1 and Page 2 -->
-  <div class="page-transition-girland-wrap" aria-hidden="true">
-    <img class="page-transition-girland" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland7.png" alt="" />
-  </div>
-
-  <!-- ═══ PAGE 2 ═══ -->
-  <section class="section-hero" id="heroCover2">
-    <div class="hero-bg"></div>
-
-    <img class="layer l-Torn2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1a.png" alt="" />
-
-    <img class="layer l-Photo2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P1.png" alt="" />
-  </section>
-
-
-
-  <!-- Seam decoration: centered exactly on the transition line between Page 1 and Page 2 -->
-  <div class="page-transition-girland-wrap" aria-hidden="true">
-    <img class="page-transition-girland" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland7.png" alt="" />
-  </div>
-
 
   <!-- PAGE 3 — CALENDAR + COUNTDOWN -->
   <section class="section rose-controlled-page page3-calendar" id="page3Calendar" style="--page-bg:url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png');">
    
    
-       <img class="raymond-flower wind-slow" style="--x:-5%;--y:-6%;--w:75%;--z:5;--rot:-3deg;--dur:9.5s;--origin:38% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland5.png" alt="" />
+
     
-   
-   
+         <img class="raymond-flower wind-slow" style="--x:-4%;--y:-3.3%;--w:52%;--z:5;--rot:18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12.png" alt="" />
+                <img class="raymond-flower wind-slow" style="--x:-7%;--y:17.3%;--w:52%;--z:5;--rot:18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12.png" alt="" />
+
+     <img class="raymond-flower wind-slow" style="--r:-4%;--y:-3.3%;--w:52%;--z:5;--rot:-18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12a.png" alt="" />
+            <img class="raymond-flower wind-slow" style="--r:-8%;--y:17%;--w:52%;--z:5;--rot:-18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12a.png" alt="" />
+            
+            
+            
+            
     <div class="page-card reveal">
       <p class="kicker">Save the date</p>
       <h2 class="section-title">Wedding Day</h2>
-      <div class="calendar-card"><p class="cal-month">August 2027</p><div class="cal-grid" id="calGrid"></div></div>
+      <div class="calendar-card"><p class="cal-month">July 2026</p><div class="cal-grid" id="calGrid"></div></div>
       <div class="countdown flower-countdown" aria-label="Wedding countdown">
         <img class="countdown-flowers" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Countdown1.png" alt="" />
         <div class="flower-count-grid flower-count-numbers">
@@ -2063,13 +2393,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     </div>
   </section>
 
-  <!-- ═══ PAGE 4 — PHOTO ═══ -->
-  <section class="section-hero page4-photo" id="page4Photo">
-    <img class="layer l-Photo2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P2.png" alt="" />
-    <img class="layer l-TornTop" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1.png" alt="" />
-    <img class="layer l-Pages2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png" alt="" />
-    <img class="layer l-Torn2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1a.png" alt="" />
-  </section>
+
 
 
   
@@ -2090,7 +2414,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     <!-- Road / path image -->
 
 
- <img class="rose-control-png page7-torn-top" style="--x:14%;--y:18%;--w:75%;--z:1;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Road13.png" alt="" />
+ <img class="rose-control-png page7-torn-top" style="--x:14%;--y:25%;--w:70%;--z:1;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Road8.png" alt="" />
+
+    <!-- Transparent clickable Google Maps areas over the locations inside Road3.png -->
+    <a class="programme-map-link" style="--x:60%;--y:33.5%;--w:22%;--h:7%;" href="https://maps.app.goo.gl/HHeDGPr5z7EL4SSY8" target="_blank" rel="noopener noreferrer" aria-label="Open Twinz Hotel location in Google Maps" title="Twinz Hotel"></a>
+    <a class="programme-map-link" style="--x:20%;--y:45.5%;--w:28%;--h:8%;" href="https://maps.app.goo.gl/RwttC9VszZsJWRVa9" target="_blank" rel="noopener noreferrer" aria-label="Open Groom's House location in Google Maps" title="Groom's House"></a>
+    <a class="programme-map-link" style="--x:62%;--y:57%;--w:24%;--h:10%;" href="https://maps.app.goo.gl/JdJW2dH1bbhMgSdD9" target="_blank" rel="noopener noreferrer" aria-label="Open Saydet el Hosn church location in Google Maps" title="Saydet el Hosn"></a>
+    <a class="programme-map-link" style="--x:20%;--y:69%;--w:27%;--h:9%;" href="https://maps.app.goo.gl/EaUygvdHE7Cihzkf8" target="_blank" rel="noopener noreferrer" aria-label="Open Splend'Or welcome drink location in Google Maps" title="Splend'Or"></a>
+    <a class="programme-map-link" style="--x:62%;--y:81%;--w:24%;--h:9%;" href="https://maps.app.goo.gl/EaUygvdHE7Cihzkf8" target="_blank" rel="noopener noreferrer" aria-label="Open Splend'Or dinner location in Google Maps" title="Splend'Or"></a>
 
 
       <img class="raymond-flower wind-slow" style="--x:-4%;--y:60%;--w:52%;--z:5;--rot:18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12.png" alt="" />
@@ -2118,64 +2449,45 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
 
 
 
-
-
-
-  <!-- ═══ PAGE 6 — PHOTO ═══ -->
-  <section class="section-hero page6-photo" id="page6Photo">
-    <img class="layer l-Photo2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P4.png" alt="" />
-    <img class="layer l-TornTop" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1.png" alt="" />
-    <img class="layer l-Pages2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png" alt="" />
-    <img class="layer l-Torn2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1a.png" alt="" />
-  </section>
-
   <!-- PAGE 7 — GIFT REGISTRY -->
   <section class="section rose-controlled-page page7-gift" id="page7Gift" style="--page-bg:url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png');">
  
  
  
- 
-        <img class="raymond-flower wind-slow" style="--r:-9%;--y:98%;--w:75%;--z:5;--rot:-180deg;--dur:9.5s;--origin:38% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland5.png" alt="" />
- 
- 
-        <img class="raymond-flower wind-slow" style="--l:-9%;--y:-3%;--w:75%;--z:5;--rot:0deg;--dur:9.5s;--origin:38% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Girland5.png" alt="" />
+       <img class="raymond-flower wind-slow" style="--x:-4%;--y:60%;--w:52%;--z:5;--rot:18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12.png" alt="" />
+        
+              <img class="raymond-flower wind-slow" style="--r:-4%;--y:20%;--w:52%;--z:5;--rot:-18deg;--dur:10.5s;--delay:-1.1s;--origin:60% 0%;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/F12a.png" alt="" />
  
     <div class="page-card reveal gift-dark-card">
       <img class="rose-control-png page7-torn-top" style="--x:23%;--y:-19%;--w:57%;--z:1;" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/15.png" alt="Gift icon" />
       <p class="kicker">With love</p>
       <h2 class="section-title">Gift Registry</h2>
-      <p class="body-text">Your love, laughter, and presence are all we could wish for. For those who wish, a wedding list is available at all Whish Money branches.</p>
-      <div class="info-card"><h3 class="bank-name">Whish Money</h3><div class="thin-line"></div><p class="bank-line">ACC# xxxxxx</p></div>
+      <p class="body-text">Your love, laughter, and presence are all we could wish for. For those who wish, you can contribute through Whish Money or the ADCB bank account below.</p>
+      <div class="info-card"><h3 class="bank-name">Gift Options</h3><div class="thin-line"></div><p class="bank-line"><strong>Whish Money:</strong><br />ACC# 31424431-03</p><div class="thin-line"></div><p class="bank-line"><strong>ADCB:</strong><br />AE160030014556464920001</p></div>
     </div>
   </section>
 
-  <!-- ═══ PAGE 8 — PHOTO ═══ -->
-  <section class="section-hero page8-photo" id="page8Photo">
-    <img class="layer l-Photo2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P3.png" alt="" />
-    <img class="layer l-TornTop" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1.png" alt="" />
-    <img class="layer l-Pages2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png" alt="" />
-    <img class="layer l-Torn2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Image1a.png" alt="" />
-  </section>
+
 
   <!-- PAGE 9 — RSVP -->
   <section class="section rose-controlled-page rsvp-section page9-rsvp" id="page9Rsvp" style="--page-bg:url('https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Page3c.png');">
 
 
     <div class="page-card reveal">
-      <p class="kicker">Kindly reply</p>
+     
         <p class="kicker"></p>
         <p class="kicker"></p>
       <h2 class="section-title">RSVP</h2>
-      <p class="subtitle">Before July 14, 2027</p>
+       <p class="kicker">Kindly reply</p>
+      <p class="subtitle">Before June 30, 2026</p>
 
       <div class="rsvp-box">
-        <div class="step-dots">
+        <div class="step-dots single-step-dots">
           <span class="step-dot on" id="dot-1"></span>
-          <span class="step-dot" id="dot-2"></span>
         </div>
 
         <div id="step1" class="rsvp-step guest-welcome-step">
-          <h3 class="guest-welcome-title">Dear <span id="guestWelcomeName">Guest</span>,</h3>
+         
           <p id="personalGuestNote" class="guest-welcome-note">Please confirm who can attend from this invitation.</p>
 
           <div id="manualGuestListWrap" class="manual-guest-list-wrap">
@@ -2183,17 +2495,8 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
           </div>
 
           <p class="guest-total-line">Total guests attending: <strong id="guestCount">0</strong></p>
-          <p class="error-msg" id="errName">Please enter at least one guest name.</p>
-          <button class="btn-solid rsvp-main-btn" type="button" onclick="goStep(1,3)">Continue →</button>
-        </div>
-
-        <div id="step3" class="rsvp-step" style="display:none;">
-          <label class="form-label" for="guestMsg">Leave a wish <span style="font-weight:400;">(optional)</span></label>
-          <textarea id="guestMsg" class="form-field" rows="4" placeholder="Share a wish for Thomas & Sarah…"></textarea>
-          <div class="btn-grid">
-            <button class="btn-soft" type="button" onclick="goStep(3,1)">← Back</button>
-            <button class="btn-solid" id="sendBtn" type="button" onclick="submitRSVP()">Send ✦</button>
-          </div>
+          <p class="error-msg" id="errName">Please enter at least one guest name and choose Yes or No.</p>
+          <button class="btn-solid rsvp-main-btn" id="sendBtn" type="button" onclick="submitRSVP()">Send RSVP ✦</button>
         </div>
 
         <div id="stepOk" style="display:none; text-align:center; padding:28px 0;">
@@ -2206,17 +2509,113 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
   </section>
 
   <footer class="footer">
-    <h2 class="names">Thomas &amp; Sarah</h2>
-    <p class="date-line">August 14, 2027 · Ehden, Lebanon</p>
-    <div class="thin-line"></div>
+    <h2 class="names">Raymond &amp; Celia</h2>
+    <p class="date-line">July 16, 2026 · Ehden, Lebanon</p>
     <div class="cardia-credit">
-      <a href="https://www.cardiastudios.com/" target="_blank" rel="noopener">Powered by <u>Cardia Studios</u></a>
+      <span class="powered-label">Powered by</span>
+      <a href="https://www.instagram.com/cardiastudios/" target="_blank" rel="noopener"><u>Cardia Studios</u></a>
+      <span class="instagram-underline" aria-hidden="true"></span>
     </div>
   </footer>
+
+
+  <section class="final-photo-section" aria-label="Raymond and Celia photo">
+    <img src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Raymond/Ray_Celia.jpg" alt="Raymond and Celia" loading="lazy" decoding="async">
+  </section>
 
 </div>
 
 <script>
+  (function preloadInvitationAssets() {
+    const loader = document.getElementById('invitationLoader');
+    const bar = document.getElementById('loaderBarFill');
+    const percent = document.getElementById('loaderPercent');
+    const imageExtensions = /\.(png|jpe?g|webp|gif|svg)(\?|#|$)/i;
+    const mediaExtensions = /\.(mp4|mp3)(\?|#|$)/i;
+    const pageHTML = document.documentElement.outerHTML;
+    const urls = Array.from(new Set((pageHTML.match(/https?:\/\/[^"'()\s<>]+?\.(?:png|jpg|jpeg|webp|gif|svg|mp4|mp3)(?:\?[^"'()\s<>]*)?/gi) || [])));
+    const imageUrls = urls.filter(url => imageExtensions.test(url));
+    const mediaUrls = urls.filter(url => mediaExtensions.test(url));
+    const domMedia = Array.from(document.querySelectorAll('video, audio'));
+    const total = Math.max(1, imageUrls.length + mediaUrls.length);
+    let completed = 0;
+    let released = false;
+
+    function updateProgress() {
+      completed += 1;
+      const value = Math.min(100, Math.round((completed / total) * 100));
+      if (bar) bar.style.width = value + '%';
+      if (percent) percent.textContent = value + '%';
+    }
+
+    function markReady() {
+      if (released) return;
+      released = true;
+      if (bar) bar.style.width = '100%';
+      if (percent) percent.textContent = '100%';
+      window.setTimeout(() => {
+        document.body.classList.remove('invitation-loading');
+        if (loader) loader.setAttribute('aria-hidden', 'true');
+      }, 300);
+    }
+
+    function preloadImage(url) {
+      return new Promise(resolve => {
+        const img = new Image();
+        const done = () => { updateProgress(); resolve(); };
+        img.onload = done;
+        img.onerror = done;
+        img.src = url;
+        if (img.complete) done();
+      });
+    }
+
+    function waitForMediaElement(el) {
+      return new Promise(resolve => {
+        let doneCalled = false;
+        const done = () => {
+          if (doneCalled) return;
+          doneCalled = true;
+          cleanup();
+          updateProgress();
+          resolve();
+        };
+        const cleanup = () => {
+          ['loadeddata','canplay','canplaythrough','error','stalled','abort'].forEach(evt => el.removeEventListener(evt, done));
+        };
+        if (el.readyState >= 3) { done(); return; }
+        ['loadeddata','canplay','canplaythrough','error','stalled','abort'].forEach(evt => el.addEventListener(evt, done, { once: true }));
+        try { el.load(); } catch (e) { done(); }
+        window.setTimeout(done, 12000);
+      });
+    }
+
+    function preloadStandaloneMedia(url) {
+      return new Promise(resolve => {
+        const isAudio = /\.mp3(\?|#|$)/i.test(url);
+        const el = document.createElement(isAudio ? 'audio' : 'video');
+        el.preload = 'auto';
+        el.muted = true;
+        el.playsInline = true;
+        const done = () => { updateProgress(); resolve(); };
+        ['loadeddata','canplay','canplaythrough','error','stalled','abort'].forEach(evt => el.addEventListener(evt, done, { once: true }));
+        el.src = url;
+        try { el.load(); } catch (e) { done(); }
+        window.setTimeout(done, 12000);
+      });
+    }
+
+    const domMediaUrls = new Set(domMedia.map(el => el.currentSrc || (el.querySelector('source') ? el.querySelector('source').src : el.src)).filter(Boolean));
+    const tasks = [
+      ...imageUrls.map(preloadImage),
+      ...domMedia.map(waitForMediaElement),
+      ...mediaUrls.filter(url => !domMediaUrls.has(url)).map(preloadStandaloneMedia)
+    ];
+
+    Promise.allSettled(tasks).then(markReady);
+    window.setTimeout(markReady, 18000);
+  })();
+
   const introCover = document.getElementById('introCover');
   const introOpenBtn = document.getElementById('introOpenBtn');
   const introVideoScreen = document.getElementById('introVideoScreen');
@@ -2250,7 +2649,12 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     updateMusicButton();
   }
 
+  function unlockInvitationScroll() {
+    document.body.classList.remove('intro-locked');
+  }
+
   function goToInvitationStart() {
+    unlockInvitationScroll();
     if (introVideo) { introVideo.pause(); introVideo.currentTime = 0; }
     if (introVideoScreen) introVideoScreen.classList.remove('show');
     const firstSection = document.getElementById('heroCover');
@@ -2285,12 +2689,6 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     });
   }, { threshold: .08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  document.getElementById('heroCover').addEventListener('click', () => {
-    const first = document.getElementById('invitationPage');
-    if (first) first.scrollIntoView({ behavior: 'smooth' });
-  });
-
   (function buildCalendar() {
     const grid = document.getElementById('calGrid');
     if (!grid) return;
@@ -2300,7 +2698,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       el.textContent = day;
       grid.appendChild(el);
     });
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 2; i++) {
       const el = document.createElement('div');
       el.className = 'cal-cell empty';
       el.textContent = '.';
@@ -2308,13 +2706,13 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     }
     for (let day = 1; day <= 31; day++) {
       const el = document.createElement('div');
-      el.className = 'cal-cell' + (day === 14 ? ' highlight' : '');
-      el.innerHTML = day === 14 ? '<span class="day-txt">14</span>' : day;
+      el.className = 'cal-cell' + (day === 16 ? ' highlight' : '');
+      el.innerHTML = day === 16 ? '<span class="day-txt">16</span>' : day;
       grid.appendChild(el);
     }
   })();
 
-  const TARGET = new Date('2027-08-14T18:00:00');
+  const TARGET = new Date('2026-07-16T18:00:00');
   function tickCountdown() {
     const diff = Math.max(0, TARGET - new Date());
     const pad = n => String(n).padStart(2, '0');
@@ -2372,14 +2770,14 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     ? lockedGuestNames.map((name, index) => ({
       slot: 'Guest ' + (index + 1),
       name: name,
-      attending: 'Yes',
+      attending: '',
       manualAttendance: false,
       locked: true
     }))
     : Array.from({ length: guestLimit }, (_, index) => ({
       slot: 'Guest ' + (index + 1),
       name: '',
-      attending: 'Yes',
+      attending: '',
       manualAttendance: false,
       locked: false
     }));
@@ -2485,17 +2883,7 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
 
   function setGuestName(index, value) {
     if (!guestResponses[index]) return;
-    const hadName = !!(guestResponses[index].name && guestResponses[index].name.trim());
     guestResponses[index].name = value.trim();
-    if (!hadName && guestResponses[index].name && !guestResponses[index].manualAttendance) {
-      guestResponses[index].attending = 'Yes';
-      renderGuestNameBoxes();
-      const restoredInput = document.getElementById('guestSlotInput' + index);
-      if (restoredInput) {
-        restoredInput.focus();
-        restoredInput.setSelectionRange(restoredInput.value.length, restoredInput.value.length);
-      }
-    }
     const errName = document.getElementById('errName');
     if (errName) errName.style.display = 'none';
     updateGuestTotal();
@@ -2507,6 +2895,8 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     guestResponses[index].manualAttendance = true;
     const err = document.getElementById('errAttend');
     if (err) err.style.display = 'none';
+    const errName = document.getElementById('errName');
+    if (errName) errName.style.display = 'none';
     updateGuestTotal();
   }
 
@@ -2530,11 +2920,19 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
         return;
       }
 
+      const missingAttendance = namedGuests.some(({ guest }) => !guest.attending);
+      if (missingAttendance) {
+        const errName = document.getElementById('errName');
+        if (errName) {
+          errName.textContent = 'Please choose Yes or No for each guest.';
+          errName.style.display = 'block';
+        }
+        return;
+      }
+
       guestResponses.forEach(guest => {
-        if (guest.name && guest.name.trim()) {
-          if (!guest.attending) guest.attending = 'Yes';
-        } else {
-          guest.attending = 'No';
+        if (!guest.name || !guest.name.trim()) {
+          guest.attending = '';
         }
       });
 
@@ -2548,9 +2946,9 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
     [1,2].forEach(i => document.getElementById('dot-' + i).classList.toggle('on', i <= activeDot));
   }
 
-  const COUPLE_NAME = 'Thomas & Sarah';
-  const CUSTOMER_EMAIL = 'cardiastudios@gmail.com';
-  const RSVP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJmJqBu9U9t6lKlbBMCvHtkXNBo6026SirsYWAhVMo_H5l9gRhoBmXipvAvI47c5v4lw/exec';
+  const COUPLE_NAME = 'Raymond & Celia';
+  const CUSTOMER_EMAIL = 'hasrounycelia@gmail.com';
+  const RSVP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby14mOW0dZlNDlLEiDZdDrYqUtnvQjinyBUN6QKM5hjey0z5n_Ao5Pvhtp8GzgFusQnCg/exec';
 
   function showRSVPThankYou(groupName, attendingCount) {
     ['step1','step2','step3'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
@@ -2593,6 +2991,33 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
 
   function submitRSVP() {
     const msg = document.getElementById('guestMsg') ? document.getElementById('guestMsg').value.trim() : '';
+    const namedGuestsBeforeSubmit = getNamedGuestResponses();
+    if (!namedGuestsBeforeSubmit.length) {
+      const errName = document.getElementById('errName');
+      if (errName) {
+        errName.textContent = 'Please enter at least one guest name.';
+        errName.style.display = 'block';
+      }
+      return;
+    }
+
+    const missingAttendance = namedGuestsBeforeSubmit.some(({ guest }) => !guest.attending);
+    if (missingAttendance) {
+      const errName = document.getElementById('errName');
+      if (errName) {
+        errName.textContent = 'Please choose Yes or No for each guest.';
+        errName.style.display = 'block';
+      }
+      return;
+    }
+
+    guestResponses.forEach(guest => {
+      if (!guest.name || !guest.name.trim()) {
+        guest.attending = '';
+      }
+    });
+    updateGuestTotal();
+
     const sendBtn = document.getElementById('sendBtn');
     if (sendBtn) { sendBtn.textContent = 'Sending...'; sendBtn.disabled = true; }
 
@@ -2602,17 +3027,33 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       return;
     }
 
-    guestResponses.forEach(guest => {
-      if (!guest.name || !guest.name.trim()) guest.attending = 'No';
-    });
 
-    const attendingCount = guestResponses.filter(guest => guest.name && guest.name.trim() && guest.attending === 'Yes').length;
-    const submittedGuestNames = guestResponses.map(guest => guest.name.trim()).filter(Boolean);
-    const groupName = formatGuestNames(submittedGuestNames);
-    const responseLines = guestResponses
+    const namedResponses = guestResponses
       .filter(guest => guest.name && guest.name.trim())
-      .map(guest => guest.slot + ' - ' + guest.name + ': ' + guest.attending)
+      .map(guest => ({
+        slot: guest.slot || '',
+        name: guest.name.trim(),
+        attending: guest.attending === 'Yes' ? 'Yes' : 'No'
+      }));
+
+    const attendingGuestsList = namedResponses
+      .filter(guest => guest.attending === 'Yes')
+      .map(guest => guest.name);
+
+    const notAttendingGuestsList = namedResponses
+      .filter(guest => guest.attending !== 'Yes')
+      .map(guest => guest.name);
+
+    const attendingCount = attendingGuestsList.length;
+    const submittedGuestNames = namedResponses.map(guest => guest.name);
+    const groupName = formatGuestNames(submittedGuestNames);
+
+    const responseLines = namedResponses
+      .map(guest => guest.name + ' — ' + (guest.attending === 'Yes' ? 'Attending' : 'Not attending'))
       .join('\n');
+
+    const attendingGuests = attendingGuestsList.join(', ');
+    const notAttendingGuests = notAttendingGuestsList.join(', ');
 
     const payload = {
       event: COUPLE_NAME,
@@ -2620,10 +3061,20 @@ fill="none" stroke="#6f5945" stroke-width="2"/>
       guest_name: groupName,
       invited_guest_from_link: invitedGroupForClient,
       attending: attendingCount > 0 ? 'Yes' : 'No',
-      attending_summary: responseLines,
       guest_count: attendingCount,
       guest_limit: guestLimit,
-      guests_json: JSON.stringify(guestResponses),
+
+      /* These fields are used by the Google Sheet + email script */
+      attending_guests: attendingGuests,
+      not_attending_guests: notAttendingGuests,
+      individual_responses: responseLines,
+
+      /* Kept for compatibility with older Google Sheet scripts */
+      attending_summary: responseLines,
+      guest_responses: responseLines,
+      responses: responseLines,
+      guests_json: JSON.stringify(namedResponses),
+
       message: msg || '',
       page_url: window.location.href,
       submitted_at: new Date().toISOString()
