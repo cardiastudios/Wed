@@ -6566,6 +6566,189 @@ body {
   z-index: 4 !important;
   pointer-events: none !important;
 }
+
+
+/* CARDIA FINAL FIX — luxury info popups + FAQ accordion */
+.info-btn {
+  opacity: 1 !important;
+  background: #fffaf3 !important;
+  color: var(--gold) !important;
+  border: 1px solid rgba(184, 144, 60, .42) !important;
+  box-shadow: 0 6px 18px rgba(42, 32, 24, .08) !important;
+}
+
+.price-card.featured .info-btn {
+  background: rgba(255, 250, 243, .16) !important;
+  color: var(--gold-lt) !important;
+  border-color: rgba(212, 184, 112, .60) !important;
+}
+
+.info-tooltip,
+.price-card .info-tooltip,
+.price-card.featured .info-tooltip,
+.share-section .info-btn .info-tooltip,
+.share-section .album-service-features .info-tooltip {
+  background: linear-gradient(145deg, #fffaf3 0%, #f6efe4 100%) !important;
+  color: var(--ink) !important;
+  border: 1px solid rgba(184, 144, 60, .42) !important;
+  box-shadow: 0 22px 62px rgba(42, 32, 24, .20) !important;
+  border-radius: 18px !important;
+  text-align: left !important;
+  font-family: "Manrope", "Jost", sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+
+.info-tooltip::after {
+  border-top-color: #f6efe4 !important;
+}
+
+.faq-grid {
+  align-items: start !important;
+  grid-auto-rows: auto !important;
+}
+
+.faq-item {
+  height: auto !important;
+}
+
+.faq-question,
+.faq-item.open .faq-question,
+.faq-question[aria-expanded="true"] {
+  padding: 1.25rem 4.35rem 1.25rem 1.35rem !important;
+  min-height: 72px !important;
+}
+
+.faq-question::after {
+  right: 1.25rem !important;
+  top: 50% !important;
+  width: 30px !important;
+  height: 30px !important;
+  transform: translateY(-50%) !important;
+  flex: 0 0 30px !important;
+  z-index: 2 !important;
+}
+
+.faq-item:not(.open) .faq-question::after,
+.faq-question[aria-expanded="false"]::after {
+  content: "+" !important;
+}
+
+.faq-item.open .faq-question::after,
+.faq-question[aria-expanded="true"]::after {
+  content: "−" !important;
+}
+
+.faq-answer {
+  display: block !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  padding: 0 1.35rem !important;
+  margin: 0 !important;
+  border-top: 0 !important;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 520px !important;
+  opacity: 1 !important;
+  padding: 0 1.35rem 1.35rem !important;
+}
+
+@media (max-width: 760px) {
+  .faq-question,
+  .faq-question[aria-expanded="true"] {
+    padding: 1.15rem 4rem 1.15rem 1.15rem !important;
+    min-height: 70px !important;
+    font-size: 1.12rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .faq-question::after {
+    right: 1rem !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .faq-answer {
+    padding: 0 1.15rem !important;
+  }
+
+  .faq-item.open .faq-answer {
+    padding: 0 1.15rem 1.15rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body.album-tooltip-open::before {
+    background: rgba(42, 32, 24, .38) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  .info-btn .info-tooltip,
+  .price-card .info-tooltip,
+  .price-card.featured .info-tooltip,
+  .share-section .info-btn .info-tooltip,
+  .share-section .album-service-features .info-tooltip {
+    background: linear-gradient(145deg, #fffaf3 0%, #f6efe4 100%) !important;
+    color: var(--ink) !important;
+    border: 1px solid rgba(184, 144, 60, .45) !important;
+    box-shadow: 0 28px 84px rgba(42, 32, 24, .28) !important;
+  }
+}
+
+
+
+/* CARDIA MOBILE FAQ FINAL FIX — one clean column on phones and small tablets */
+@media (max-width: 920px) {
+  .faq-content {
+    max-width: 620px !important;
+  }
+
+  .faq-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .faq-item {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .faq-question,
+  .faq-question[aria-expanded="true"] {
+    padding: 1.18rem 4rem 1.18rem 1.25rem !important;
+    min-height: 0 !important;
+    font-size: 1.22rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .faq-question::after {
+    right: 1.15rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .faq-grid {
+    gap: .95rem !important;
+  }
+
+  .faq-question,
+  .faq-question[aria-expanded="true"] {
+    padding: 1.12rem 3.85rem 1.12rem 1.15rem !important;
+    font-size: 1.18rem !important;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#fffdf8"/>
@@ -7642,7 +7825,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li class="price-feature"><span>Everything in Premium</span></li>
 <li class="price-feature"><span>Up to 12 photos of your choice included (e.g., from your wedding photo shoot) </span></li>
 <li class="price-feature"><span>Priority service — ready in up to 2 days</span></li>
-<li class="price-feature"><span>Photo album QR experience included — custom QR card + shared online album for 4 months <span class="info-btn">ⓘ<span class="info-tooltip">A beautiful printable table card with your own QR code, designed to match your wedding style and colors. Guests print it and place it on the reception tables, then scan it to instantly upload photos and videos into one shared online album — no app or account needed.</span></span><br/><a class="luxury-demo-link" href="#photo-album-service">See photo album demo below ↓</a></span></li>
+<li class="price-feature"><span>Photo album QR experience included — custom QR card + shared online album for 4 months <span class="info-btn">ⓘ<span class="info-tooltip">We design a printable QR table card with your own QR code, matched to your wedding style and colors. You, the couple, print the cards and place them on the reception tables. Guests simply scan the QR code to upload photos and videos into one shared online album — no app or account needed.</span></span><br/><a class="luxury-demo-link" href="#photo-album-service">See photo album demo below ↓</a></span></li>
 <li class="price-feature"><span>Hosted forever on our servers</span></li>
 </ul>
 </div>
@@ -7691,7 +7874,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li class="price-feature"><span>Everything in Premium</span></li>
 <li class="price-feature"><span>Up to 12 photos included</span></li>
 <li class="price-feature"><span>Priority service — ready in up to 2 days</span></li>
-<li class="price-feature"><span>Photo album QR experience included — custom QR card + shared online album for 4 months <span class="info-btn">ⓘ<span class="info-tooltip">A beautiful printable table card with your own QR code, designed to match your wedding style and colors. Guests print it and place it on the reception tables, then scan it to instantly upload photos and videos into one shared online album — no app or account needed.</span></span><br/><a class="luxury-demo-link" href="#photo-album-service">See photo album demo below ↓</a></span></li>
+<li class="price-feature"><span>Photo album QR experience included — custom QR card + shared online album for 4 months <span class="info-btn">ⓘ<span class="info-tooltip">We design a printable QR table card with your own QR code, matched to your wedding style and colors. You, the couple, print the cards and place them on the reception tables. Guests simply scan the QR code to upload photos and videos into one shared online album — no app or account needed.</span></span><br/><a class="luxury-demo-link" href="#photo-album-service">See photo album demo below ↓</a></span></li>
 <li class="price-feature"><span>Hosted forever on our servers</span></li>
 </ul>
 </div>
@@ -8013,7 +8196,7 @@ const CARDIA_TRANSLATIONS = {
       luxuryMobile:['Everything in Premium','Up to 12 photos included','Priority service - ready in up to 2 days','Photo album QR included + shared online album for 4 months','Hosted forever on our servers']
     },
     tooltip:'We customize your chosen template with your names, date, venue, schedule and personal details. You can add or remove sections, reorder content, replace any icons with your own icons, and adapt the template to match your event style.',
-    qrTooltip:'A beautiful printable table card with your own QR code, designed to match your wedding style and colors. Guests print it and place it on the reception tables, then scan it to instantly upload photos and videos into one shared online album — no app or account needed.',
+    qrTooltip:'We design a printable QR table card with your own QR code, matched to your wedding style and colors. You, the couple, print the cards and place them on the reception tables. Guests simply scan the QR code to upload photos and videos into one shared online album — no app or account needed.',
     qrDemoLink:'See photo album demo below ↓',
     generator:'',
     paymentHead1:'Lebanon', paymentHead2:'France, EU & Worldwide',
@@ -8047,7 +8230,7 @@ const CARDIA_TRANSLATIONS = {
       luxuryMobile:['Tout ce qui est inclus dans Premium','Jusqu’à 12 photos incluses','Service prioritaire - prêt sous 2 jours maximum','QR album photo inclus + album en ligne pendant 4 mois','Hébergé pour toujours sur nos serveurs']
     },
     tooltip:'Nous personnalisons le modèle choisi avec vos noms, la date, le lieu et le programme. Vous pouvez ajouter ou supprimer des étapes (cérémonie, cocktail, dîner, soirée, etc.).',
-    qrTooltip:'Une belle carte de table imprimable avec votre propre QR code, conçue pour correspondre au style et aux couleurs de votre mariage. Les invités l’impriment/la placent sur les tables, puis scannent le QR code pour téléverser instantanément leurs photos et vidéos dans un album en ligne partagé — sans application ni compte.',
+    qrTooltip:'Nous créons une carte de table QR imprimable avec votre propre QR code, assortie au style et aux couleurs de votre mariage. Le couple imprime les cartes et les place sur les tables de réception. Les invités scannent simplement le QR code pour téléverser leurs photos et vidéos dans un album en ligne partagé — sans application ni compte.',
     qrDemoLink:'Voir la démo de l’album photo plus bas ↓',
     generator:'',
     paymentHead1:'Liban', paymentHead2:'France, UE et monde entier',
@@ -8081,7 +8264,7 @@ const CARDIA_TRANSLATIONS = {
       luxuryMobile:['Todo lo incluido en Premium','Hasta 12 fotos incluidas','Servicio prioritario - listo en hasta 2 días','Alojada para siempre en nuestros servidores']
     },
     tooltip:'Personalizamos la plantilla elegida con nombres, fecha, lugar, programa y detalles personales. Puedes añadir o quitar secciones, reorganizar el contenido, reemplazar iconos por los tuyos y adaptar el estilo a tu evento.',
-    qrTooltip:'Una bonita tarjeta de mesa imprimible con vuestro propio código QR, diseñada para combinar con el estilo y los colores de vuestra boda. Los invitados la colocan en las mesas y escanean el código para subir fotos y vídeos al álbum online compartido — sin aplicación ni cuenta.',
+    qrTooltip:'Diseñamos una tarjeta QR de mesa imprimible con vuestro propio código QR, adaptada al estilo y los colores de vuestra boda. La pareja imprime las tarjetas y las coloca en las mesas de la recepción. Los invitados solo escanean el código para subir fotos y vídeos al álbum online compartido — sin aplicación ni cuenta.',
     qrDemoLink:'Ver la demo del álbum abajo ↓',
     generator:'',
     paymentHead1:'Líbano', paymentHead2:'Francia, UE y todo el mundo',
@@ -8115,7 +8298,7 @@ const CARDIA_TRANSLATIONS = {
       luxuryMobile:['Tutto ciò che è incluso in Premium','Fino a 12 foto incluse','Servizio prioritario - pronto entro 2 giorni','Ospitato per sempre sui nostri server']
     },
     tooltip:'Personalizziamo il modello scelto con nomi, data, luogo, programma e dettagli personali. Puoi aggiungere o rimuovere sezioni, riorganizzare i contenuti, sostituire le icone con le tue e adattare lo stile al tuo evento.',
-    qrTooltip:'Un’elegante card da tavolo stampabile con il vostro QR code, progettata per abbinarsi allo stile e ai colori del matrimonio. Gli ospiti la mettono sui tavoli e scansionano il QR per caricare foto e video nell’album online condiviso — senza app né account.',
+    qrTooltip:'Progettiamo una card QR da tavolo stampabile con il vostro QR code, abbinata allo stile e ai colori del matrimonio. La coppia stampa le card e le posiziona sui tavoli del ricevimento. Gli ospiti devono solo scansionare il QR per caricare foto e video nell’album online condiviso — senza app né account.',
     qrDemoLink:'Vedi la demo dell’album più sotto ↓',
     generator:'',
     paymentHead1:'Libano', paymentHead2:'Francia, UE e tutto il mondo',
@@ -8239,13 +8422,25 @@ const CARDIA_FAQ_TRANSLATIONS = {
 };
 
 function initFaqAccordion() {
-  document.querySelectorAll('.faq-item').forEach((item) => {
+  const closeFaqItem = (item) => {
+    if (!item) return;
     item.classList.remove('open');
     const answer = item.querySelector('.faq-answer');
     const question = item.querySelector('.faq-question');
     if (answer) answer.setAttribute('aria-hidden', 'true');
     if (question) question.setAttribute('aria-expanded', 'false');
-  });
+  };
+
+  const openFaqItem = (item) => {
+    if (!item) return;
+    item.classList.add('open');
+    const answer = item.querySelector('.faq-answer');
+    const question = item.querySelector('.faq-question');
+    if (answer) answer.setAttribute('aria-hidden', 'false');
+    if (question) question.setAttribute('aria-expanded', 'true');
+  };
+
+  document.querySelectorAll('.faq-item').forEach(closeFaqItem);
 
   document.querySelectorAll('.faq-question').forEach((button) => {
     if (button.dataset.faqReady === 'true') return;
@@ -8253,10 +8448,18 @@ function initFaqAccordion() {
     button.addEventListener('click', () => {
       const item = button.closest('.faq-item');
       if (!item) return;
-      const answer = item.querySelector('.faq-answer');
-      const isOpen = item.classList.toggle('open');
-      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      if (answer) answer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+
+      const shouldOpen = !item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+        if (openItem !== item) closeFaqItem(openItem);
+      });
+
+      if (shouldOpen) {
+        openFaqItem(item);
+      } else {
+        closeFaqItem(item);
+      }
     });
   });
 }
@@ -9728,6 +9931,71 @@ if (document.readyState === 'loading') {
 
   window.addEventListener('storage', function(e){
     if (e.key === 'cardiaLang') syncSoon();
+  });
+})();
+</script>
+
+
+<script id="cardia-final-faq-exclusive-fix-js">
+(function(){
+  function closeItem(item){
+    if (!item) return;
+    item.classList.remove('open');
+    var q = item.querySelector('.faq-question');
+    var a = item.querySelector('.faq-answer');
+    if (q) q.setAttribute('aria-expanded', 'false');
+    if (a) a.setAttribute('aria-hidden', 'true');
+  }
+
+  function openItem(item){
+    if (!item) return;
+    item.classList.add('open');
+    var q = item.querySelector('.faq-question');
+    var a = item.querySelector('.faq-answer');
+    if (q) q.setAttribute('aria-expanded', 'true');
+    if (a) a.setAttribute('aria-hidden', 'false');
+  }
+
+  function initExclusiveFaq(){
+    var questions = document.querySelectorAll('.faq-question');
+    questions.forEach(function(oldButton){
+      if (oldButton.dataset.finalFaqReady === 'true') return;
+
+      var newButton = oldButton.cloneNode(true);
+      newButton.dataset.finalFaqReady = 'true';
+      newButton.dataset.faqReady = 'true';
+      oldButton.parentNode.replaceChild(newButton, oldButton);
+
+      newButton.addEventListener('click', function(){
+        var item = newButton.closest('.faq-item');
+        if (!item) return;
+
+        var shouldOpen = !item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openFaq){
+          if (openFaq !== item) closeItem(openFaq);
+        });
+
+        if (shouldOpen) openItem(item);
+        else closeItem(item);
+      });
+    });
+
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      if (!item.classList.contains('open')) closeItem(item);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExclusiveFaq);
+  } else {
+    initExclusiveFaq();
+  }
+
+  window.addEventListener('load', initExclusiveFaq);
+  document.addEventListener('change', function(e){
+    if (e.target && e.target.id === 'languageSelect') {
+      setTimeout(initExclusiveFaq, 40);
+    }
   });
 })();
 </script>
