@@ -166,7 +166,7 @@
     .paper-sheet::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 5%,rgba(255,255,255,.82),transparent 40%),linear-gradient(135deg,rgba(184,146,84,.05),transparent 35%,rgba(184,146,84,.06));pointer-events:none;}
     .paper-sheet > *{position:relative;z-index:2;}
     .paper-sheet.hero-paper{min-height:760px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:74px 26px 62px;}
-    .paper-frame-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.68;z-index:1;filter:var(--icon-filter);transition:filter .45s ease, opacity .45s ease;}
+    .paper-frame-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.68;z-index:1;filter:none;transition:filter .45s ease, opacity .45s ease;}
     .paper-doves{width:122px;margin:0 auto 26px;opacity:.95;}
     .paper-kicker{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
     .paper-names{font-family:'Great Vibes',cursive;color:#4e2931;font-size:74px;line-height:.92;font-weight:400;text-shadow:0 2px 0 rgba(255,255,255,.7);}
@@ -228,7 +228,7 @@
       --hero-overlay:linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.14), rgba(0,0,0,.22));
       --paper-card-bg:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,250,243,.90));
       --footer-gradient:linear-gradient(to bottom,var(--bg-soft),var(--bg));
-      --icon-filter:sepia(1) saturate(.9) hue-rotate(350deg) brightness(.92);
+      --icon-filter:sepia(1) saturate(.9) hue-rotate(350deg) brightness(.92); /* Pages3/Rings2 fixed PNG tint: warm gold */
     }
 
     body[data-theme="rose"]{
@@ -247,7 +247,7 @@
       --hero-overlay:linear-gradient(to bottom, rgba(60,20,35,.05), rgba(80,30,50,.16), rgba(100,40,60,.26));
       --paper-card-bg:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,246,249,.90));
       --footer-gradient:linear-gradient(to bottom,var(--bg-soft),var(--bg));
-      --icon-filter:sepia(1) saturate(1.2) hue-rotate(295deg) brightness(.85);
+      --icon-filter:sepia(1) saturate(1.2) hue-rotate(295deg) brightness(.85); /* Pages3/Rings2 fixed PNG tint: mauve/berry */
     }
 
     body[data-theme="navy"]{
@@ -266,7 +266,7 @@
       --hero-overlay:linear-gradient(to bottom, rgba(14,24,38,.05), rgba(14,24,38,.20), rgba(14,24,38,.34));
       --paper-card-bg:linear-gradient(160deg,rgba(255,255,255,.95),rgba(248,248,242,.90));
       --footer-gradient:linear-gradient(to bottom,var(--bg-soft),var(--bg));
-      --icon-filter:sepia(1) saturate(1.1) hue-rotate(175deg) brightness(.62);
+      --icon-filter:sepia(1) saturate(1.1) hue-rotate(175deg) brightness(.62); /* Pages3/Rings2 fixed PNG tint: navy */
     }
 
     body[data-theme="olive"]{
@@ -285,7 +285,7 @@
       --hero-overlay:linear-gradient(to bottom, rgba(35,55,38,.05), rgba(55,80,58,.16), rgba(70,95,70,.26));
       --paper-card-bg:linear-gradient(160deg,rgba(255,255,255,.95),rgba(247,250,247,.90));
       --footer-gradient:linear-gradient(to bottom,var(--bg-soft),var(--bg));
-      --icon-filter:sepia(1) saturate(1.15) hue-rotate(55deg) brightness(.82);
+      --icon-filter:sepia(1) saturate(1.15) hue-rotate(55deg) brightness(.82); /* Pages3/Rings2 fixed PNG tint: sage green */
     }
 
     body[data-theme="terracotta"]{
@@ -304,7 +304,7 @@
       --hero-overlay:linear-gradient(to bottom, rgba(90,42,28,.05), rgba(120,55,35,.16), rgba(140,65,40,.28));
       --paper-card-bg:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,248,242,.90));
       --footer-gradient:linear-gradient(to bottom,var(--bg-soft),var(--bg));
-      --icon-filter:sepia(1) saturate(1.35) hue-rotate(330deg) brightness(.82);
+      --icon-filter:sepia(1) saturate(1.35) hue-rotate(330deg) brightness(.82); /* Pages3/Rings2 fixed PNG tint: terracotta/rust */
     }
 
     .hero-cover::after{background:var(--hero-overlay);}
@@ -318,18 +318,11 @@
     .bank-box{background:color-mix(in srgb,var(--bg-soft) 78%,#fff);border-color:color-mix(in srgb,var(--gold) 18%,transparent);}
     .paper-names{color:var(--text);}
 
-    img[src$=".png"],
-    img[src*=".png?"],
-    img[src*="Paper%20cut"],
-    img[src*="Paper cut"],
-    .paper-doves,
-    .paper-asset,
-    .paper-frame-bg,
-    .icon,
-    .venue-img,
-    .event-card img,
-    footer img,
-    img[data-theme-icon="true"]{
+    img[data-theme-asset]{
+      filter:none !important;
+      transition:opacity .45s ease;
+    }
+    img[data-theme-filter-asset]{
       filter:var(--icon-filter) !important;
       transition:filter .45s ease, opacity .45s ease;
     }
@@ -387,7 +380,7 @@
       opacity:.70;
       z-index:1;
       pointer-events:none;
-      filter:var(--icon-filter) !important;
+      filter:none !important;
     }
     .paper-gallery-frame .album{
       position:relative;
@@ -452,7 +445,7 @@
       opacity:.78;
       z-index:1;
       pointer-events:none;
-      filter:var(--icon-filter) !important;
+      filter:none !important;
     }
 
     .gallery-content{
@@ -605,7 +598,7 @@
       opacity:.86;
       z-index:6;
       pointer-events:none;
-      filter:var(--icon-filter) !important;
+      filter:none !important;
     }
 
     .gallery-content{
@@ -723,7 +716,7 @@
       opacity:.88 !important;
       z-index:10 !important;
       pointer-events:none !important;
-      filter:var(--icon-filter) !important;
+      filter:none !important;
     }
 
     #gallery .gallery-content{
@@ -855,7 +848,7 @@
       opacity:.88 !important;
       z-index:20 !important;
       pointer-events:none !important;
-      filter:var(--icon-filter) !important;
+      filter:none !important;
     }
 
     #gallery .gallery-content{
@@ -1232,9 +1225,363 @@
         height:600px !important;
       }
     }
+
+  :root,
+  body{
+    --accent:var(--gold);
+    --rsvp-accent:var(--gold);
+    --rsvp-accent-border:color-mix(in srgb,var(--gold) 48%,transparent);
+    --rsvp-accent-muted:color-mix(in srgb,var(--gold) 62%,transparent);
+    --rsvp-slot-bg:color-mix(in srgb,var(--gold) 8%,#fff);
+    --rsvp-slot-bg-locked:color-mix(in srgb,var(--gold) 13%,#fff);
+    --rsvp-soft-bg:color-mix(in srgb,var(--bg-soft) 86%,#fff);
+  }
+
+  body[data-theme="classic"],
+  body[data-theme="rose"],
+  body[data-theme="navy"],
+  body[data-theme="olive"],
+  body[data-theme="terracotta"]{
+    --accent:var(--gold);
+    --rsvp-accent:var(--gold);
+    --rsvp-accent-border:color-mix(in srgb,var(--gold) 48%,transparent);
+    --rsvp-accent-muted:color-mix(in srgb,var(--gold) 62%,transparent);
+    --rsvp-slot-bg:color-mix(in srgb,var(--gold) 8%,#fff);
+    --rsvp-slot-bg-locked:color-mix(in srgb,var(--gold) 13%,#fff);
+    --rsvp-soft-bg:color-mix(in srgb,var(--bg-soft) 86%,#fff);
+  }
+
+  /* ── Raymond-style per-guest RSVP slots, fully theme-driven ── */
+  .guest-welcome-step { text-align:left; }
+  .manual-guest-list-wrap{
+    width:100%;
+    position:relative;
+  }
+
+  /* Elegant compact guest-list scrolling.
+     Native mobile scrollbars are inconsistent, so the real scrollbar is hidden
+     and replaced with a thin, theme-colored visual scrollbar inside the guest area. */
+  .guest-scroll-hint{display:none!important;}
+
+  .guest-slot-name-list {
+    display:grid;
+    gap:14px;
+    width:100%;
+    margin:18px 0 8px;
+  }
+
+  .manual-guest-list-wrap.has-scroll{
+    --guest-scroll-thumb-top:0px;
+    --guest-scroll-thumb-height:64px;
+    position:relative;
+    padding-right:0;
+  }
+
+  .manual-guest-list-wrap.has-scroll .guest-slot-name-list{
+    margin-top:0;
+    margin-bottom:0;
+  }
+
+  .guest-slot-name-list.scrollable-guest-list {
+    max-height:250px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    overscroll-behavior:contain;
+    overscroll-behavior-y:contain;
+    touch-action:pan-y;
+    pointer-events:auto;
+    padding:16px 18px 16px 0;
+    margin-right:0;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+  }
+
+  .guest-slot-name-list.scrollable-guest-list::-webkit-scrollbar{
+    width:0!important;
+    height:0!important;
+    display:none!important;
+    background:transparent!important;
+  }
+
+  .guest-slot-name-list.scrollable-guest-list::-webkit-scrollbar-track,
+  .guest-slot-name-list.scrollable-guest-list::-webkit-scrollbar-thumb,
+  .guest-slot-name-list.scrollable-guest-list::-webkit-scrollbar-button{
+    display:none!important;
+    width:0!important;
+    height:0!important;
+    background:transparent!important;
+  }
+
+  .manual-guest-list-wrap.has-scroll::before{
+    content:"";
+    position:absolute;
+    right:5px;
+    top:0;
+    bottom:0;
+    width:2px;
+    border-radius:999px;
+    background:color-mix(in srgb,var(--rsvp-accent) 22%,transparent);
+    pointer-events:none;
+    z-index:5;
+  }
+
+  .manual-guest-list-wrap.has-scroll::after{
+    content:"";
+    position:absolute;
+    right:4px;
+    top:var(--guest-scroll-thumb-top);
+    width:4px;
+    height:var(--guest-scroll-thumb-height);
+    min-height:38px;
+    border-radius:999px;
+    background:color-mix(in srgb,var(--rsvp-accent) 72%,transparent);
+    box-shadow:0 0 0 1px color-mix(in srgb,#fff 76%,transparent);
+    pointer-events:none;
+    z-index:6;
+    transition:background .35s ease, top .08s linear, height .12s ease;
+  }
+  .guest-slot-name-box {
+    width:100%;
+    border:1.5px solid var(--rsvp-accent-border);
+    border-radius:14px;
+    padding:14px 14px 12px;
+    background:var(--rsvp-slot-bg);
+    transition:border-color .35s ease, background .35s ease, color .35s ease;
+  }
+  .guest-slot-name-box.locked { background:var(--rsvp-slot-bg-locked); }
+  .guest-slot-name-label {
+    display:block;
+    margin:0 0 8px;
+    font-size:10px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--rsvp-accent);
+    transition:color .35s ease;
+  }
+  .guest-slot-name-box > input {
+    width:100%;
+    border:none!important;
+    border-bottom:1.5px solid var(--rsvp-accent-border)!important;
+    border-radius:0!important;
+    background:transparent!important;
+    color:var(--rsvp-accent)!important;
+    padding:10px 0!important;
+    margin:0!important;
+    font-size:22px!important;
+    outline:none;
+    transition:border-color .35s ease, color .35s ease;
+  }
+  .guest-slot-name-box > input::placeholder { color:var(--rsvp-accent-muted)!important; }
+  .guest-slot-name-box > input[readonly] { cursor:default; }
+  .guest-slot-attendance { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; }
+  .guest-slot-attendance > span {
+    font-size:9px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--rsvp-accent);
+    transition:color .35s ease;
+  }
+  .guest-response-options { display:flex; gap:8px; margin-left:auto; }
+  .guest-response-options input { position:absolute; opacity:0; pointer-events:none; }
+  .guest-response-options label { cursor:pointer; }
+  .guest-response-pill {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:58px;
+    padding:10px 12px;
+    border-radius:999px;
+    border:1.5px solid var(--rsvp-accent-border);
+    background:color-mix(in srgb,#fff 84%,var(--rsvp-accent));
+    color:var(--rsvp-accent);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    transition:background .25s ease,border-color .25s ease,color .25s ease,transform .25s ease;
+  }
+  .guest-response-options input:checked + .guest-response-pill {
+    background:var(--rsvp-accent);
+    border-color:var(--rsvp-accent);
+    color:#fff;
+  }
+  .guest-total-line { margin:16px 0 4px; text-align:center; font-size:18px; color:var(--rsvp-accent); transition:color .35s ease; }
+  .guest-welcome-note { margin:0 0 20px; font-size:16px; line-height:1.5; color:var(--text-soft); transition:color .35s ease; }
+  @media(max-width:420px){
+    .guest-slot-name-list.scrollable-guest-list{
+      max-height:240px;
+      padding:16px 18px 16px 0;
+      margin-right:0;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+      -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+      mask-image:linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+    }
+    .guest-slot-name-list.scrollable-guest-list::-webkit-scrollbar{
+      width:0!important;
+      height:0!important;
+      display:none!important;
+      background:transparent!important;
+    }
+    .manual-guest-list-wrap.has-scroll::before{
+      right:5px;
+      width:2px;
+      background:color-mix(in srgb,var(--rsvp-accent) 20%,transparent);
+    }
+    .manual-guest-list-wrap.has-scroll::after{
+      right:4px;
+      width:4px;
+      background:color-mix(in srgb,var(--rsvp-accent) 72%,transparent);
+    }
+    .guest-response-pill{width:100%;min-width:0;}
+    .guest-slot-attendance{align-items:stretch;flex-direction:column;}
+    .guest-response-options{width:100%;margin-left:0;}
+  }
+
+
+
+    /* ── RSVP: Raymond & Celia behavior adapted to Royal Floral ── */
+    #rsvp .rsvp-box{
+      width:100%;
+      border-color:color-mix(in srgb,var(--rsvp-accent) 18%,#fff);
+      background:color-mix(in srgb,var(--rsvp-soft-bg) 92%,#fff);
+      transition:background .35s ease,border-color .35s ease,box-shadow .35s ease;
+    }
+    #rsvp .section-title,
+    #rsvp .guest-welcome-title,
+    #rsvp .wish-message-label,
+    #rsvp .guest-total-line strong{color:var(--rsvp-accent);transition:color .35s ease;}
+    #rsvp .subtitle{color:var(--text-soft);transition:color .35s ease;}
+    #rsvp .step-dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:26px;}
+    #rsvp .step-dot{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--rsvp-accent) 28%,transparent);transition:background .35s ease;}
+    #rsvp .step-dot.on{background:var(--rsvp-accent);}
+    #rsvp .guest-welcome-title{margin:8px 0 16px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.15;font-weight:500;text-align:left;}
+    #rsvp .manual-guest-list-wrap{display:block;}
+    #rsvp .error-msg{display:none;margin:12px 0 0;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.08em;color:#9b3f35;text-align:left;}
+    #rsvp .wish-message-label{display:block;margin:22px 0 0;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-align:left;}
+    #rsvp #guestMsg{
+      margin-top:10px;
+      width:100%;
+      min-height:105px;
+      resize:vertical;
+      color:var(--text);
+      border-color:var(--rsvp-accent-border);
+      transition:border-color .35s ease,color .35s ease,background .35s ease;
+    }
+    #rsvp #guestMsg:focus{border-color:var(--rsvp-accent);}
+    #rsvp .send-btn,
+    #rsvp .rsvp-main-btn{
+      background:var(--rsvp-accent);
+      color:#fff;
+      transition:background .35s ease,border-color .35s ease,color .35s ease,opacity .25s ease,transform .25s ease;
+    }
+    #rsvp .rsvp-main-btn:disabled{opacity:.7;cursor:default;}
+
+
+    /* ═════════ INITIAL ASSET LOADER ═════════ */
+    body.invitation-loading{
+      overflow:hidden !important;
+      height:100vh;
+      height:100svh;
+      background:var(--bg-soft);
+    }
+    body.invitation-loading .invite,
+    body.invitation-loading .lang-toggle,
+    body.invitation-loading .music-btn{
+      opacity:0;
+      pointer-events:none;
+    }
+    .invitation-loader{
+      position:fixed;
+      inset:0;
+      z-index:99999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:30px;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,.96), rgba(251,248,243,.92) 46%, rgba(246,241,234,.96) 100%);
+      color:var(--gold);
+      transition:opacity .55s ease, visibility .55s ease;
+    }
+    body:not(.invitation-loading) .invitation-loader{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+    .loader-card{
+      width:min(84vw, 350px);
+      padding:34px 30px 32px;
+      border-radius:26px;
+      background:rgba(255,255,255,.72);
+      border:1px solid color-mix(in srgb,var(--gold) 22%,transparent);
+      box-shadow:0 24px 60px rgba(84,64,35,.13);
+      backdrop-filter:blur(10px);
+      text-align:center;
+    }
+    .loader-monogram{
+      font-family:'Great Vibes',cursive;
+      font-size:clamp(50px, 14vw, 72px);
+      line-height:1;
+      margin-bottom:10px;
+      color:var(--gold);
+    }
+    .loader-text{
+      font-family:'Montserrat',sans-serif;
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+    .loader-bar{
+      width:100%;
+      height:6px;
+      border-radius:999px;
+      overflow:hidden;
+      background:color-mix(in srgb,var(--gold) 16%,transparent);
+    }
+    .loader-bar span{
+      display:block;
+      width:0%;
+      height:100%;
+      border-radius:inherit;
+      background:var(--gold);
+      transition:width .25s ease;
+    }
+    .loader-percent{
+      margin-top:12px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:.08em;
+      color:var(--gold);
+    }
+    @media(max-width:420px){
+      .loader-card{width:min(88vw, 330px);padding:30px 26px 28px;border-radius:24px;}
+      .loader-text{font-size:9px;letter-spacing:.23em;}
+    }
+
 </style>
 </head>
-<body>
+<body class="invitation-loading">
+
+<div class="invitation-loader" id="invitationLoader" role="status" aria-live="polite">
+<div class="loader-card">
+<div class="loader-monogram">T&nbsp;&amp;&nbsp;S</div>
+<div class="loader-text"><span class="lang-en">Preparing your invitation</span><span class="lang-fr">Préparation de votre invitation</span></div>
+<div class="loader-bar" aria-hidden="true"><span id="loaderBar"></span></div>
+<div class="loader-percent" id="loaderPercent">0%</div>
+</div>
+</div>
+
 <div class="lang-toggle">
 <button class="active" id="btnEN" onclick="setLang('en')">EN</button>
 <button id="btnFR" onclick="setLang('fr')">FR</button>
@@ -1246,7 +1593,7 @@
 <main class="invite">
 <!-- FIRST SCREEN: ENVELOPE CLOSED / OPEN BUTTON -->
 <section class="hero-cover" id="heroCover" onclick="openInvitation()">
-<video id="envelopeVideo" muted="" playsinline="" poster="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Paper%20cut/Envelope2.png" preload="metadata">
+<video id="envelopeVideo" muted="" playsinline="" poster="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Paper%20cut/Envelope2.png" preload="auto">
 <source src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Envelope4.mp4" type="video/mp4"/>
 </video>
 <div class="hero-content">
@@ -1272,7 +1619,7 @@
 </div>
 <section class="section" id="countdownSection">
 <div class="reveal paper-sheet hero-paper">
-<img alt="" aria-hidden="true" class="paper-frame-bg" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Pages3.png"/>
+<img alt="" aria-hidden="true" class="paper-frame-bg" data-theme-filter-asset="Pages3.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Pages3.png"/>
 <div class="paper-countdown">
 <div class="countdown">
 <div class="count-item"><div class="count-num" id="cdDays">--</div><div class="count-label"><span class="lang-en">Days</span><span class="lang-fr">Jours</span></div></div>
@@ -1285,13 +1632,13 @@
 <h2 class="paper-names">Thomas</h2>
 <div class="paper-amp">&amp;</div>
 <h2 class="paper-names">Sarah</h2>
-<p class="paper-verse"><span class="lang-en">Together with their families, they invite you to share a day of love, joy, and celebration.</span><span class="lang-fr">Avec leurs familles, ils vous invitent à partager une journée d'amour, de joie et de célébration.</span></p>
+<p class="paper-verse"><span class="lang-en">“I have found the one whom my soul loves.”<br/>Solomon 3:4</span><span class="lang-fr">« J’ai trouvé celui que mon âme aime. »<br/>Salomon 3:4</span></p>
 <p class="paper-date"><span class="lang-en">14 August 2027 · Ehden, Lebanon</span><span class="lang-fr">14 août 2027 · Ehden, Liban</span></p>
 </div>
 </section>
 <section class="section">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut wedding rings" class="paper-asset" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Rings2.png"/>
+<img alt="Paper-cut wedding rings" class="paper-asset" data-theme-filter-asset="Rings2.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Rings2.png"/>
 <p class="paper-kicker"><span class="lang-en">Together with their families</span><span class="lang-fr">Avec leurs familles</span></p>
 <div class="paper-divider">✦</div>
 <p class="paper-body"><span class="lang-en">We warmly invite you to celebrate our wedding day with us in beautiful Ehden, Lebanon. We look forward to sharing this unforgettable moment with our most special people.</span><span class="lang-fr">Nous vous invitons chaleureusement à célébrer notre mariage avec nous dans la belle ville d'Ehden, au Liban. Nous avons hâte de partager ce moment inoubliable avec les personnes qui nous sont les plus chères.</span></p>
@@ -1301,7 +1648,7 @@
 <!-- ===================== REORDERED: 1. DAY PROGRAMME ===================== -->
 <section class="section" id="programme">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut champagne bucket" class="paper-asset" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Cake5.png"/>
+<img alt="Paper-cut champagne bucket" class="paper-asset" data-theme-asset="Cake5.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/Cake5.png"/>
 <h2 class="section-title"><span class="lang-en">Day Programme</span><span class="lang-fr">Programme de la journée</span></h2>
 <p class="subtitle"><span class="lang-en">14 August 2027</span><span class="lang-fr">14 août 2027</span></p>
 <div class="paper-timeline">
@@ -1316,7 +1663,7 @@
 <!-- ===================== REORDERED: 2. CEREMONY (CHURCH) ===================== -->
 <section class="section gold" id="church">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut church illustration" class="paper-asset large" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Church3.png"/>
+<img alt="Paper-cut church illustration" class="paper-asset large" data-theme-asset="Church3.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/Church3.png"/>
 <div class="paper-card">
 <h3 class="venue-name"><span class="lang-en">The Ceremony</span><span class="lang-fr">La cérémonie</span></h3>
 <h3 class="venue-name"><span class="lang-en">St. Mourra Church</span><span class="lang-fr">Église St. Mourra</span></h3>
@@ -1331,7 +1678,7 @@
 <!-- ===================== REORDERED: 3. RECEPTION (VENUE) ===================== -->
 <section class="section gold" id="venue">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut vintage wedding car" class="paper-asset large" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/car3.png"/>
+<img alt="Paper-cut vintage wedding car" class="paper-asset large" data-theme-asset="car3.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/car3.png"/>
 <div class="paper-card">
 <h3 class="venue-name">
 <span class="lang-en">The Reception</span>
@@ -1373,7 +1720,7 @@
 </section>
 <section class="section gold" id="gifts">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut wedding cake" class="paper-asset" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Champagne9.png"/>
+<img alt="Paper-cut wedding cake" class="paper-asset" data-theme-asset="Champagne9.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/Champagne9.png"/>
 <h2 class="section-title"><span class="lang-en">Gifts</span><span class="lang-fr">Cadeaux</span></h2>
 <p class="paper-body"><span class="lang-en">Your love, laughter, and presence are all we could wish for. For those who wish, a wedding list is available at all Whish Money branches.</span><span class="lang-fr">Votre présence est notre plus beau cadeau. Pour ceux qui le souhaitent, une liste de mariage est disponible dans toutes les agences Whish Money.</span></p>
 <div class="bank-box"><div class="bank-name">Whish Money</div><div class="bank-line"><span class="lang-en">ACC# xxxxxx</span><span class="lang-fr">Compte n° xxxxxx</span></div></div>
@@ -1381,43 +1728,212 @@
 </section>
 <section class="section" id="rsvp">
 <div class="reveal paper-sheet">
-<img alt="Paper-cut doves and wedding rings" class="paper-asset" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/Doves4.png"/>
+<img alt="Paper-cut doves and wedding rings" class="paper-asset" data-theme-asset="Doves4.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/Doves4.png"/>
 <h2 class="section-title"><span class="lang-en">RSVP</span><span class="lang-fr">Réponse</span></h2>
 <p class="subtitle"><span class="lang-en">Kindly reply before 1 August 2027</span><span class="lang-fr">Merci de répondre avant le 1er août 2027</span></p>
 <div class="card rsvp-box">
-<form id="rsvpForm" onsubmit="sendRSVP(event)">
-<p class="question"><span class="lang-en">Will you be attending? *</span><span class="lang-fr">Serez-vous présent ? *</span></p>
-<label class="radio-line"><input checked="" name="attending" type="radio" value="Yes"/> <span class="lang-en">Yes, I'll be there</span><span class="lang-fr">Oui, je serai présent(e)</span></label>
-<label class="radio-line"><input name="attending" type="radio" value="No"/> <span class="lang-en">Unfortunately, I can't make it</span><span class="lang-fr">Malheureusement, je ne pourrai pas être présent(e)</span></label>
-<p class="question"><span class="lang-en">How many guests?</span><span class="lang-fr">Combien d'invités ?</span></p>
-<div class="guest-counter"><button onclick="changeGuests(-1)" type="button">−</button><span id="guestCount">1</span><button onclick="changeGuests(1)" type="button">+</button></div>
-<p class="question"><span class="lang-en">Person 1 / Main contact</span><span class="lang-fr">Personne 1 / Contact principal</span></p>
-<input data-placeholder-en="Full name" data-placeholder-fr="Nom complet" id="fullName" placeholder="Full name" required="" type="text"/>
-<p class="question"><span class="lang-en">Message for the couple</span><span class="lang-fr">Message pour les mariés</span></p>
-<textarea data-placeholder-en="Is there anything you'd like to tell us?" data-placeholder-fr="Souhaitez-vous nous laisser un message ?" id="message" placeholder="Is there anything you'd like to tell us?"></textarea>
-<button class="send-btn" type="submit"><span class="lang-en">Send RSVP</span><span class="lang-fr">Envoyer la réponse</span></button><p id="formStatus" style="text-align:center;margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);"></p>
-</form>
+<div class="step-dots single-step-dots" aria-hidden="true">
+<span class="step-dot on" id="dot-1"></span>
+</div>
+<div id="step1" class="rsvp-step guest-welcome-step">
+<h3 class="guest-welcome-title"><span class="lang-en">Dear</span><span class="lang-fr">Cher(e)</span> <span id="guestWelcomeName">Guest</span>,</h3>
+<p id="personalGuestNote" class="guest-welcome-note">Please confirm who can attend from this invitation.</p>
+<div id="manualGuestListWrap" class="manual-guest-list-wrap">
+<div id="guestSlotNameList" class="guest-slot-name-list"></div>
+</div>
+<p class="guest-total-line"><span class="lang-en">Total guests attending:</span><span class="lang-fr">Nombre d'invités présents :</span> <strong id="guestCount">0</strong></p>
+<p class="error-msg" id="errName">Please enter at least one guest name and choose Yes or No.</p>
+<label class="wish-message-label" for="guestMsg"><span class="lang-en">Your message / wishes</span><span class="lang-fr">Votre message / vos vœux</span></label>
+<textarea id="guestMsg" placeholder="Is there anything you'd like to tell us?" data-placeholder-en="Is there anything you'd like to tell us?" data-placeholder-fr="Souhaitez-vous nous laisser un message ?"></textarea>
+<button class="send-btn rsvp-main-btn" id="sendBtn" type="button" onclick="submitRSVP()"><span class="lang-en">Send RSVP ✦</span><span class="lang-fr">Envoyer la réponse ✦</span></button>
+</div>
+<div id="stepOk" style="display:none;text-align:center;padding:28px 0;">
+<div style="font-size:46px;margin-bottom:12px;">✨</div>
+<h3 style="font-family:'Great Vibes',cursive;font-size:52px;color:var(--gold);margin-bottom:12px;"><span class="lang-en">Thank you!</span><span class="lang-fr">Merci !</span></h3>
+<p id="okMsg" style="font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.7;color:var(--text);"></p>
+</div>
 </div>
 </div>
 </section>
-<footer class="footer ornament-bg"><div class="reveal"><img alt="Paper-cut wedding rings" class="icon small" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Royal/cupid-illustration-BO3_EWaD.png"/><div class="names">Thomas<br/>&amp;<br/>Sarah</div><p class="subtitle"><span class="lang-en">14 August 2027 · Ehden, Lebanon</span><span class="lang-fr">14 août 2027 · Ehden, Liban</span></p><div class="thin-line"></div><p style="font-size:12px;letter-spacing:.16em;color:var(--text-soft);"><span class="lang-en">Powered by</span><span class="lang-fr">Créé par</span> <a href="https://www.cardiastudios.com/" style="color:var(--gold); text-decoration:underline; text-underline-offset:3px;" target="_blank">Cardia Studios</a></p></div></footer>
+<footer class="footer ornament-bg"><div class="reveal"><img alt="Paper-cut wedding rings" class="icon small" data-theme-asset="Angel.png" src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut/1_%23b89254/Angel.png"/><div class="names">Thomas<br/>&amp;<br/>Sarah</div><p class="subtitle"><span class="lang-en">14 August 2027 · Ehden, Lebanon</span><span class="lang-fr">14 août 2027 · Ehden, Liban</span></p><div class="thin-line"></div><p style="font-size:12px;letter-spacing:.16em;color:var(--text-soft);"><span class="lang-en">Powered by</span><span class="lang-fr">Créé par</span> <a href="https://www.cardiastudios.com/" style="color:var(--gold); text-decoration:underline; text-underline-offset:3px;" target="_blank">Cardia Studios</a></p></div></footer>
 </div>
 </main>
 <script>
     const CONFIG = {coupleName:'Thomas & Sarah',weddingDate:'2027-08-14T18:00:00',rsvpDeadline:'2027-08-01',location:'Ehden, Lebanon',church:'St. Mourra Church, Ehden',reception:'Twinz Hotel, Ehden',rsvpEmail:'nemer.david9@gmail.com'};
 
     const THEMES = ['classic','rose','navy','olive','terracotta'];
+    const THEME_ASSET_BASE = 'https://raw.githubusercontent.com/NemerDavid/web-des/main/Paper%20cut';
+    const THEME_ASSET_FOLDERS = {
+      classic:'1_%23b89254',
+      rose:'2_%23a05878',
+      navy:'3_%2324364f',
+      olive:'4_%237a8f7b',
+      terracotta:'5_%23a85f45'
+    };
+
+    function themedAssetUrl(theme, fileName){
+      const folder = THEME_ASSET_FOLDERS[theme] || THEME_ASSET_FOLDERS.classic;
+      return `${THEME_ASSET_BASE}/${folder}/${fileName}`;
+    }
+
+    function fixedPaperCutAssetUrl(fileName){
+      return `${THEME_ASSET_BASE}/${fileName}`;
+    }
+
+    function updateThemeAssets(theme){
+      // Six decorative assets use accurate pre-colored PNGs from the matching color folder.
+      document.querySelectorAll('img[data-theme-asset]').forEach(img=>{
+        const fileName = img.getAttribute('data-theme-asset');
+        if(!fileName) return;
+        const nextSrc = themedAssetUrl(theme, fileName);
+        if(img.getAttribute('src') !== nextSrc){
+          img.setAttribute('src', nextSrc);
+        }
+      });
+
+      // Pages3.png and Rings2.png stay as fixed root PNGs and are tinted by --icon-filter.
+      document.querySelectorAll('img[data-theme-filter-asset]').forEach(img=>{
+        const fileName = img.getAttribute('data-theme-filter-asset');
+        if(!fileName) return;
+        const fixedSrc = fixedPaperCutAssetUrl(fileName);
+        if(img.getAttribute('src') !== fixedSrc){
+          img.setAttribute('src', fixedSrc);
+        }
+      });
+    }
+
     function setTheme(theme){
       if(!THEMES.includes(theme)) theme='classic';
       document.body.setAttribute('data-theme', theme);
+      updateThemeAssets(theme);
       localStorage.setItem('paperCutInvitationTheme', theme);
       document.querySelectorAll('.theme-dot').forEach(btn=>btn.classList.toggle('active', btn.dataset.theme===theme));
+      requestAnimationFrame(updateGuestListScrollbar);
     }
+
     setTheme(localStorage.getItem('paperCutInvitationTheme') || 'classic');
+
+    const PRELOAD_THEME_ASSETS = ['Angel.png','Church3.png','Doves4.png','Cake5.png','Champagne9.png','car3.png'];
+    const PRELOAD_FIXED_ASSETS = ['Pages3.png','Rings2.png','Envelope2.png'];
+
+    function updateLoaderProgress(percent){
+      const bar=document.getElementById('loaderBar');
+      const label=document.getElementById('loaderPercent');
+      const safePercent=Math.max(0,Math.min(100,Math.round(percent)));
+      if(bar) bar.style.width=safePercent+'%';
+      if(label) label.textContent=safePercent+'%';
+    }
+
+    function markInvitationAssetsReady(){
+      updateLoaderProgress(100);
+      setTimeout(()=>{
+        document.body.classList.remove('invitation-loading');
+        const loader=document.getElementById('invitationLoader');
+        if(loader){
+          setTimeout(()=>loader.remove(),650);
+        }
+      },280);
+    }
+
+    function preloadImageAsset(url, timeoutMs=9000){
+      return new Promise(resolve=>{
+        if(!url){ resolve(); return; }
+        const img=new Image();
+        let settled=false;
+        const done=()=>{
+          if(settled) return;
+          settled=true;
+          resolve();
+        };
+        const timer=setTimeout(done,timeoutMs);
+        img.onload=()=>{ clearTimeout(timer); done(); };
+        img.onerror=()=>{ clearTimeout(timer); done(); };
+        img.src=url;
+        if(img.complete){ clearTimeout(timer); done(); }
+      });
+    }
+
+    function preloadVideoAsset(url, timeoutMs=12000){
+      return new Promise(resolve=>{
+        if(!url){ resolve(); return; }
+        const video=document.createElement('video');
+        let settled=false;
+        const done=()=>{
+          if(settled) return;
+          settled=true;
+          try{ video.pause(); video.removeAttribute('src'); video.load(); }catch(e){}
+          resolve();
+        };
+        const timer=setTimeout(done,timeoutMs);
+        video.muted=true;
+        video.playsInline=true;
+        video.preload='auto';
+        video.oncanplaythrough=()=>{ clearTimeout(timer); done(); };
+        video.onloadeddata=()=>{ clearTimeout(timer); done(); };
+        video.onerror=()=>{ clearTimeout(timer); done(); };
+        video.src=url;
+        try{ video.load(); }catch(e){ clearTimeout(timer); done(); }
+      });
+    }
+
+    function collectInvitationPreloadAssets(){
+      const imageUrls=new Set();
+      const videoUrls=new Set();
+
+      document.querySelectorAll('img[src]').forEach(img=>{
+        const src=img.getAttribute('src');
+        if(src && /\.png(?:[?#]|$)/i.test(src)) imageUrls.add(new URL(src, window.location.href).href);
+      });
+      document.querySelectorAll('video[poster]').forEach(video=>{
+        const poster=video.getAttribute('poster');
+        if(poster && /\.png(?:[?#]|$)/i.test(poster)) imageUrls.add(new URL(poster, window.location.href).href);
+      });
+      document.querySelectorAll('video source[src]').forEach(source=>{
+        videoUrls.add(new URL(source.getAttribute('src'), window.location.href).href);
+      });
+      document.querySelectorAll('video[src]').forEach(video=>videoUrls.add(video.src));
+
+      PRELOAD_FIXED_ASSETS.forEach(fileName=>imageUrls.add(fixedPaperCutAssetUrl(fileName)));
+      THEMES.forEach(theme=>{
+        PRELOAD_THEME_ASSETS.forEach(fileName=>imageUrls.add(themedAssetUrl(theme,fileName)));
+      });
+
+      return {imageUrls:[...imageUrls], videoUrls:[...videoUrls]};
+    }
+
+    function startInvitationPreloader(){
+      const loader=document.getElementById('invitationLoader');
+      if(!loader){ document.body.classList.remove('invitation-loading'); return; }
+      updateLoaderProgress(3);
+
+      const {imageUrls, videoUrls}=collectInvitationPreloadAssets();
+      const jobs=[
+        ...imageUrls.map(url=>({type:'image', promise:preloadImageAsset(url)})),
+        ...videoUrls.map(url=>({type:'video', promise:preloadVideoAsset(url)}))
+      ];
+
+      if(!jobs.length){ markInvitationAssetsReady(); return; }
+
+      let completed=0;
+      const total=jobs.length;
+      jobs.forEach(job=>{
+        job.promise.finally(()=>{
+          completed+=1;
+          updateLoaderProgress(5 + (completed/total)*95);
+        });
+      });
+
+      const allAssetsLoaded=Promise.allSettled(jobs.map(job=>job.promise));
+      const safetyTimeout=new Promise(resolve=>setTimeout(resolve,18000));
+      Promise.race([allAssetsLoaded,safetyTimeout]).then(markInvitationAssetsReady);
+    }
+
+    startInvitationPreloader();
 
     let invitationOpening = false;
 
     function openInvitation(){
+      if(document.body.classList.contains('invitation-loading')) return;
       if(invitationOpening) return;
       invitationOpening = true;
       const hero = document.getElementById('heroCover');
@@ -1465,69 +1981,374 @@
     function updateCountdown(){const target=new Date(CONFIG.weddingDate);const now=new Date();const diff=Math.max(0,target-now);const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff/(1000*60*60))%24);const minutes=Math.floor((diff/(1000*60))%60);const seconds=Math.floor((diff/1000)%60);document.getElementById('cdDays').textContent=days;document.getElementById('cdHours').textContent=String(hours).padStart(2,'0');document.getElementById('cdMinutes').textContent=String(minutes).padStart(2,'0');document.getElementById('cdSeconds').textContent=String(seconds).padStart(2,'0');}
     updateCountdown();setInterval(updateCountdown,1000);
 
-    let guests=1;function changeGuests(delta){
-      guests=Math.max(1,Math.min(10,guests+delta));
-      const guestDisplay=document.getElementById('guestCount');
-      if(guestDisplay){
-        guestDisplay.textContent=String(guests);
-        guestDisplay.innerText=String(guests);
+    
+  const COUPLE_NAME = CONFIG.coupleName || 'Thomas & Sarah';
+  const CUSTOMER_EMAIL = CONFIG.rsvpEmail || 'cardiastudios@gmail.com';
+  const RSVP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJmJqBu9U9t6lKlbBMCvHtkXNBo6026SirsYWAhVMo_H5l9gRhoBmXipvAvI47c5v4lw/exec';
+
+  /* RSVP link modes:
+     ?limit=2 shows editable Guest 1 / Guest 2 fields.
+     ?guests=Marie|Jean&limit=2 pre-fills and locks the named household.
+     Also supports ?guest=, ?invite= and ?group=.
+  */
+  const inviteParams = new URLSearchParams(window.location.search);
+
+  function decodeGuestList(rawValue) {
+    if (!rawValue) return [];
+    return rawValue
+      .split(/\||,|\n|;/)
+      .map(name => name.trim())
+      .filter(Boolean);
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[char]));
+  }
+
+  function formatGuestNames(names) {
+    const clean = names.map(name => String(name || '').trim()).filter(Boolean);
+    if (!clean.length) return 'Guest';
+    if (clean.length === 1) return clean[0];
+    if (clean.length === 2) return clean[0] + ' & ' + clean[1];
+    return clean.slice(0, -1).join(', ') + ' & ' + clean[clean.length - 1];
+  }
+
+  const namedGuestsFromLink = [
+    ...decodeGuestList(inviteParams.get('invite') || ''),
+    ...decodeGuestList(inviteParams.get('group') || ''),
+    ...decodeGuestList(inviteParams.get('guests') || ''),
+    ...decodeGuestList(inviteParams.get('guest') || '')
+  ];
+
+  const uniqueNamedGuestsFromLink = [...new Set(namedGuestsFromLink)];
+  const hasLockedGuestNames = uniqueNamedGuestsFromLink.length > 0;
+  const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueNamedGuestsFromLink.length || 1), 10);
+  const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueNamedGuestsFromLink.length, 1);
+  const lockedGuestNames = hasLockedGuestNames ? uniqueNamedGuestsFromLink.slice(0, guestLimit) : [];
+
+  const invitedGroupForClient = formatGuestNames(lockedGuestNames);
+  let guestResponses = hasLockedGuestNames
+    ? lockedGuestNames.map((name, index) => ({
+      slot: 'Guest ' + (index + 1),
+      name: name,
+      attending: '',
+      manualAttendance: false,
+      locked: true
+    }))
+    : Array.from({ length: guestLimit }, (_, index) => ({
+      slot: 'Guest ' + (index + 1),
+      name: '',
+      attending: '',
+      manualAttendance: false,
+      locked: false
+    }));
+
+  function applyPersonalGuestLink() {
+    const guestWelcomeName = document.getElementById('guestWelcomeName');
+    const personalGuestNote = document.getElementById('personalGuestNote');
+    const manualWrap = document.getElementById('manualGuestListWrap');
+
+    if (guestWelcomeName) {
+      guestWelcomeName.textContent = hasLockedGuestNames ? invitedGroupForClient : 'Guest';
+    }
+
+    if (personalGuestNote) {
+      if (currentLang() === 'fr') {
+        personalGuestNote.textContent = hasLockedGuestNames
+          ? 'Merci de confirmer les personnes présentes depuis cette invitation.'
+          : (guestLimit === 1
+            ? 'Merci d’indiquer votre nom pour confirmer la réponse.'
+            : 'Merci d’indiquer les noms des invités pour confirmer la réponse.');
+      } else {
+        personalGuestNote.textContent = hasLockedGuestNames
+          ? 'Please confirm who can attend from this invitation.'
+          : (guestLimit === 1
+            ? 'Please enter your name to confirm the RSVP.'
+            : 'Please enter the guest names to confirm the RSVP.');
       }
     }
 
-    function sendRSVP(e){
-      e.preventDefault();
+    if (manualWrap) manualWrap.style.display = 'block';
 
-      const form = document.getElementById('rsvpForm');
-      const status = document.getElementById('formStatus');
-      const sendBtn = form.querySelector('.send-btn');
-      const attendingInput = document.querySelector('input[name="attending"]:checked');
-      const attending = attendingInput ? attendingInput.value : 'Yes';
-      const fullName = document.getElementById('fullName').value.trim();
-      const emailEl = document.getElementById('email');
-      const email = emailEl ? emailEl.value.trim() : '';
-      const message = document.getElementById('message').value.trim();
+    renderGuestNameBoxes();
+    updateGuestTotal();
+  }
 
-      if(!fullName){
-        status.textContent = t('Please enter your name.',"Merci d'indiquer votre nom.");
-        return;
+  function renderGuestNameBoxes() {
+    const boxList = document.getElementById('guestSlotNameList');
+    if (!boxList) return;
+    const manualWrap = document.getElementById('manualGuestListWrap');
+    const shouldScrollGuestList = guestResponses.length >= 3;
+    boxList.classList.toggle('scrollable-guest-list', shouldScrollGuestList);
+    if (manualWrap) manualWrap.classList.toggle('has-scroll', shouldScrollGuestList);
+
+    boxList.onscroll = updateGuestListScrollbar;
+    boxList.onwheel = shouldScrollGuestList ? handleGuestListWheel : null;
+    boxList.innerHTML = guestResponses.map((guest, index) => {
+      const safeName = escapeHTML(guest.name || '');
+      const yesChecked = guest.attending === 'Yes' ? ' checked' : '';
+      const noChecked = guest.attending === 'No' ? ' checked' : '';
+      const lockedClass = guest.locked ? ' locked' : '';
+      const readonlyAttr = guest.locked ? ' readonly aria-readonly="true"' : '';
+      const inputHandler = guest.locked ? '' : ` oninput="setGuestName(${index}, this.value)"`;
+      const labelText = guest.locked ? escapeHTML(guest.name) : 'Guest ' + (index + 1);
+      return `
+        <div class="guest-slot-name-box${lockedClass}">
+          <label class="guest-slot-name-label" for="guestSlotInput${index}">${labelText}</label>
+          <input
+            id="guestSlotInput${index}"
+            type="text"
+            value="${safeName}"
+            placeholder="Write name"
+            ${readonlyAttr}${inputHandler}
+          />
+          <div class="guest-slot-attendance" aria-label="Guest ${index + 1} attendance">
+            <span>Attending?</span>
+            <div class="guest-response-options">
+              <label>
+                <input type="radio" name="guestAttend${index}" value="Yes"${yesChecked} onchange="setGuestResponse(${index}, 'Yes')" />
+                <span class="guest-response-pill">Yes</span>
+              </label>
+              <label>
+                <input type="radio" name="guestAttend${index}" value="No"${noChecked} onchange="setGuestResponse(${index}, 'No')" />
+                <span class="guest-response-pill">No</span>
+              </label>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+    requestAnimationFrame(updateGuestListScrollbar);
+  }
+
+  function handleGuestListWheel(event) {
+    const list = event.currentTarget || document.getElementById('guestSlotNameList');
+    if (!list || !list.classList.contains('scrollable-guest-list')) return;
+
+    const maxScroll = list.scrollHeight - list.clientHeight;
+    if (maxScroll <= 1) return;
+
+    let deltaY = event.deltaY || 0;
+    if (event.deltaMode === 1) deltaY *= 16;
+    if (event.deltaMode === 2) deltaY *= list.clientHeight;
+    if (!deltaY) return;
+
+    const previousTop = list.scrollTop;
+    const nextTop = Math.max(0, Math.min(maxScroll, previousTop + deltaY));
+
+    if (nextTop !== previousTop) {
+      list.scrollTop = nextTop;
+      event.preventDefault();
+      event.stopPropagation();
+      updateGuestListScrollbar();
+    }
+  }
+
+  function updateGuestListScrollbar() {
+    const wrap = document.getElementById('manualGuestListWrap');
+    const list = document.getElementById('guestSlotNameList');
+    if (!wrap || !list || !list.classList.contains('scrollable-guest-list')) return;
+
+    const scrollHeight = list.scrollHeight;
+    const clientHeight = list.clientHeight;
+    if (!scrollHeight || !clientHeight || scrollHeight <= clientHeight + 1) {
+      wrap.style.setProperty('--guest-scroll-thumb-top', '0px');
+      wrap.style.setProperty('--guest-scroll-thumb-height', clientHeight + 'px');
+      return;
+    }
+
+    const minThumb = 42;
+    const thumbHeight = Math.max(minThumb, Math.round((clientHeight / scrollHeight) * clientHeight));
+    const maxTop = Math.max(0, clientHeight - thumbHeight);
+    const scrollRatio = list.scrollTop / (scrollHeight - clientHeight);
+    const thumbTop = Math.round(maxTop * scrollRatio);
+
+    wrap.style.setProperty('--guest-scroll-thumb-top', thumbTop + 'px');
+    wrap.style.setProperty('--guest-scroll-thumb-height', thumbHeight + 'px');
+  }
+
+  window.addEventListener('resize', updateGuestListScrollbar);
+
+  function getNamedGuestResponses() {
+    return guestResponses
+      .map((guest, index) => ({ guest, index }))
+      .filter(item => item.guest.name && item.guest.name.trim());
+  }
+
+  function setGuestName(index, value) {
+    if (!guestResponses[index]) return;
+    guestResponses[index].name = value.trim();
+    const errName = document.getElementById('errName');
+    if (errName) errName.style.display = 'none';
+    updateGuestTotal();
+  }
+
+  function setGuestResponse(index, value) {
+    if (!guestResponses[index]) return;
+    guestResponses[index].attending = value;
+    guestResponses[index].manualAttendance = true;
+    const errName = document.getElementById('errName');
+    if (errName) errName.style.display = 'none';
+    updateGuestTotal();
+  }
+
+  function updateGuestTotal() {
+    const total = guestResponses.filter(guest => guest.name && guest.name.trim() && guest.attending === 'Yes').length;
+    const totalEl = document.getElementById('guestCount');
+    if (totalEl) totalEl.textContent = total;
+  }
+
+  function showRSVPThankYou(groupName, attendingCount) {
+    ['step1','step2','step3'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    const dots = document.querySelector('#rsvp .step-dots') || document.querySelector('#page9Rsvp .step-dots');
+    if (dots) dots.style.display = 'none';
+    const ok = document.getElementById('stepOk');
+    if (ok) ok.style.display = 'block';
+    const okMsg = document.getElementById('okMsg');
+    if (okMsg) {
+      if (currentLang() === 'fr') {
+        okMsg.innerHTML = "Merci, <strong>" + escapeHTML(groupName) + "</strong> !<br />Nous avons reçu votre réponse pour " + attendingCount + " invité" + (attendingCount === 1 ? '' : 's') + ".";
+      } else {
+        okMsg.innerHTML = "Thank you, <strong>" + escapeHTML(groupName) + "</strong>!<br />We received your RSVP for " + attendingCount + " guest" + (attendingCount === 1 ? '' : 's') + ".";
       }
+    }
+  }
 
-      status.textContent = '';
-      sendBtn.textContent = t('Sending...','Envoi en cours...');
+  function postRSVPToGoogleSheet(payload) {
+    const iframeName = 'rsvpGoogleSheetFrame';
+    let iframe = document.getElementById(iframeName);
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.id = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = RSVP_SCRIPT_URL;
+    form.target = iframeName;
+    form.style.display = 'none';
+    Object.entries(payload).forEach(([key, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 1500);
+  }
+
+  function submitRSVP() {
+    const msg = document.getElementById('guestMsg') ? document.getElementById('guestMsg').value.trim() : '';
+    const namedGuestsBeforeSubmit = getNamedGuestResponses();
+    if (!namedGuestsBeforeSubmit.length) {
+      const errName = document.getElementById('errName');
+      if (errName) {
+        errName.textContent = currentLang() === 'fr' ? 'Merci d’indiquer au moins un nom.' : 'Please enter at least one guest name.';
+        errName.style.display = 'block';
+      }
+      return;
+    }
+
+    const missingAttendance = namedGuestsBeforeSubmit.some(({ guest }) => !guest.attending);
+    if (missingAttendance) {
+      const errName = document.getElementById('errName');
+      if (errName) {
+        errName.textContent = currentLang() === 'fr' ? 'Merci de choisir Oui ou Non pour chaque invité.' : 'Please choose Yes or No for each guest.';
+        errName.style.display = 'block';
+      }
+      return;
+    }
+
+    guestResponses.forEach(guest => {
+      if (!guest.name || !guest.name.trim()) {
+        guest.attending = '';
+      }
+    });
+    updateGuestTotal();
+
+    const sendBtn = document.getElementById('sendBtn');
+    if (sendBtn) {
+      sendBtn.dataset.originalHtml = sendBtn.dataset.originalHtml || sendBtn.innerHTML;
+      sendBtn.textContent = currentLang() === 'fr' ? 'Envoi en cours...' : 'Sending...';
       sendBtn.disabled = true;
-
-      fetch('https://formsubmit.co/ajax/' + CONFIG.rsvpEmail, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: 'New RSVP - ' + CONFIG.coupleName,
-          _template: 'table',
-          name: fullName,
-          email: email,
-          attending: attending,
-          guests: attending === 'Yes' ? guests : 0,
-          message: message || '(none)'
-        })
-      })
-      .then(r => r.json())
-      .then(data => {
-        if(data.success === 'true' || data.success === true){
-          form.innerHTML = '<div style="text-align:center;padding:28px 0;"><div style="font-size:44px;margin-bottom:10px;">✨</div><h3 style="font-family:Great Vibes,cursive;font-size:46px;color:var(--gold);font-weight:400;margin-bottom:12px;">'+t('Thank you!','Merci !')+'</h3><p style="font-family:Cormorant Garamond,serif;font-size:19px;line-height:1.6;color:var(--text);">'+t('Your RSVP has been sent successfully.','Votre réponse a bien été envoyée.')+'</p></div>';
-        }else{
-          throw new Error('Formsubmit error');
-        }
-      })
-      .catch(() => {
-        sendBtn.innerHTML = '<span class="lang-en">Send RSVP</span><span class="lang-fr">Envoyer la réponse</span>';
-        sendBtn.disabled = false;
-        status.textContent = t('Something went wrong. Please try again.','Une erreur est survenue. Merci de réessayer.');
-      });
     }
 
-    let revealObserver;function observeReveals(){if(revealObserver)return;revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}});},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));}
+    if (!RSVP_SCRIPT_URL || RSVP_SCRIPT_URL.includes('PASTE_YOUR_GOOGLE_APPS_SCRIPT')) {
+      alert('Please paste your Google Apps Script Web App URL into RSVP_SCRIPT_URL first.');
+      if (sendBtn) {
+        sendBtn.innerHTML = sendBtn.dataset.originalHtml || 'Send RSVP ✦';
+        sendBtn.disabled = false;
+      }
+      return;
+    }
+
+    const namedResponses = guestResponses
+      .filter(guest => guest.name && guest.name.trim())
+      .map(guest => ({
+        slot: guest.slot || '',
+        name: guest.name.trim(),
+        attending: guest.attending === 'Yes' ? 'Yes' : 'No'
+      }));
+
+    const attendingGuestsList = namedResponses
+      .filter(guest => guest.attending === 'Yes')
+      .map(guest => guest.name);
+
+    const notAttendingGuestsList = namedResponses
+      .filter(guest => guest.attending !== 'Yes')
+      .map(guest => guest.name);
+
+    const attendingCount = attendingGuestsList.length;
+    const submittedGuestNames = namedResponses.map(guest => guest.name);
+    const groupName = formatGuestNames(submittedGuestNames);
+
+    const responseLines = namedResponses
+      .map(guest => guest.name + ' — ' + (guest.attending === 'Yes' ? 'Attending' : 'Not attending'))
+      .join('\n');
+
+    const attendingGuests = attendingGuestsList.join(', ');
+    const notAttendingGuests = notAttendingGuestsList.join(', ');
+
+    const payload = {
+      event: COUPLE_NAME,
+      customer_email: CUSTOMER_EMAIL,
+      guest_name: groupName,
+      invited_guest_from_link: invitedGroupForClient,
+      attending: attendingCount > 0 ? 'Yes' : 'No',
+      guest_count: attendingCount,
+      guest_limit: guestLimit,
+
+      /* These fields are used by the Google Sheet + email script */
+      attending_guests: attendingGuests,
+      not_attending_guests: notAttendingGuests,
+      individual_responses: responseLines,
+
+      /* Kept for compatibility with older Google Sheet scripts */
+      attending_summary: responseLines,
+      guest_responses: responseLines,
+      responses: responseLines,
+      guests_json: JSON.stringify(namedResponses),
+
+      message: msg || '',
+      page_url: window.location.href,
+      submitted_at: new Date().toISOString()
+    };
+
+    postRSVPToGoogleSheet(payload);
+    setTimeout(() => {
+      if (sendBtn) { sendBtn.textContent = currentLang() === 'fr' ? 'Envoyé ✓' : 'Sent ✓'; sendBtn.disabled = true; }
+      showRSVPThankYou(groupName, attendingCount);
+    }, 650);
+  }
+
+  applyPersonalGuestLink();
+
+  let revealObserver;function observeReveals(){if(revealObserver)return;revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}});},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));}
 
     let albumIndex=0;
     let albumReady=false;
