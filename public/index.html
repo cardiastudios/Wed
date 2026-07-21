@@ -1951,7 +1951,7 @@ textarea.form-input {
   }
 }
 
-@keyframes cardiaHeroMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes cardiaHeroMarquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - var(--hero-template-half-gap, .95rem))); } }
 
 .bs-png-main, .bs-png-inner {
   display: block;
@@ -3375,30 +3375,8 @@ html, body {
   flex-shrink: 0;
 }
 
-.price-amount .old-price {
-  position: relative;
-  opacity: .45;
-  font-size: .44em;
-  line-height: 1;
-  flex-shrink: 0;
-}
 
-.price-amount .old-price::after {
-  content: "";
-  position: absolute;
-  left: -2px;
-  right: -2px;
-  top: 50%;
-  height: 1.5px;
-  background: currentColor;
-  transform: translateY(-50%) rotate(-8deg);
-}
 
-.price-amount .offer-price {
-  font-size: 1em;
-  line-height: 1;
-  flex-shrink: 0;
-}
 
 @media (max-width: 640px) {
   .pricing-swiper-wrap .price-card .price-amount {
@@ -3421,17 +3399,7 @@ html, body {
   }
 }
 
-@media (max-width: 640px) {
-  .pricing-swiper-wrap .price-card .price-amount .old-price {
-    font-size: .42em;
-  }
-}
 
-@media (max-width: 640px) {
-  .pricing-swiper-wrap .price-card .price-amount .offer-price {
-    font-size: .92em;
-  }
-}
 
 @media (max-width: 640px) {
   .pricing-swiper-wrap .price-card .price-amount .price-currency {
@@ -3895,18 +3863,8 @@ h1, h2, h3, .section-header h2, .bestsellers-header h2, .bestsellers-header h3, 
   letter-spacing: -.04em;
 }
 
-.old-price {
-  opacity: .44;
-  text-decoration-thickness: 2px;
-}
 
-.offer-price {
-  color: var(--berry);
-}
 
-.price-card.featured .offer-price {
-  color: var(--gold-lt);
-}
 
 .price-feature::before, .payment-bullets li::before, .album-service-features li::before {
   color: var(--gold);
@@ -5406,13 +5364,13 @@ body {
 }
 
 .hero-template-track {
+  --hero-template-half-gap: clamp(.55rem, 1.05vw, .95rem);
   display: flex;
   width: max-content;
-  animation: cardiaHeroMarquee 42s linear infinite;
-  padding: 0 2rem;
+  animation: cardiaHeroMarquee 88s linear infinite;
+  padding: 0;
   align-items: center;
   gap: clamp(1.1rem, 2.1vw, 1.9rem);
-  animation-duration: 38s;
 }
 
 .hero-template-track img, .hero-template-track img:nth-child(2n), .hero-template-track img:nth-child(3n), .hero-template-track img:nth-child(4), .hero-template-track img:nth-child(5n) {
@@ -5601,8 +5559,9 @@ body {
 
 @media (max-width: 640px) {
   .hero-template-track {
+    --hero-template-half-gap: .425rem;
     gap: .85rem;
-    animation-duration: 28s;
+    animation-duration: 64s;
   }
 }
 
@@ -6866,14 +6825,14 @@ document.addEventListener('DOMContentLoaded', function () {
           {
             "@type": "Offer",
             "name": "Standard Digital Wedding Invitation",
-            "price": "80",
+            "price": "100",
             "priceCurrency": "USD",
             "url": "https://www.cardiastudios.com/#pricing"
           },
           {
             "@type": "Offer",
             "name": "Luxury Digital Wedding Invitation",
-            "price": "151",
+            "price": "150",
             "priceCurrency": "USD",
             "url": "https://www.cardiastudios.com/#pricing"
           }
@@ -7780,14 +7739,17 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="hero-bg"></div>
 <div aria-label="Template preview gallery" class="hero-template-marquee">
 <div class="hero-template-track">
+<!-- Complete visible sequence: every existing preview plus Gerbera Garden A8_1, A8_2 and A8_3. -->
 <img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
 <img alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
 <img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
 <img alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
 <img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
 <img alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
+<img alt="Gerbera Garden digital wedding invitation countdown preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
 <img alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
 <img alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_2.png" width="1080"/>
+<img alt="Gerbera Garden digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_1.png" width="1080"/>
 <img alt="Elegant custom wedding website invitation preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
 <img alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
 <img alt="Romantic digital wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
@@ -7801,11 +7763,33 @@ document.addEventListener('DOMContentLoaded', function () {
 <img alt="Romantic wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_4.png" width="1080"/>
 <img alt="Modern wedding RSVP website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_2.png" width="1080"/>
 <img alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
+<img alt="Gerbera Garden digital wedding invitation details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
+<!-- Identical accessibility-hidden copy required for a seamless continuous loop. -->
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_1.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_3.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_4.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A4_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_4.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_2.png" width="1080"/>
+<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
 </div>
-</div>
-<div aria-label="Special offer" class="special-offer-banner hero-top-offer" role="note">
-<strong data-i18n="offerTitle">Special 20% OFF on All Plans</strong>
-<span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
 </div>
 <div class="hero-content">
 <div class="hero-tag">Digital Wedding Invitations with Online RSVP</div>
@@ -8047,6 +8031,36 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="template-id-note">Template ID: A7</div>
 <div class="bs-card-desc">
       Elegant florals and a modern romantic atmosphere designed to adapt beautifully to any wedding style.
+    </div>
+<span class="bs-card-link">View theme</span>
+</div>
+</a>
+
+<!-- Gerbera Garden -->
+<a class="bs-card reveal" href="https://www.cardiastudios.com/templates/Gerbera_garden.html" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(229,151,164,.22) 0%, rgba(250,229,221,.14) 70%, transparent 100%);" target="_blank" rel="noopener">
+<div class="bs-card-visual">
+<div class="bs-badge">Best Seller</div>
+<div class="bs-template-id">A8</div>
+<div class="phone-back">
+<div class="phone-outer">
+<div class="phone-screen">
+<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Gerbera_garden.html" title="Gerbera Garden theme preview back"></iframe>
+</div>
+</div>
+</div>
+<div class="phone-wrap">
+<div class="phone-outer">
+<div class="phone-screen">
+<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Gerbera_garden.html" title="Gerbera Garden theme preview"></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="bs-card-info">
+<div class="bs-card-name">Gerbera Garden</div>
+<div class="template-id-note">Template ID: A8</div>
+<div class="bs-card-desc">
+      A joyful floral wedding invitation filled with vibrant gerbera blooms, soft garden details and a fresh romantic atmosphere.
     </div>
 <span class="bs-card-link">View theme</span>
 </div>
@@ -8337,14 +8351,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="pricing-choice-kicker">Choose from 2 simple plans</div>
 <p class="pricing-choice-text">Select the plan that fits your celebration. Open Standard or Luxury to compare what each one includes.</p>
 </div>
-<div class="special-offer-banner">
-<strong data-i18n="offerTitle">Special 20% OFF on All Plans</strong>
-<span data-i18n="offerSubtitle">Limited offer until July 20 · Preview sent before payment</span>
-</div>
 <div class="pricing-cards">
 <div class="price-card reveal">
 <div class="price-name">Standard</div>
-<div class="price-amount" data-base-price="100"><span class="price-currency">$</span><span class="old-price">100</span><span class="offer-price">80</span></div>
+<div class="price-amount" data-base-price="100"><span class="price-currency">$</span><span class="price-value">100</span></div>
 <div class="price-period">one-time payment</div>
 <div class="price-desc">The complete digital invitation</div>
 <ul class="price-features">
@@ -8360,7 +8370,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </div><div class="price-card featured reveal">
 <div class="price-badge">Most Popular</div>
 <div class="price-name">Luxury</div>
-<div class="price-amount" data-base-price="165"><span class="price-currency">$</span><span class="old-price">165</span><span class="offer-price">132</span></div>
+<div class="price-amount" data-base-price="150"><span class="price-currency">$</span><span class="price-value">150</span></div>
 <div class="price-period">one-time payment</div>
 <div class="price-desc">For the perfect wedding</div>
 <ul class="price-features">
@@ -8397,7 +8407,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="price-card featured mobile-price-panel" data-plan-panel="luxury">
 <div class="price-badge">Most Popular</div>
 <div class="price-name">Luxury</div>
-<div class="price-amount" data-base-price="165"></div>
+<div class="price-amount" data-base-price="150"></div>
 <div class="price-period">one-time payment</div>
 <div class="price-desc">For the perfect wedding</div>
 <ul class="price-features">
@@ -9360,7 +9370,7 @@ function applyCurrency(code) {
   if (!CARDIA_CURRENCIES[code]) code = 'USD';
   const c = CARDIA_CURRENCIES[code];
   document.querySelectorAll('.price-amount').forEach(el => {
-    const usd = parseFloat(el.dataset.usd || '0');
+    const usd = parseFloat(el.dataset.basePrice || '0');
     const rounded = Math.round(usd * c.rate);
     const currencyEl = el.querySelector('.price-currency');
     const valueEl = el.querySelector('.price-value');
@@ -9747,7 +9757,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 <script>
-/* Requested homepage preview mapping: A1-A7 PNG files from /AA/ */
+/* Homepage Best Seller preview mapping: A0-A8 PNG files from /AB/ */
 (function(){
   const base = 'https://www.cardiastudios.com/AB/';
 
@@ -9759,6 +9769,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     A4: { pages: 5 },
     A5: { pages: 5 },
     A6: { pages: 4 },
+    A8: { pages: 3 },
     A7: {
       pages: 15,
       colors: [
@@ -9865,24 +9876,19 @@ if (document.readyState === 'loading') {
 </script>
 <script>
 /* =======================================================
-   UNIFIED PRICE + OFFER BANNER SCRIPT
+   UNIFIED PRICE SCRIPT
    - Handles all .price-amount[data-base-price] elements
-     (desktop cards AND mobile accordion panels)
-   - Applies 20% discount and currency conversion
-   - Updates the offer banner text on language change
+     (desktop cards and mobile accordion panels)
+   - Converts the new USD prices into the selected currency
 ======================================================= */
 (function(){
-
-  /* -- Currency table (matches nav select options) -- */
   var CURRENCIES = {
     USD: { symbol: '$',  rate: 1    },
-    EUR: { symbol: '\u20ac',  rate: 0.93 },
-    GBP: { symbol: '\u00a3',  rate: 0.80 },
+    EUR: { symbol: '\u20ac', rate: 0.93 },
+    GBP: { symbol: '\u00a3', rate: 0.80 },
     CAD: { symbol: 'C$', rate: 1.37 },
     AUD: { symbol: 'A$', rate: 1.53 }
   };
-
-  var DISCOUNT = 0.80; /* 20% off */
 
   function getSelectedCurrency() {
     var sel = document.getElementById('currencySelect');
@@ -9895,8 +9901,7 @@ if (document.readyState === 'loading') {
 
   function renderAmount(el, basePriceUSD, currencyCode) {
     var cfg = CURRENCIES[currencyCode] || CURRENCIES.USD;
-    var full  = basePriceUSD * cfg.rate;
-    var offer = full * DISCOUNT;
+    var converted = basePriceUSD * cfg.rate;
 
     el.innerHTML = '';
 
@@ -9904,17 +9909,12 @@ if (document.readyState === 'loading') {
     cur.className = 'price-currency';
     cur.textContent = cfg.symbol;
 
-    var old = document.createElement('span');
-    old.className = 'old-price';
-    old.textContent = fmt(full);
-
-    var disc = document.createElement('span');
-    disc.className = 'offer-price';
-    disc.textContent = fmt(offer);
+    var value = document.createElement('span');
+    value.className = 'price-value';
+    value.textContent = fmt(converted);
 
     el.appendChild(cur);
-    el.appendChild(old);
-    el.appendChild(disc);
+    el.appendChild(value);
   }
 
   function updateAllPrices() {
@@ -9925,33 +9925,10 @@ if (document.readyState === 'loading') {
     });
   }
 
-  /* -- Offer banner i18n -- */
-  var OFFER_I18N = {
-    en: { title: 'Special 20% OFF on All Plans',                         sub: 'Limited offer until July 20 \u00b7 Preview sent before payment' },
-    fr: { title: '\U0001f389 Offre sp\u00e9ciale\u00a0: -20\u00a0% sur tous les forfaits', sub: "Offre limit\u00e9e jusqu'au 20 juillet \u00b7 Aper\u00e7u envoy\u00e9 avant paiement" },
-    es: { title: 'Oferta especial: 20% de descuento en todos los planes', sub: 'Oferta limitada hasta el 20 de julio \u00b7 Vista previa antes del pago' },
-    it: { title: 'Offerta speciale: 20% di sconto su tutti i pacchetti',   sub: 'Offerta limitata fino al 20 luglio \u00b7 Anteprima inviata prima del pagamento' },
-    pt: { title: 'Oferta especial: 20% de desconto em todos os planos',   sub: 'Oferta limitada at\u00e9 20 de julho \u00b7 Pr\u00e9-visualiza\u00e7\u00e3o antes do pagamento' }
-  };
-
-  function updateOfferBanner() {
-    var langSel = document.getElementById('languageSelect');
-    var lang = langSel ? langSel.value : 'en';
-    var t = OFFER_I18N[lang] || OFFER_I18N.en;
-    document.querySelectorAll('[data-i18n="offerTitle"]').forEach(function(e)    { e.textContent = t.title; });
-    document.querySelectorAll('[data-i18n="offerSubtitle"]').forEach(function(e) { e.textContent = t.sub;   });
-  }
-
-  /* -- Boot -- */
   function init() {
     updateAllPrices();
-    updateOfferBanner();
-
     var currSel = document.getElementById('currencySelect');
     if (currSel) currSel.addEventListener('change', updateAllPrices);
-
-    var langSel = document.getElementById('languageSelect');
-    if (langSel) langSel.addEventListener('change', updateOfferBanner);
   }
 
   if (document.readyState === 'loading') {
@@ -9960,8 +9937,7 @@ if (document.readyState === 'loading') {
     init();
   }
 
-  window.updateOfferPrices = updateAllPrices; /* public alias kept for compatibility */
-
+  window.updateCardiaPrices = updateAllPrices;
 })();
 </script>
 <script>
