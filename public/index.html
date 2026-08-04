@@ -6869,7 +6869,7 @@ document.addEventListener('DOMContentLoaded', function () {
           "name": "Do Cardia Studios invitations include online RSVP?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. RSVP replies can be sent to your email and collected in a live Google Sheet so you can track who is attending, who declined, and how many guests are coming."
+            "text": "Yes. RSVP replies are collected in a live Google Sheet so you can track who is attending, who declined, and how many guests are coming."
           }
         },
         {
@@ -8147,6 +8147,295 @@ document.addEventListener('DOMContentLoaded', function () {
   order: 2 !important;
 }
 </style>
+
+
+<!-- CARDIA: modern language and currency controls -->
+<style id="cardia-modern-nav-selects">
+.nav-controls.nav-controls-in-menu {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.nav-select-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 78px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid rgba(184, 144, 60, .28);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .92), rgba(250, 241, 228, .78));
+  box-shadow: 0 8px 22px rgba(42, 32, 24, .075), inset 0 1px 0 rgba(255, 255, 255, .95);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.nav-select-shell-currency {
+  min-width: 88px;
+}
+
+.nav-select-shell:hover {
+  transform: translateY(-1px);
+  border-color: rgba(184, 144, 60, .5);
+  background: linear-gradient(145deg, #ffffff, #fbf1e4);
+  box-shadow: 0 11px 28px rgba(42, 32, 24, .11), inset 0 1px 0 #fff;
+}
+
+.nav-select-shell:focus-within {
+  border-color: rgba(184, 144, 60, .82);
+  box-shadow: 0 0 0 3px rgba(184, 144, 60, .13), 0 12px 30px rgba(42, 32, 24, .11);
+}
+
+.nav-select-icon {
+  position: absolute;
+  left: .72rem;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nav-select-shell::after {
+  content: "";
+  position: absolute;
+  right: .76rem;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid rgba(42, 32, 24, .62);
+  border-bottom: 1.5px solid rgba(42, 32, 24, .62);
+  transform: translateY(-68%) rotate(45deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nav-select-shell .nav-select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 100% !important;
+  padding: 0 1.75rem 0 2rem !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ink) !important;
+  -webkit-text-fill-color: var(--ink) !important;
+  font-family: "Manrope", "Jost", sans-serif !important;
+  font-size: .61rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .085em !important;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav-select-shell .nav-select option {
+  background: #fffaf2;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .nav .nav-links .nav-controls.nav-controls-in-menu,
+  .nav .nav-links.open .nav-controls.nav-controls-in-menu {
+    gap: .65rem !important;
+    padding: .68rem !important;
+    border-radius: 22px !important;
+    background: linear-gradient(135deg, rgba(184, 144, 60, .12), rgba(255, 255, 255, .88)) !important;
+  }
+
+  .nav .nav-links .nav-select-shell,
+  .nav .nav-links.open .nav-select-shell {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 48px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .94);
+    box-shadow: 0 9px 24px rgba(42, 32, 24, .08), inset 0 1px 0 #fff;
+  }
+
+  .nav .nav-links .nav-select-shell .nav-select,
+  .nav .nav-links.open .nav-select-shell .nav-select {
+    max-width: none !important;
+    height: 100% !important;
+    padding: 0 1.9rem 0 2.25rem !important;
+    font-size: .68rem !important;
+    text-align: left;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .nav .nav-links .nav-select-icon,
+  .nav .nav-links.open .nav-select-icon {
+    left: .86rem;
+    width: 17px;
+    height: 17px;
+  }
+
+  .nav .nav-links .nav-select-shell::after,
+  .nav .nav-links.open .nav-select-shell::after {
+    right: .9rem;
+  }
+}
+</style>
+
+
+
+<!-- CARDIA: minimal modern mobile navigation -->
+<style id="cardia-minimal-mobile-navigation">
+@media (max-width: 640px) {
+  /* A lighter floating panel with fewer decorative shapes. */
+  .nav .nav-links,
+  .nav .nav-links.open {
+    top: 82px !important;
+    left: 14px !important;
+    right: 14px !important;
+    width: auto !important;
+    max-height: calc(100svh - 100px) !important;
+    padding: .5rem 1.15rem 1rem !important;
+    gap: 0 !important;
+    border-radius: 20px !important;
+    background: rgba(255, 253, 249, .985) !important;
+    border: 1px solid rgba(72, 55, 40, .10) !important;
+    box-shadow: 0 22px 60px rgba(42, 32, 24, .16) !important;
+    backdrop-filter: blur(22px) saturate(125%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(125%) !important;
+  }
+
+  /* Plain text rows separated by subtle rules instead of individual boxes. */
+  .nav .nav-links .nav-link,
+  .nav .nav-links.open .nav-link {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 49px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .2rem .35rem !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(42, 32, 24, .105) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #2a2018 !important;
+    -webkit-text-fill-color: #2a2018 !important;
+    font-size: .64rem !important;
+    font-weight: 500 !important;
+    letter-spacing: .17em !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    text-shadow: none !important;
+    transition: color .2s ease, letter-spacing .2s ease, background .2s ease !important;
+  }
+
+  .nav .nav-links .nav-link:last-of-type,
+  .nav .nav-links.open .nav-link:last-of-type {
+    border-bottom-color: rgba(42, 32, 24, .14) !important;
+  }
+
+  .nav .nav-links.open .nav-link:hover,
+  .nav .nav-links.open .nav-link:focus,
+  .nav .nav-links.open .nav-link:active {
+    color: #9f7521 !important;
+    -webkit-text-fill-color: #9f7521 !important;
+    background: rgba(184, 144, 60, .045) !important;
+    border-color: rgba(42, 32, 24, .105) !important;
+    letter-spacing: .19em !important;
+    outline: none !important;
+  }
+
+  /* Keep the two selectors together, but remove the large surrounding capsule. */
+  .nav .nav-links .nav-controls.nav-controls-in-menu,
+  .nav .nav-links.open .nav-controls.nav-controls-in-menu,
+  .nav-controls.nav-controls-in-menu {
+    width: 100% !important;
+    margin: .82rem 0 0 !important;
+    padding: .12rem 0 0 !important;
+    gap: 1rem !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Flat, underlined language and currency fields. */
+  .nav .nav-links .nav-select-shell,
+  .nav .nav-links.open .nav-select-shell {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 43px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(42, 32, 24, .26) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    transform: none !important;
+    transition: border-color .2s ease !important;
+  }
+
+  .nav .nav-links .nav-select-shell:hover,
+  .nav .nav-links.open .nav-select-shell:hover,
+  .nav .nav-links .nav-select-shell:focus-within,
+  .nav .nav-links.open .nav-select-shell:focus-within {
+    border-bottom-color: #b8903c !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .nav .nav-links .nav-select-shell .nav-select,
+  .nav .nav-links.open .nav-select-shell .nav-select {
+    height: 100% !important;
+    padding: 0 1.55rem 0 1.75rem !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #2a2018 !important;
+    -webkit-text-fill-color: #2a2018 !important;
+    font-size: .66rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .11em !important;
+    text-align: center !important;
+  }
+
+  .nav .nav-links .nav-select-icon,
+  .nav .nav-links.open .nav-select-icon {
+    left: .18rem !important;
+    width: 15px !important;
+    height: 15px !important;
+    stroke: #b1842f !important;
+  }
+
+  .nav .nav-links .nav-select-shell::after,
+  .nav .nav-links.open .nav-select-shell::after {
+    right: .28rem !important;
+    width: 5px !important;
+    height: 5px !important;
+    border-color: rgba(42, 32, 24, .55) !important;
+  }
+
+  /* A simpler close button while the menu is open. */
+  .nav .nav-hamburger.open {
+    border-color: transparent !important;
+    border-radius: 50% !important;
+    background: rgba(184, 144, 60, .08) !important;
+    box-shadow: none !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- NAV -->
@@ -8162,6 +8451,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <a class="nav-link" href="#share" onclick="closeMenu()">Share</a>
 <a class="nav-link" href="#contact" onclick="closeMenu()">Contact</a>
 <div class="nav-controls nav-controls-in-menu">
+<div class="nav-select-shell nav-select-shell-language">
+<svg aria-hidden="true" class="nav-select-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21M12 3C9.6 5.5 8.3 8.5 8.3 12S9.6 18.5 12 21"></path></svg>
 <select aria-label="Language" class="nav-select" id="languageSelect">
 <option value="en">EN</option>
 <option value="fr">FR</option>
@@ -8169,6 +8460,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <option value="it">IT</option>
 <option value="pt">PT</option>
 </select>
+</div>
+<div class="nav-select-shell nav-select-shell-currency">
+<svg aria-hidden="true" class="nav-select-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5c-.8-.7-2-1.1-3.3-1.1-1.8 0-3.2.8-3.2 2.1 0 1.4 1.3 1.8 3.1 2.2 1.9.4 3.4.9 3.4 2.4 0 1.4-1.4 2.4-3.5 2.4-1.5 0-2.9-.5-3.8-1.3M12 5.8v12.4"></path></svg>
 <select aria-label="Currency" class="nav-select" id="currencySelect">
 <option value="USD">USD</option>
 <option value="EUR">EUR</option>
@@ -8177,9 +8471,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <option value="AUD">AUD</option>
 </select>
 </div>
+</div>
 
 </div>
-<button aria-label="Menu" class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
 <span></span><span></span><span></span>
 </button>
 </nav>
@@ -10221,16 +10516,33 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
 /* ── Mobile hamburger ── */
 function toggleMenu(){
-  document.getElementById('navLinks').classList.toggle('open');
-  document.getElementById('navHamburger').classList.toggle('open');
+  const navLinks = document.getElementById('navLinks');
+  const navHamburger = document.getElementById('navHamburger');
+  if (!navLinks || !navHamburger) return;
+  const isOpen = navLinks.classList.toggle('open');
+  navHamburger.classList.toggle('open', isOpen);
+  navHamburger.setAttribute('aria-expanded', String(isOpen));
 }
 function closeMenu(){
-  document.getElementById('navLinks').classList.remove('open');
-  document.getElementById('navHamburger').classList.remove('open');
+  const navLinks = document.getElementById('navLinks');
+  const navHamburger = document.getElementById('navHamburger');
+  if (navLinks) navLinks.classList.remove('open');
+  if (navHamburger) {
+    navHamburger.classList.remove('open');
+    navHamburger.setAttribute('aria-expanded', 'false');
+  }
 }
+
+/* Close the mobile navigation immediately after a language or currency choice. */
+document.addEventListener('change', e => {
+  if (!e.target || (e.target.id !== 'languageSelect' && e.target.id !== 'currencySelect')) return;
+  e.target.blur();
+  closeMenu();
+});
+
 document.addEventListener('click', e => {
   const nav = document.querySelector('.nav');
-  if(!nav.contains(e.target)) closeMenu();
+  if(nav && !nav.contains(e.target)) closeMenu();
 });
 
 /* ── Generic touch swiper factory ── */
