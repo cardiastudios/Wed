@@ -50,6 +50,8 @@
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A1_1.png" rel="preload"/>
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A3_2.png" rel="preload"/>
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A0_1.png" rel="preload"/>
+<link href="https://raw.githubusercontent.com" rel="preconnect" crossorigin/>
+<link href="https://raw.githubusercontent.com" rel="dns-prefetch"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Jost:wght@200;300;400;500&amp;family=Great+Vibes&amp;display=swap" rel="stylesheet"/>
 <style>
 /* CARDIA STUDIOS CLEAN CSS
@@ -6763,7 +6765,7 @@ body {
 }
 
 
-/* Combined template gallery: A0–A9 retain Best Seller badges; B1–B6 share the same gallery without badges. */
+/* Combined template gallery: A0–A9 plus A8B retain Best Seller badges; B1–B6 share the same gallery without badges. */
 #bestsellers .bs-card .bs-template-id {
   z-index: 5;
 }
@@ -8455,6 +8457,52 @@ document.addEventListener('DOMContentLoaded', function () {
     box-shadow: none !important;
   }
 }
+
+
+/* CARDIA PERFORMANCE: progressive image loading + subtle skeletons */
+@keyframes cardiaImageSkeleton {
+  0% { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+
+/* The hero loop starts only after the first visible previews are ready. */
+.hero-template-track {
+  animation-play-state: paused;
+}
+.hero-template-track.is-ready {
+  animation-play-state: running;
+}
+
+.hero-template-track img.is-loading,
+.hero-template-track img.is-error,
+#bestsellers .bs-png-main,
+#bestsellers .bs-png-inner {
+  background-color: #eee9e1;
+  background-image: linear-gradient(100deg, #eee9e1 22%, #f8f5ef 40%, #eee9e1 58%);
+  background-size: 220% 100%;
+}
+
+.hero-template-track img.is-loading {
+  animation: cardiaImageSkeleton 1.35s ease-in-out infinite;
+}
+
+.hero-template-track img.is-loaded {
+  animation: none;
+  background-image: none;
+  background-color: #eee9e1;
+}
+
+.hero-template-track img.is-error {
+  animation: none;
+  background-image: linear-gradient(135deg, #eee9e1, #f7f3ed);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-template-track img.is-loading {
+    animation: none;
+  }
+}
+
 </style>
 
 </head>
@@ -8506,69 +8554,42 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="hero-bg"></div>
 <div aria-label="Template preview gallery" class="hero-template-marquee">
 <div class="hero-template-track">
-<!-- Complete visible sequence: every existing preview plus Gerbera Garden A8_1, A8_2 and A8_3. -->
-<img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
-<img alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
-<img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
-<img alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
-<img alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
-<img alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
-<img alt="Gerbera Garden digital wedding invitation countdown preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
-<img alt="Lebanon Panorama digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_1.png" width="1080"/>
-<img alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
-<img alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_2.png" width="1080"/>
-<img alt="Gerbera Garden digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_1.png" width="1080"/>
-<img alt="Elegant custom wedding website invitation preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
-<img alt="Lebanon Panorama wedding details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_3.png" width="1080"/>
-<img alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
-<img alt="Lebanon Panorama venue preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_4.png" width="1080"/>
-<img alt="Modern online wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_3.png" width="1080"/>
-<img alt="Premium digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
-<img alt="Interactive digital wedding invitation phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
-<img alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_4.png" width="1080"/>
-<img alt="Online wedding invitation mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
-<img alt="Luxury digital wedding invitation mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
-<img alt="Custom wedding website mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A4_2.png" width="1080"/>
-<img alt="Lebanon Panorama wedding story preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_2.png" width="1080"/>
-<img alt="Romantic wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_4.png" width="1080"/>
-<img alt="Modern wedding RSVP website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_2.png" width="1080"/>
-<img alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
-<img alt="Gerbera Garden digital wedding invitation details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
-<img alt="Lebanon Panorama RSVP preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_5.png" width="1080"/>
-<img alt="Romantic digital wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
+<!-- Primary sequence. Garden Romance (A8B) is included; JavaScript creates the exact duplicate loop. -->
+<img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
+<img class="hero-progressive-img" alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
+<img class="hero-progressive-img" alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Gerbera Garden digital wedding invitation countdown preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 1" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_1.png"/>
+<img class="hero-progressive-img" alt="Lebanon Panorama digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_1.png" width="1080"/>
+<img class="hero-progressive-img" alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
+<img class="hero-progressive-img" alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Gerbera Garden digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A8_1.png" width="1080"/>
+<img class="hero-progressive-img" alt="Elegant custom wedding website invitation preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Lebanon Panorama wedding details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
+<img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 2" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_2.png"/>
+<img class="hero-progressive-img" alt="Lebanon Panorama venue preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_4.png" width="1080"/>
+<img class="hero-progressive-img" alt="Modern online wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A6_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Premium digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Interactive digital wedding invitation phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_4.png" width="1080"/>
+<img class="hero-progressive-img" alt="Online wedding invitation mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Luxury digital wedding invitation mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Custom wedding website mobile preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A4_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 3" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_3.png"/>
+<img class="hero-progressive-img" alt="Lebanon Panorama wedding story preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Romantic wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A5_4.png" width="1080"/>
+<img class="hero-progressive-img" alt="Modern wedding RSVP website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A6_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Gerbera Garden digital wedding invitation details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 4" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_4.png"/>
+<img class="hero-progressive-img" alt="Lebanon Panorama RSVP preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_5.png" width="1080"/>
+<img class="hero-progressive-img" alt="Romantic digital wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
 
-
-<!-- Identical accessibility-hidden copy required for a seamless continuous loop. -->
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_1.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_3.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A0_4.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A4_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A5_4.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A6_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_1.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_2.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_3.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_4.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_5.png" width="1080"/>
-<img alt="" aria-hidden="true" decoding="async" fetchpriority="low" height="1920" loading="lazy" src="https://www.cardiastudios.com/AB/A9_6.png" width="1080"/>
+<!-- Seamless accessibility-hidden duplicate is generated automatically by the progressive loader. -->
 </div>
 </div>
 <div class="hero-content">
@@ -8581,6 +8602,162 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <div class="scroll-hint"><div class="scroll-arrow"></div><span>Scroll</span></div>
 </section>
+
+
+
+<script id="cardia-progressive-image-loader">
+(function () {
+  const track = document.querySelector('.hero-template-track');
+  const marquee = document.querySelector('.hero-template-marquee');
+  if (!track || !marquee) return;
+
+  /* Keep one authored sequence only. The second half is always cloned from it,
+     which prevents loop-width mismatches when templates are added later. */
+  track.querySelectorAll('img[aria-hidden="true"], img[data-marquee-clone="true"]').forEach(img => img.remove());
+  const originals = Array.from(track.querySelectorAll('img'));
+  const sourceOf = img => img.getAttribute('src') || img.dataset.src || '';
+  const loadPromises = new WeakMap();
+
+  function watchState(img) {
+    if (!img || img.dataset.cardiaImageWatched === '1') return;
+    img.dataset.cardiaImageWatched = '1';
+    img.classList.add('is-loading');
+
+    const loaded = () => {
+      img.classList.remove('is-loading', 'is-error');
+      img.classList.add('is-loaded');
+    };
+    const failed = () => {
+      img.classList.remove('is-loading', 'is-loaded');
+      img.classList.add('is-error');
+    };
+
+    img.addEventListener('load', loaded);
+    img.addEventListener('error', failed);
+
+    if (img.getAttribute('src') && img.complete) {
+      if (img.naturalWidth > 0) loaded();
+      else failed();
+    }
+  }
+
+  originals.forEach(watchState);
+
+  const clones = originals.map(original => {
+    const clone = original.cloneNode(true);
+    const source = sourceOf(original);
+    clone.alt = '';
+    clone.setAttribute('aria-hidden', 'true');
+    clone.dataset.marqueeClone = 'true';
+    clone.setAttribute('fetchpriority', 'low');
+    clone.setAttribute('loading', 'lazy');
+    clone.classList.remove('is-loaded', 'is-error');
+    clone.classList.add('is-loading');
+    clone.removeAttribute('src');
+    if (source) clone.dataset.src = source;
+    clone.removeAttribute('data-cardia-image-watched');
+    track.appendChild(clone);
+    watchState(clone);
+    return clone;
+  });
+
+  const allImages = originals.concat(clones);
+
+  function loadImage(img) {
+    if (!img) return Promise.resolve();
+    if (loadPromises.has(img)) return loadPromises.get(img);
+
+    const promise = new Promise(resolve => {
+      if (img.classList.contains('is-loaded') || (img.getAttribute('src') && img.complete && img.naturalWidth > 0)) {
+        img.classList.remove('is-loading', 'is-error');
+        img.classList.add('is-loaded');
+        resolve();
+        return;
+      }
+
+      const source = sourceOf(img);
+      if (!source) {
+        resolve();
+        return;
+      }
+
+      const settle = () => resolve();
+      img.addEventListener('load', settle, { once: true });
+      img.addEventListener('error', settle, { once: true });
+
+      if (!img.getAttribute('src')) {
+        img.setAttribute('loading', 'eager');
+        img.setAttribute('fetchpriority', 'low');
+        img.src = source;
+      } else if (img.complete) {
+        settle();
+      }
+    });
+
+    loadPromises.set(img, promise);
+    return promise;
+  }
+
+  /* Load enough cards to cover the initial viewport before motion begins. */
+  const initialBatch = originals.slice(0, Math.min(8, originals.length));
+  initialBatch.forEach(loadImage);
+
+  const startBatch = originals.slice(0, Math.min(6, originals.length));
+  const timeout = new Promise(resolve => setTimeout(resolve, 1500));
+  Promise.race([Promise.all(startBatch.map(loadImage)), timeout]).then(() => {
+    track.classList.add('is-ready');
+  });
+
+  /* Load images well before they enter the visible marquee. */
+  let nearObserver = null;
+  if ('IntersectionObserver' in window) {
+    nearObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        nearObserver.unobserve(entry.target);
+        loadImage(entry.target);
+      });
+    }, {
+      root: marquee,
+      rootMargin: '0px 1200px 0px 1200px',
+      threshold: 0.01
+    });
+
+    allImages.forEach(img => {
+      if (!img.getAttribute('src') && img.dataset.src) nearObserver.observe(img);
+    });
+  }
+
+  /* Once the main page has loaded, fill the remaining image cache gently:
+     at most two outstanding image activations at a time. */
+  const pending = originals.slice(8).concat(clones).filter(img => !img.getAttribute('src') && img.dataset.src);
+  let cursor = 0;
+  let active = 0;
+
+  function pumpQueue() {
+    while (active < 2 && cursor < pending.length) {
+      const img = pending[cursor++];
+      if (img.getAttribute('src')) continue;
+      active++;
+      loadImage(img).finally(() => {
+        active--;
+        setTimeout(pumpQueue, 90);
+      });
+    }
+  }
+
+  function beginBackgroundFill() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(pumpQueue, { timeout: 1200 });
+    } else {
+      setTimeout(pumpQueue, 350);
+    }
+  }
+
+  if (document.readyState === 'complete') beginBackgroundFill();
+  else window.addEventListener('load', beginBackgroundFill, { once: true });
+})();
+</script>
 
 
 <!-- TEMPLATES / COLLECTION -->
@@ -8855,6 +9032,27 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="bs-card-desc">
       A joyful floral wedding invitation filled with vibrant gerbera blooms, soft garden details and a fresh romantic atmosphere.
     </div>
+<span class="bs-card-link">View theme</span>
+</div>
+</a>
+
+<!-- Garden Romance -->
+<a class="bs-card reveal" data-template="A8B" href="https://www.cardiastudios.com/templates/Garden_Romance_PR" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(147,169,137,.22) 0%, rgba(239,233,220,.16) 70%, transparent 100%);" target="_blank" rel="noopener" aria-label="View Garden Romance template">
+<div class="bs-card-visual">
+<div class="bs-badge">Best Seller</div>
+<div class="bs-template-id">A8B</div>
+<div class="bs-png-stack">
+<div class="bs-phone-frame">
+<img class="bs-png-main" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_1.png" alt="Garden Romance invitation cover preview" loading="lazy" decoding="async" fetchpriority="low"/>
+</div>
+<img class="bs-png-inner one" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_2.png" alt="Garden Romance invitation second preview" loading="lazy" decoding="async" fetchpriority="low"/>
+<img class="bs-png-inner two" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_3.png" alt="Garden Romance invitation third preview" loading="lazy" decoding="async" fetchpriority="low"/>
+</div>
+</div>
+<div class="bs-card-info">
+<div class="bs-card-name">Garden Romance</div>
+<div class="template-id-note">Template ID: A8B</div>
+<div class="bs-card-desc">A romantic garden wedding invitation with soft florals, delicate details and an elegant, timeless atmosphere.</div>
 <span class="bs-card-link">View theme</span>
 </div>
 </a>
@@ -10637,7 +10835,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 <script>
-/* Homepage Best Seller preview mapping: A0-A9 PNG files from /AB/ */
+/* Homepage Best Seller preview mapping: A0-A9 use /AB/ PNGs; A8B is authored directly from its GitHub preview images. */
 (function(){
   const base = 'https://www.cardiastudios.com/AB/';
 
