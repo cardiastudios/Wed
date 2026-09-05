@@ -47,6 +47,7 @@
 <meta name="theme-color" content="#F7F7F7">
 <!-- CARDIA_HIGH_RES_PRELOADS -->
 <!-- Only the first visible hero images are preloaded. The rest of the carousel loads lazily in the body. -->
+<link as="image" fetchpriority="high" href="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_1.png" rel="preload"/>
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A1_1.png" rel="preload"/>
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A3_2.png" rel="preload"/>
 <link as="image" fetchpriority="high" href="https://www.cardiastudios.com/AB/A0_1.png" rel="preload"/>
@@ -6765,7 +6766,46 @@ body {
 }
 
 
-/* Combined template gallery: A0–A9 plus A8B retain Best Seller badges; B1–B6 share the same gallery without badges. */
+/* A10 launch badge: deliberately separate from .bs-badge so language switching never changes “New” into “Best Seller”. */
+#bestsellers .bs-new-badge {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .34rem .82rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.42);
+  box-shadow: 0 9px 24px rgba(42,32,24,.16);
+  font-family: "Manrope", "Jost", sans-serif;
+  font-size: .54rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+#bestsellers .bs-new-badge::before {
+  content: "✦";
+  font-size: .58rem;
+  letter-spacing: 0;
+}
+
+@media (max-width: 640px) {
+  #bestsellers .bs-new-badge {
+    top: .95rem;
+    left: .95rem;
+    padding: .32rem .72rem;
+    font-size: .50rem;
+  }
+}
+
+/* Combined template gallery: A0–A10 plus A8B retain Best Seller badges; B1–B6 share the same gallery without badges. */
 #bestsellers .bs-card .bs-template-id {
   z-index: 5;
 }
@@ -8554,14 +8594,17 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="hero-bg"></div>
 <div aria-label="Template preview gallery" class="hero-template-marquee">
 <div class="hero-template-track">
-<!-- Primary sequence. Garden Romance (A8B) is included; JavaScript creates the exact duplicate loop. -->
+<!-- Primary sequence. Winter Invitation (A10) is first; Garden Romance (A8B) is included; JavaScript creates the exact duplicate loop. -->
+
 <img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A1_1.png" width="1080"/>
 <img class="hero-progressive-img" alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A3_2.png" width="1080"/>
 <img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="high" height="1920" loading="eager" src="https://www.cardiastudios.com/AB/A0_1.png" width="1080"/>
 <img class="hero-progressive-img" alt="Classic online wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A2_2.png" width="1080"/>
+<img class="hero-progressive-img" alt="Winter Invitation digital wedding invitation template preview 1" decoding="async" fetchpriority="high" loading="eager" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_1.png"/>
 <img class="hero-progressive-img" alt="Gondola Dream digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A1_2.png" width="1080"/>
 <img class="hero-progressive-img" alt="Luxury floral digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_3.png" width="1080"/>
 <img class="hero-progressive-img" alt="Gerbera Garden digital wedding invitation countdown preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A8_3.png" width="1080"/>
+<img class="hero-progressive-img" alt="Winter Invitation digital wedding invitation template preview 3" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_3.png"/>
 <img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 1" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_1.png"/>
 <img class="hero-progressive-img" alt="Lebanon Panorama digital wedding invitation opening preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_1.png" width="1080"/>
 <img class="hero-progressive-img" alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A7_9.png" width="1080"/>
@@ -8570,6 +8613,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <img class="hero-progressive-img" alt="Elegant custom wedding website invitation preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A1_3.png" width="1080"/>
 <img class="hero-progressive-img" alt="Lebanon Panorama wedding details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_3.png" width="1080"/>
 <img class="hero-progressive-img" alt="Beach Romance digital wedding invitation template preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A0_5.png" width="1080"/>
+<img class="hero-progressive-img" alt="Winter Invitation digital wedding invitation template preview 4" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_4.png"/>
 <img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 2" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_2.png"/>
 <img class="hero-progressive-img" alt="Lebanon Panorama venue preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_4.png" width="1080"/>
 <img class="hero-progressive-img" alt="Modern online wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A6_3.png" width="1080"/>
@@ -8586,6 +8630,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <img class="hero-progressive-img" alt="Premium wedding invitation website phone preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A7_2.png" width="1080"/>
 <img class="hero-progressive-img" alt="Gerbera Garden digital wedding invitation details preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A8_2.png" width="1080"/>
 <img class="hero-progressive-img" alt="Garden Romance digital wedding invitation template preview 4" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A8B_4.png"/>
+<img class="hero-progressive-img" alt="Winter Invitation digital wedding invitation template preview 2" decoding="async" fetchpriority="low" loading="lazy" data-src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_2.png"/>
 <img class="hero-progressive-img" alt="Lebanon Panorama RSVP preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A9_5.png" width="1080"/>
 <img class="hero-progressive-img" alt="Romantic digital wedding invitation design preview" decoding="async" fetchpriority="low" height="1920" loading="lazy" data-src="https://www.cardiastudios.com/AB/A5_1.png" width="1080"/>
 
@@ -8783,6 +8828,53 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 </div>
 <div class="bestsellers-grid gallery-view-grid-3" data-template-gallery>
+<!-- Winter Invitation — A10 intentionally placed first as the newest template -->
+<a class="bs-card reveal" data-template="A10" href="https://www.cardiastudios.com/templates/Strasbourg_PR" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(184,144,60,.18) 0%, rgba(232,215,190,.12) 70%, transparent 100%);" target="_blank" rel="noopener" aria-label="View Winter Invitation template">
+<div class="bs-card-visual">
+<div class="bs-new-badge">New</div>
+<div class="bs-template-id">A10</div>
+<div class="bs-png-stack">
+<div class="bs-phone-frame">
+<img class="bs-png-main" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_1.png" alt="Winter Invitation cover preview" loading="eager" decoding="async" fetchpriority="high"/>
+</div>
+<img class="bs-png-inner one" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_2.png" alt="Winter Invitation second preview" loading="lazy" decoding="async" fetchpriority="low"/>
+<img class="bs-png-inner two" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/A10_3.png" alt="Winter Invitation third preview" loading="lazy" decoding="async" fetchpriority="low"/>
+</div>
+</div>
+<div class="bs-card-info">
+<div class="bs-card-name">Winter Invitation</div>
+<div class="template-id-note">Template ID: A10</div>
+<div class="bs-card-desc">A romantic winter wedding invitation with elegant seasonal details, soft winter charm and a refined European atmosphere.</div>
+<span class="bs-card-link">View theme</span>
+</div>
+</a>
+<!-- Lebanon Panorama — A9 intentionally placed second -->
+<a class="bs-card reveal" data-template="A9" href="https://www.cardiastudios.com/templates/Lebanonn_PR.html" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(111,142,118,.24) 0%, rgba(224,232,218,.14) 70%, transparent 100%);" target="_blank" rel="noopener">
+<div class="bs-card-visual">
+<div class="bs-new-badge">New</div>
+<div class="bs-template-id">A9</div>
+<div class="phone-back">
+<div class="phone-outer">
+<div class="phone-screen">
+<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Lebanonn_PR.html" title="Lebanon Panorama theme preview back"></iframe>
+</div>
+</div>
+</div>
+<div class="phone-wrap">
+<div class="phone-outer">
+<div class="phone-screen">
+<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Lebanonn_PR.html" title="Lebanon Panorama theme preview"></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="bs-card-info">
+<div class="bs-card-name">Lebanon Panorama</div>
+<div class="template-id-note">Template ID: A9</div>
+<div class="bs-card-desc">A cinematic horizontal wedding invitation inspired by Lebanese mountain scenery, warm village details and a celebration that unfolds from side to side.</div>
+<span class="bs-card-link">View theme</span>
+</div>
+</a>
 <!-- Beach Theme -->
 <a class="bs-card reveal" href="https://www.cardiastudios.com/templates/Beach_protected.html" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(180,210,225,.20) 0%, rgba(220,235,245,.10) 70%, transparent 100%);" target="_blank">
 <div class="bs-card-visual">
@@ -9053,33 +9145,6 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="bs-card-name">Garden Romance</div>
 <div class="template-id-note">Template ID: A8B</div>
 <div class="bs-card-desc">A romantic garden wedding invitation with soft florals, delicate details and an elegant, timeless atmosphere.</div>
-<span class="bs-card-link">View theme</span>
-</div>
-</a>
-<!-- Lebanon Panorama -->
-<a class="bs-card reveal" data-template="A9" href="https://www.cardiastudios.com/templates/Lebanonn_PR.html" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(111,142,118,.24) 0%, rgba(224,232,218,.14) 70%, transparent 100%);" target="_blank" rel="noopener">
-<div class="bs-card-visual">
-<div class="bs-badge">Best Seller</div>
-<div class="bs-template-id">A9</div>
-<div class="phone-back">
-<div class="phone-outer">
-<div class="phone-screen">
-<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Lebanonn_PR.html" title="Lebanon Panorama theme preview back"></iframe>
-</div>
-</div>
-</div>
-<div class="phone-wrap">
-<div class="phone-outer">
-<div class="phone-screen">
-<iframe loading="lazy" scrolling="no" src="https://www.cardiastudios.com/templates/Lebanonn_PR.html" title="Lebanon Panorama theme preview"></iframe>
-</div>
-</div>
-</div>
-</div>
-<div class="bs-card-info">
-<div class="bs-card-name">Lebanon Panorama</div>
-<div class="template-id-note">Template ID: A9</div>
-<div class="bs-card-desc">A cinematic horizontal wedding invitation inspired by Lebanese mountain scenery, warm village details and a celebration that unfolds from side to side.</div>
 <span class="bs-card-link">View theme</span>
 </div>
 </a>
@@ -10835,7 +10900,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 <script>
-/* Homepage Best Seller preview mapping: A0-A9 use /AB/ PNGs; A8B is authored directly from its GitHub preview images. */
+/* Homepage Best Seller preview mapping: A0-A9 use /AB/ PNGs; A8B and A10 are authored directly from GitHub preview images. */
 (function(){
   const base = 'https://www.cardiastudios.com/AB/';
 
