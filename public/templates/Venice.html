@@ -1,0 +1,3699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thomas & Sarah — Venice Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #f9f4ec;
+  --gold:  #c4956a;
+  --deep:  #4a2e1a;
+  --blush: #e8c9b0;
+  --rust:  #c97b4b;
+
+  /* BASE PATH — change once if you move assets */
+  --cdn: "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/";
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #d4b896;
+  font-family: 'Jost', sans-serif;
+}
+
+/* 9:16 PHONE PREVIEW FRAME
+   On desktop this forces the whole invitation to render inside a real mobile ratio.
+   On mobile it naturally fills the screen. */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── STAGE ── */
+#stage {
+  position: relative;
+  width: min(100vw, 56.25vh);
+  height: min(100vh, 177.7778vw);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  cursor: ew-resize;
+  background: #d4b896;
+  container-type: size;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.25), 0 18px 55px rgba(60,35,15,.22);
+}
+
+/* ── PANORAMA STRIP  800cqw wide ── */
+#panorama {
+  position: absolute;
+  top: 0; left: 0;
+  width: 800%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* ── CONTINUOUS BACKGROUND LAYERS ── */
+/* Sky stretches full 800cqw */
+#bg-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Sea sits at bottom ~45% height */
+#bg-sea {
+  position: absolute;
+  top: 80%; left: 0;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+}
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea1 {
+  position: absolute;
+  top: 80%; left: 10%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+    transform: scaleX(-1); /* mirror horizontally */
+}
+
+/* Sea sits at bottom ~45% height */
+#bg-sea2 {
+  position: absolute;
+top: 80%; left: 20%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+
+}
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea3 {
+  position: absolute;
+ top: 80%; left: 30%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+    transform: scaleX(-1); /* mirror horizontally */
+}
+
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea4 {
+  position: absolute;
+top: 80%; left: 40%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+
+}
+
+
+
+
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea5 {
+  position: absolute;
+top: 80%;; left: 50%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+    transform: scaleX(-1); /* mirror horizontally */
+}
+
+
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea6 {
+  position: absolute;
+top: 80%; left: 60%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+
+}
+
+
+
+
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea7 {
+  position: absolute;
+ top: 80%;; left: 70%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+    transform: scaleX(-1); /* mirror horizontally */
+}
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea8 {
+  position: absolute;
+  top: 80%; left: 80%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+
+}
+
+
+
+
+/* Sea sits at bottom ~45% height */
+#bg-sea9 {
+  position: absolute;
+top: 80%; left: 90%;
+  width: 10%; height: 48%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+    transform: scaleX(-1); /* mirror horizontally */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ── PANEL ── each 100cqw wide, absolute positioned inside panorama */
+.panel {
+  position: absolute;
+  top: 0;
+  width: calc(100% / 8);
+  height: 100%;
+  /* panels don't clip children — layers can bleed between panels */
+  overflow: visible;
+}
+
+/* Each panel is exactly one 9:16 screen wide */
+#p1 { left: calc((100% / 8) * 0) !important; }
+#p2 { left: calc((100% / 8) * 1) !important; }
+#p3 { left: calc((100% / 8) * 2) !important; }
+#p4 { left: calc((100% / 8) * 3) !important; }
+#p5 { left: calc((100% / 8) * 4) !important; }
+#p6 { left: calc((100% / 8) * 5) !important; }
+#p7 { left: calc((100% / 8) * 6) !important; }
+#p8 { left: calc((100% / 8) * 7) !important; }
+
+/* ── LAYER SYSTEM ──
+   Every PNG asset gets class="layer" plus a unique id.
+   Position/size/z-index all live in #panel-N .l-name rules below.
+   You can also override inline with style="" per element.
+*/
+.layer {
+  position: absolute;
+  /* defaults — override per element */
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(4px 8px 12px rgba(80,40,10,0.35));
+}
+
+/* ── CONTENT OVERLAY ── */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  z-index: 50; /* above all building layers */
+  pointer-events: none;
+}
+.content * { pointer-events: auto; }
+
+.script { font-family: 'Great Vibes', cursive; color: #373222; line-height: 1; text-shadow: 0 2px 12px rgba(255,255,255,0.6); }
+.serif  { font-family: 'Cormorant Garamond', serif; }
+.sans   { font-family: 'Jost', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; }
+
+.orn { display:flex; align-items:center; gap:14px; width:100%; justify-content:center; margin:10px 0; }
+.orn span { flex:1; max-width:70px; height:1px; background:#373222; opacity:0.6; }
+.orn em   { font-style:normal; color:#373222; font-size:13px; }
+
+.badge {
+  background: rgba(255,245,230,0.55);
+  border: 1px solid rgba(196,149,106,0.5);
+  border-radius: 40px;
+  padding: 6px 22px;
+  font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: #373222);
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.section-tag {
+  position: absolute;
+  top: 22px; right: 24px;
+  font-family: 'Jost'; font-size: 8px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(74,46,26,0.4);
+  z-index: 51;
+}
+
+/* ── PROGRESS BAR ── */
+#progress {
+  position: absolute; bottom: 0; left: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--blush));
+  width: 0%; z-index: 300; pointer-events: none;
+  transition: width 0.05s linear;
+}
+
+/* ── SCROLL HINT ── */
+#hint {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 300; display:flex; align-items:center; gap:10px;
+  opacity: 0; animation: hintIn 0.6s ease 1.2s forwards;
+  pointer-events: none;
+}
+@keyframes hintIn { to { opacity:1; } }
+#hint.gone { opacity:0 !important; transition: opacity 0.3s; }
+#hint .arr {
+  font-size:16px; color:rgba(74,46,26,0.5);
+  animation: nudge 1.5s ease-in-out infinite;
+}
+#hint .arr.l { animation-name: nudgeL; }
+@keyframes nudge  { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+@keyframes nudgeL { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-4px)} }
+#hint span { font-family:'Jost'; font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(74,46,26,0.45); }
+
+/* ── RSVP ── */
+.rsvp-card {
+  background: rgba(255,245,230,0.55);
+  border: 1px solid rgba(196,149,106,0.4);
+  border-radius: 4px; padding: 26px 34px;
+  margin-top: 18px; backdrop-filter: blur(8px);
+  max-width: 310px; width: 100%;
+}
+.rsvp-card input, .rsvp-card select {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid rgba(74,46,26,0.25);
+  color: #373222; font-family: 'Jost'; font-size: 14px;
+  letter-spacing: 0.15em; padding: 9px 0; margin: 6px 0; outline: none;
+}
+.rsvp-card input::placeholder { color: rgba(74,46,26,0.4); }
+.rsvp-card select option { background: #f5ede0; color: var(--deep); }
+.rsvp-btn {
+  margin-top: 16px; width: 100%;
+  background: var(--gold); border: none;
+  color: white; font-family: 'Jost'; font-size: 9px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  padding: 12px; cursor: pointer; transition: opacity 0.2s;
+}
+.rsvp-btn:hover { opacity: 0.82; }
+
+
+/* ════════════════════════════════════════════════
+   LAYER POSITIONING — EDIT EVERYTHING HERE
+   Each rule: position, size, z-index, animation
+   Reference: left/top are % of the 100cqw panel width/height
+════════════════════════════════════════════════ */
+
+/* ── PANEL 1 layers ── */
+
+  .l-balloon {
+  left: -5%;
+  top: 15%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+  .l-balloon1 {
+  left: 3%;
+  top: 40%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 8s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+
+  .l-balloon2 {
+  left: 42%;
+  top: 45%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 9s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+
+  .l-balloon4 {
+  left: 75%;
+  top: 25%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+
+
+
+  .l-balloon5 {
+  left: 175%;
+  top: 11%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+  .l-balloon6 {
+  left: 185%;
+  top: 48%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+  .l-balloon7 {
+  left: 325%;
+  top: 41%;
+  width: 28% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+
+  .l-balloon8 {
+  left: 485%;
+  top: 35%;
+  width: 33% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 5;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+  .l-balloon9 {
+  left: 575%;
+  top: 15%;
+  width: 25% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+
+
+  .l-Road {
+  left: 185%;
+  top: -3%;
+  width: 203% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+
+  transform-origin: center top;
+}
+
+
+
+  .l-Plane {
+  left: 288%;
+  top: -1%;
+  width: 118% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatBalloon 6s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+
+  .l-clouds1 {
+  left: 68%;
+  top: 5%;
+  width: 38% !important;
+  max-width: none !important;
+  height: auto !important;
+  z-index: 4;
+  animation: floatMed 3s ease-in-out infinite .4s;
+  transform-origin: center top;
+}
+
+
+
+
+
+
+
+
+
+#p1 .l-bld1a  { left:-28%; bottom:17%; width:64%; z-index:5; }
+#p1 .l-bld2a { left:8%; bottom:16%; width:64%; z-index:4; }
+#p1 .l-bld6a  { left:40%; bottom:16%; width:64%; z-index:4; }
+#p1 .l-bld5a { left:85%; bottom:16%; width:64%; z-index:4; }
+#p1 .l-bld3a  { left:137%; bottom:14%; width:62%; z-index:5; }
+#p1 .l-bld10a  { left:180%; bottom:17%; width:58%; z-index:4; }
+#p1 .l-bld2aa  { left:260%; bottom:13%; width:58%; z-index:5; }
+
+
+#p1 .l-bld1b  { left:-18%; bottom:17%; width:58%; z-index:5; }
+#p1 .l-bld4b  { left:28%; bottom:17%; width:58%; z-index:5; }
+#p1 .l-bld2b  { left:77%; bottom:17%; width:58%; z-index:5; } 
+#p1 .l-bld8b { left:120%; bottom:17%; width:61%; z-index:5; }
+#p1 .l-bld1binv  { left:165%; bottom:17%; width:58%; z-index:5; }
+#p1 .l-bld5aa  { left:195%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld8a  { left:208%; bottom:10%; width:90%; z-index:6; }
+
+
+
+
+
+
+
+
+#p1 .l-bld1aR  { left:328%; bottom:11%; width:64%; z-index:5; }
+#p1 .l-bld2aR { left:348%; bottom:11%; width:69%; z-index:6; }
+
+
+
+#p1 .l-bld4bR  { left:518%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld2bR  { left:537%; bottom:11%; width:58%; z-index:5; } 
+#p1 .l-bld8bR { left:550%; bottom:11%; width:61%; z-index:5; }
+#p1 .l-bld1binvR  { left:659%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld5aaR  { left:585%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld8aR  { left:608%; bottom:11%; width:60%; z-index:6; }
+
+#p1 .l-bld10aR  { left:628%; bottom:11%; width:60%; z-index:4; }
+
+
+#p1 .l-bld2aEnd  { left:680%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld5End  { left:730%; bottom:11%; width:58%; z-index:5; }
+#p1 .l-bld8End  { left:760%; bottom:11%; width:60%; z-index:6; }
+
+#p1 .l-bld10End  { left:790%; bottom:11%; width:60%; z-index:4; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#p1 .l-bridge  { left:292%; bottom:11.5%; width:60%; z-index:4; }
+#p1 .l-bridge2  { left:175%; bottom:11.5%; width:60%; z-index:4; }
+#p1 .l-bridge3  { left:390%; bottom:2%; width:154%; z-index:3; }
+#p1 .l-bridge4  { left:705%; bottom:9.5%; width:60%; z-index:4; }
+
+
+
+#p1 .l-gondola   { left:30%; bottom:5%; width:48%; z-index:6; }
+#p1 .l-clouds    { left:10%; top:5%;    width:35%; z-index:2; opacity:0.9; filter:none; animation: driftCloud 18s ease-in-out infinite; }
+
+/* ── PANEL 2 layers ── */
+#p2 .l-bld-a  { left:-5%;  bottom:22%; width:42%; z-index:5; }
+#p2 .l-bld-b  { left:50%;  bottom:24%; width:38%; z-index:4; }
+#p2 .l-clouds { left:55%;  top:8%;    width:30%; z-index:2; opacity:0.85; filter:none; animation: driftCloud 22s ease-in-out infinite 3s; }
+
+/* ── PANEL 3 layers ── */
+#p3 .l-bld-a  { left:-8%;  bottom:22%; width:45%; z-index:5; }
+#p3 .l-bld-b  { left:42%;  bottom:20%; width:50%; z-index:4; }
+
+/* ── PANEL 4 layers ── */
+#p4 .l-bld-a  { left:-5%;  bottom:22%; width:40%; z-index:5; }
+#p4 .l-bld-b  { left:55%;  bottom:20%; width:40%; z-index:4; }
+#p4 .l-gondola { left:28%; bottom:16%; width:45%; z-index:6; }
+
+/* ── PANEL 5 layers ── */
+#p5 .l-bld-a  { left:-2%;  bottom:22%; width:38%; z-index:5; }
+#p5 .l-bld-b  { left:52%;  bottom:24%; width:38%; z-index:4; }
+#p5 .l-clouds { left:20%;  top:4%;    width:28%; z-index:2; opacity:0.8; filter:none; animation: driftCloud 20s ease-in-out infinite 6s; }
+
+/* ── PANEL 6 layers ── */
+#p6 .l-bld-a  { left:-4%;  bottom:22%; width:42%; z-index:5; }
+#p6 .l-bld-b  { left:54%;  bottom:20%; width:36%; z-index:4; }
+
+/* ── PANEL 7 layers ── */
+#p7 .l-bld-a  { left:-2%;  bottom:22%; width:40%; z-index:5; }
+#p7 .l-bld-b  { left:56%;  bottom:22%; width:38%; z-index:4; }
+#p7 .l-gondola { left:32%; bottom:17%; width:38%; z-index:6; }
+#p7 .l-clouds  { left:40%; top:6%;    width:32%; z-index:2; opacity:0.85; filter:none; animation: driftCloud 16s ease-in-out infinite 1s; }
+#p8 .l-bld-a  { left:-2%;  bottom:22%; width:40%; z-index:5; }
+#p8 .l-bld-b  { left:56%;  bottom:22%; width:38%; z-index:4; }
+#p8 .l-gondola { left:32%; bottom:17%; width:38%; z-index:6; }
+#p8 .l-clouds  { left:40%; top:6%;    width:32%; z-index:2; opacity:0.85; filter:none; animation: driftCloud 16s ease-in-out infinite 1s; }
+
+/* ── ANIMATIONS ── */
+
+
+
+  @keyframes floatBalloon {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-18px) translateX(8px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateY(-35px) translateX(15px) rotate(-1deg);
+  }
+
+  75% {
+    transform: translateY(-18px) translateX(8px) rotate(1deg);
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+}
+
+
+
+  @keyframes floatMed { 0%,100% { translate: 0 0; } 50% { translate: 0 -1.3%; } }
+  @keyframes floatSlow { 0%,100% { translate: 0 0; } 50% { translate: 0 -1.1%; } }
+
+
+@keyframes driftCloud {
+  0%,100% { transform: translateX(0); }
+  50%      { transform: translateX(18px); }
+}
+@keyframes floatGondola {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  33%      { transform: translateY(-5px) rotate(0.5deg); }
+  66%      { transform: translateY(-2px) rotate(-0.3deg); }
+}
+
+/* gondola float applied globally */
+.l-gondola { animation: floatGondola 5s ease-in-out infinite; }
+
+/* water shimmer overlay */
+.water-shimmer {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 48%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,220,160,0.08) 40%,
+    rgba(255,200,120,0.12) 100%);
+  z-index: 3;
+  pointer-events: none;
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%,100% { opacity:0.7; }
+  50%      { opacity:1; }
+}
+
+
+
+/* ═════════ USER FIX — LOCKED TEXT POSITIONS + NAVY INFO + PHOTO ALBUM ═════════
+   All copy now uses absolute % positions inside the 9:16 stage.
+   No clamp/cqw text sizing for these blocks, so the text stays the same
+   relative size/position on PC preview and mobile. */
+.content {
+  padding: 0 !important;
+  display: block !important;
+  pointer-events: none;
+}
+.fixed-copy {
+  position: absolute;
+  z-index: 55;
+  width: 68%;
+  text-align: center;
+  pointer-events: auto;
+}
+.fixed-copy .script {
+  font-size: 46px !important;
+  line-height: .88 !important;
+}
+.fixed-copy .script.small-script {
+  font-size: 38px !important;
+}
+.fixed-copy .sans {
+  font-size: 11px !important;
+  line-height: 1.65 !important;
+  letter-spacing: .28em !important;
+}
+.fixed-copy .serif {
+  font-size: 18px !important;
+  line-height: 1.45 !important;
+}
+.fixed-copy .orn {
+  width: 78% !important;
+  margin: 12px auto !important;
+}
+
+/* Cover: locked, not responsive */
+#p1 .cover-copy {
+  left: 50%;
+  top: 13%;
+  transform: translateX(-50%);
+  width: 72%;
+}
+#p1 .cover-copy .name { font-size: 58px !important; }
+#p1 .cover-copy .ampersand { font-size: 66px !important; margin: -8px 0 -10px !important; }
+#p1 .cover-copy .families { font-size: 15px !important; margin-top: 16px !important; margin-bottom: 18px !important; }
+#p1 .cover-copy .date { font-size: 15px !important; }
+
+/* Story text aligned above buildings */
+#p2 .story-copy {
+  left: 14%;
+  top: 18%;
+  width: 70%;
+  text-align: center;
+}
+#p2 .story-copy p {
+  font-size: 21px !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+}
+
+/* Ceremony moved to the right and placed above church PNG 9.png */
+#p3 .ceremony-copy {
+  left: 17%;
+  top: 16%;
+  width: 66%;
+}
+#p3 .ceremony-copy .script {
+  font-size: 42px !important;
+}
+#p3 .ceremony-copy .date-line {
+  color: var(--rust) !important;
+  font-size: 18px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Invitation/family text from Navy Blue */
+#p3 .family-copy {
+  left: -72%;
+  top: 16%;
+  width: 72%;
+}
+#p3 .family-copy .script {
+  font-size: 34px !important;
+}
+#p3 .family-copy .serif {
+  font-size: 17px !important;
+}
+#p3 .family-copy .sans {
+  font-size: 10px !important;
+}
+
+/* Reception moved to the right and placed above restaurant PNG 10.png */
+#p4 .reception-copy {
+  left: 16%;
+  top: 15%;
+  width: 68%;
+}
+#p4 .reception-copy .script {
+  font-size: 42px !important;
+}
+#p4 .reception-copy .script + .script {
+  margin-top: -4px !important;
+}
+#p4 .reception-copy p {
+  font-size: 18px !important;
+  line-height: 1.65 !important;
+}
+
+/* RSVP higher */
+#p6 .rsvp-copy {
+  left: 50%;
+  top: 17%;
+  transform: translateX(-50%);
+  width: 78%;
+}
+#p6 .rsvp-copy .script { font-size: 48px !important; }
+#p6 .rsvp-copy .sans { font-size: 8px !important; }
+#p6 .rsvp-card {
+  margin-top: 18px !important;
+  max-width: 310px !important;
+  padding: 26px 34px !important;
+}
+
+/* Photo album panel */
+#p5 .album-copy {
+  left: 50%;
+  top: 8%;
+  transform: translateX(-50%);
+  width: 84%;
+}
+#p5 .album-copy .script { font-size: 48px !important; }
+.venice-album {
+  position: relative;
+  width: 100%;
+  margin: 18px auto 0;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255,245,230,.72);
+  border: 1px solid rgba(196,149,106,.36);
+  box-shadow: 0 18px 45px rgba(80,40,10,.20);
+  touch-action: pan-y;
+  pointer-events: auto;
+}
+.venice-album-track {
+  display: flex;
+  transition: transform .55s ease;
+  will-change: transform;
+}
+.venice-album-slide {
+  min-width: 100%;
+}
+.venice-album-slide img {
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: none;
+}
+.venice-album-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 8;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(74,46,26,.22);
+  background: rgba(255,255,255,.88);
+  color: var(--deep);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.venice-album-arrow.prev { left: 10px; }
+.venice-album-arrow.next { right: 10px; }
+.venice-album-counter {
+  margin-top: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(74,46,26,.62);
+}
+
+@media (max-width: 600px) {
+  #stage { box-shadow: none; }
+}
+
+
+
+/* ═════════ FINAL CLEAN LAYOUT FIX — BIGGER LOCKED TEXT, NO OVERLAP ═════════ */
+.content{
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  padding:0 !important;
+  z-index:50 !important;
+  pointer-events:none !important;
+}
+.fixed-copy{
+  position:absolute !important;
+  z-index:60 !important;
+  text-align:center !important;
+  pointer-events:auto !important;
+  max-width:none !important;
+}
+.fixed-copy .script{
+  font-size:54px !important;
+  line-height:.92 !important;
+  white-space:normal !important;
+}
+.fixed-copy .script.small-script{
+  font-size:38px !important;
+  line-height:1 !important;
+}
+.fixed-copy .sans{
+  font-size:12px !important;
+  line-height:1.65 !important;
+  letter-spacing:.28em !important;
+}
+.fixed-copy .serif{
+  font-size:22px !important;
+  line-height:1.45 !important;
+}
+.fixed-copy .orn{
+  width:78% !important;
+  margin:14px auto !important;
+}
+
+/* Keep every text block safely inside its own 9:16 panel */
+#p1 .cover-copy{
+  left:50% !important;
+  top:12% !important;
+  transform:translateX(-50%) !important;
+  width:76% !important;
+}
+#p1 .cover-copy .name{font-size:62px !important;}
+#p1 .cover-copy .ampersand{font-size:70px !important;margin:-8px 0 -10px !important;}
+#p1 .cover-copy .families{font-size:16px !important;margin-top:18px !important;margin-bottom:18px !important;}
+#p1 .cover-copy .date{font-size:16px !important;}
+
+#p2 .story-copy{
+  left:50% !important;
+  top:15% !important;
+  transform:translateX(-50%) !important;
+  width:78% !important;
+}
+#p2 .story-copy p{
+  font-size:24px !important;
+  line-height:1.75 !important;
+}
+
+#p3 .ceremony-copy{
+  left:50% !important;
+  top:14% !important;
+  transform:translateX(-50%) !important;
+  width:78% !important;
+}
+#p3 .ceremony-copy .script{font-size:54px !important;}
+#p3 .ceremony-copy .date-line{
+  color:var(--rust) !important;
+  font-size:22px !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+}
+#p3 .family-copy{
+  left:50% !important;
+  top:39% !important;
+  transform:translateX(-50%) !important;
+  width:78% !important;
+}
+#p3 .family-copy .script{font-size:36px !important;}
+#p3 .family-copy .serif{font-size:20px !important;}
+#p3 .family-copy .sans{font-size:11px !important;}
+
+#p4 .reception-copy{
+  left:50% !important;
+  top:17% !important;
+  transform:translateX(-50%) !important;
+  width:78% !important;
+}
+#p4 .reception-copy .script{font-size:52px !important;}
+#p4 .reception-copy .script.small-script{font-size:46px !important;margin-top:0 !important;}
+#p4 .reception-copy p{font-size:22px !important;line-height:1.7 !important;}
+#p4 .reception-copy .sans{font-size:12px !important;}
+
+#p5 .album-copy{
+  left:50% !important;
+  top:9% !important;
+  transform:translateX(-50%) !important;
+  width:84% !important;
+}
+#p5 .album-copy .script{font-size:54px !important;}
+#p5 .album-copy .sans{font-size:12px !important;}
+.venice-album{margin-top:18px !important;}
+.venice-album-slide img{height:410px !important;}
+
+#p6 .rsvp-copy{
+  left:50% !important;
+  top:11% !important;
+  transform:translateX(-50%) !important;
+  width:82% !important;
+}
+#p6 .rsvp-copy .script{font-size:56px !important;}
+#p6 .rsvp-copy .sans{font-size:9px !important;}
+#p6 .rsvp-card{
+  margin-top:18px !important;
+  max-width:320px !important;
+  padding:24px 34px !important;
+}
+#p6 .rsvp-card input,
+#p6 .rsvp-card select{
+  font-size:12px !important;
+  padding:10px 0 !important;
+}
+
+#p8 .closing-copy{
+  left:50% !important;
+  top:16% !important;
+  transform:translateX(-50%) !important;
+  width:84% !important;
+}
+#p8 .closing-copy .script{font-size:58px !important;}
+#p8 .closing-copy .serif{font-size:20px !important;}
+#p8 .closing-copy .sans{font-size:10px !important;}
+
+/* prevent old inline flow/padding from pushing text off-screen */
+#p2 .content,
+#p3 .content,
+#p4 .content,
+#p5 .content,
+#p6 .content,
+#p7 .content,
+#p8 .content{
+  align-items:initial !important;
+  justify-content:initial !important;
+  padding:0 !important;
+}
+
+/* Keep section labels small and away from main text */
+.section-tag{
+  top:18px !important;
+  right:18px !important;
+  font-size:7px !important;
+  opacity:.65 !important;
+}
+
+
+/* ═════════ FINAL USER FIX — CENTERED RSVP/COVER + DRIVING GONDOLA ═════════ */
+
+/* Hide the old gondola that was inside the panorama so only the “driving” boat is visible */
+#panorama .l-gondola{
+  display:none !important;
+}
+
+/* Fixed gondola that stays in the viewer and moves as you travel through pages */
+#travelGondola{
+  position:absolute;
+  left:0;
+  bottom:5.5%;
+  width:46%;
+  height:auto;
+  z-index:75;
+  pointer-events:none;
+  filter:drop-shadow(4px 8px 12px rgba(80,40,10,0.35));
+  will-change:transform;
+}
+
+/* Make all main copy blocks truly centered inside their 9:16 panel */
+.fixed-copy{
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  text-align:center !important;
+}
+
+/* Cover: centered and a little cleaner */
+#p1 .cover-copy{
+  left:50% !important;
+  top:11.5% !important;
+  width:78% !important;
+  transform:translateX(-50%) !important;
+}
+#p1 .cover-copy .badge{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  max-width:380px !important;
+  margin:0 auto 14px !important;
+  text-align:center !important;
+}
+#p1 .cover-copy .families,
+#p1 .cover-copy .date{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+}
+
+/* RSVP: centered title, divider, subtitle, and form */
+#p6 .rsvp-copy{
+  left:50% !important;
+  top:10.5% !important;
+  width:82% !important;
+  transform:translateX(-50%) !important;
+  text-align:center !important;
+}
+#p6 .rsvp-copy .script,
+#p6 .rsvp-copy .sans,
+#p6 .rsvp-copy .orn{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+#p6 .rsvp-card{
+  display:block !important;
+  width:100% !important;
+  max-width:320px !important;
+  margin:20px auto 0 !important;
+  text-align:left !important;
+}
+#p6 .rsvp-btn{
+  display:block !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Keep section labels from visually competing */
+.section-tag{
+  pointer-events:none !important;
+}
+
+/* Slightly better mobile-safe sizing */
+@media (max-width:600px){
+  #travelGondola{ width:46% !important; bottom:5.5% !important; }
+  #p6 .rsvp-copy{ width:82% !important; }
+}
+
+/* ═════════ FINAL USER UPDATE — TRUE MOBILE FULL SCREEN + MUSIC + PERMANENT DRAG HINT ═════════ */
+
+/* No outside gaps on phones: the stage fills the browser viewport */
+html, body{
+  margin:0 !important;
+  padding:0 !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:100% !important;
+  overflow:hidden !important;
+  background:#d4b896 !important;
+  overscroll-behavior:none !important;
+}
+
+/* Permanent swipe/drag instruction */
+#hint{
+  opacity:1 !important;
+  animation:none !important;
+  bottom:0px !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  padding:8px 14px !important;
+  border-radius:999px !important;
+  background:rgba(255,245,230,.56) !important;
+  border:1px solid rgba(196,149,106,.32) !important;
+  backdrop-filter:blur(5px) !important;
+  box-shadow:0 10px 25px rgba(80,40,10,.14) !important;
+}
+#hint.gone{
+  opacity:1 !important;
+}
+#hint span{
+  color:rgba(74,46,26,.62) !important;
+  font-size:8px !important;
+  white-space:nowrap !important;
+}
+#hint .arr{
+  color:rgba(74,46,26,.66) !important;
+}
+
+/* Music play / stop button */
+#musicBtn{
+  position:absolute;
+  right:14px;
+  bottom:62px;
+  z-index:450;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid rgba(196,149,106,.45);
+  background:rgba(255,245,230,.72);
+  color:var(--deep);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Jost', sans-serif;
+  font-size:18px;
+  letter-spacing:0;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(80,40,10,.22);
+  backdrop-filter:blur(6px);
+}
+#musicBtn.music-on{
+  background:rgba(196,149,106,.88);
+  color:#fff;
+}
+
+/* Mobile: do not preserve the desktop preview frame — fill the actual phone screen */
+@media (max-width:600px), (pointer:coarse){
+  body{
+    display:block !important;
+    align-items:initial !important;
+    justify-content:initial !important;
+  }
+
+  #stage{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    height:100svh !important;
+    height:100dvh !important;
+    max-width:none !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    box-shadow:none !important;
+    border:0 !important;
+    overflow:hidden !important;
+  }
+
+  #panorama{
+    height:100% !important;
+  }
+
+  #hint{
+    bottom:calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  #musicBtn{
+    right:calc(14px + env(safe-area-inset-right)) !important;
+    bottom:calc(58px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+
+/* ═════════ USER UPDATE — HIGHER ALBUM/RSVP + OPEN INVITATION CTA ═════════ */
+#p5 .album-copy{
+  top:5.8% !important;
+}
+#p6 .rsvp-copy{
+  top:7.2% !important;
+}
+
+.open-invitation-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:20px auto 0;
+  padding:13px 28px;
+  border-radius:999px;
+  border:1px solid rgba(196,149,106,.55);
+  background:rgba(255,245,230,.62);
+  color:var(--deep);
+  font-family:'Jost', sans-serif;
+  font-size:9px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 14px 34px rgba(80,40,10,.18);
+  backdrop-filter:blur(6px);
+  transition:transform .2s ease, background .2s ease, color .2s ease, opacity .2s ease;
+}
+.open-invitation-btn:hover{
+  transform:translateY(-1px);
+  background:rgba(196,149,106,.88);
+  color:#fff;
+}
+.open-invitation-btn.opened{
+  opacity:.72;
+  background:rgba(196,149,106,.88);
+  color:#fff;
+}
+@media (max-width:600px), (pointer:coarse){
+  #p5 .album-copy{ top:5.2% !important; }
+  #p6 .rsvp-copy{ top:6.5% !important; }
+  .open-invitation-btn{ margin-top:18px !important; }
+}
+
+
+/* ═════════ USER UPDATE — PROGRAMME TIMELINE ═════════ */
+#p4 .reception-copy.programme-copy{
+  top:7.2% !important;
+  width:84% !important;
+}
+#p4 .programme-copy .script{
+  font-size:52px !important;
+}
+#p4 .programme-copy .subtitle{
+  margin-top:2px !important;
+  margin-bottom:10px !important;
+  color:var(--deep) !important;
+  opacity:.58 !important;
+  font-size:9px !important;
+  letter-spacing:.24em !important;
+  text-transform:uppercase !important;
+}
+.programme-timeline{
+  width:100%;
+  max-width:340px;
+  margin:14px auto 0;
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,245,230,.58);
+  border:1px solid rgba(196,149,106,.34);
+  box-shadow:0 16px 38px rgba(80,40,10,.16);
+  backdrop-filter:blur(7px);
+}
+.programme-time-row{
+  display:grid;
+  grid-template-columns:62px 42px 1fr;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(196,149,106,.22);
+}
+.programme-time-row:last-child{
+  border-bottom:0;
+}
+.programme-time{
+  font-family:'Jost', sans-serif;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(74,46,26,.76);
+  text-align:right;
+  white-space:nowrap;
+}
+.programme-time-icon{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.48);
+  border:1px solid rgba(196,149,106,.24);
+}
+.programme-time-icon img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  display:block;
+}
+.programme-label{
+  font-family:'Cormorant Garamond', serif;
+  font-size:17px;
+  line-height:1.12;
+  color:var(--deep);
+  text-align:left;
+  opacity:.88;
+}
+.programme-label small{
+  display:block;
+  margin-top:2px;
+  font-family:'Jost', sans-serif;
+  font-size:8px;
+  line-height:1.35;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(74,46,26,.56);
+}
+@media (max-width:600px), (pointer:coarse){
+  #p4 .reception-copy.programme-copy{ top:6.6% !important; width:86% !important; }
+  .programme-timeline{ max-width:330px; padding:16px 16px 14px; }
+  .programme-time-row{ grid-template-columns:58px 38px 1fr; gap:9px; padding:9px 0; }
+  .programme-time-icon{ width:36px; height:36px; }
+  .programme-time-icon img{ width:24px; height:24px; }
+  .programme-label{ font-size:16px; }
+}
+
+/* ═════════ USER UPDATE — PROGRAMME MOVED TO PANEL 3 + NO ICON CIRCLES ═════════ */
+#p3 .programme-copy{
+  left:50% !important;
+  top:6.2% !important;
+  transform:translateX(-50%) !important;
+  width:86% !important;
+  text-align:center !important;
+}
+#p3 .programme-copy .script{
+  font-size:54px !important;
+  color:var(--deep) !important;
+}
+#p3 .programme-copy .subtitle{
+  margin-top:2px !important;
+  margin-bottom:10px !important;
+  color:var(--deep) !important;
+  opacity:.58 !important;
+  font-size:9px !important;
+  letter-spacing:.24em !important;
+  text-transform:uppercase !important;
+}
+#p3 .programme-timeline{
+  width:100% !important;
+  max-width:342px !important;
+  margin:14px auto 0 !important;
+  padding:18px 18px 16px !important;
+  border-radius:22px !important;
+  background:rgba(255,245,230,.62) !important;
+  border:1px solid rgba(196,149,106,.34) !important;
+  box-shadow:0 16px 38px rgba(80,40,10,.16) !important;
+  backdrop-filter:blur(7px) !important;
+}
+#p3 .programme-time-row{
+  display:grid !important;
+  grid-template-columns:62px 44px 1fr !important;
+  align-items:center !important;
+  gap:10px !important;
+  padding:10px 0 !important;
+  border-bottom:1px solid rgba(196,149,106,.24) !important;
+}
+#p3 .programme-time-row:last-child{
+  border-bottom:0 !important;
+}
+#p3 .programme-time{
+  font-family:'Jost', sans-serif !important;
+  font-size:10px !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+  color:rgba(74,46,26,.76) !important;
+  text-align:right !important;
+  white-space:nowrap !important;
+}
+#p3 .programme-time-icon{
+  width:42px !important;
+  height:42px !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+#p3 .programme-time-icon img{
+  width:30px !important;
+  height:30px !important;
+  object-fit:contain !important;
+  display:block !important;
+}
+#p3 .programme-label{
+  font-family:'Cormorant Garamond', serif !important;
+  font-size:18px !important;
+  line-height:1.12 !important;
+  color:var(--deep) !important;
+  text-align:left !important;
+  opacity:.88 !important;
+}
+#p3 .programme-label small{
+  display:block !important;
+  margin-top:2px !important;
+  font-family:'Jost', sans-serif !important;
+  font-size:8px !important;
+  line-height:1.35 !important;
+  letter-spacing:.13em !important;
+  text-transform:uppercase !important;
+  color:rgba(74,46,26,.56) !important;
+}
+/* Restore panel 4 as a clean reception page after moving the programme */
+#p4 .reception-copy:not(.programme-copy){
+  left:50% !important;
+  top:17% !important;
+  transform:translateX(-50%) !important;
+  width:78% !important;
+}
+@media (max-width:600px), (pointer:coarse){
+  #p3 .programme-copy{ top:5.8% !important; width:88% !important; }
+  #p3 .programme-timeline{ max-width:330px !important; padding:16px 16px 14px !important; }
+  #p3 .programme-time-row{ grid-template-columns:58px 40px 1fr !important; gap:9px !important; padding:9px 0 !important; }
+  #p3 .programme-time-icon{ width:40px !important; height:40px !important; }
+  #p3 .programme-time-icon img{ width:28px !important; height:28px !important; }
+  #p3 .programme-label{ font-size:16px !important; }
+}
+
+
+/* ═════════ USER UPDATE — LOCK EXPLORATION UNTIL OPENING ═════════ */
+#stage.invitation-locked{
+  cursor:default !important;
+}
+#stage.invitation-locked #hint{
+  opacity:.38 !important;
+}
+#stage.invitation-locked #hint span{
+  font-size:0 !important;
+}
+#stage.invitation-locked #hint span:nth-child(2)::after{
+  content:'open invitation to explore';
+  font-size:8px !important;
+  letter-spacing:.28em !important;
+}
+#stage.invitation-locked #progress{
+  width:0% !important;
+}
+
+
+/* ═════════ FINAL FIX — STABLE 9:16 LAYOUT ON EVERY SCREEN ═════════
+   This keeps the invitation using one fixed 9:16 coordinate system.
+   Text, the Open Invitation button, and the photo album now scale from
+   the stage width, so they do not drift or overlap on shorter screens. */
+#stage{
+  width:min(100vw, 56.25svh) !important;
+  height:min(100svh, 177.7778vw) !important;
+  aspect-ratio:9 / 16 !important;
+  max-width:none !important;
+  max-height:none !important;
+}
+
+@media (max-width:600px), (pointer:coarse){
+  body{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100vw !important;
+    height:100svh !important;
+    height:100dvh !important;
+    overflow:hidden !important;
+  }
+  #stage{
+    position:relative !important;
+    inset:auto !important;
+    width:min(100vw, 56.25svh) !important;
+    height:min(100svh, 177.7778vw) !important;
+    aspect-ratio:9 / 16 !important;
+    box-shadow:none !important;
+    overflow:hidden !important;
+  }
+}
+
+/* Cover: all text and the CTA are locked to the same relative positions */
+#p1 .cover-copy{
+  top:8.4% !important;
+  width:78% !important;
+}
+#p1 .cover-copy .name{
+  font-size:11.65cqw !important;
+  line-height:.88 !important;
+}
+#p1 .cover-copy .ampersand{
+  font-size:12.3cqw !important;
+  line-height:.72 !important;
+  margin:-0.7cqw 0 -0.9cqw !important;
+}
+#p1 .cover-copy .orn{
+  margin:1.5cqw auto 1.8cqw !important;
+}
+#p1 .cover-copy .families{
+  font-size:2.65cqw !important;
+  line-height:1.45 !important;
+  margin-top:2.8cqw !important;
+  margin-bottom:2.1cqw !important;
+  letter-spacing:.34em !important;
+}
+#p1 .cover-copy .date{
+  font-size:2.7cqw !important;
+  line-height:1.25 !important;
+}
+#p1 .open-invitation-btn{
+  margin-top:4.2cqw !important;
+  padding:2.35cqw 5.7cqw !important;
+  font-size:1.7cqw !important;
+  letter-spacing:.30em !important;
+}
+
+/* Push the first-screen buildings/boat slightly lower so the button never touches them */
+#p1 .l-bld1a,
+#p1 .l-bld2a,
+#p1 .l-bld6a,
+#p1 .l-bld5a,
+#p1 .l-bld3a,
+#p1 .l-bld10a,
+
+#p1 .l-bld1b,
+#p1 .l-bld4b,
+#p1 .l-bld2b,
+#p1 .l-bld8b,
+#p1 .l-bld1binv,
+
+{
+  bottom:12.2% !important;
+}
+#travelGondola{
+  bottom:5.2% !important;
+}
+
+/* Album: fixed relative height, no screen-to-screen drifting */
+#p5 .album-copy{
+  top:6.6% !important;
+  width:84% !important;
+}
+#p5 .album-copy .script{
+  font-size:10.1cqw !important;
+}
+#p5 .album-copy .sans{
+  font-size:2.15cqw !important;
+}
+.venice-album{
+  margin-top:3.2cqw !important;
+  border-radius:5.2cqw !important;
+}
+.venice-album-slide img{
+  height:80cqw !important;
+  min-height:0 !important;
+  max-height:90svh !important;
+}
+.venice-album-arrow{
+  width:7.2cqw !important;
+  height:7.2cqw !important;
+  font-size:5.2cqw !important;
+}
+.venice-album-counter{
+  margin-top:2.2cqw !important;
+  font-size:1.85cqw !important;
+}
+
+/* RSVP also follows the fixed coordinate system */
+#p6 .rsvp-copy{
+  top:7.2% !important;
+  width:82% !important;
+}
+#p6 .rsvp-copy .script{
+  font-size:10.5cqw !important;
+}
+#p6 .rsvp-copy .sans{
+  font-size:2.25cqw !important;
+}
+#p6 .rsvp-card{
+  max-width:60cqw !important;
+  padding:4.5cqw 6cqw !important;
+  margin-top:3cqw !important;
+}
+#p6 .rsvp-card input,
+#p6 .rsvp-card select{
+  font-size:2.25cqw !important;
+  padding:1.8cqw 0 !important;
+}
+#p6 .rsvp-btn{
+  font-size:2.15cqw !important;
+  padding:2.2cqw !important;
+  margin-top:3cqw !important;
+}
+
+
+/* ═════════ FINAL MOBILE FIX — TRUE FULL SCREEN + STRONGER INTRO TEXT ═════════
+   Phone view now fills the whole browser viewport: no beige padding above/below.
+   The first-page text is larger, darker, and constrained so it stays visible. */
+@media (max-width:600px), (pointer:coarse){
+  html, body{
+    width:100vw !important;
+    height:100vh !important;
+    height:100svh !important;
+    height:100dvh !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#d4b896 !important;
+    display:block !important;
+  }
+
+  #stage{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    height:100svh !important;
+    height:100dvh !important;
+    max-width:none !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    box-shadow:none !important;
+    border:0 !important;
+    overflow:hidden !important;
+  }
+
+  #panorama{
+    height:100% !important;
+  }
+}
+
+/* Stronger intro typography on all phone sizes */
+#p1 .cover-copy{
+  top:12.2% !important;
+  width:90% !important;
+}
+#p1 .cover-copy .name{
+  font-size:16.4cqw !important;
+  line-height:.86 !important;
+  color:#373222 !important;
+  text-shadow:0 2px 10px rgba(255,255,255,.78), 0 1px 0 rgba(74,46,26,.08) !important;
+}
+#p1 .cover-copy .ampersand{
+  font-size:16.2cqw !important;
+  line-height:.66 !important;
+  margin:-.4cqw 0 -.7cqw !important;
+  opacity:.26 !important;
+}
+#p1 .cover-copy .orn{
+  width:56% !important;
+  margin:2.3cqw auto 2.6cqw !important;
+}
+#p1 .cover-copy .families{
+  font-size:4.0cqw !important;
+  line-height:1.35 !important;
+  letter-spacing:.24em !important;
+  margin-top:2.7cqw !important;
+  margin-bottom:2.4cqw !important;
+  color:#373222 !important;
+  opacity:.72 !important;
+  white-space:nowrap !important;
+}
+#p1 .cover-copy .date{
+  font-size:3.05cqw !important;
+  line-height:1.25 !important;
+  color:#373222 !important;
+  opacity:.88 !important;
+}
+#p1 .open-invitation-btn{
+  margin-top:3.6cqw !important;
+  padding:2.65cqw 7.4cqw !important;
+  font-size:2.05cqw !important;
+  letter-spacing:.30em !important;
+}
+
+@media (max-width:380px), (pointer:coarse){
+  #p1 .cover-copy{ width:92% !important; }
+  #p1 .cover-copy .families{
+    font-size:2.75cqw !important;
+    letter-spacing:.20em !important;
+  }
+}
+
+
+/* ═════════ USER UPDATE — BOAT LOWER, AWAY FROM BUILDINGS ═════════ */
+#travelGondola{
+  bottom:1.4% !important;
+}
+
+@media (max-width:600px), (pointer:coarse){
+  #travelGondola{
+    bottom:1.4% !important;
+  }
+}
+
+
+
+/* ═════════ RSVP GOOGLE SHEET FORM — SAME WORKFLOW AS PALE_BLUE_ENV ═════════ */
+#p6 .venice-rsvp-box{
+  border-radius:22px !important;
+  padding:4.2cqw 5.4cqw !important;
+  background:rgba(255,245,230,.72) !important;
+  border:1px solid rgba(196,149,106,.36) !important;
+  box-shadow:0 16px 38px rgba(80,40,10,.16) !important;
+  backdrop-filter:blur(7px) !important;
+}
+#p6 .step-dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:18px;}
+#p6 .step-dot{width:6px;height:6px;border-radius:50%;background:rgba(196,149,106,.30);transition:.25s;}
+#p6 .step-dot.on{background:#373222;}
+#p6 .form-label,#p6 .question{display:block;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin:16px 0 8px;color:rgba(55,50,34,.72);text-align:left;}
+#p6 .question{text-align:center;margin-top:4px;}
+#p6 .form-field,#p6 textarea.form-field{width:100%;border-radius:0;padding:10px 0;margin-top:4px;font-family:'Cormorant Garamond',serif;font-size:18px;outline:none;background:transparent;color:#373222;border:none;border-bottom:1.5px solid rgba(74,46,26,.24);transition:border-color .25s;letter-spacing:0;}
+#p6 textarea.form-field{min-height:78px;resize:none;}
+#p6 .form-field:focus,#p6 textarea.form-field:focus{border-bottom-color:#373222;}
+#p6 .error-msg{display:none;margin-top:8px;font-family:'Jost',sans-serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#9b4a36;text-align:left;}
+#p6 .attend-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0;}
+#p6 .attend-opt input{position:absolute;opacity:0;pointer-events:none;}
+#p6 .attend-box{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:14px;border:1px solid rgba(74,46,26,.18);background:rgba(255,255,255,.42);cursor:pointer;transition:.25s;padding:10px 12px;}
+#p6 .attend-opt input:checked + .attend-box{background:rgba(196,149,106,.86);border-color:rgba(196,149,106,.95);color:#fff;}
+#p6 .attend-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;}
+#p6 .count-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:10px 0 12px;}
+#p6 .count-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(74,46,26,.22);background:rgba(255,255,255,.68);color:#373222;font-size:20px;line-height:1;cursor:pointer;}
+#p6 .guest-num{min-width:24px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#373222;}
+#p6 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+#p6 .btn-soft,#p6 .btn-solid{width:100%;border-radius:999px;padding:12px 12px;cursor:pointer;font-family:'Jost',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:.25s;}
+#p6 .btn-soft{background:rgba(255,255,255,.50);border:1px solid rgba(74,46,26,.18);color:#373222;}
+#p6 .btn-solid{background:#c4956a;border:1px solid #c4956a;color:#fff;}
+#p6 .btn-solid:disabled{opacity:.68;cursor:default;}
+#p6 .btn-soft:hover,#p6 .btn-solid:hover{transform:translateY(-1px);}
+#p6 .rsvp-main-btn{margin-top:18px;}
+@media (max-width:600px),(pointer:coarse){
+  #p6 .venice-rsvp-box{padding:4.1cqw 5.2cqw !important;}
+  #p6 .form-field,#p6 textarea.form-field{font-size:4.1cqw !important;}
+}
+
+
+/* ═════════ FINAL PHONE FIX — HINT LOWER + BOAT ABOVE HINT ═════════ */
+@media (max-width:600px), (pointer:coarse){
+  #hint{
+    bottom:calc(2px + env(safe-area-inset-bottom)) !important;
+    z-index:500 !important;
+  }
+
+  #travelGondola{
+    bottom:1.4% !important;
+    z-index:75 !important;
+  }
+
+  #musicBtn{
+    bottom:calc(58px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Final mobile lock for the farewell page.
+   Anchor the copy above the buildings so browser chrome height changes
+   cannot push the text into the skyline. */
+@media (max-width:600px), (pointer:coarse){
+  #p2 .story-copy{
+    top:auto !important;
+    bottom:50% !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    width:82% !important;
+    max-height:42% !important;
+  }
+
+  #p2 .story-copy .script{
+    font-size:12.4cqw !important;
+    line-height:.95 !important;
+  }
+
+  #p2 .story-copy .orn{
+    width:56% !important;
+    margin:3.1cqw auto 3.4cqw !important;
+  }
+
+  #p2 .story-copy p{
+    font-size:4.45cqw !important;
+    line-height:1.52 !important;
+    margin:0 !important;
+  }
+
+  #p8 .closing-copy{
+    top:auto !important;
+    bottom:41% !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    width:88% !important;
+    max-height:48% !important;
+  }
+
+  #p8 .closing-copy .sans{
+    font-size:2.55cqw !important;
+    line-height:1.55 !important;
+    letter-spacing:.26em !important;
+    margin-bottom:2.8cqw !important;
+    margin-top:0 !important;
+  }
+
+  #p8 .closing-copy .script{
+    font-size:13.2cqw !important;
+    line-height:.9 !important;
+    white-space:nowrap !important;
+  }
+
+  #p8 .closing-copy .serif{
+    font-size:4.25cqw !important;
+    line-height:1.38 !important;
+  }
+
+  #p8 .closing-copy .orn{
+    width:58% !important;
+    margin:3.2cqw auto 3cqw !important;
+  }
+}
+
+
+/* ═════════ USER UPDATE — GIFT REGISTRY ADDED BEFORE RSVP + EXTENDED PANORAMA ═════════ */
+#p6 .gift-copy{
+  left:50% !important;
+  top:8.2% !important;
+  transform:translateX(-50%) !important;
+  width:86% !important;
+  text-align:center !important;
+  z-index:80 !important;
+}
+#p6 .gift-copy .script{
+  font-size:12.6cqw !important;
+  line-height:.9 !important;
+  color:#373222 !important;
+  text-shadow:0 2px 12px rgba(255,255,255,.84) !important;
+}
+#p6 .gift-copy .orn{
+  width:64% !important;
+  margin:3cqw auto 3.4cqw !important;
+}
+#p6 .gift-card{
+  width:100% !important;
+  max-width:72cqw !important;
+  margin:0 auto !important;
+  padding:7cqw 6.2cqw !important;
+  border-radius:6cqw !important;
+  background:rgba(255,245,230,.82) !important;
+  border:1px solid rgba(196,149,106,.44) !important;
+  box-shadow:0 18px 48px rgba(80,40,10,.20) !important;
+  backdrop-filter:blur(8px) !important;
+}
+#p6 .gift-intro{
+  font-size:4.9cqw !important;
+  line-height:1.45 !important;
+  color:#373222 !important;
+  opacity:.94 !important;
+  font-weight:700 !important;
+  letter-spacing:.01em !important;
+}
+#p6 .gift-seal{
+  margin:4.8cqw auto 3.2cqw !important;
+  color:var(--gold) !important;
+  font-size:5.4cqw !important;
+}
+#p6 .gift-bank{
+  font-size:3.2cqw !important;
+  letter-spacing:.26em !important;
+  color:#373222 !important;
+  opacity:.72 !important;
+  font-weight:800 !important;
+  margin-bottom:2cqw !important;
+}
+#p6 .gift-account{
+  font-size:5.4cqw !important;
+  line-height:1.2 !important;
+  color:#373222 !important;
+  font-weight:800 !important;
+  letter-spacing:.08em !important;
+}
+
+/* RSVP was pushed one full screen to the right */
+#p7 .rsvp-copy{
+  left:50% !important;
+  top:7.2% !important;
+  transform:translateX(-50%) !important;
+  width:82% !important;
+  text-align:center !important;
+}
+#p7 .rsvp-copy .script{font-size:10.5cqw !important;color:#373222 !important;}
+#p7 .rsvp-copy .sans{font-size:2.25cqw !important;}
+#p7 .rsvp-copy .orn{text-align:center !important;margin-left:auto !important;margin-right:auto !important;}
+#p7 .rsvp-card{display:block !important;width:100% !important;max-width:60cqw !important;margin:3cqw auto 0 !important;text-align:left !important;padding:4.5cqw 6cqw !important;}
+#p7 .venice-rsvp-box{border-radius:22px !important;background:rgba(255,245,230,.72) !important;border:1px solid rgba(196,149,106,.36) !important;box-shadow:0 16px 38px rgba(80,40,10,.16) !important;backdrop-filter:blur(7px) !important;}
+#p7 .step-dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:18px;}
+#p7 .step-dot{width:6px;height:6px;border-radius:50%;background:rgba(196,149,106,.30);transition:.25s;}
+#p7 .step-dot.on{background:#373222;}
+#p7 .form-label,#p7 .question{display:block;font-family:'Jost',sans-serif;font-size:49px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin:16px 0 8px;color:rgba(55,50,34,.72);text-align:left;}
+#p7 .question{text-align:center;margin-top:4px;}
+#p7 .form-field,#p7 textarea.form-field{width:100%;border-radius:0;padding:10px 0;margin-top:4px;font-family:'Cormorant Garamond',serif;font-size:18px;outline:none;background:transparent;color:#373222;border:none;border-bottom:1.5px solid rgba(74,46,26,.24);transition:border-color .25s;letter-spacing:0;}
+#p7 textarea.form-field{min-height:78px;resize:none;}
+#p7 .form-field:focus,#p7 textarea.form-field:focus{border-bottom-color:#373222;}
+#p7 .error-msg{display:none;margin-top:8px;font-family:'Jost',sans-serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#9b4a36;text-align:left;}
+#p7 .attend-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0;}
+#p7 .attend-opt input{position:absolute;opacity:0;pointer-events:none;}
+#p7 .attend-box{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:14px;border:1px solid rgba(74,46,26,.18);background:rgba(255,255,255,.42);cursor:pointer;transition:.25s;padding:10px 12px;}
+#p7 .attend-opt input:checked + .attend-box{background:rgba(196,149,106,.86);border-color:rgba(196,149,106,.95);color:#fff;}
+#p7 .attend-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;}
+#p7 .count-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:10px 0 12px;}
+#p7 .count-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(74,46,26,.22);background:rgba(255,255,255,.68);color:#373222;font-size:20px;line-height:1;cursor:pointer;}
+#p7 .guest-num{min-width:24px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#373222;}
+#p7 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+#p7 .btn-soft,#p7 .btn-solid{width:100%;border-radius:999px;padding:12px 12px;cursor:pointer;font-family:'Jost',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:.25s;}
+#p7 .btn-soft{background:rgba(255,255,255,.50);border:1px solid rgba(74,46,26,.18);color:#373222;}
+#p7 .btn-solid{background:#c4956a;border:1px solid #c4956a;color:#fff;}
+#p7 .btn-solid:disabled{opacity:.68;cursor:default;}
+#p7 .btn-soft:hover,#p7 .btn-solid:hover{transform:translateY(-1px);}
+#p7 .rsvp-main-btn{margin-top:18px;}
+#p7 .rsvp-btn{display:block !important;margin-left:auto !important;margin-right:auto !important;font-size:2.15cqw !important;padding:2.2cqw !important;margin-top:3cqw !important;}
+#p7 .rsvp-card input,#p7 .rsvp-card select{font-size:2.25cqw !important;padding:1.8cqw 0 !important;}
+@media (max-width:600px),(pointer:coarse){
+  #p6 .gift-copy{top:7.4% !important;width:88% !important;}
+  #p6 .gift-card{max-width:76cqw !important;padding:7.2cqw 6.4cqw !important;}
+  #p6 .gift-intro{font-size:5.15cqw !important;line-height:1.42 !important;}
+  #p7 .venice-rsvp-box{padding:4.1cqw 5.2cqw !important;}
+  #p7 .form-field,#p7 textarea.form-field{font-size:4.1cqw !important;}
+}
+
+
+/* ═════════ USER UPDATE — SMALLER GIFT + BIGGER RSVP + END BUILDINGS ═════════ */
+#p6 .gift-copy{
+  top:7.4% !important;
+  width:82% !important;
+}
+#p6 .gift-copy .script{
+  font-size:11.2cqw !important;
+}
+#p6 .gift-copy .orn{
+  width:58% !important;
+  margin:2.4cqw auto 2.8cqw !important;
+}
+#p6 .gift-card{
+  max-width:68cqw !important;
+  padding:5.8cqw 5.4cqw !important;
+  border-radius:5.4cqw !important;
+}
+#p6 .gift-intro{
+  font-size:4.25cqw !important;
+  line-height:1.42 !important;
+  font-weight:650 !important;
+}
+#p6 .gift-seal{
+  margin:3.8cqw auto 2.6cqw !important;
+  font-size:4.7cqw !important;
+}
+#p6 .gift-bank{
+  font-size:2.7cqw !important;
+  letter-spacing:.24em !important;
+}
+#p6 .gift-account{
+  font-size:4.7cqw !important;
+}
+
+#p7 .rsvp-copy{
+  top:4.6% !important;
+  width:90% !important;
+}
+#p7 .rsvp-copy .script{
+  font-size:13.6cqw !important;
+  line-height:.84 !important;
+}
+#p7 .rsvp-copy .orn{
+  width:60% !important;
+  margin:2.2cqw auto 2.8cqw !important;
+}
+#p7 .rsvp-copy .sans{
+  font-size:2.8cqw !important;
+  line-height:1.6 !important;
+  letter-spacing:.24em !important;
+  margin-bottom:2.8cqw !important;
+}
+#p7 .rsvp-card{
+  max-width:72cqw !important;
+  padding:5.2cqw 6.4cqw !important;
+  margin-top:2.6cqw !important;
+}
+#p7 .venice-rsvp-box{
+  border-radius:5.2cqw !important;
+}
+#p7 .step-dots{
+  margin-bottom:3.4cqw !important;
+}
+#p7 .step-dot{
+  width:1.25cqw !important;
+  height:1.25cqw !important;
+}
+#p7 .form-label,
+#p7 .question{
+  font-size:2.05cqw !important;
+  margin:2.8cqw 0 1.5cqw !important;
+}
+#p7 .form-field,
+#p7 textarea.form-field{
+  font-size:4.25cqw !important;
+  padding:2.1cqw 0 !important;
+}
+#p7 textarea.form-field{
+  min-height:18cqw !important;
+}
+#p7 .rsvp-main-btn,
+#p7 .btn-soft,
+#p7 .btn-solid{
+  font-size:2.05cqw !important;
+  padding:2.8cqw 2.2cqw !important;
+}
+#p7 .attend-label{
+  font-size:2cqw !important;
+}
+#p7 .attend-box{
+  min-height:9.8cqw !important;
+  border-radius:3.2cqw !important;
+}
+#p7 .guest-num{
+  font-size:5cqw !important;
+}
+#p7 .count-btn{
+  width:7.4cqw !important;
+  height:7.4cqw !important;
+  font-size:4.4cqw !important;
+}
+#p7 .error-msg{
+  font-size:1.75cqw !important;
+}
+
+/* Decorative buildings added to the extended pages */
+#p7 .end-bld-left,
+#p8 .end-bld-left{
+  left:-5% !important;
+  bottom:10.8% !important;
+  width:58% !important;
+  z-index:6 !important;
+}
+#p7 .end-bld-right,
+#p8 .end-bld-right{
+  left:52% !important;
+  bottom:10.8% !important;
+  width:62% !important;
+  z-index:6 !important;
+}
+#p7 .end-bld-mid,
+#p8 .end-bld-mid{
+  left:27% !important;
+  bottom:10.4% !important;
+  width:54% !important;
+  z-index:5 !important;
+}
+
+@media (max-width:600px),(pointer:coarse){
+  #p6 .gift-copy{top:6.8% !important;width:82% !important;}
+  #p6 .gift-card{max-width:68cqw !important;padding:5.4cqw 5.2cqw !important;}
+  #p6 .gift-intro{font-size:4.05cqw !important;line-height:1.42 !important;}
+  #p6 .gift-copy .script{font-size:10.9cqw !important;}
+  #p7 .rsvp-copy{top:4.2% !important;width:90% !important;}
+  #p7 .rsvp-card{max-width:73cqw !important;padding:5.1cqw 6.2cqw !important;}
+  #p7 .form-field,#p7 textarea.form-field{font-size:4.25cqw !important;}
+}
+
+
+/* ═════════ FINAL USER FIX — MATCH SECTION TITLES + BIGGER RSVP NAME TEXT ═════════ */
+/* Make Photo Album, Gift Registry, and RSVP titles the same smaller size */
+#p5 .album-copy .script,
+#p6 .gift-copy .script,
+#p7 .rsvp-copy .script{
+  font-size:10.2cqw !important;
+  line-height:.9 !important;
+}
+
+/* Keep Gift Registry and RSVP dividers balanced under the smaller titles */
+#p5 .album-copy .orn,
+#p6 .gift-copy .orn,
+#p7 .rsvp-copy .orn{
+  width:58% !important;
+  margin:2.1cqw auto 2.7cqw !important;
+}
+
+/* RSVP name label and typed text: larger and easier to read */
+#p7 .form-label,
+#p7 .question{
+  font-size:2.45cqw !important;
+  letter-spacing:.20em !important;
+  margin:3.1cqw 0 1.7cqw !important;
+}
+#p7 .form-field,
+#p7 textarea.form-field{
+  font-size:5.35cqw !important;
+  line-height:1.15 !important;
+  padding:2.3cqw 0 !important;
+}
+#p7 .form-field::placeholder,
+#p7 textarea.form-field::placeholder{
+  font-size:4.65cqw !important;
+  opacity:.55 !important;
+}
+
+@media (max-width:600px),(pointer:coarse){
+  #p5 .album-copy .script,
+  #p6 .gift-copy .script,
+  #p7 .rsvp-copy .script{
+    font-size:10.2cqw !important;
+    line-height:.9 !important;
+  }
+  #p7 .form-label,
+  #p7 .question{
+    font-size:2.55cqw !important;
+  }
+  #p7 .form-field,
+  #p7 textarea.form-field{
+    font-size:5.6cqw !important;
+    line-height:1.15 !important;
+  }
+  #p7 .form-field::placeholder,
+  #p7 textarea.form-field::placeholder{
+    font-size:4.85cqw !important;
+  }
+}
+
+
+/* ═════════ FINAL OVERRIDE — SMALLER SECTION TITLES + CLEAR RSVP TYPED NAME ═════════ */
+/* Smaller matching titles for Photo Album, Gift Registry, and RSVP */
+#p5 .album-copy .script,
+#p6 .gift-copy .script,
+#p7 .rsvp-copy .script{
+  font-size:8.6cqw !important;
+  line-height:.92 !important;
+  white-space:nowrap !important;
+}
+
+/* Force the typed RSVP name to be large, overriding all wizard/mobile rules */
+#p7 #guestName,
+#p7 input#guestName.form-field,
+#p7 .venice-rsvp-box input#guestName{
+  font-family:'Cormorant Garamond', serif !important;
+  font-size:31px !important;
+  line-height:1.25 !important;
+  height:auto !important;
+  min-height:46px !important;
+  padding:8px 0 9px !important;
+  color:#373222 !important;
+  letter-spacing:0 !important;
+  transform:none !important;
+}
+
+#p7 #guestName::placeholder{
+  font-size:26px !important;
+  line-height:1.25 !important;
+  color:rgba(55,50,34,.48) !important;
+}
+
+#p7 .form-label[for="guestName"]{
+  font-size:12px !important;
+  letter-spacing:.18em !important;
+  margin-bottom:8px !important;
+}
+
+@media (max-width:600px),(pointer:coarse){
+  #p5 .album-copy .script,
+  #p6 .gift-copy .script,
+  #p7 .rsvp-copy .script{
+    font-size:8.6cqw !important;
+    line-height:.92 !important;
+  }
+
+  #p7 #guestName,
+  #p7 input#guestName.form-field,
+  #p7 .venice-rsvp-box input#guestName{
+    font-size:31px !important;
+    line-height:1.25 !important;
+    min-height:46px !important;
+    padding:8px 0 9px !important;
+  }
+
+  #p7 #guestName::placeholder{
+    font-size:6px !important;
+  }
+}
+
+
+/* FINAL CLEANUP — remove the extra buildings added on the extended RSVP/closing pages */
+#p7 .end-bld-left, #p7 .end-bld-mid, #p7 .end-bld-right,
+#p8 .end-bld-left, #p8 .end-bld-mid, #p8 .end-bld-right{
+  display:none !important;
+}
+
+
+  /* ── Raymond-style per-guest RSVP slots ── */
+  :root { --rsvp-accent: var(--gold, #b8924a); --rsvp-accent-border: rgba(120,100,50,.45); --rsvp-accent-muted: rgba(120,100,50,.5); --rsvp-slot-bg: rgba(255,248,235,.18); --rsvp-slot-bg-locked: rgba(255,248,235,.28); }
+  .guest-welcome-step { text-align:left; }
+  .guest-slot-name-list{display:grid;gap:14px;width:100%;margin:18px 0 8px;}
+  .guest-slot-name-box{width:100%;border:1.5px solid var(--rsvp-accent-border);border-radius:14px;padding:14px 14px 12px;background:var(--rsvp-slot-bg);}
+  .guest-slot-name-box.locked{background:var(--rsvp-slot-bg-locked);}
+  .guest-slot-name-label{display:block;margin:0 0 8px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--rsvp-accent);}
+  .guest-slot-name-box > input{width:100%;border:none!important;border-bottom:1.5px solid var(--rsvp-accent-border)!important;border-radius:0!important;background:transparent!important;color:var(--rsvp-accent)!important;padding:10px 0!important;margin:0!important;font-size:22px!important;outline:none;}
+  .guest-slot-name-box > input::placeholder{color:var(--rsvp-accent-muted)!important;}
+  .guest-slot-name-box > input[readonly]{cursor:default;}
+  .guest-slot-attendance{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;}
+  .guest-slot-attendance > span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--rsvp-accent);}
+  .guest-response-options{display:flex;gap:8px;margin-left:auto;}
+  .guest-response-options input{position:absolute;opacity:0;pointer-events:none;}
+  .guest-response-options label{cursor:pointer;}
+  .guest-response-pill{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:10px 12px;border-radius:999px;border:1.5px solid var(--rsvp-accent-border);background:rgba(255,255,255,.18);color:var(--rsvp-accent);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.2s;}
+  .guest-response-options input:checked + .guest-response-pill{background:var(--rsvp-accent);border-color:var(--rsvp-accent);color:#fff;}
+  .guest-total-line{margin:16px 0 4px;text-align:center;font-size:18px;color:var(--rsvp-accent);}
+  .guest-welcome-note{margin:0 0 20px;font-size:16px;line-height:1.5;color:var(--rsvp-accent);}
+  @media(max-width:420px){.guest-response-pill{width:100%;min-width:0;}.guest-slot-attendance{align-items:stretch;flex-direction:column;}.guest-response-options{width:100%;margin-left:0;}}
+
+
+
+/* ═════════ CARDIA FIX — COMPACT RSVP GUEST SLOTS FOR MANY GUESTS ═════════
+   Keeps the existing Venice RSVP logic, but makes each guest row compact and
+   scrollable so links with 4, 5, or more guests do not stretch the RSVP card. */
+#p7 .guest-welcome-title{
+  font-size:clamp(30px,7.2vw,44px) !important;
+  line-height:.95 !important;
+  margin-bottom:6px !important;
+}
+#p7 .guest-welcome-note{
+  margin:0 0 10px !important;
+  font-size:14px !important;
+  line-height:1.35 !important;
+  text-align:center !important;
+}
+#p7 .guest-slot-name-list{
+  display:grid !important;
+  gap:8px !important;
+  width:100% !important;
+  max-height:34vh !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  padding-right:3px !important;
+  margin:10px 0 6px !important;
+  overscroll-behavior:contain !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar{width:4px;}
+#p7 .guest-slot-name-list::-webkit-scrollbar-thumb{
+  background:rgba(196,149,106,.55);
+  border-radius:999px;
+}
+#p7 .guest-slot-name-box{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  align-items:center !important;
+  column-gap:8px !important;
+  width:100% !important;
+  padding:8px 9px !important;
+  border-radius:13px !important;
+}
+#p7 .guest-slot-name-label{
+  display:none !important;
+}
+#p7 .guest-slot-name-box > input{
+  min-width:0 !important;
+  height:38px !important;
+  padding:0 0 0 2px !important;
+  border-bottom:0 !important;
+  font-size:17px !important;
+  line-height:1.1 !important;
+}
+#p7 .guest-slot-attendance{
+  margin:0 !important;
+  gap:0 !important;
+  justify-content:flex-end !important;
+}
+#p7 .guest-slot-attendance > span{
+  display:none !important;
+}
+#p7 .guest-response-options{
+  gap:5px !important;
+  margin-left:0 !important;
+  flex-shrink:0 !important;
+}
+#p7 .guest-response-options label{
+  display:block !important;
+}
+#p7 .guest-response-pill{
+  min-width:42px !important;
+  height:34px !important;
+  padding:0 9px !important;
+  border-radius:10px !important;
+  font-size:8px !important;
+  letter-spacing:.10em !important;
+}
+#p7 .guest-total-line{
+  margin:8px 0 2px !important;
+  font-size:15px !important;
+}
+#p7 #errName{
+  margin-top:6px !important;
+  text-align:center !important;
+}
+#p7 .rsvp-main-btn{
+  margin-top:12px !important;
+}
+#p7 .venice-rsvp-box{
+  padding-top:4.2cqw !important;
+  padding-bottom:4.2cqw !important;
+}
+
+@media (max-width:600px), (pointer:coarse){
+  #p7 .guest-slot-name-list{
+    max-height:30svh !important;
+  }
+  #p7 .guest-slot-name-box{
+    grid-template-columns:minmax(0,1fr) auto !important;
+    padding:7px 8px !important;
+  }
+  #p7 .guest-slot-name-box > input{
+    height:36px !important;
+    font-size:4.15cqw !important;
+  }
+  #p7 .guest-response-pill{
+    min-width:40px !important;
+    height:32px !important;
+    font-size:2.05cqw !important;
+  }
+  #p7 .guest-welcome-title{
+    font-size:9.4cqw !important;
+  }
+  #p7 .guest-welcome-note{
+    font-size:3.25cqw !important;
+  }
+}
+
+
+/* ═════════ CARDIA FIX — RSVP SCROLLBAR SPACED + UP/DOWN ARROWS ═════════ */
+#p7 #manualGuestListWrap{
+  position:relative !important;
+  width:100% !important;
+  padding-right:18px !important;
+  margin:12px 0 6px !important;
+}
+#p7 #manualGuestListWrap::before,
+#p7 #manualGuestListWrap::after{
+  position:absolute !important;
+  right:1px !important;
+  z-index:6 !important;
+  width:14px !important;
+  height:14px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:rgba(196,149,106,.92) !important;
+  color:#fff !important;
+  font-family:'Jost',sans-serif !important;
+  font-size:9px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  box-shadow:0 4px 10px rgba(80,40,10,.18) !important;
+  pointer-events:none !important;
+}
+#p7 #manualGuestListWrap::before{
+  content:'▲' !important;
+  top:0 !important;
+  transform:translateY(-55%) !important;
+}
+#p7 #manualGuestListWrap::after{
+  content:'▼' !important;
+  bottom:0 !important;
+  transform:translateY(55%) !important;
+}
+#p7 .guest-slot-name-list{
+  margin:0 !important;
+  padding-right:8px !important;
+  scrollbar-width:thin !important;
+  scrollbar-color:rgba(196,149,106,.92) rgba(196,149,106,.18) !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar{
+  width:7px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-track{
+  background:rgba(196,149,106,.16) !important;
+  border-radius:999px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-thumb{
+  background:rgba(196,149,106,.95) !important;
+  border-radius:999px !important;
+  border:1px solid rgba(255,245,230,.75) !important;
+}
+@media (max-width:600px), (pointer:coarse){
+  #p7 #manualGuestListWrap{
+    padding-right:20px !important;
+    margin-top:13px !important;
+  }
+  #p7 #manualGuestListWrap::before,
+  #p7 #manualGuestListWrap::after{
+    width:15px !important;
+    height:15px !important;
+    font-size:9px !important;
+  }
+  #p7 .guest-slot-name-list{
+    padding-right:9px !important;
+  }
+}
+
+
+/* CARDIA RSVP MOBILE SCROLL IMPROVEMENT */
+#p7 .guest-slot-name-list{
+  max-height:260px !important; /* about 3 guest rows visible */
+  overflow-y:scroll !important;
+  scrollbar-gutter:stable !important;
+}
+#p7 #manualGuestListWrap{
+  padding-right:28px !important;
+}
+#p7 #manualGuestListWrap::before,
+#p7 #manualGuestListWrap::after{
+  right:4px !important;
+  width:22px !important;
+  height:22px !important;
+  font-size:12px !important;
+  opacity:1 !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar{
+  width:10px !important;
+}
+@media (max-width:600px),(pointer:coarse){
+  #p7 .guest-slot-name-list{
+    max-height:250px !important; /* forces scrolling after ~3 guests */
+    overflow-y:scroll !important;
+  }
+  #p7 #manualGuestListWrap{
+    padding-right:30px !important;
+  }
+  #p7 #manualGuestListWrap::before,
+  #p7 #manualGuestListWrap::after{
+    width:24px !important;
+    height:24px !important;
+    font-size:13px !important;
+  }
+  #p7 .guest-slot-name-list::-webkit-scrollbar{
+    width:12px !important;
+  }
+}
+
+
+
+/* ═════════ CARDIA FINAL RSVP POLISH — WIDER CARD, SMALLER PLACEHOLDER, CENTERED SCROLLBAR ═════════ */
+#p7 .rsvp-copy{
+  width:94% !important;
+  top:3.8% !important;
+}
+#p7 .rsvp-card{
+  width:100% !important;
+  max-width:82cqw !important;
+  padding:5.2cqw 6.4cqw !important;
+}
+#p7 .venice-rsvp-box{
+  width:100% !important;
+  padding-left:5.8cqw !important;
+  padding-right:5.8cqw !important;
+}
+#p7 .guest-slot-name-list{
+  max-height:250px !important;
+  overflow-y:scroll !important;
+  overflow-x:hidden !important;
+  padding-right:26px !important;
+  margin:13px 0 !important;
+  scrollbar-width:thin !important;
+  scrollbar-color:rgba(196,149,106,.96) transparent !important;
+  scrollbar-gutter:stable !important;
+}
+#p7 #manualGuestListWrap{
+  position:relative !important;
+  width:100% !important;
+  padding-right:0 !important;
+  margin:10px 0 6px !important;
+}
+#p7 #manualGuestListWrap::before,
+#p7 #manualGuestListWrap::after{
+  right:0 !important;
+  left:auto !important;
+  width:22px !important;
+  height:22px !important;
+  font-size:12px !important;
+  z-index:12 !important;
+}
+#p7 #manualGuestListWrap::before{
+  top:0 !important;
+  transform:translateY(-22%) !important;
+}
+#p7 #manualGuestListWrap::after{
+  bottom:0 !important;
+  transform:translateY(22%) !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar{
+  width:9px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-track{
+  background:rgba(196,149,106,.16) !important;
+  border-radius:999px !important;
+  margin-top:18px !important;
+  margin-bottom:18px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-thumb{
+  background:rgba(196,149,106,.96) !important;
+  border-radius:999px !important;
+  border:1px solid rgba(255,245,230,.82) !important;
+}
+#p7 .guest-slot-name-box{
+  grid-template-columns:minmax(0,1fr) auto !important;
+  column-gap:7px !important;
+  padding:7px 8px !important;
+}
+#p7 .guest-slot-name-box > input{
+  font-size:4.05cqw !important;
+  letter-spacing:.08em !important;
+  min-width:0 !important;
+}
+#p7 .guest-slot-name-box > input::placeholder{
+  font-size:3.15cqw !important;
+  letter-spacing:.14em !important;
+  color:rgba(196,149,106,.64) !important;
+}
+
+@media (max-width:600px),(pointer:coarse){
+  #p7 .rsvp-copy{
+    width:94% !important;
+    top:3.7% !important;
+  }
+  #p7 .rsvp-card{
+    max-width:82cqw !important;
+    padding:5.0cqw 6.1cqw !important;
+  }
+  #p7 .venice-rsvp-box{
+    padding-left:5.4cqw !important;
+    padding-right:5.4cqw !important;
+  }
+  #p7 .guest-slot-name-list{
+    max-height:248px !important;
+    padding-right:26px !important;
+    margin:13px 0 !important;
+  }
+  #p7 #manualGuestListWrap::before,
+  #p7 #manualGuestListWrap::after{
+    width:22px !important;
+    height:22px !important;
+    font-size:12px !important;
+    right:0 !important;
+  }
+  #p7 .guest-slot-name-box > input{
+    font-size:3.85cqw !important;
+  }
+  #p7 .guest-slot-name-box > input::placeholder{
+    font-size:3.0cqw !important;
+    letter-spacing:.13em !important;
+  }
+  #p7 .guest-response-pill{
+    min-width:38px !important;
+    height:31px !important;
+    padding:0 8px !important;
+  }
+}
+
+
+
+/* ═════════ CARDIA UPDATE — RSVP SCROLLBAR LEFT + VISIBLE BORDER ═════════ */
+#p7 .guest-slot-name-list{
+  width:calc(100% - 14px) !important;
+  margin-right:14px !important;
+  padding-right:24px !important;
+  scrollbar-color:rgba(196,149,106,.96) rgba(255,245,230,.72) !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar{
+  width:10px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-track{
+  background:rgba(255,245,230,.70) !important;
+  border:1.5px solid rgba(196,149,106,.72) !important;
+  border-radius:999px !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.42) !important;
+  margin-top:20px !important;
+  margin-bottom:20px !important;
+}
+#p7 .guest-slot-name-list::-webkit-scrollbar-thumb{
+  background:rgba(196,149,106,.96) !important;
+  border:2px solid rgba(255,245,230,.88) !important;
+  border-radius:999px !important;
+}
+@media (max-width:600px),(pointer:coarse){
+  #p7 .guest-slot-name-list{
+    width:calc(100% - 14px) !important;
+    margin-right:14px !important;
+    padding-right:24px !important;
+  }
+}
+
+
+/* ═════════ CARDIA FIX — ELEGANT ASSET LOADER FOR HEAVY PNG TEMPLATE ═════════
+   Keeps guests paused until the visual invitation assets are loaded. */
+#stage.assets-loading{
+  cursor:wait !important;
+}
+#stage.assets-loading #panorama,
+#stage.assets-loading #travelGondola,
+#stage.assets-loading #progress,
+#stage.assets-loading #hint,
+#stage.assets-loading #musicBtn{
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+#stage.assets-ready #panorama,
+#stage.assets-ready #travelGondola,
+#stage.assets-ready #progress,
+#stage.assets-ready #hint,
+#stage.assets-ready #musicBtn{
+  opacity:1;
+  transition:opacity .75s ease;
+}
+#loadingOverlay{
+  position:absolute;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8cqw;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(255,245,230,.95) 0%, rgba(244,222,190,.88) 38%, rgba(212,184,150,.96) 100%);
+  color:#373222;
+  text-align:center;
+  pointer-events:auto;
+  transition:opacity .75s ease, visibility .75s ease;
+}
+#loadingOverlay.is-hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.loading-card{
+  width:min(82%, 360px);
+  padding:8cqw 6.5cqw;
+  border-radius:7cqw;
+  background:rgba(255,245,230,.58);
+  border:1px solid rgba(196,149,106,.46);
+  box-shadow:0 24px 65px rgba(80,40,10,.20);
+  backdrop-filter:blur(10px);
+}
+.loading-title{
+  font-family:'Great Vibes', cursive;
+  font-size:min(12.5cqw, 58px);
+  line-height:.95;
+  color:#373222;
+  text-shadow:0 2px 12px rgba(255,255,255,.72);
+}
+.loading-subtitle{
+  margin-top:3cqw;
+  font-family:'Jost', sans-serif;
+  font-size:min(2.3cqw, 11px);
+  line-height:1.7;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(74,46,26,.64);
+}
+.loading-bar{
+  width:100%;
+  height:4px;
+  margin:5cqw auto 2.5cqw;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(74,46,26,.14);
+}
+.loading-bar span{
+  display:block;
+  width:0%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, var(--gold), var(--blush));
+  transition:width .25s ease;
+}
+.loading-percent{
+  font-family:'Jost', sans-serif;
+  font-size:min(2.4cqw, 11px);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(74,46,26,.58);
+}
+.loading-note{
+  margin-top:3cqw;
+  font-family:'Cormorant Garamond', serif;
+  font-size:min(3.5cqw, 17px);
+  line-height:1.35;
+  color:rgba(55,50,34,.70);
+}
+@media (max-width:600px), (pointer:coarse){
+  #loadingOverlay{padding:7vw;}
+  .loading-card{width:86%; padding:9vw 7vw; border-radius:28px;}
+  .loading-title{font-size:54px;}
+  .loading-subtitle{font-size:10px; margin-top:14px;}
+  .loading-bar{margin:24px auto 12px;}
+  .loading-percent{font-size:10px;}
+  .loading-note{font-size:16px; margin-top:14px;}
+}
+
+</style>
+</head>
+<body>
+
+<div id="stage" class="invitation-locked assets-loading">
+<div id="loadingOverlay" role="status" aria-live="polite" aria-label="Loading invitation">
+  <div class="loading-card">
+    <div class="loading-title">Preparing Venice</div>
+    <div class="loading-subtitle">Please wait a moment</div>
+    <div class="loading-bar"><span id="loadingBarFill"></span></div>
+    <div class="loading-percent" id="loadingPercent">0%</div>
+
+  </div>
+</div>
+<audio id="bgMusic" preload="auto" loop>
+  <source src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Music/paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" type="button" aria-label="Play or stop music">♪</button>
+<img id="travelGondola"
+     src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Gondola.png"
+     alt="">
+<div id="progress"></div>
+<div id="hint">
+  <span class="arr l">←</span>
+  <span>Move left or right to explore</span>
+  <span class="arr">→</span>
+</div>
+
+<div id="panorama">
+
+  <!-- ══════════════════════════════════
+       BACKGROUND LAYERS (full 800cqw)
+  ══════════════════════════════════ -->
+  <img id="bg-sky"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sky.png"
+       alt="">
+  <img id="bg-sea"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+
+  <img id="bg-sea1"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+
+
+<img id="bg-sea1"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+       
+       
+<img id="bg-sea2"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">  
+       
+       
+       
+<img id="bg-sea3"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+  <img id="bg-sea4"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+       
+<img id="bg-sea5"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+       
+       
+       
+  <img id="bg-sea6"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+  <img id="bg-sea7"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+       
+<img id="bg-sea8"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+       
+       
+       
+      <img id="bg-sea9"
+       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       alt="">
+       
+
+       
+
+
+  <!-- ══════════════════════════════════
+       PANEL 1 — Cover
+       Buildings: 1.png (left), 2.png (right)
+  ══════════════════════════════════ -->
+  <div class="panel" id="p1" style="left:0cqw;">
+
+    <div class="water-shimmer"></div>
+
+
+
+ <img class="layer l-balloon"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+
+
+
+ 
+
+ <img class="layer l-balloon4"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="">
+
+
+
+
+
+ <img class="layer l-balloon5"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+
+
+    
+    
+    <img class="layer l-balloon6" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" />
+ 
+
+
+
+ <img class="layer l-balloon7"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+
+
+    
+    
+    <img class="layer l-balloon8" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" />
+ 
+
+ <img class="layer l-balloon9"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air6.png" alt="">
+
+
+
+
+ <img class="layer l-Road"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Road2.png" alt="">
+
+
+
+ <img class="layer l-Plane"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Plane2.png" alt="">
+
+
+
+ <img class="layer l-clouds1"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+
+
+
+
+
+
+                 <img class="layer l-bld1a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1a.png" alt="">  
+         
+         
+                 <img class="layer l-bld2a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2a.png" alt="">  
+         
+
+
+         
+          <img class="layer l-bld5a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         
+           <img class="layer l-bld6a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         
+       
+       
+       
+                   
+         <img class="layer l-bld3a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/3a.png" alt="">  
+         
+           <img class="layer l-bld8a"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/8a.png" alt="">  
+         
+
+
+         
+            
+            
+              <img class="layer l-bld2aa"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2a.png" alt=""> 
+            
+        
+        
+          <img class="layer l-bld1b"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1b.png" alt="">  
+         
+          <img class="layer l-bld2b"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2b.png" alt="">  
+         
+
+         <img class="layer l-bld4b"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/4b.png" alt="">
+         
+
+         
+          <img class="layer l-bld8b"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/8b.png" alt=""> 
+         
+
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+                 <img class="layer l-bld1aR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1a.png" alt="">  
+         
+         
+                 <img class="layer l-bld2aR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         
+            
+   
+         
+
+         
+             <img class="layer l-bld5aaR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         
+           <img class="layer l-bld8aR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/9a.png" alt="">  
+         
+ <img class="layer l-bld10aR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/10a.png" alt=""> 
+
+         
+            
+
+         <img class="layer l-bld4bR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/3a.png" alt="">
+         
+
+         
+          <img class="layer l-bld8bR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/7a.png" alt=""> 
+         
+         
+
+         
+          <img class="layer l-bld1binvR"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt=""> 
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+        
+         
+                <img class="layer l-bld2aEnd"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         
+            
+   
+         
+
+         
+             <img class="layer l-bld5End"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         
+           <img class="layer l-bld8End"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/9a.png" alt="">  
+         
+ <img class="layer l-bld10End"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/10a.png" alt=""> 
+         
+         
+         
+         
+         
+         
+         
+         
+             
+          <img class="layer l-bridge"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+         
+          <img class="layer l-bridge2"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+   
+           <img class="layer l-bridge3"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge3a.png" alt=""> 
+         
+         
+                <img class="layer l-bridge4"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+    <img class="layer l-gondola"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Gondola.png" alt="">
+    <img class="layer l-clouds"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+    <div class="content">
+      <div class="fixed-copy cover-copy">
+
+        <div class="script name">Thomas</div>
+        <div class="script ampersand" style="display:block;opacity:0.18;color:var(--gold);">﹠</div>
+        <div class="script name">Sarah</div>
+        <div class="orn" ><span></span><em>✦</em><span></span></div>
+        <div class="sans families" style="color:var(--deep);opacity:0.6;">Together with their families</div>
+       <div class="serif date" style="color:#373222;font-weight:800;letter-spacing:0.1em;opacity:0.85;font-size:150px;"> August 14, 2027 · Ehden, Lebanon</div>
+        <button id="openInvitationBtn" class="open-invitation-btn" type="button">Open Invitation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PANEL 2 — Our Story
+       Buildings: 3.png (left), 4.png (right)
+  ══════════════════════════════════ -->
+  <div class="panel" id="p2" style="left:100cqw;">
+
+    <div class="water-shimmer"></div>
+
+
+
+    <img class="layer l-clouds"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+    <div class="content">
+      <div class="fixed-copy story-copy">
+        <div class="script" style="color:#373222;">Our Story</div>
+        <div class="orn"><span></span><em>✦</em><span></span></div>
+        <p class="serif" style="color:#373222;font-style:italic;opacity:0.86;font-weight:800;">
+          Two souls who found each other<br>
+          by the waters of La Serenissima,<br>
+          and chose to walk this path<br>
+          together - forever.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ══════════════════════════════════
+       PANEL 3 — Programme
+       Full celebration timeline
+  ══════════════════════════════════ -->
+  <div class="panel" id="p3" style="left:200cqw;">
+   
+    <div class="water-shimmer"></div>
+
+    <div class="content">
+      <div class="fixed-copy programme-copy">
+        <div class="script" style="color:var(--deep);">Programme</div>
+        <div class="orn"><span></span><em>✦</em><span></span></div>
+      
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PANEL 4 — Reception
+       Buildings: 10.png (café, left), 11.png (right)
+  ══════════════════════════════════ -->
+
+
+  <!-- ══════════════════════════════════
+       PANEL 5 — Details
+       Buildings: 13.png (left), 14.png (right)
+  ══════════════════════════════════ -->
+  <div class="panel" id="p5" style="left:400cqw;">
+
+    <div class="water-shimmer"></div>
+
+    <img class="layer l-clouds"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+    <div class="content">
+      <div class="fixed-copy album-copy">
+        <div class="script" style="color:var(--deep);">Photo Album</div>
+        <div class="orn"><span></span><em>✦</em><span></span></div>
+        
+
+        <div class="venice-album" id="veniceAlbum">
+          <div class="venice-album-track" id="veniceAlbumTrack">
+            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 1"></div>
+            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 2"></div>
+            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 3"></div>
+          </div>
+          <button class="venice-album-arrow prev" type="button" aria-label="Previous photo" onclick="moveVeniceAlbum(-1)">‹</button>
+          <button class="venice-album-arrow next" type="button" aria-label="Next photo" onclick="moveVeniceAlbum(1)">›</button>
+        </div>
+        <div class="venice-album-counter" id="veniceAlbumCounter">1 / 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PANEL 6 — Gift Registry
+       Placed before the RSVP section
+  ══════════════════════════════════ -->
+  <div class="panel" id="p6" style="left:500cqw;">
+
+    <div class="water-shimmer"></div>
+
+    <img class="layer l-clouds"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+    <div class="content">
+      <div class="fixed-copy gift-copy">
+        <div class="script" style="color:#373222;font-weight:900;">Gift Registry</div>
+        <div class="orn"><span></span><em>✦</em><span></span></div>
+        <div class="gift-card">
+          <p class="serif gift-intro">
+            Your love, laughter, and presence are all we could wish for.
+            For those who wish, a wedding list is available at all Whish Money branches.
+          </p>
+          <div class="gift-seal">✦</div>
+          <div class="sans gift-bank">Whish Money</div>
+          <div class="serif gift-account">ACC# xxxxxx</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PANEL 7 — RSVP
+       Buildings: 16.png (left), 17.png (right)
+  ══════════════════════════════════ -->
+  <div class="panel" id="p7" style="left:600cqw;">
+
+    <div class="water-shimmer"></div>
+
+    <div class="content">
+      <div class="fixed-copy rsvp-copy">
+        <div class="script" style="color:#373222;font-weight:900;">RSVP</div>
+        <div class="orn" style="margin:4px auto 0;"><span></span><em>✦</em><span></span></div>
+        <div class="sans" style="color:#373222;opacity:0.5;margin-bottom:4px;">Kindly reply before August 1, 2027</div>
+        <div class="rsvp-card venice-rsvp-box">
+          <div class="step-dots">
+            <span class="step-dot on" id="dot-1"></span>
+            <span class="step-dot" id="dot-2"></span>
+            <span class="step-dot" id="dot-3"></span>
+          </div>
+
+          <div id="step1" class="rsvp-step guest-welcome-step">
+            <h3 class="guest-welcome-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,56px);color:var(--rsvp-accent);margin:0 0 8px;">Dear <span id="guestWelcomeName">Guest</span>,</h3>
+            <p id="personalGuestNote" class="guest-welcome-note">Please enter the guest names to confirm the RSVP.</p>
+            <div id="manualGuestListWrap">
+              <div id="guestSlotNameList" class="guest-slot-name-list"></div>
+            </div>
+            <p class="guest-total-line">Total guests attending: <strong id="guestCount">0</strong></p>
+            <p class="error-msg" id="errName" style="display:none;">Please enter at least one guest name.</p>
+            <button class="btn-solid rsvp-main-btn" type="button" onclick="goStep(1,3)" style="margin-top:18px;">Continue →</button>
+          </div>
+          <div id="step2" class="rsvp-step" style="display:none;">
+            <p class="question">Will you attend?</p>
+            <div class="attend-grid">
+              <label class="attend-opt"><input type="radio" name="attend" value="yes" /><span class="attend-box"><span class="attend-label">Joyfully accept</span></span></label>
+              <label class="attend-opt"><input type="radio" name="attend" value="no" /><span class="attend-box"><span class="attend-label">Regretfully decline</span></span></label>
+            </div>
+            <div id="guestCountWrap" style="display:none; margin-bottom:10px;">
+              <label class="form-label guest-label">Number of guests</label>
+              <div class="count-row">
+                <button class="count-btn" type="button" onclick="changeCount(-1)">−</button>
+                <span class="guest-num" id="guestCount">1</span>
+                <button class="count-btn" type="button" onclick="changeCount(1)">+</button>
+              </div>
+            </div>
+            <p class="error-msg" id="errAttend">Please select an option.</p>
+            <div class="btn-grid">
+              <button class="btn-soft" type="button" onclick="goStep(2,1)">← Back</button>
+              <button class="btn-solid" type="button" onclick="goStep(2,3)">Continue →</button>
+            </div>
+          </div>
+
+          <div id="step3" class="rsvp-step" style="display:none;">
+            <label class="form-label" for="guestMsg">Leave a wish <span style="font-weight:400;">(optional)</span></label>
+            <textarea id="guestMsg" class="form-field" rows="4" placeholder="Share a wish for Thomas & Sarah…"></textarea>
+            <div class="btn-grid">
+              <button class="btn-soft" type="button" onclick="goStep(3,2)">← Back</button>
+              <button class="btn-solid" id="sendBtn" type="button" onclick="submitRSVP()">Send ✦</button>
+            </div>
+          </div>
+
+          <div id="stepOk" style="display:none; text-align:center; padding:18px 0;">
+            <div style="font-size:38px; margin-bottom:8px;">✨</div>
+            <h3 style="font-family:'Great Vibes',cursive; font-size:44px; color:#373222; margin-bottom:10px;">Thank you!</h3>
+            <p id="okMsg" style="font-family:'Cormorant Garamond',serif; font-size:16px; line-height:1.55; color:#373222;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PANEL 8 — Closing
+       Buildings: 18.png (left), 19.png (right)
+  ══════════════════════════════════ -->
+  <div class="panel" id="p8" style="left:700cqw;">
+
+    <div class="water-shimmer"></div>
+
+    <img class="layer l-clouds"
+         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+
+    <div class="content">
+      <div class="fixed-copy closing-copy">
+        <div class="sans" style="color:#373222;opacity:0.52;margin-bottom:14px;font-weight:800;">We cannot wait to celebrate with you</div>
+        <div class="script" style="color:#373222;">Thomas &amp; Sarah</div>
+        <div style="font-size:30px;margin:14px 0;color:var(--rust);">♥</div>
+        <div class="serif" style="color:#373222;letter-spacing:0.12em;font-style:italic;opacity:0.78;">August 14, 2027 · Ehden, Lebanon</div>
+        <div class="orn"><span></span><em>✦</em><span></span></div>
+        <div class="sans" style="color:#373222;opacity:0.42;margin-top:12px;font-weight:800;">Designed with love · Cardia Studios</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panorama -->
+</div><!-- /stage -->
+
+<script>
+
+  /* ELEGANT PRELOADER FOR HEAVY PNG ASSETS
+     The overlay blocks the invitation until the artwork is ready.
+     A safety timeout prevents guests from being stuck if one remote image is slow or blocked. */
+  (function initCardiaAssetLoader(){
+    const loaderStage = document.getElementById('stage');
+    const loaderOverlay = document.getElementById('loadingOverlay');
+    const loaderBar = document.getElementById('loadingBarFill');
+    const loaderPercent = document.getElementById('loadingPercent');
+    if (!loaderStage || !loaderOverlay) return;
+
+    const imageUrls = [...new Set(
+      Array.from(document.querySelectorAll('img[src]'))
+        .map(img => img.currentSrc || img.getAttribute('src'))
+        .filter(Boolean)
+    )];
+
+    const minimumVisibleTime = 1200;
+    const safetyTimeout = 14000;
+    const startedAt = Date.now();
+    let done = 0;
+    let finished = false;
+
+    function setLoaderProgress(value){
+      const pct = Math.max(0, Math.min(100, Math.round(value)));
+      if (loaderBar) loaderBar.style.width = pct + '%';
+      if (loaderPercent) loaderPercent.textContent = pct + '%';
+    }
+
+    function finishLoader(){
+      if (finished) return;
+      finished = true;
+      setLoaderProgress(100);
+      const wait = Math.max(0, minimumVisibleTime - (Date.now() - startedAt));
+      setTimeout(() => {
+        loaderStage.classList.remove('assets-loading');
+        loaderStage.classList.add('assets-ready');
+        loaderOverlay.classList.add('is-hidden');
+        loaderOverlay.setAttribute('aria-hidden', 'true');
+        setTimeout(() => loaderOverlay.remove(), 900);
+      }, wait + 250);
+    }
+
+    if (!imageUrls.length) {
+      finishLoader();
+      return;
+    }
+
+    function markAssetReady(){
+      if (finished) return;
+      done += 1;
+      setLoaderProgress((done / imageUrls.length) * 100);
+      if (done >= imageUrls.length) finishLoader();
+    }
+
+    setLoaderProgress(3);
+
+    imageUrls.forEach(src => {
+      const img = new Image();
+      img.onload = markAssetReady;
+      img.onerror = markAssetReady;
+      img.src = src;
+      if (img.complete) markAssetReady();
+    });
+
+    window.addEventListener('load', () => setTimeout(finishLoader, 2500), { once:true });
+    setTimeout(finishLoader, safetyTimeout);
+  })();
+
+  const panorama = document.getElementById('panorama');
+  const progress = document.getElementById('progress');
+  const hint     = document.getElementById('hint');
+  const stage    = document.getElementById('stage');
+  const travelGondola = document.getElementById('travelGondola');
+  const PANELS   = 8;
+
+  let offset = 0;
+  let target = 0;
+  let lastOffset = 0;
+  let boatDir = 1;
+  let invitationOpened = false;
+
+  const panelW = () => stage.clientWidth;
+  const maxOff = () => (PANELS - 1) * panelW();
+  const clamp  = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  // smooth lerp loop
+  (function tick() {
+    if (!invitationOpened) target = 0;
+    const d = target - offset;
+    offset = Math.abs(d) < 0.4 ? target : offset + d * 0.1;
+    offset = clamp(offset, 0, maxOff());
+    panorama.style.transform = `translateX(${-offset}px)`;
+    progress.style.width = (offset / maxOff() * 100) + '%';
+
+    /* Driving gondola:
+       - moves left → right as you scroll/drag forward
+       - moves right → left as you go backward
+       - stays visible like the guest is travelling through Venice */
+    if (travelGondola) {
+      const max = Math.max(1, maxOff());
+      const t = offset / max;
+      if (Math.abs(offset - lastOffset) > 0.15) {
+        boatDir = offset >= lastOffset ? 1 : -1;
+      }
+      lastOffset = offset;
+
+      const startX = -stage.clientWidth * 0.08;
+      const endX   =  stage.clientWidth * 0.58;
+      const x = startX + (endX - startX) * t;
+      const bob = Math.sin(t * Math.PI * 10) * 4;
+      travelGondola.style.transform =
+        `translateX(${x}px) translateY(${bob}px) scaleX(${boatDir})`;
+    }
+
+    requestAnimationFrame(tick);
+  })();
+
+  let hintGone = false;
+  function hideHint() {
+    /* Permanent instruction: keep the drag hint visible. */
+    hintGone = false;
+    if (hint) hint.classList.remove('gone');
+  }
+
+  // WHEEL
+  window.addEventListener('wheel', e => {
+    e.preventDefault();
+    if (!invitationOpened) { target = 0; return; }
+    hideHint();
+    const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    target = clamp(target + d * 1.8, 0, maxOff());
+  }, { passive: false });
+
+  // DRAG
+  let dragX = null, dragBase = 0;
+  stage.addEventListener('mousedown', e => {
+    if (!invitationOpened) { dragX = null; target = 0; return; }
+    dragX = e.clientX;
+    dragBase = target;
+    stage.style.cursor = 'grabbing';
+    hideHint();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!invitationOpened) { target = 0; dragX = null; return; }
+    if (dragX === null) return;
+    target = clamp(dragBase + (dragX - e.clientX) * 1.5, 0, maxOff());
+  });
+  window.addEventListener('mouseup',   () => { dragX = null; stage.style.cursor = 'ew-resize'; });
+
+  // TOUCH
+  let touchX = 0, touchBase = 0;
+  stage.addEventListener('touchstart', e => {
+    if (!invitationOpened) { target = 0; return; }
+    touchX = e.touches[0].clientX;
+    touchBase = target;
+    hideHint();
+  }, { passive: true });
+  stage.addEventListener('touchmove',  e => {
+    if (!invitationOpened) { target = 0; return; }
+    target = clamp(touchBase + (touchX - e.touches[0].clientX) * 1.4, 0, maxOff());
+  }, { passive: true });
+
+  // KEYBOARD
+  window.addEventListener('keydown', e => {
+    if (!invitationOpened) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        target = 0;
+      }
+      return;
+    }
+    const step = panelW() * 0.85;
+    if (e.key === 'ArrowRight') { target = clamp(target + step, 0, maxOff()); hideHint(); }
+    if (e.key === 'ArrowLeft')  { target = clamp(target - step, 0, maxOff()); hideHint(); }
+  });
+
+
+  /* PHOTO ALBUM */
+  let veniceAlbumIndex = 0;
+  const veniceAlbumTrack = document.getElementById('veniceAlbumTrack');
+  const veniceAlbumCounter = document.getElementById('veniceAlbumCounter');
+  const veniceAlbumTotal = veniceAlbumTrack ? veniceAlbumTrack.children.length : 0;
+
+  function updateVeniceAlbum() {
+    if (!veniceAlbumTrack) return;
+    veniceAlbumTrack.style.transform = `translateX(${-veniceAlbumIndex * 100}%)`;
+    if (veniceAlbumCounter) veniceAlbumCounter.textContent = `${veniceAlbumIndex + 1} / ${veniceAlbumTotal}`;
+  }
+
+  function moveVeniceAlbum(dir) {
+    if (!veniceAlbumTotal) return;
+    veniceAlbumIndex = (veniceAlbumIndex + dir + veniceAlbumTotal) % veniceAlbumTotal;
+    updateVeniceAlbum();
+  }
+
+  const veniceAlbum = document.getElementById('veniceAlbum');
+  if (veniceAlbum) {
+    veniceAlbum.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
+    veniceAlbum.addEventListener('mousedown', e => e.stopPropagation());
+    veniceAlbum.addEventListener('mousemove', e => e.stopPropagation());
+    veniceAlbum.addEventListener('mouseup', e => e.stopPropagation());
+    let ax = null;
+    veniceAlbum.addEventListener('touchstart', e => {
+      ax = e.touches[0].clientX;
+      e.stopPropagation();
+    }, { passive: true });
+    veniceAlbum.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
+    veniceAlbum.addEventListener('touchend', e => {
+      if (ax === null) return;
+      const bx = e.changedTouches[0].clientX;
+      if (Math.abs(ax - bx) > 40) moveVeniceAlbum(ax > bx ? 1 : -1);
+      ax = null;
+      e.stopPropagation();
+    }, { passive: true });
+  }
+
+  /* MUSIC PLAY / STOP */
+  const bgMusic = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  const openInvitationBtn = document.getElementById('openInvitationBtn');
+
+  function setMusicButton(isPlaying){
+    if (!musicBtn) return;
+    musicBtn.textContent = isPlaying ? 'Ⅱ' : '♪';
+    musicBtn.classList.toggle('music-on', isPlaying);
+    musicBtn.setAttribute('aria-label', isPlaying ? 'Stop music' : 'Play music');
+  }
+
+  function startInvitationMusic(){
+    if (!bgMusic) return;
+    bgMusic.play()
+      .then(() => setMusicButton(true))
+      .catch(() => setMusicButton(false));
+  }
+
+  if (openInvitationBtn) {
+    openInvitationBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      invitationOpened = true;
+      stage.classList.remove('invitation-locked');
+      stage.style.cursor = 'ew-resize';
+      startInvitationMusic();
+
+      /* The Open Invitation button is only used to start the music.
+         After opening, remove it completely instead of showing “Invitation Opened”. */
+      openInvitationBtn.style.display = 'none';
+      openInvitationBtn.setAttribute('aria-hidden', 'true');
+
+      hideHint();
+    });
+  }
+
+  if (musicBtn && bgMusic) {
+    musicBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        startInvitationMusic();
+      } else {
+        bgMusic.pause();
+        setMusicButton(false);
+      }
+    });
+  }
+
+
+  /* RSVP → GOOGLE SHEETS */
+  const COUPLE_NAME='Thomas & Sarah';
+  const CUSTOMER_EMAIL='cardiastudios@gmail.com';
+  const RSVP_SCRIPT_URL='https://script.google.com/macros/s/AKfycbzJmJqBu9U9t6lKlbBMCvHtkXNBo6026SirsYWAhVMo_H5l9gRhoBmXipvAvI47c5v4lw/exec';
+
+  function postRSVPToGoogleSheet(payload){
+    const iframeName='rsvpGoogleSheetFrame';
+    let iframe=document.getElementById(iframeName);
+    if(!iframe){iframe=document.createElement('iframe');iframe.name=iframe.id=iframeName;iframe.style.display='none';document.body.appendChild(iframe);}
+    const form=document.createElement('form');form.method='POST';form.action=RSVP_SCRIPT_URL;form.target=iframeName;form.style.display='none';
+    Object.entries(payload).forEach(([k,v])=>{const inp=document.createElement('input');inp.type='hidden';inp.name=k;inp.value=v;form.appendChild(inp);});
+    document.body.appendChild(form);form.submit();setTimeout(()=>form.remove(),1500);
+  }
+
+  function decodeGuestList(raw){if(!raw)return[];return raw.split(/\||,|\n|;/).map(n=>n.trim()).filter(Boolean);}
+  function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#039;'}[c]));}
+  function formatGuestNames(names){const c=names.map(n=>String(n||'').trim()).filter(Boolean);if(!c.length)return'Guest';if(c.length===1)return c[0];if(c.length===2)return c[0]+' & '+c[1];return c.slice(0,-1).join(', ')+' & '+c[c.length-1];}
+
+  const _inviteParams=new URLSearchParams(window.location.search);
+  const _namedGuests=[...new Set([...decodeGuestList(_inviteParams.get('guests')||''),...decodeGuestList(_inviteParams.get('guest')||''),...decodeGuestList(_inviteParams.get('invite')||''),...decodeGuestList(_inviteParams.get('group')||'')])];
+  const hasLockedGuestNames=_namedGuests.length>0;
+  const _parsedLimit=parseInt(_inviteParams.get('limit')||String(_namedGuests.length||1),10);
+  const guestLimit=Number.isFinite(_parsedLimit)&&_parsedLimit>0?_parsedLimit:Math.max(_namedGuests.length,1);
+  const lockedGuestNames=hasLockedGuestNames?_namedGuests.slice(0,guestLimit):[];
+  const invitedGroupForClient=formatGuestNames(lockedGuestNames);
+
+  let guestResponses=hasLockedGuestNames
+    ?lockedGuestNames.map((name,i)=>({slot:'Guest '+(i+1),name,attending:'Yes',manualAttendance:false,locked:true}))
+    :Array.from({length:guestLimit},(_,i)=>({slot:'Guest '+(i+1),name:'',attending:'Yes',manualAttendance:false,locked:false}));
+
+  function applyPersonalGuestLink(){
+    const welcomeEl=document.getElementById('guestWelcomeName');
+    const noteEl=document.getElementById('personalGuestNote');
+    if(welcomeEl)welcomeEl.textContent=hasLockedGuestNames?invitedGroupForClient:'Guest';
+    if(noteEl)noteEl.textContent=hasLockedGuestNames?'Please confirm who can attend from this invitation.':(guestLimit===1?'Please enter your name to confirm the RSVP.':'Please enter the guest names to confirm the RSVP.');
+    renderGuestNameBoxes();updateGuestTotal();
+  }
+
+  function renderGuestNameBoxes(){
+    const boxList=document.getElementById('guestSlotNameList');if(!boxList)return;
+    boxList.innerHTML=guestResponses.map((guest,index)=>{
+      const safeName=escapeHTML(guest.name||'');
+      const yesChecked=guest.attending==='Yes'?' checked':'';
+      const noChecked=guest.attending==='No'?' checked':'';
+      const lockedClass=guest.locked?' locked':'';
+      const readonlyAttr=guest.locked?' readonly aria-readonly="true"':'';
+      const inputHandler=guest.locked?'':` oninput="setGuestName(${index},this.value)"`;
+      const labelText=guest.locked?escapeHTML(guest.name):'Guest '+(index+1);
+      return`<div class="guest-slot-name-box${lockedClass}"><label class="guest-slot-name-label" for="guestSlotInput${index}">${labelText}</label><input id="guestSlotInput${index}" type="text" value="${safeName}" placeholder="Write name" ${readonlyAttr}${inputHandler}/><div class="guest-slot-attendance" aria-label="Guest ${index+1} attendance"><span>Attending?</span><div class="guest-response-options"><label><input type="radio" name="guestAttend${index}" value="Yes"${yesChecked} onchange="setGuestResponse(${index},'Yes')"/><span class="guest-response-pill">Yes</span></label><label><input type="radio" name="guestAttend${index}" value="No"${noChecked} onchange="setGuestResponse(${index},'No')"/><span class="guest-response-pill">No</span></label></div></div></div>`;
+    }).join('');
+  }
+
+  function setGuestName(index,value){
+    if(!guestResponses[index])return;
+    const hadName=!!(guestResponses[index].name&&guestResponses[index].name.trim());
+    guestResponses[index].name=value.trim();
+    if(!hadName&&guestResponses[index].name&&!guestResponses[index].manualAttendance){
+      guestResponses[index].attending='Yes';renderGuestNameBoxes();
+      const inp=document.getElementById('guestSlotInput'+index);
+      if(inp){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length);}
+    }
+    const errName=document.getElementById('errName');if(errName)errName.style.display='none';
+    updateGuestTotal();
+  }
+  function setGuestResponse(index,value){if(!guestResponses[index])return;guestResponses[index].attending=value;guestResponses[index].manualAttendance=true;updateGuestTotal();}
+  function updateGuestTotal(){const total=guestResponses.filter(g=>g.name&&g.name.trim()&&g.attending==='Yes').length;const el=document.getElementById('guestCount');if(el)el.textContent=total;}
+
+  function goStep(from,to){
+    if(from===1){
+      const named=guestResponses.filter(g=>g.name&&g.name.trim());
+      if(!named.length){const e=document.getElementById('errName');if(e)e.style.display='block';return;}
+      guestResponses.forEach(g=>{if(g.name&&g.name.trim()){if(!g.attending)g.attending='Yes';}else{g.attending='No';}});
+      const e=document.getElementById('errName');if(e)e.style.display='none';
+    }
+    ['step1','step2','step3'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+    const toEl=document.getElementById('step'+to);if(toEl)toEl.style.display='block';
+    [1,2,3].forEach(i=>{const dot=document.getElementById('dot-'+i);if(dot)dot.classList.toggle('on',i<=(to===3?2:1));});
+  }
+
+  function showRSVPThankYou(groupName,attendingCount){
+    ['step1','step2','step3'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+    const dots=document.querySelector('.step-dots');if(dots)dots.style.display='none';
+    const ok=document.getElementById('stepOk');if(ok)ok.style.display='block';
+    const okMsg=document.getElementById('okMsg');
+    if(okMsg)okMsg.innerHTML='Thank you, <strong>'+escapeHTML(groupName)+'</strong>!<br>We received your RSVP for '+attendingCount+' guest'+(attendingCount===1?'':'s')+'.';
+  }
+
+  function submitRSVP(){
+    guestResponses.forEach(g=>{if(!g.name||!g.name.trim())g.attending='No';});
+    const attendingCount=guestResponses.filter(g=>g.name&&g.name.trim()&&g.attending==='Yes').length;
+    const submittedNames=guestResponses.map(g=>g.name.trim()).filter(Boolean);
+    const groupName=formatGuestNames(submittedNames);
+    const responseLines=guestResponses.filter(g=>g.name&&g.name.trim()).map(g=>g.slot+' - '+g.name+': '+g.attending).join('\n');
+    const msg=document.getElementById('guestMsg')?document.getElementById('guestMsg').value.trim():'';
+    const sendBtn=document.getElementById('sendBtn');
+    if(sendBtn){sendBtn.textContent='Sending...';sendBtn.disabled=true;}
+    postRSVPToGoogleSheet({event:COUPLE_NAME,customer_email:CUSTOMER_EMAIL,guest_name:groupName,invited_guest_from_link:invitedGroupForClient,attending:attendingCount>0?'Yes':'No',attending_summary:responseLines,guest_count:attendingCount,guest_limit:guestLimit,guests_json:JSON.stringify(guestResponses),message:msg||'',page_url:window.location.href,submitted_at:new Date().toISOString()});
+    setTimeout(()=>{if(sendBtn){sendBtn.textContent='Sent ✓';sendBtn.disabled=true;}showRSVPThankYou(groupName,attendingCount);},700);
+  }
+
+  applyPersonalGuestLink();
+
+
+
+  window.addEventListener('resize', () => {
+    target = clamp(target, 0, maxOff());
+    offset = clamp(offset, 0, maxOff());
+  });
+
+function updateGuestScrollUI(){
+  const rows=document.querySelectorAll('.guest-row');
+  const up=document.querySelector('.guest-scroll-up');
+  const down=document.querySelector('.guest-scroll-down');
+  const bar=document.querySelector('.guest-scrollbar-wrap');
+  const needsScroll=rows.length>3;
+  if(up) up.style.display=needsScroll?'flex':'none';
+  if(down) down.style.display=needsScroll?'flex':'none';
+  if(bar) bar.style.display=needsScroll?'block':'none';
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(updateGuestScrollUI,100));
+
+
+function forceGuestArrowVisibility(){
+  const guestInputs=document.querySelectorAll('input[type="text"], .guest-row');
+  const count=guestInputs.length;
+  const up=document.querySelector('.guest-scroll-up');
+  const down=document.querySelector('.guest-scroll-down');
+  const bar=document.querySelector('.guest-scrollbar-wrap');
+  if(count<=3){
+    if(up) up.style.display='none';
+    if(down) down.style.display='none';
+    if(bar) bar.style.display='none';
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(forceGuestArrowVisibility,300));
+window.addEventListener('load',()=>setTimeout(forceGuestArrowVisibility,300));
+
+</script>
+</body>
+</html>

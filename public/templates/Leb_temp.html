@@ -1,0 +1,3041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Thomas & Sarah — Ehden Wedding Invitation</title>
+
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CARDIA UPDATE — preload every visual/audio asset before the loader opens the invitation -->
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/cardiastudios/Tempo/refs/heads/main/Ralph%20%26%20Roussana/Lebanon.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Car.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Dabke.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Dance.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Post3.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Birds1.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Birds1.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png">
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Plane3.png">
+  <link rel="preload" as="audio" href="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Ray.mp3" type="audio/mpeg">
+
+  <style>
+    :root {
+      --app-height: 100svh;
+      --pano-url: url("https://raw.githubusercontent.com/cardiastudios/Tempo/refs/heads/main/Ralph%20%26%20Roussana/Lebanon.png");
+      --car-url: url("https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Car.png");
+
+      /* Rossi10.png = 7517 × 852 */
+      --pano-ratio: 8.8227699531;
+
+      /* Desktop keeps the elegant 9:16 invitation frame. Mobile is full-screen below. */
+      --screen-w: min(100vw, calc(var(--app-height) * 9 / 16));
+      --screen-h: min(var(--app-height), calc(100vw * 16 / 9));
+
+      --gold: #f7d27c;
+      --gold-soft: #ffe7a6;
+      --warm-gold: #d99a43;
+      --sunset: #c96b2f;
+      --cream: #fff3da;
+      --ink: #261106;
+      --brown: #321606;
+      --panel: rgba(39, 16, 6, .54);
+      --panel-soft: rgba(39, 16, 6, .40);
+
+      --car-left: 18%;
+      --car-tilt: 0deg;
+      --car-scale-x: 1;
+      --dust-opacity: .14;
+    }
+
+    @supports (height: 100dvh) {
+      :root { --app-height: 100dvh; }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      min-height: var(--app-height);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(217, 154, 67, .26), transparent 36%),
+        linear-gradient(180deg, #120704, #050201);
+      color: var(--cream);
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .stage {
+      position: relative;
+      width: var(--screen-w);
+      height: var(--screen-h);
+      overflow: hidden;
+      background: #080302;
+      isolation: isolate;
+      user-select: none;
+      box-shadow:
+        0 0 0 1px rgba(247, 210, 124, .18),
+        0 30px 80px rgba(0, 0, 0, .58);
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --screen-w: 100vw;
+        --screen-h: var(--app-height);
+      }
+
+      html,
+      body {
+        width: 100vw;
+        height: var(--app-height);
+        min-height: var(--app-height);
+        background: #080302;
+      }
+
+      body { display: block; }
+
+      .stage {
+        width: 100vw;
+        height: var(--app-height);
+        max-width: 100vw;
+        max-height: var(--app-height);
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    .pano-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: grab;
+      scrollbar-width: none;
+      touch-action: none;
+      overscroll-behavior: contain;
+    }
+
+    .pano-wrap:active { cursor: grabbing; }
+    .pano-wrap::-webkit-scrollbar { display: none; }
+
+    body.invitation-locked .pano-wrap {
+      overflow: hidden;
+      touch-action: none;
+      cursor: default;
+    }
+
+    .pano {
+      position: relative;
+      height: 100%;
+      width: calc(var(--screen-h) * var(--pano-ratio));
+      background-image: var(--pano-url);
+      background-size: 100% 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    /* Soft golden atmosphere only. No duplicated/cut panorama layers. */
+    .pano::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 53% 14%, rgba(255, 220, 139, .18), transparent 30%),
+        linear-gradient(180deg, rgba(255, 176, 80, .08), transparent 48%, rgba(58, 22, 5, .11));
+      mix-blend-mode: screen;
+    }
+
+
+
+
+
+.Dabke {
+      position: absolute;
+      z-index: 6;
+      width: calc(var(--screen-h) * .135);
+      height: auto;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+      pointer-events: none;
+      opacity: .94;
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .020) rgba(48, 17, 5, .22))
+        drop-shadow(0 0 calc(var(--screen-h) * .010) rgba(255, 230, 170, .12));
+      will-change: transform;
+    }
+    .Dabke {
+      left: 51.6%;
+      top: 68%;
+      width: calc(var(--screen-h) * .23);
+      transform-origin: 50% 90%;
+      animation: dabkeStep 5.18s ease-in-out infinite;
+    }
+
+.Dance {
+      position: absolute;
+      z-index: 6;
+      width: calc(var(--screen-h) * .135);
+      height: auto;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+      pointer-events: none;
+      opacity: .94;
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .020) rgba(48, 17, 5, .22))
+        drop-shadow(0 0 calc(var(--screen-h) * .010) rgba(255, 230, 170, .12));
+      will-change: transform;
+    }
+
+  .Dance {
+    left: 51.6%;
+    top: 70%;
+    width: calc(var(--screen-h) * .135);
+    transform-origin: 50% 88%;
+    animation: coupleSwayDance 3.15s ease-in-out infinite;
+  }
+
+    @keyframes dabkeStep {
+      0%, 100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-1.4deg) scale(1);
+      }
+      18% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.010), calc(var(--screen-h) * -.010), 0) rotate(2.0deg) scale(1.012);
+      }
+      36% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .009), calc(var(--screen-h) * .002), 0) rotate(-1.8deg) scale(.995);
+      }
+      54% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .014), calc(var(--screen-h) * -.012), 0) rotate(2.2deg) scale(1.015);
+      }
+      72% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.006), calc(var(--screen-h) * .003), 0) rotate(-1.0deg) scale(.998);
+      }
+    }
+
+    @keyframes coupleSwayDance {
+      0%, 100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-1.0deg) scale(1);
+      }
+      25% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.006), calc(var(--screen-h) * -.006), 0) rotate(1.6deg) scale(1.006);
+      }
+      50% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .006), calc(var(--screen-h) * -.002), 0) rotate(-.4deg) scale(1.012);
+      }
+      75% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .010), calc(var(--screen-h) * -.007), 0) rotate(1.4deg) scale(1.004);
+      }
+    }
+
+    .hot-air {
+      position: absolute;
+      z-index: 6;
+      width: calc(var(--screen-h) * .115);
+      height: auto;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+      pointer-events: none;
+      opacity: .94;
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .020) rgba(48, 17, 5, .22))
+        drop-shadow(0 0 calc(var(--screen-h) * .010) rgba(255, 230, 170, .12));
+      will-change: transform;
+    }
+
+
+
+    .hot-air-1a { left: 17.2%; top: 67.5%; width: calc(var(--screen-h) * .425) }
+    .hot-air-1b { left: 37.2%; top: 71.5%; width: calc(var(--screen-h) * .425) }
+    .hot-air-1 { left: 16.2%; top: 13.5%; width: calc(var(--screen-h) * .105); animation: balloonFloatA 22s ease-in-out infinite; }
+    .hot-air-2 { left: 24.8%; top: 20.2%; width: calc(var(--screen-h) * .082); opacity: .86; animation: balloonFloatB 26s ease-in-out infinite; animation-delay: -7s; }
+    .hot-air-3 { left: 36.6%; top: 12.8%; width: calc(var(--screen-h) * .128); animation: balloonFloatA 28s ease-in-out infinite; animation-delay: -12s; }
+    .hot-air-4 { left: 25.4%; top: 48.5%; width: calc(var(--screen-h) * .092); opacity: .88; animation: balloonFloatB 24s ease-in-out infinite; animation-delay: -4s; }
+    .hot-air-5 { left: 59.8%; top: 12.5%; width: calc(var(--screen-h) * .118); animation: balloonFloatA 30s ease-in-out infinite; animation-delay: -16s; }
+    .hot-air-6 { left: 70.6%; top: 20.8%; width: calc(var(--screen-h) * .085); opacity: .86; animation: balloonFloatB 27s ease-in-out infinite; animation-delay: -10s; }
+    .hot-air-7 { left: 82.5%; top: 14.4%; width: calc(var(--screen-h) * .125); animation: balloonFloatA 31s ease-in-out infinite; animation-delay: -19s; }
+    .hot-air-8 { left: 37.2%; top: 28.8%; width: calc(var(--screen-h) * .788); animation: balloonFloatA 22s ease-in-out infinite; }
+
+    /* Clickable hotspots placed over the "Open location" areas already designed inside Rossi10.png.
+       They are transparent so the background board stays exactly as it is. */
+    .board-location-link {
+      position: absolute;
+      z-index: 24;
+      display: block;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .130);
+      height: calc(var(--screen-h) * .043);
+      border-radius: calc(var(--screen-h) * .010);
+      background: transparent;
+      text-indent: -9999px;
+      overflow: hidden;
+      pointer-events: auto;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .board-location-link:focus-visible {
+      outline: 2px solid rgba(67, 44, 22, .70);
+      outline-offset: 2px;
+      background: rgba(255, 245, 220, .16);
+    }
+
+    .board-location-link.bride-house-location {
+      left: 18.42%;
+      top: 59.75%;
+    }
+
+    .board-location-link.groom-house-location {
+      left: 18.42%;
+      top: 63.28%;
+    }
+
+
+    @keyframes balloonFloatA {
+      0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-1.2deg); }
+      50% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .018), calc(var(--screen-h) * -.020), 0) rotate(1.6deg); }
+    }
+
+    @keyframes balloonFloatB {
+      0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(1.2deg); }
+      50% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.018), calc(var(--screen-h) * -.014), 0) rotate(-1.5deg); }
+    }
+
+    .stage-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 22;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(9, 3, 1, .20), transparent 18%, transparent 82%, rgba(9, 3, 1, .22)),
+        linear-gradient(180deg, rgba(8, 2, 1, .03), transparent 58%, rgba(8, 2, 1, .18));
+    }
+
+    .gold-text {
+      color: #f0d9a0;
+      text-shadow:
+        0 calc(var(--screen-h) * .0015) calc(var(--screen-h) * .0025) rgba(49, 21, 7, .66),
+        0 0 calc(var(--screen-h) * .0045) rgba(255, 238, 190, .34),
+        0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .020) rgba(45, 16, 4, .42);
+    }
+
+    .static-card h2.gold-text,
+    .parents-card .couple-line,
+    .guest-welcome-title,
+    #stepOk h3 {
+      color: #ecd18c;
+      background: linear-gradient(180deg, #fff6d4 0%, #f0d58f 40%, #c58a42 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .0018) calc(var(--screen-h) * .0022) rgba(54, 23, 8, .68))
+        drop-shadow(0 0 calc(var(--screen-h) * .0045) rgba(255, 234, 177, .28));
+    }
+
+    .static-card h2.gold-text {
+      letter-spacing: .012em;
+    }
+
+    .final-card h2.gold-text {
+      line-height: 1.06;
+      letter-spacing: .006em;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 23.8%;
+      z-index: 10;
+      left: 10.5%;
+      width: calc(var(--screen-h) * .455);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .story-title {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .053);
+color: #1E1C11;
+      line-height: .92;
+    }
+
+    .story-star {
+      margin: calc(var(--screen-h) * .004) 0 calc(var(--screen-h) * .006);
+      color: #1E1C11;
+      font-size: calc(var(--screen-h) * .020);
+      line-height: 1;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .012) rgba(255, 226, 156, .78),
+        0 calc(var(--screen-h) * .003) calc(var(--screen-h) * .006) rgba(55, 16, 2, .45);
+    }
+
+    .story-copy {
+      margin: 0 auto;
+      max-width: calc(var(--screen-h) * .43);
+      color:#1E1C11;
+      font-size: calc(var(--screen-h) * .0187);
+      font-weight: 900;
+      line-height: 1.24;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .010) rgba(255, 229, 164, .52),
+        0 calc(var(--screen-h) * .003) calc(var(--screen-h) * .007) rgba(55, 16, 2, .60);
+    }
+
+    .date-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--screen-h) * .010);
+      margin-top: calc(var(--screen-h) * .015);
+      font: 800 calc(var(--screen-h) * .0158)/1 "Montserrat", sans-serif;
+      letter-spacing: .20em;
+      color: rgba(255, 241, 206, .94);
+      text-transform: uppercase;
+    }
+
+    .date-line::before,
+    .date-line::after {
+      content: "";
+      width: calc(var(--screen-h) * .052);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 224, 149, .90));
+      box-shadow: 0 0 calc(var(--screen-h) * .010) rgba(255, 190, 96, .65);
+    }
+
+    .date-line::after {
+      background: linear-gradient(90deg, rgba(255, 224, 149, .90), transparent);
+    }
+
+    .static-card {
+      position: absolute;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .38);
+      padding: calc(var(--screen-h) * .020) calc(var(--screen-h) * .022);
+      border-radius: calc(var(--screen-h) * .026);
+      border: 1px solid rgba(255, 224, 149, .34);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 222, 142, .13), transparent 44%),
+        linear-gradient(180deg, rgba(53, 22, 7, .54), rgba(17, 6, 2, .42));
+      box-shadow:
+        0 calc(var(--screen-h) * .018) calc(var(--screen-h) * .050) rgba(0, 0, 0, .35),
+        inset 0 0 0 1px rgba(255, 247, 222, .045);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      text-align: center;
+      user-select: text;
+    }
+
+    .static-card::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: calc(var(--screen-h) * .012);
+      width: 68%;
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(255, 224, 149, .60), transparent);
+      pointer-events: none;
+    }
+
+    .static-card h2 {
+      margin: 0 0 calc(var(--screen-h) * .010);
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .047);
+      line-height: .98;
+    }
+
+    .static-card .kicker {
+      margin: 0 0 calc(var(--screen-h) * .009);
+      color: rgba(255, 236, 196, .82);
+      font: 800 calc(var(--screen-h) * .0105)/1 "Montserrat", sans-serif;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+    }
+
+    .static-card p {
+      margin: 0;
+      font-size: calc(var(--screen-h) * .0185);
+      line-height: 1.28;
+      color: rgba(255, 246, 226, .94);
+    }
+
+    .static-card strong {
+      display: block;
+      margin: calc(var(--screen-h) * .004) 0;
+      color: #f1d99b;
+      font-size: calc(var(--screen-h) * .023);
+      line-height: 1.10;
+      text-shadow:
+        0 calc(var(--screen-h) * .0015) calc(var(--screen-h) * .0025) rgba(45, 18, 5, .55),
+        0 0 calc(var(--screen-h) * .004) rgba(255, 235, 185, .25);
+    }
+
+    .static-card .small {
+      display: block;
+      margin-top: calc(var(--screen-h) * .006);
+      color: rgba(255, 236, 196, .82);
+      font: 800 calc(var(--screen-h) * .0115)/1.25 "Montserrat", sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .static-card .map-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: calc(var(--screen-h) * .014);
+      padding: calc(var(--screen-h) * .008) calc(var(--screen-h) * .016);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 224, 149, .44);
+      background: rgba(255, 247, 228, .12);
+      color: rgba(255, 241, 206, .96);
+      font: 900 calc(var(--screen-h) * .0102)/1 "Montserrat", sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: background .22s ease, transform .22s ease;
+    }
+
+    .static-card .map-link:hover {
+      background: rgba(255, 247, 228, .20);
+      transform: translateY(calc(var(--screen-h) * -.002));
+    }
+
+    .parents-card {
+      left: 10.5%;
+      top: 55.5%;
+      width: calc(var(--screen-h) * .43);
+      padding: calc(var(--screen-h) * .018) calc(var(--screen-h) * .020);
+    }
+
+    .parents-card .parents-names {
+      margin: 0;
+      color: rgba(255, 247, 226, .96);
+      font-size: calc(var(--screen-h) * .0205);
+      font-weight: 700;
+      line-height: 1.20;
+    }
+
+    .parents-card .request-line {
+      margin-top: calc(var(--screen-h) * .010);
+      color: rgba(255, 241, 211, .90);
+      font-size: calc(var(--screen-h) * .0168);
+      line-height: 1.24;
+    }
+
+    .parents-card .couple-line {
+      display: block;
+      margin-top: calc(var(--screen-h) * .007);
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .040);
+      line-height: .98;
+    }
+
+    .church-card {
+      left: 26.4%;
+      top: 27.5%;
+    }
+
+    .venue-card {
+      left: 50.6%;
+      top: 28%;
+      width: calc(var(--screen-h) * .40);
+    }
+
+    .gift-card {
+      left: 61.8%;
+      top: 34%;
+      width: calc(var(--screen-h) * .42);
+    }
+
+    .gift-card .gift-line {
+      display: grid;
+      gap: calc(var(--screen-h) * .006);
+      margin-top: calc(var(--screen-h) * .014);
+      text-align: left;
+    }
+
+    .gift-card .gift-line div {
+      padding: calc(var(--screen-h) * .010) calc(var(--screen-h) * .012);
+      border-radius: calc(var(--screen-h) * .014);
+      border: 1px solid rgba(255, 224, 149, .20);
+      background: rgba(255, 244, 221, .08);
+    }
+
+    .gift-card .gift-line span {
+      display: block;
+      margin-bottom: calc(var(--screen-h) * .004);
+      color: rgba(255, 236, 196, .72);
+      font: 800 calc(var(--screen-h) * .0095)/1 "Montserrat", sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .gift-card .gift-line code,
+    .gift-card .gift-line b {
+      display: block;
+      color: #fff1c9;
+      font: 800 calc(var(--screen-h) * .0125)/1.28 "Montserrat", sans-serif;
+      letter-spacing: .03em;
+      word-break: break-word;
+    }
+
+    .rsvp-card {
+      left: 74.2%;
+      top: 42%;
+      width: calc(var(--screen-h) * .44);
+      max-height: calc(var(--screen-h) * .79);
+      padding: calc(var(--screen-h) * .020);
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(247, 210, 124, .68) rgba(255,255,255,.08);
+    }
+
+    .rsvp-card::-webkit-scrollbar { width: calc(var(--screen-h) * .007); }
+    .rsvp-card::-webkit-scrollbar-track { background: rgba(255,255,255,.08); border-radius: 999px; }
+    .rsvp-card::-webkit-scrollbar-thumb { background: rgba(247,210,124,.68); border-radius: 999px; }
+
+    .rsvp-form {
+      display: grid;
+      gap: calc(var(--screen-h) * .009);
+      margin-top: calc(var(--screen-h) * .014);
+      text-align: left;
+    }
+
+    .field-label {
+      display: grid;
+      gap: calc(var(--screen-h) * .005);
+      color: rgba(255, 235, 194, .84);
+      font: 800 calc(var(--screen-h) * .0102)/1 "Montserrat", sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 224, 149, .38);
+      border-radius: calc(var(--screen-h) * .013);
+      padding: calc(var(--screen-h) * .012) calc(var(--screen-h) * .013);
+      outline: none;
+      background: rgba(255, 247, 228, .93);
+      color: var(--brown);
+      font: 800 calc(var(--screen-h) * .013)/1.22 "Montserrat", sans-serif;
+      user-select: text;
+    }
+
+    textarea {
+      min-height: calc(var(--screen-h) * .064);
+      resize: vertical;
+    }
+
+    .attendance-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: calc(var(--screen-h) * .008);
+    }
+
+    .attendance-pills label {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(var(--screen-h) * .043);
+      border: 1px solid rgba(255, 224, 149, .38);
+      border-radius: 999px;
+      background: rgba(255, 247, 228, .90);
+      color: var(--brown);
+      font: 900 calc(var(--screen-h) * .011)/1 "Montserrat", sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .attendance-pills input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    .attendance-pills label:has(input:checked) {
+      background: linear-gradient(135deg, #ffe7a4, #d99a43, #bd6230);
+      color: #241006;
+      border-color: rgba(255, 231, 164, .78);
+      box-shadow: 0 0 calc(var(--screen-h) * .017) rgba(247, 210, 124, .28);
+    }
+
+    .submit-btn,
+    .open-invitation-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 224, 149, .66);
+      background: linear-gradient(135deg, #ffe7a4, #d99a43, #bd6230);
+      color: #261106;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .22s ease, filter .22s ease, opacity .22s ease;
+      box-shadow: 0 calc(var(--screen-h) * .014) calc(var(--screen-h) * .034) rgba(0, 0, 0, .28);
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: calc(var(--screen-h) * .004);
+      padding: calc(var(--screen-h) * .014) calc(var(--screen-h) * .018);
+      font-size: calc(var(--screen-h) * .0115);
+    }
+
+    .open-invitation-btn {
+      position: absolute;
+      z-index: 55;
+      left: 50%;
+      top: 80%;
+      transform: translate(-50%, -50%);
+      padding: calc(var(--screen-h) * .012) calc(var(--screen-h) * .034);
+      font-size: calc(var(--screen-h) * .0108);
+      white-space: nowrap;
+    }
+
+    .submit-btn:hover,
+    .open-invitation-btn:hover {
+      filter: brightness(1.06);
+    }
+
+    .open-invitation-btn:hover {
+      transform: translate(-50%, -52%);
+    }
+
+    body.invitation-open .open-invitation-btn {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .thank-you {
+      display: none;
+      margin: calc(var(--screen-h) * .014) 0 0;
+      color: #ffe7a6;
+      font-size: calc(var(--screen-h) * .018);
+      line-height: 1.32;
+      text-align: center;
+    }
+
+    .final-card {
+      left: 84.2%;
+      top: 30%;
+      width: calc(var(--screen-h) * .43);
+    }
+
+    .powered-by {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--screen-h) * .004);
+      margin-top: calc(var(--screen-h) * .026);
+      padding: calc(var(--screen-h) * .012) calc(var(--screen-h) * .030) calc(var(--screen-h) * .011);
+      color: rgba(255, 242, 213, .92);
+      text-decoration: none;
+      pointer-events: auto;
+      cursor: pointer;
+      border-radius: calc(var(--screen-h) * .020);
+      border: 1px solid rgba(255, 229, 169, .20);
+      background: rgba(255, 244, 218, .045);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .035),
+        0 calc(var(--screen-h) * .006) calc(var(--screen-h) * .018) rgba(0, 0, 0, .16);
+      transition: transform .22s ease, opacity .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    .powered-by::before,
+    .powered-by::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 82%;
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(255, 229, 169, .62), transparent);
+      pointer-events: none;
+    }
+
+    .powered-by::before { top: 0; }
+    .powered-by::after { bottom: 0; }
+
+    .powered-by-label {
+      font: 700 calc(var(--screen-h) * .0092)/1 "Montserrat", sans-serif;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255, 239, 203, .72);
+    }
+
+    .powered-by-brand {
+      font-family: "Great Vibes", cursive;
+      font-size: calc(var(--screen-h) * .033);
+      font-weight: 400;
+      line-height: .95;
+      color: #efd698;
+      background: linear-gradient(180deg, #fff5d0 0%, #eacb82 48%, #b87934 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .0018) calc(var(--screen-h) * .0022) rgba(52, 22, 7, .62))
+        drop-shadow(0 0 calc(var(--screen-h) * .004) rgba(255, 232, 176, .24));
+    }
+
+    .powered-by-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: calc(var(--screen-h) * .003);
+      padding: calc(var(--screen-h) * .0045) calc(var(--screen-h) * .012);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 229, 169, .34);
+      background: rgba(255, 241, 209, .12);
+      color: rgba(255, 244, 222, .90);
+      font: 800 calc(var(--screen-h) * .0082)/1 "Montserrat", sans-serif;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      line-height: 1;
+      -webkit-text-fill-color: currentColor;
+    }
+
+    .powered-by:hover,
+    .powered-by:focus-visible {
+      transform: translateY(calc(var(--screen-h) * -.002));
+      background: rgba(255, 244, 218, .085);
+      border-color: rgba(255, 229, 169, .38);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .055),
+        0 calc(var(--screen-h) * .008) calc(var(--screen-h) * .022) rgba(0, 0, 0, .20),
+        0 0 calc(var(--screen-h) * .014) rgba(255, 229, 169, .16);
+      outline: none;
+    }
+
+    .powered-by:hover .powered-by-brand,
+    .powered-by:focus-visible .powered-by-brand {
+      filter:
+        drop-shadow(0 calc(var(--screen-h) * .0018) calc(var(--screen-h) * .0022) rgba(52, 22, 7, .62))
+        drop-shadow(0 0 calc(var(--screen-h) * .006) rgba(255, 232, 176, .36));
+    }
+
+    .powered-by:hover .powered-by-cta,
+    .powered-by:focus-visible .powered-by-cta {
+      background: rgba(255, 241, 209, .20);
+      border-color: rgba(255, 229, 169, .52);
+    }
+
+    .car-wrap {
+      position: absolute;
+      z-index: 28;
+      left: var(--car-left);
+      bottom: calc(var(--screen-h) * -0.100);
+      width: calc(var(--screen-h) * .485);
+      height: calc(var(--screen-h) * .485);
+      pointer-events: none;
+      transform: translate(-50%, 0) scaleX(var(--car-scale-x)) rotate(var(--car-tilt));
+      transform-origin: 50% 86%;
+      will-change: left, transform;
+      transition: transform .10s linear;
+      filter: none;
+    }
+
+    .car-wrap img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      pointer-events: none;
+      -webkit-user-drag: none;
+      animation: carIdle 1.6s ease-in-out infinite;
+    }
+
+    .car-shadow {
+      display: none;
+    }
+
+    @keyframes carIdle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(calc(var(--screen-h) * -.002)); }
+    }
+
+    .dust {
+      display: none;
+    }
+
+    .drag-hint {
+      position: absolute;
+      z-index: 52;
+      left: 50%;
+      bottom: calc(var(--screen-h) * .052);
+      transform: translateX(-50%);
+      padding: calc(var(--screen-h) * .007) calc(var(--screen-h) * .015);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 222, 151, .23);
+      background: rgba(14, 5, 2, .42);
+      color: rgba(255, 245, 221, .86);
+      font: 800 calc(var(--screen-h) * .0094)/1 "Montserrat", sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+
+
+    .music-toggle-btn {
+      position: absolute;
+      z-index: 54;
+      right: calc(var(--screen-h) * .018);
+      top: calc(var(--screen-h) * .018);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--screen-h) * .006);
+      min-width: calc(var(--screen-h) * .105);
+      min-height: calc(var(--screen-h) * .034);
+      padding: calc(var(--screen-h) * .008) calc(var(--screen-h) * .012);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 222, 151, .34);
+      background: rgba(14, 5, 2, .48);
+      color: rgba(255, 245, 221, .92);
+      font: 900 calc(var(--screen-h) * .0098)/1 "Montserrat", sans-serif;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      box-shadow: 0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .022) rgba(0, 0, 0, .24);
+      transition: opacity .25s ease, visibility .25s ease, transform .18s ease, background .18s ease;
+    }
+
+    .music-toggle-btn:hover {
+      background: rgba(14, 5, 2, .62);
+      transform: translateY(calc(var(--screen-h) * -.0015));
+    }
+
+    .music-toggle-icon {
+      font-size: calc(var(--screen-h) * .0135);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    body.invitation-locked .music-toggle-btn,
+    body.assets-loading .music-toggle-btn {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .scroll-ui {
+      position: absolute;
+      z-index: 51;
+      left: 50%;
+      bottom: calc(var(--screen-h) * .018);
+      width: calc(var(--screen-h) * .250);
+      transform: translateX(-50%);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+    .progress-shell {
+      padding: calc(var(--screen-h) * .006);
+      border: 1px solid rgba(255, 222, 151, .26);
+      border-radius: 999px;
+      background: rgba(14, 5, 2, .48);
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: calc(var(--screen-h) * .009);
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 244, 221, .18);
+      box-shadow: inset 0 0 calc(var(--screen-h) * .008) rgba(0, 0, 0, .26);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ffe9aa, #f7d27c, #d99a43, #c96b2f);
+      box-shadow: 0 0 calc(var(--screen-h) * .012) rgba(247, 210, 124, .62);
+      transition: width .10s linear;
+    }
+
+    body.invitation-locked .scroll-ui,
+    body.invitation-locked .drag-hint {
+      opacity: .55;
+    }
+
+    .loader {
+      position: absolute;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--screen-h) * .035);
+      background:
+        radial-gradient(circle at 50% 34%, rgba(247, 210, 124, .20), transparent 38%),
+        linear-gradient(180deg, rgba(23, 9, 3, .98), rgba(8, 3, 1, .99));
+      text-align: center;
+      transition: opacity .55s ease, visibility .55s ease;
+      pointer-events: auto;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-card {
+      width: min(84%, calc(var(--screen-h) * .40));
+      padding: calc(var(--screen-h) * .035) calc(var(--screen-h) * .030);
+      border-radius: calc(var(--screen-h) * .030);
+      border: 1px solid rgba(247, 210, 124, .35);
+      background: rgba(39, 16, 6, .54);
+      box-shadow: 0 calc(var(--screen-h) * .022) calc(var(--screen-h) * .060) rgba(0, 0, 0, .42);
+      backdrop-filter: blur(9px);
+    }
+
+    .loader-title {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .052);
+      color: #ffe29c;
+      line-height: 1;
+      text-shadow: 0 0 calc(var(--screen-h) * .020) rgba(255, 170, 72, .62);
+    }
+
+    .loader-text {
+      margin: calc(var(--screen-h) * .018) 0 0;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .0105);
+      font-weight: 900;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+      color: rgba(255, 245, 221, .82);
+    }
+
+    .loader-bar {
+      width: 100%;
+      height: calc(var(--screen-h) * .009);
+      margin: calc(var(--screen-h) * .026) auto calc(var(--screen-h) * .014);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 245, 221, .14);
+      box-shadow: inset 0 0 calc(var(--screen-h) * .007) rgba(0, 0, 0, .30);
+    }
+
+    .loader-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ffe9aa, #f7d27c, #d99a43, #bd6230);
+      transition: width .25s ease;
+    }
+
+    .loader-percent {
+      font: 900 calc(var(--screen-h) * .0105)/1 "Montserrat", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255, 245, 221, .70);
+    }
+
+
+
+    /* ═════════ CARDIA UPDATE — VENICE-STYLE PER-GUEST RSVP ═════════
+       Generator-ready RSVP:
+       - ?limit=3 creates three guest slots
+       - ?guests=Name1|Name2 or ?guest=Name1&limit=3 pre-fills names
+       - 4+ guest slots become internally scrollable, like Venice.html */
+    .rsvp-card {
+      overflow: visible;
+    }
+
+    .rr-rsvp-box {
+      margin-top: calc(var(--screen-h) * .014);
+      text-align: left;
+    }
+
+    .step-dots {
+      display: flex;
+      justify-content: center;
+      gap: calc(var(--screen-h) * .007);
+      margin-bottom: calc(var(--screen-h) * .012);
+    }
+
+    .step-dot {
+      width: calc(var(--screen-h) * .0075);
+      height: calc(var(--screen-h) * .0075);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 224, 149, .54);
+      background: rgba(255, 247, 228, .14);
+      box-shadow: 0 0 calc(var(--screen-h) * .010) rgba(247, 210, 124, .16);
+    }
+
+    .step-dot.on {
+      background: #ffe7a6;
+      box-shadow: 0 0 calc(var(--screen-h) * .016) rgba(247, 210, 124, .55);
+    }
+
+    .guest-welcome-title {
+      margin: 0 0 calc(var(--screen-h) * .007);
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .040);
+      line-height: 1;
+      text-align: center;
+    }
+
+    .guest-welcome-note {
+      margin: 0 0 calc(var(--screen-h) * .012);
+      color: rgba(255, 241, 211, .88);
+      font-size: calc(var(--screen-h) * .0155);
+      line-height: 1.30;
+      text-align: center;
+    }
+
+    .guest-slot-name-list {
+      display: grid;
+      gap: calc(var(--screen-h) * .008);
+      width: 100%;
+      max-height: calc(var(--screen-h) * .285);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: calc(var(--screen-h) * .010);
+      margin: calc(var(--screen-h) * .012) 0 calc(var(--screen-h) * .010);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(247, 210, 124, .78) rgba(255,255,255,.10);
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .guest-slot-name-list::-webkit-scrollbar { width: calc(var(--screen-h) * .006); }
+    .guest-slot-name-list::-webkit-scrollbar-track {
+      background: rgba(255,255,255,.10);
+      border-radius: 999px;
+      margin: calc(var(--screen-h) * .005) 0;
+    }
+    .guest-slot-name-list::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ffe7a6, #d99a43, #bd6230);
+      border-radius: 999px;
+    }
+
+    /* CARDIA UPDATE — always-visible RSVP guest scroll indicator.
+       Mobile browsers often hide native scrollbars until the guest touches the list,
+       so this custom golden rail + cue makes it obvious that more guests are below. */
+    #manualGuestListWrap {
+      position: relative;
+    }
+
+    #manualGuestListWrap.is-scrollable .guest-slot-name-list {
+      overflow-y: scroll;
+      padding-right: calc(var(--screen-h) * .034);
+      scrollbar-gutter: stable;
+    }
+
+    .guest-list-scroll-rail {
+      position: absolute;
+      z-index: 5;
+      right: calc(var(--screen-h) * .007);
+      top: calc(var(--screen-h) * .018);
+      bottom: calc(var(--screen-h) * .018);
+      width: calc(var(--screen-h) * .010);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 231, 164, .34);
+      background: rgba(255, 247, 228, .16);
+      box-shadow:
+        inset 0 0 calc(var(--screen-h) * .006) rgba(49, 21, 7, .34),
+        0 0 calc(var(--screen-h) * .012) rgba(247, 210, 124, .22);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .20s ease, visibility .20s ease;
+    }
+
+    #manualGuestListWrap.is-scrollable .guest-list-scroll-rail {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .guest-list-scroll-thumb {
+      position: absolute;
+      left: 50%;
+      top: 0%;
+      width: calc(var(--screen-h) * .0068);
+      min-height: calc(var(--screen-h) * .042);
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fff1b8, #d99a43, #bd6230);
+      box-shadow:
+        0 0 calc(var(--screen-h) * .014) rgba(247, 210, 124, .50),
+        inset 0 0 calc(var(--screen-h) * .004) rgba(255, 255, 255, .28);
+    }
+
+    .guest-list-bottom-fade {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: calc(var(--screen-h) * .026);
+      bottom: calc(var(--screen-h) * .006);
+      height: calc(var(--screen-h) * .056);
+      border-radius: 0 0 calc(var(--screen-h) * .018) calc(var(--screen-h) * .018);
+      background: linear-gradient(180deg, rgba(48, 23, 8, 0), rgba(48, 23, 8, .74));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .20s ease;
+    }
+
+    #manualGuestListWrap.is-scrollable:not(.at-bottom) .guest-list-bottom-fade {
+      opacity: 1;
+    }
+
+    .guest-list-scroll-cue {
+      position: absolute;
+      z-index: 6;
+      left: 50%;
+      bottom: calc(var(--screen-h) * .013);
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--screen-h) * .0055) calc(var(--screen-h) * .012);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 231, 164, .42);
+      background: rgba(39, 16, 6, .70);
+      color: rgba(255, 245, 221, .96);
+      font: 900 calc(var(--screen-h) * .0082)/1 "Montserrat", sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      box-shadow: 0 0 calc(var(--screen-h) * .014) rgba(247, 210, 124, .22);
+      animation: guestScrollNudge 1.25s ease-in-out infinite;
+      transition: opacity .20s ease, visibility .20s ease;
+    }
+
+    #manualGuestListWrap.is-scrollable:not(.at-bottom) .guest-list-scroll-cue {
+      opacity: .98;
+      visibility: visible;
+    }
+
+    @keyframes guestScrollNudge {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(calc(var(--screen-h) * .004)); }
+    }
+
+    .guest-slot-name-box {
+      width: 100%;
+      padding: calc(var(--screen-h) * .010) calc(var(--screen-h) * .011);
+      border-radius: calc(var(--screen-h) * .016);
+      border: 1px solid rgba(255, 224, 149, .28);
+      background: rgba(255, 244, 221, .10);
+      box-shadow: inset 0 0 0 1px rgba(255, 247, 222, .035);
+    }
+
+    .guest-slot-name-box.locked {
+      background: rgba(255, 244, 221, .15);
+      border-color: rgba(255, 224, 149, .40);
+    }
+
+    .guest-slot-name-label,
+    .form-label {
+      display: block;
+      margin: 0 0 calc(var(--screen-h) * .006);
+      color: rgba(255, 235, 194, .84);
+      font: 900 calc(var(--screen-h) * .0092)/1 "Montserrat", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .guest-slot-name-box > input,
+    .form-field {
+      width: 100%;
+      border: 1px solid rgba(255, 224, 149, .34) !important;
+      border-radius: calc(var(--screen-h) * .012) !important;
+      padding: calc(var(--screen-h) * .010) calc(var(--screen-h) * .011) !important;
+      margin: 0 !important;
+      background: rgba(255, 247, 228, .93) !important;
+      color: var(--brown) !important;
+      font: 900 calc(var(--screen-h) * .0122)/1.20 "Montserrat", sans-serif !important;
+      letter-spacing: .02em !important;
+      outline: none;
+    }
+
+    .guest-slot-name-box > input::placeholder,
+    .form-field::placeholder {
+      color: rgba(50, 22, 6, .44);
+    }
+
+    .guest-slot-name-box > input[readonly] {
+      cursor: default;
+      color: #241006 !important;
+      background: rgba(255, 231, 164, .90) !important;
+    }
+
+    .guest-slot-attendance {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: calc(var(--screen-h) * .010);
+      margin-top: calc(var(--screen-h) * .009);
+    }
+
+    .guest-slot-attendance > span {
+      color: rgba(255, 235, 194, .82);
+      font: 900 calc(var(--screen-h) * .0087)/1 "Montserrat", sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .guest-response-options {
+      display: flex;
+      gap: calc(var(--screen-h) * .006);
+      margin-left: auto;
+    }
+
+    .guest-response-options input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    .guest-response-options label { cursor: pointer; }
+
+    .guest-response-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: calc(var(--screen-h) * .047);
+      padding: calc(var(--screen-h) * .008) calc(var(--screen-h) * .010);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 224, 149, .36);
+      background: rgba(255, 247, 228, .90);
+      color: var(--brown);
+      font: 900 calc(var(--screen-h) * .0095)/1 "Montserrat", sans-serif;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      transition: background .18s ease, color .18s ease, border-color .18s ease;
+    }
+
+    .guest-response-options input:checked + .guest-response-pill {
+      background: linear-gradient(135deg, #ffe7a4, #d99a43, #bd6230);
+      color: #241006;
+      border-color: rgba(255, 231, 164, .78);
+      box-shadow: 0 0 calc(var(--screen-h) * .014) rgba(247, 210, 124, .25);
+    }
+
+    .guest-total-line {
+      margin: calc(var(--screen-h) * .011) 0 calc(var(--screen-h) * .006);
+      color: #ffe7a6;
+      font-size: calc(var(--screen-h) * .017);
+      line-height: 1.20;
+      text-align: center;
+    }
+
+    .error-msg {
+      margin: calc(var(--screen-h) * .007) 0 0;
+      color: #ffe7a6;
+      font: 900 calc(var(--screen-h) * .0105)/1.35 "Montserrat", sans-serif;
+      letter-spacing: .04em;
+      text-align: center;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: calc(var(--screen-h) * .008);
+      margin-top: calc(var(--screen-h) * .012);
+    }
+
+    .btn-soft,
+    .btn-solid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 999px;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .0102);
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+    }
+
+    .btn-solid {
+      border: 1px solid rgba(255, 224, 149, .66);
+      background: linear-gradient(135deg, #ffe7a4, #d99a43, #bd6230);
+      color: #261106;
+      box-shadow: 0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .026) rgba(0, 0, 0, .24);
+      padding: calc(var(--screen-h) * .012) calc(var(--screen-h) * .014);
+    }
+
+    .btn-soft {
+      border: 1px solid rgba(255, 224, 149, .38);
+      background: rgba(255, 247, 228, .13);
+      color: rgba(255, 241, 206, .96);
+      padding: calc(var(--screen-h) * .012) calc(var(--screen-h) * .014);
+    }
+
+    .btn-solid:hover,
+    .btn-soft:hover { filter: brightness(1.06); }
+
+    .rsvp-main-btn {
+      margin-top: calc(var(--screen-h) * .010);
+    }
+
+    #stepOk {
+      text-align: center;
+      padding: calc(var(--screen-h) * .012) 0 calc(var(--screen-h) * .004);
+    }
+
+    #stepOk h3 {
+      margin: 0 0 calc(var(--screen-h) * .010);
+      font-family: "Great Vibes", cursive;
+      font-size: calc(var(--screen-h) * .044);
+      font-weight: 400;
+      color: #ffe7a6;
+    }
+
+    #stepOk p {
+      margin: 0;
+      color: rgba(255, 241, 211, .92);
+      font-size: calc(var(--screen-h) * .017);
+      line-height: 1.38;
+    }
+
+    @media (max-width: 720px) {
+      .rsvp-card {
+        width: calc(var(--screen-h) * .47);
+        max-height: calc(var(--screen-h) * .82);
+      }
+
+      .guest-slot-name-list {
+        max-height: calc(var(--screen-h) * .270);
+      }
+
+      .guest-slot-attendance {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .guest-response-options {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .guest-response-options label {
+        flex: 1;
+      }
+
+      .guest-response-pill {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    body.assets-loading .pano-wrap,
+    body.assets-loading .open-invitation-btn,
+    body.assets-loading .rsvp-card,
+    body.assets-loading .drag-hint,
+    body.assets-loading .scroll-ui {
+      pointer-events: none !important;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @media (max-width: 720px) {
+      .hero-text {
+        top: 23.6%;
+        width: calc(var(--screen-h) * .43);
+      }
+
+      .story-copy {
+        font-size: calc(var(--screen-h) * .0176);
+        line-height: 1.22;
+      }
+
+      .static-card {
+        width: calc(var(--screen-h) * .39);
+      }
+
+      .parents-card {
+        width: calc(var(--screen-h) * .405);
+      }
+
+      .rsvp-card {
+        width: calc(var(--screen-h) * .45);
+      }
+    }
+
+
+
+    /* CARDIA FIX — prevent the elegant script letters from being clipped.
+       Great Vibes has tall ascenders; the previous tight line-height made the top of
+       letters like S, R and W look cut. These overrides keep the same champagne style
+       but give the text its full vertical breathing room. */
+    .static-card,
+    .final-card,
+    .rsvp-card {
+      overflow: visible;
+    }
+
+    .static-card h2 {
+      line-height: 1.26;
+      padding-top: calc(var(--screen-h) * .010);
+      padding-bottom: calc(var(--screen-h) * .004);
+      margin-top: calc(var(--screen-h) * -.008);
+      margin-bottom: calc(var(--screen-h) * .004);
+    }
+
+    .static-card h2.gold-text,
+    .parents-card .couple-line,
+    .guest-welcome-title,
+    #stepOk h3 {
+      display: block;
+      overflow: visible;
+      line-height: 1.26;
+      padding-top: calc(var(--screen-h) * .010);
+      padding-bottom: calc(var(--screen-h) * .005);
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    .parents-card .couple-line,
+    .guest-welcome-title,
+    #stepOk h3 {
+      margin-top: calc(var(--screen-h) * -.002);
+    }
+
+    .final-card h2.gold-text {
+      line-height: 1.24;
+      padding-top: calc(var(--screen-h) * .012);
+      padding-bottom: calc(var(--screen-h) * .006);
+      margin-bottom: calc(var(--screen-h) * .006);
+    }
+
+    .powered-by-brand {
+      display: block;
+      overflow: visible;
+      line-height: 1.28;
+      padding-top: calc(var(--screen-h) * .008);
+      padding-bottom: calc(var(--screen-h) * .004);
+      margin-top: calc(var(--screen-h) * -.004);
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+
+
+    /* CARDIA UPDATE — make the story and parents sections slightly larger on phones.
+       This keeps the same placement and theme, but improves readability on mobile. */
+    @media (max-width: 720px) {
+      .hero-text {
+        top: 23.3%;
+        width: calc(var(--screen-h) * .475);
+      }
+
+      .story-title {
+        font-size: calc(var(--screen-h) * .060);
+        line-height: 1.02;
+      }
+
+      .story-star {
+        font-size: calc(var(--screen-h) * .022);
+        margin: calc(var(--screen-h) * .004) 0 calc(var(--screen-h) * .007);
+      }
+
+      .story-copy {
+        max-width: calc(var(--screen-h) * .455);
+        font-size: calc(var(--screen-h) * .0197);
+        line-height: 1.27;
+      }
+
+      .parents-card {
+        width: calc(var(--screen-h) * .445);
+        padding: calc(var(--screen-h) * .022) calc(var(--screen-h) * .024);
+      }
+
+      .parents-card .kicker {
+        font-size: calc(var(--screen-h) * .0114);
+        letter-spacing: .22em;
+      }
+
+      .parents-card .parents-names {
+        font-size: calc(var(--screen-h) * .0226);
+        line-height: 1.22;
+      }
+
+      .parents-card .request-line {
+        font-size: calc(var(--screen-h) * .0180);
+        line-height: 1.28;
+      }
+
+      .parents-card .couple-line {
+        font-size: calc(var(--screen-h) * .046);
+        line-height: 1.20;
+      }
+    }
+
+
+
+    /* CARDIA UPDATE — slightly larger and clearer text across the invitation.
+       Kept moderate so the cards remain comfortable on phone screens. */
+    .story-title {
+      font-size: calc(var(--screen-h) * .056);
+      line-height: 1.02;
+    }
+
+    .story-star {
+      font-size: calc(var(--screen-h) * .0215);
+    }
+
+    .story-copy {
+      max-width: calc(var(--screen-h) * .445);
+      font-size: calc(var(--screen-h) * .0200);
+      line-height: 1.28;
+    }
+
+    .static-card h2 {
+      font-size: calc(var(--screen-h) * .050);
+      line-height: 1.25;
+    }
+
+    .static-card .kicker {
+      font-size: calc(var(--screen-h) * .0114);
+      letter-spacing: .20em;
+    }
+
+    .static-card p {
+      font-size: calc(var(--screen-h) * .0197);
+      line-height: 1.31;
+    }
+
+    .static-card strong {
+      font-size: calc(var(--screen-h) * .0246);
+      line-height: 1.13;
+    }
+
+    .static-card .small {
+      font-size: calc(var(--screen-h) * .0123);
+      line-height: 1.28;
+    }
+
+    .static-card .map-link {
+      font-size: calc(var(--screen-h) * .0110);
+      padding: calc(var(--screen-h) * .0085) calc(var(--screen-h) * .0175);
+    }
+
+    .parents-card .parents-names {
+      font-size: calc(var(--screen-h) * .0220);
+      line-height: 1.22;
+    }
+
+    .parents-card .request-line {
+      font-size: calc(var(--screen-h) * .0180);
+      line-height: 1.28;
+    }
+
+    .parents-card .couple-line {
+      font-size: calc(var(--screen-h) * .0435);
+      line-height: 1.20;
+    }
+
+    .gift-card .gift-line {
+      text-align: center;
+      gap: calc(var(--screen-h) * .008);
+    }
+
+    .gift-card .gift-line div {
+      text-align: center;
+    }
+
+    .gift-card .gift-line span {
+      font-size: calc(var(--screen-h) * .0104);
+      margin-bottom: calc(var(--screen-h) * .005);
+    }
+
+    .gift-card .gift-line code,
+    .gift-card .gift-line b {
+      font-size: calc(var(--screen-h) * .0137);
+      line-height: 1.32;
+      text-align: center;
+    }
+
+    .guest-welcome-title {
+      font-size: calc(var(--screen-h) * .0435);
+      line-height: 1.18;
+    }
+
+    .guest-welcome-note {
+      font-size: calc(var(--screen-h) * .0166);
+      line-height: 1.34;
+    }
+
+    .guest-slot-name-label,
+    .form-label {
+      font-size: calc(var(--screen-h) * .0100);
+      line-height: 1.12;
+    }
+
+    .guest-slot-name-box > input,
+    .form-field,
+    input,
+    select,
+    textarea {
+      font-size: calc(var(--screen-h) * .0134) !important;
+      line-height: 1.24 !important;
+    }
+
+    .guest-slot-attendance > span {
+      font-size: calc(var(--screen-h) * .0095);
+    }
+
+    .guest-response-pill,
+    .btn-soft,
+    .btn-solid,
+    .submit-btn,
+    .open-invitation-btn {
+      font-size: calc(var(--screen-h) * .0109);
+    }
+
+    .guest-total-line,
+    .thank-you,
+    #stepOk p {
+      font-size: calc(var(--screen-h) * .0182);
+      line-height: 1.36;
+    }
+
+    .error-msg {
+      font-size: calc(var(--screen-h) * .0112);
+    }
+
+    #stepOk h3 {
+      font-size: calc(var(--screen-h) * .047);
+    }
+
+    .final-card h2.gold-text {
+      font-size: calc(var(--screen-h) * .049);
+      line-height: 1.25;
+    }
+
+    .powered-by-label {
+      font-size: calc(var(--screen-h) * .0098);
+    }
+
+    .powered-by-brand {
+      font-size: calc(var(--screen-h) * .035);
+    }
+
+    .powered-by-cta {
+      font-size: calc(var(--screen-h) * .0088);
+    }
+
+    .music-toggle-btn {
+      font-size: calc(var(--screen-h) * .0105);
+    }
+
+    .drag-hint,
+    .loader-text,
+    .loader-percent {
+      font-size: calc(var(--screen-h) * .0108);
+    }
+
+    .loader-title {
+      font-size: calc(var(--screen-h) * .055);
+    }
+
+    @media (max-width: 720px) {
+      .hero-text {
+        top: 23.2%;
+        width: calc(var(--screen-h) * .490);
+      }
+
+      .story-title {
+        font-size: calc(var(--screen-h) * .063);
+      }
+
+      .story-copy {
+        max-width: calc(var(--screen-h) * .465);
+        font-size: calc(var(--screen-h) * .0208);
+        line-height: 1.29;
+      }
+
+      .static-card {
+        padding: calc(var(--screen-h) * .022) calc(var(--screen-h) * .023);
+      }
+
+      .church-card,
+      .venue-card {
+        width: calc(var(--screen-h) * .410);
+      }
+
+      .gift-card {
+        width: calc(var(--screen-h) * .445);
+      }
+
+      .rsvp-card {
+        width: calc(var(--screen-h) * .468);
+      }
+
+      .static-card h2 {
+        font-size: calc(var(--screen-h) * .0515);
+      }
+
+      .venue-card h2.gold-text {
+        font-size: calc(var(--screen-h) * .0475);
+      }
+
+      .parents-card .parents-names {
+        font-size: calc(var(--screen-h) * .0234);
+      }
+
+      .parents-card .request-line {
+        font-size: calc(var(--screen-h) * .0188);
+      }
+
+      .parents-card .couple-line {
+        font-size: calc(var(--screen-h) * .048);
+      }
+
+      .gift-card .gift-line code,
+      .gift-card .gift-line b {
+        font-size: calc(var(--screen-h) * .0141);
+      }
+    }
+
+
+
+    /* CARDIA UPDATE — further slight text increase across all invitation sections.
+       Added as a final override so every text area is a little more readable while
+       keeping the mobile layout elegant and not oversized. */
+    .story-title {
+      font-size: calc(var(--screen-h) * .0585);
+      line-height: 1.03;
+    }
+
+    .story-star {
+      font-size: calc(var(--screen-h) * .0224);
+    }
+
+    .story-copy {
+      max-width: calc(var(--screen-h) * .455);
+      font-size: calc(var(--screen-h) * .0211);
+      line-height: 1.30;
+    }
+
+    .static-card h2 {
+      font-size: calc(var(--screen-h) * .0525);
+      line-height: 1.26;
+    }
+
+    .static-card .kicker {
+      font-size: calc(var(--screen-h) * .0119);
+      line-height: 1.10;
+    }
+
+    .static-card p {
+      font-size: calc(var(--screen-h) * .0207);
+      line-height: 1.33;
+    }
+
+    .static-card strong {
+      font-size: calc(var(--screen-h) * .0258);
+      line-height: 1.15;
+    }
+
+    .static-card .small {
+      font-size: calc(var(--screen-h) * .0129);
+      line-height: 1.30;
+    }
+
+    .static-card .map-link {
+      font-size: calc(var(--screen-h) * .0116);
+      padding: calc(var(--screen-h) * .009) calc(var(--screen-h) * .0185);
+    }
+
+    .parents-card .parents-names {
+      font-size: calc(var(--screen-h) * .0232);
+      line-height: 1.24;
+    }
+
+    .parents-card .request-line {
+      font-size: calc(var(--screen-h) * .0190);
+      line-height: 1.30;
+    }
+
+    .parents-card .couple-line {
+      font-size: calc(var(--screen-h) * .0460);
+      line-height: 1.22;
+    }
+
+    .gift-card .gift-line span {
+      font-size: calc(var(--screen-h) * .0110);
+      line-height: 1.12;
+    }
+
+    .gift-card .gift-line code,
+    .gift-card .gift-line b {
+      font-size: calc(var(--screen-h) * .0145);
+      line-height: 1.34;
+    }
+
+    .guest-welcome-title {
+      font-size: calc(var(--screen-h) * .0460);
+      line-height: 1.20;
+    }
+
+    .guest-welcome-note {
+      font-size: calc(var(--screen-h) * .0174);
+      line-height: 1.36;
+    }
+
+    .guest-slot-name-label,
+    .form-label,
+    .field-label {
+      font-size: calc(var(--screen-h) * .0107);
+      line-height: 1.14;
+    }
+
+    .guest-slot-name-box > input,
+    .form-field,
+    input,
+    select,
+    textarea {
+      font-size: calc(var(--screen-h) * .0142) !important;
+      line-height: 1.26 !important;
+    }
+
+    .guest-slot-attendance > span {
+      font-size: calc(var(--screen-h) * .0102);
+      line-height: 1.15;
+    }
+
+    .guest-response-pill,
+    .btn-soft,
+    .btn-solid,
+    .submit-btn,
+    .open-invitation-btn {
+      font-size: calc(var(--screen-h) * .0116);
+      line-height: 1.08;
+    }
+
+    .guest-total-line,
+    .thank-you,
+    #stepOk p {
+      font-size: calc(var(--screen-h) * .0191);
+      line-height: 1.38;
+    }
+
+    .error-msg {
+      font-size: calc(var(--screen-h) * .0118);
+      line-height: 1.38;
+    }
+
+    #stepOk h3 {
+      font-size: calc(var(--screen-h) * .0500);
+      line-height: 1.22;
+    }
+
+    .final-card h2.gold-text {
+      font-size: calc(var(--screen-h) * .0518);
+      line-height: 1.26;
+    }
+
+    .powered-by-label {
+      font-size: calc(var(--screen-h) * .0103);
+    }
+
+    .powered-by-brand {
+      font-size: calc(var(--screen-h) * .0368);
+    }
+
+    .powered-by-cta {
+      font-size: calc(var(--screen-h) * .0093);
+    }
+
+    .music-toggle-btn {
+      font-size: calc(var(--screen-h) * .0111);
+    }
+
+    .drag-hint,
+    .loader-text,
+    .loader-percent,
+    .guest-list-scroll-cue {
+      font-size: calc(var(--screen-h) * .0113);
+    }
+
+    .loader-title {
+      font-size: calc(var(--screen-h) * .0575);
+    }
+
+    @media (max-width: 720px) {
+      .hero-text {
+        top: 23.1%;
+        width: calc(var(--screen-h) * .500);
+      }
+
+      .story-title {
+        font-size: calc(var(--screen-h) * .0660);
+      }
+
+      .story-copy {
+        max-width: calc(var(--screen-h) * .478);
+        font-size: calc(var(--screen-h) * .0220);
+        line-height: 1.31;
+      }
+
+      .static-card {
+        width: calc(var(--screen-h) * .405);
+        padding: calc(var(--screen-h) * .023) calc(var(--screen-h) * .024);
+      }
+
+      .church-card,
+      .venue-card {
+        width: calc(var(--screen-h) * .420);
+      }
+
+      .parents-card {
+        width: calc(var(--screen-h) * .455);
+        padding: calc(var(--screen-h) * .023) calc(var(--screen-h) * .025);
+      }
+
+      .gift-card {
+        width: calc(var(--screen-h) * .455);
+      }
+
+      .rsvp-card {
+        width: calc(var(--screen-h) * .476);
+      }
+
+      .static-card h2 {
+        font-size: calc(var(--screen-h) * .0540);
+      }
+
+      .venue-card h2.gold-text {
+        font-size: calc(var(--screen-h) * .0495);
+      }
+
+      .static-card p {
+        font-size: calc(var(--screen-h) * .0212);
+      }
+
+      .static-card strong {
+        font-size: calc(var(--screen-h) * .0263);
+      }
+
+      .parents-card .parents-names {
+        font-size: calc(var(--screen-h) * .0244);
+      }
+
+      .parents-card .request-line {
+        font-size: calc(var(--screen-h) * .0196);
+      }
+
+      .parents-card .couple-line {
+        font-size: calc(var(--screen-h) * .0500);
+      }
+
+      .gift-card .gift-line code,
+      .gift-card .gift-line b {
+        font-size: calc(var(--screen-h) * .0149);
+      }
+
+      .guest-welcome-title {
+        font-size: calc(var(--screen-h) * .0475);
+      }
+
+      .guest-welcome-note {
+        font-size: calc(var(--screen-h) * .0178);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="assets-loading invitation-locked">
+  <main class="stage" id="stage">
+    <div class="loader" id="loader" role="status" aria-live="polite">
+      <div class="loader-card">
+        <h2 class="loader-title">Preparing your invitation</h2>
+        <p class="loader-text">Loading Ehden sunset</p>
+        <div class="loader-bar" aria-hidden="true"><div class="loader-fill" id="loaderFill"></div></div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
+      </div>
+    </div>
+
+
+
+    <audio id="weddingMusic" loop preload="auto">
+      <source src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Ray.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="pano-wrap" id="panoWrap" aria-label="Horizontal scrolling wedding panorama">
+      <div class="pano" id="pano">
+        
+
+        
+     <img class="Dabke" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Dabke.png" alt="" draggable="false">
+     <img class="Dance" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Dance.png" alt="" draggable="false">
+     
+     <img class="hot-air hot-air-1a" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Post3.png" alt="" draggable="false">
+        <img class="hot-air hot-air-1b" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Posta.png" alt="" draggable="false">
+        <img class="hot-air hot-air-1" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="" draggable="false">
+        <img class="hot-air hot-air-2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" draggable="false">
+        <img class="hot-air hot-air-3" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="" draggable="false">
+        <img class="hot-air hot-air-4" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Birds1.png" alt="" draggable="false">
+        <img class="hot-air hot-air-5" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="" draggable="false">
+        <img class="hot-air hot-air-6" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" draggable="false">
+        <img class="hot-air hot-air-7" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Birds1.png" alt="" draggable="false">
+        <img class="hot-air hot-air-8" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Plane3.png" alt="" draggable="false">
+
+        <a class="board-location-link bride-house-location" href="https://maps.app.goo.gl/CRbTDSKK7z4QRi1u9" target="_blank" rel="noopener" aria-label="Open bride's house location">Open bride's house location</a>
+        <a class="board-location-link groom-house-location" href="https://maps.app.goo.gl/R8bofdnytJ1Xd75p8" target="_blank" rel="noopener" aria-label="Open groom's house location">Open groom's house location</a>
+
+        <div class="hero-text gold-text" aria-label="Our Story">
+          <h1 class="story-title">Our Story</h1>
+          <div class="story-star" aria-hidden="true">✦</div>
+          <p class="story-copy">
+            Two souls, united by God’s grace,<br>
+            whose love knew no borders and conquered every distance,<br>
+            chose to walk this journey hand in hand,<br>
+            building a life, a home, and a family<br>
+            rooted in faith and everlasting love
+          </p>
+        </div>
+
+        <section class="static-card parents-card" aria-label="Parents invitation">
+          <p class="kicker">With Joyful Hearts</p>
+          <p class="parents-names">Robert  &amp; Tina Martin<br>Michael  &amp; Anna Clarke</p>
+          <p class="request-line">request the honor of your presence at the wedding of their son and daughter</p>
+          <span class="couple-line">Thomas &amp; Sarah</span>
+        </section>
+
+        <section class="static-card church-card" aria-label="Church information">
+          <p class="kicker">Marriage Ceremony</p>
+          <h2 class="gold-text">St. Marina Church</h2>
+          <p><strong>Amyoun</strong><span class="small">5:30 PM</span></p>
+          <a class="map-link" href="https://maps.app.goo.gl/u3UBEhF89FF8HrJB9?g_st=iw" target="_blank" rel="noopener">Open Location</a>
+        </section>
+
+        <section class="static-card venue-card" aria-label="Venue information">
+          <p class="kicker">Celebration</p>
+          <h2 class="gold-text">Splendor Venue Ehden</h2>
+          <p><strong>Welcome Drink</strong><span class="small">7:00 PM</span></p>
+          <p style="margin-top: calc(var(--screen-h) * .010);"><strong>Dinner</strong><span class="small">8:00 PM</span></p>
+          <a class="map-link" href="https://maps.app.goo.gl/Tw8ZHeqvLzmtpfcN7" target="_blank" rel="noopener">Open Location</a>
+        </section>
+
+        <section class="static-card gift-card" aria-label="Wedding list and gift information">
+          <p class="kicker">Wedding List</p>
+          <h2 class="gold-text">With Love</h2>
+          <p>Your love, laughter, and presence are all we could wish for. For those who wish, a wedding list is available at all Whish Money branches.</p>
+          <div class="gift-line">
+            <div>
+              <span>Whish money</span>
+              <code>xxxxxxxxx</code>
+            </div>
+          </div>
+        </section>
+
+        <section class="static-card rsvp-card" id="rsvp" aria-label="RSVP form">
+      
+          <h2 class="gold-text">RSVP</h2>
+          <p class="kicker">Kindly Reply</p>
+          <p>Before 15 July 2026</p>
+
+          <div class="rr-rsvp-box">
+            <div class="step-dots" aria-hidden="true">
+              <span class="step-dot on" id="dot-1"></span>
+              <span class="step-dot" id="dot-2"></span>
+            </div>
+
+            <div id="step1" class="rsvp-step guest-welcome-step">
+              <h3 class="guest-welcome-title">Dear <span id="guestWelcomeName">Guest</span>,</h3>
+              <p id="personalGuestNote" class="guest-welcome-note">Please enter the guest names to confirm the RSVP.</p>
+
+              <div id="manualGuestListWrap">
+                <div id="guestSlotNameList" class="guest-slot-name-list" aria-label="Guest RSVP list"></div>
+                <div class="guest-list-scroll-rail" aria-hidden="true"><span id="guestListScrollThumb" class="guest-list-scroll-thumb"></span></div>
+                <div class="guest-list-bottom-fade" aria-hidden="true"></div>
+                <div class="guest-list-scroll-cue" aria-hidden="true">Scroll guests ↓</div>
+              </div>
+
+              <p class="guest-total-line">Total guests attending: <strong id="attendingGuestCount">0</strong></p>
+              <p class="error-msg" id="errName" style="display:none;">Please enter at least one guest name.</p>
+
+              <button class="btn-solid rsvp-main-btn" id="continueToMessageBtn" type="button">Continue →</button>
+            </div>
+
+            <div id="step2" class="rsvp-step" style="display:none;">
+              <label class="form-label" for="guestMsg">Leave a wish <span style="font-weight:400;letter-spacing:.04em;text-transform:none;">(optional)</span></label>
+              <textarea id="guestMsg" class="form-field" rows="4" placeholder="Share a wish for Thomas &amp; Sarah…"></textarea>
+
+              <div class="btn-grid">
+                <button class="btn-soft" id="backToGuestsBtn" type="button">← Back</button>
+                <button class="btn-solid" id="sendBtn" type="button">Send ✦</button>
+              </div>
+            </div>
+
+            <div id="stepOk" style="display:none;">
+              <div style="font-size:calc(var(--screen-h) * .032); margin-bottom:calc(var(--screen-h) * .006);">✨</div>
+              <h3>Thank you!</h3>
+              <p id="okMsg"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="static-card final-card" aria-label="Final message">
+          <h2 class="gold-text">We cannot wait to celebrate with you</h2>
+        
+          <p style="margin-top: calc(var(--screen-h) * .010);"><strong>Thomas &amp; Sarah</strong><span class="small">28 · 07 · 2026</span></p>
+          <a class="powered-by" href="https://www.instagram.com/cardiastudios/" target="_blank" rel="noopener" aria-label="Visit Cardia Studios on Instagram"><span class="powered-by-label">Powered by</span><span class="powered-by-brand">Cardia Studios</span><span class="powered-by-cta">Tap to visit ↗</span></a>
+        </section>
+      </div>
+    </div>
+
+    <div class="car-wrap" id="carWrap" aria-hidden="true">
+      <img src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Car.png" alt="">
+    </div>
+
+    <div class="stage-vignette"></div>
+
+    <button class="open-invitation-btn" id="openBtn" type="button">Open Invitation</button>
+    <button class="music-toggle-btn" id="musicToggleBtn" type="button" aria-label="Stop music" aria-pressed="false"><span class="music-toggle-icon" aria-hidden="true">♪</span><span id="musicToggleText">Stop music</span></button>
+    <div class="drag-hint" id="dragHint">Drag left / right to follow the car</div>
+
+    <div class="scroll-ui" aria-hidden="true">
+      <div class="progress-shell">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function setAppHeight() {
+      document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
+    }
+
+    setAppHeight();
+    window.addEventListener("resize", setAppHeight, { passive: true });
+    window.addEventListener("orientationchange", () => window.setTimeout(setAppHeight, 250), { passive: true });
+
+    const PANO_URL = "https://raw.githubusercontent.com/cardiastudios/Tempo/refs/heads/main/Ralph%20%26%20Roussana/Lebanon.png";
+    const CAR_URL = "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Rossi/Car.png";
+    const MUSIC_URL = "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Raymond/Ray.mp3";
+    const HOT_AIR_4B_URL = "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png";
+    const HOT_AIR_5_URL = "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png";
+
+    /* Paste your deployed Google Apps Script Web App URL here when you want the RSVP form
+       to send replies to Google Sheets. Keep empty for visual/demo mode. */
+    const RSVP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyq7Qs0ht1I_kHHJs1vR3vHp7QS4pzpkiNP8WUn-n-Zu6_AAT6sZFtDnouj_z4yZW7Mxw/exec";
+    const COUPLE_NAME = "Thomas & Sarah";
+
+    const body = document.body;
+    const stage = document.getElementById("stage");
+    const wrap = document.getElementById("panoWrap");
+    const progressFill = document.getElementById("progressFill");
+    const carWrap = document.getElementById("carWrap");
+    const dust = document.getElementById("dust");
+    const openBtn = document.getElementById("openBtn");
+    const weddingMusic = document.getElementById("weddingMusic");
+    const musicToggleBtn = document.getElementById("musicToggleBtn");
+    const musicToggleText = document.getElementById("musicToggleText");
+    const sendBtn = document.getElementById("sendBtn");
+
+    const pano = document.getElementById("pano");
+
+    let isDragging = false;
+    let pointerStartX = 0;
+    let dragBaseTarget = 0;
+    let target = 0;
+    let offset = 0;
+    let lastOffset = 0;
+    let lastFrameTime = performance.now();
+    let velocity = 0;
+    let lastFrameDelta = 0;
+    let carDirection = 1;
+    let pendingCarDirection = 1;
+    let pendingDirectionDistance = 0;
+    let currentRatio = 0;
+
+    /* Prevents the car from flipping from tiny accidental finger movements.
+       It will only turn around after a clear, intentional drag in the opposite direction. */
+    const CAR_FLIP_SPEED_THRESHOLD = 220;
+    const CAR_FLIP_DISTANCE_THRESHOLD = 30;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function maxScroll() {
+      return Math.max(0, pano.offsetWidth - wrap.clientWidth);
+    }
+
+    function getRatio() {
+      const max = maxScroll();
+      return max ? clamp(offset / max, 0, 1) : 0;
+    }
+
+    function updateCar(ratio) {
+      const carLeft = 18 + (ratio * 66);
+
+      /* Flip the car only after a deliberate opposite drag.
+         Positive velocity = moving forward through the panorama, negative = going back. */
+      const intendedDirection = velocity > CAR_FLIP_SPEED_THRESHOLD ? 1 : (velocity < -CAR_FLIP_SPEED_THRESHOLD ? -1 : 0);
+      const scrollDelta = Math.abs(lastFrameDelta);
+
+      if (intendedDirection && intendedDirection !== carDirection) {
+        if (pendingCarDirection !== intendedDirection) {
+          pendingCarDirection = intendedDirection;
+          pendingDirectionDistance = scrollDelta;
+        } else {
+          pendingDirectionDistance += scrollDelta;
+        }
+
+        if (pendingDirectionDistance >= CAR_FLIP_DISTANCE_THRESHOLD) {
+          carDirection = intendedDirection;
+          pendingDirectionDistance = 0;
+        }
+      } else if (intendedDirection === carDirection || Math.abs(velocity) < 80) {
+        pendingCarDirection = carDirection;
+        pendingDirectionDistance = 0;
+      }
+
+      const tilt = clamp(velocity * .010, -2.5, 2.5);
+      const speedDust = clamp(Math.abs(velocity) / 1600, 0.10, .48);
+
+      stage.style.setProperty("--car-left", carLeft.toFixed(3) + "%");
+      stage.style.setProperty("--car-tilt", tilt.toFixed(3) + "deg");
+      stage.style.setProperty("--car-scale-x", String(carDirection));
+      stage.style.setProperty("--dust-opacity", speedDust.toFixed(2));
+
+      if (dust) dust.style.left = `calc(${carLeft.toFixed(3)}% - 9%)`;
+    }
+
+    /* The heart of the smooth-drag feel, ported from the Venice template:
+       input only ever changes "target". Every animation frame, "offset" eases
+       a little closer to "target" and the panorama is repositioned with a
+       transform. Because rendering is decoupled from input events, the motion
+       stays glassy-smooth no matter how fast or choppy the finger events are. */
+    function tick() {
+      const now = performance.now();
+      const dt = Math.max(16, now - lastFrameTime);
+      lastFrameTime = now;
+
+      const max = maxScroll();
+      target = clamp(target, 0, max);
+      const d = target - offset;
+      offset = Math.abs(d) < 0.4 ? target : offset + d * 0.16;
+      offset = clamp(offset, 0, max);
+
+      lastFrameDelta = offset - lastOffset;
+      velocity = lastFrameDelta / dt * 1000;
+      lastOffset = offset;
+
+      pano.style.transform = `translate3d(${(-offset).toFixed(2)}px,0,0)`;
+
+      currentRatio = getRatio();
+      progressFill.style.width = `${(currentRatio * 100).toFixed(2)}%`;
+      updateCar(currentRatio);
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    /* Kept as a no-op for compatibility with existing call sites below —
+       the tick() loop above already keeps everything in sync every frame. */
+    function requestUIUpdate() {}
+
+    function scrollToRatio(ratio, behavior = "smooth") {
+      const value = maxScroll() * clamp(ratio, 0, 1);
+      target = value;
+      if (behavior === "auto") {
+        offset = value;
+        lastOffset = value;
+      }
+    }
+
+    /* Only real form controls and the vertically-scrolling guest list stay
+       excluded — everything else, including the RSVP card's own background,
+       can be used to drag the panorama. */
+    function targetIsInteractive(target) {
+      return Boolean(target.closest("button, a, input, select, textarea, label, .guest-slot-name-list"));
+    }
+
+    wrap.addEventListener("wheel", (event) => {
+      if (body.classList.contains("invitation-locked")) return;
+      if (targetIsInteractive(event.target)) return;
+      const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      target = clamp(target + delta * 1.8, 0, maxScroll());
+      event.preventDefault();
+    }, { passive: false });
+
+    wrap.addEventListener("pointerdown", (event) => {
+      if (body.classList.contains("invitation-locked")) return;
+      if (targetIsInteractive(event.target)) return;
+      isDragging = true;
+      pointerStartX = event.clientX;
+      dragBaseTarget = target;
+      wrap.setPointerCapture(event.pointerId);
+    });
+
+    wrap.addEventListener("pointermove", (event) => {
+      if (!isDragging) return;
+      target = clamp(dragBaseTarget + (pointerStartX - event.clientX) * 1.5, 0, maxScroll());
+    });
+
+    function endDrag() {
+      isDragging = false;
+    }
+
+    wrap.addEventListener("pointerup", endDrag);
+    wrap.addEventListener("pointercancel", endDrag);
+    wrap.addEventListener("lostpointercapture", endDrag);
+
+
+    function setMusicToggleState(isPlaying) {
+      if (!musicToggleBtn || !musicToggleText) return;
+      musicToggleText.textContent = isPlaying ? "Stop music" : "Play music";
+      musicToggleBtn.setAttribute("aria-label", isPlaying ? "Stop music" : "Play music");
+      musicToggleBtn.setAttribute("aria-pressed", isPlaying ? "false" : "true");
+    }
+
+    function playWeddingMusic() {
+      if (!weddingMusic) return;
+      weddingMusic.volume = 0.85;
+      const playPromise = weddingMusic.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise
+          .then(() => setMusicToggleState(true))
+          .catch(() => setMusicToggleState(false));
+      } else {
+        setMusicToggleState(true);
+      }
+    }
+
+    function stopWeddingMusic() {
+      if (!weddingMusic) return;
+      weddingMusic.pause();
+      setMusicToggleState(false);
+    }
+
+    if (musicToggleBtn) {
+      musicToggleBtn.addEventListener("click", () => {
+        if (!weddingMusic) return;
+        if (weddingMusic.paused) {
+          playWeddingMusic();
+        } else {
+          stopWeddingMusic();
+        }
+      });
+    }
+
+    if (weddingMusic) {
+      weddingMusic.addEventListener("play", () => setMusicToggleState(true));
+      weddingMusic.addEventListener("pause", () => setMusicToggleState(false));
+      weddingMusic.addEventListener("ended", () => setMusicToggleState(false));
+    }
+
+    openBtn.addEventListener("click", () => {
+      body.classList.remove("invitation-locked");
+      body.classList.add("invitation-open");
+      scrollToRatio(0.015, "smooth");
+      requestUIUpdate();
+
+      playWeddingMusic();
+    });
+
+    document.querySelectorAll("input, select, textarea, label, button, a").forEach((el) => {
+      el.addEventListener("pointerdown", (event) => event.stopPropagation());
+    });
+
+    function postRSVPToGoogleSheet(payload) {
+      if (!RSVP_SCRIPT_URL) return;
+
+      const iframeName = "rsvpGoogleSheetFrame";
+      let iframe = document.getElementById(iframeName);
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.name = iframe.id = iframeName;
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+      }
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = RSVP_SCRIPT_URL;
+      form.target = iframeName;
+      form.style.display = "none";
+
+      Object.entries(payload).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value == null ? "" : String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      window.setTimeout(() => form.remove(), 1500);
+    }
+
+    function decodeGuestList(raw) {
+      if (!raw) return [];
+      return String(raw)
+        .replace(/\+/g, " ")
+        .split(/\||,|\n|;/)
+        .map((name) => name.trim())
+        .filter((name) => name && !/^\d+$/.test(name));
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function uniqueNames(names) {
+      const seen = new Set();
+      return names.filter((name) => {
+        const key = name.trim().toLowerCase();
+        if (!key || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function formatGuestNames(names) {
+      const clean = names.map((name) => String(name || "").trim()).filter(Boolean);
+      if (!clean.length) return "Guest";
+      if (clean.length === 1) return clean[0];
+      if (clean.length === 2) return `${clean[0]} & ${clean[1]}`;
+      return `${clean.slice(0, -1).join(", ")} & ${clean[clean.length - 1]}`;
+    }
+
+    const inviteParams = new URLSearchParams(window.location.search);
+    const rawGuestParam = inviteParams.get("guests") || "";
+    const numericGuestParam = /^\d+$/.test(rawGuestParam.trim()) ? rawGuestParam.trim() : "";
+    const namedGuests = uniqueNames([
+      ...decodeGuestList(rawGuestParam),
+      ...decodeGuestList(inviteParams.get("guest") || ""),
+      ...decodeGuestList(inviteParams.get("invite") || ""),
+      ...decodeGuestList(inviteParams.get("group") || ""),
+      ...decodeGuestList(inviteParams.get("name") || ""),
+      ...decodeGuestList(inviteParams.get("to") || "")
+    ]);
+
+    const requestedLimit = parseInt(
+      inviteParams.get("limit") ||
+      numericGuestParam ||
+      inviteParams.get("guestCount") ||
+      inviteParams.get("count") ||
+      String(namedGuests.length || 1),
+      10
+    );
+    const guestLimit = clamp(Number.isFinite(requestedLimit) && requestedLimit > 0 ? requestedLimit : Math.max(namedGuests.length, 1), 1, 20);
+    const hasLockedGuestNames = namedGuests.length > 0;
+    const lockedGuestNames = namedGuests.slice(0, guestLimit);
+    const invitedGroupForClient = formatGuestNames(lockedGuestNames);
+
+    let guestResponses = Array.from({ length: guestLimit }, (_, index) => {
+      const name = lockedGuestNames[index] || "";
+      return {
+        slot: `Guest ${index + 1}`,
+        name,
+        attending: "Yes",
+        manualAttendance: false,
+        locked: Boolean(name)
+      };
+    });
+
+    function applyGuestParams() {
+      const welcomeEl = document.getElementById("guestWelcomeName");
+      const noteEl = document.getElementById("personalGuestNote");
+
+      if (welcomeEl) welcomeEl.textContent = hasLockedGuestNames ? invitedGroupForClient : "Guest";
+      if (noteEl) {
+        noteEl.textContent = hasLockedGuestNames
+          ? "Please confirm who can attend from this invitation."
+          : (guestLimit === 1 ? "Please enter your name to confirm the RSVP." : "Please enter the guest names to confirm the RSVP.");
+      }
+
+      renderGuestNameBoxes();
+      updateGuestTotal();
+    }
+
+    function renderGuestNameBoxes() {
+      const boxList = document.getElementById("guestSlotNameList");
+      if (!boxList) return;
+
+      boxList.innerHTML = guestResponses.map((guest, index) => {
+        const safeName = escapeHTML(guest.name || "");
+        const yesChecked = guest.attending === "Yes" ? " checked" : "";
+        const noChecked = guest.attending === "No" ? " checked" : "";
+        const lockedClass = guest.locked ? " locked" : "";
+        const readonlyAttr = guest.locked ? " readonly aria-readonly=\"true\"" : "";
+        const inputHandler = guest.locked ? "" : ` oninput="setGuestName(${index}, this.value)"`;
+        const labelText = guest.locked ? escapeHTML(guest.name) : `Guest ${index + 1}`;
+
+        return `
+          <div class="guest-slot-name-box${lockedClass}">
+            <label class="guest-slot-name-label" for="guestSlotInput${index}">${labelText}</label>
+            <input id="guestSlotInput${index}" type="text" value="${safeName}" placeholder="Write name"${readonlyAttr}${inputHandler}>
+            <div class="guest-slot-attendance" aria-label="Guest ${index + 1} attendance">
+              <span>Attending?</span>
+              <div class="guest-response-options">
+                <label><input type="radio" name="guestAttend${index}" value="Yes"${yesChecked} onchange="setGuestResponse(${index}, 'Yes')"><span class="guest-response-pill">Yes</span></label>
+                <label><input type="radio" name="guestAttend${index}" value="No"${noChecked} onchange="setGuestResponse(${index}, 'No')"><span class="guest-response-pill">No</span></label>
+              </div>
+            </div>
+          </div>`;
+      }).join("");
+
+      requestAnimationFrame(updateGuestListScrollUI);
+    }
+
+    function updateGuestListScrollUI() {
+      const list = document.getElementById("guestSlotNameList");
+      const listWrap = document.getElementById("manualGuestListWrap");
+      const thumb = document.getElementById("guestListScrollThumb");
+
+      if (!list || !listWrap) return;
+
+      const scrollable = list.scrollHeight > list.clientHeight + 2;
+      listWrap.classList.toggle("is-scrollable", scrollable);
+      listWrap.classList.toggle("not-scrollable", !scrollable);
+
+      if (!scrollable) {
+        listWrap.classList.remove("at-top", "at-bottom");
+        if (thumb) {
+          thumb.style.height = "100%";
+          thumb.style.top = "0%";
+        }
+        return;
+      }
+
+      const max = Math.max(1, list.scrollHeight - list.clientHeight);
+      const progress = clamp(list.scrollTop / max, 0, 1);
+      const thumbHeight = clamp((list.clientHeight / list.scrollHeight) * 100, 20, 72);
+      const thumbTop = (100 - thumbHeight) * progress;
+
+      listWrap.classList.toggle("at-top", list.scrollTop <= 2);
+      listWrap.classList.toggle("at-bottom", list.scrollTop >= max - 2);
+
+      if (thumb) {
+        thumb.style.height = `${thumbHeight.toFixed(2)}%`;
+        thumb.style.top = `${thumbTop.toFixed(2)}%`;
+      }
+    }
+
+    function setGuestName(index, value) {
+      if (!guestResponses[index] || guestResponses[index].locked) return;
+
+      const hadName = Boolean(guestResponses[index].name && guestResponses[index].name.trim());
+      guestResponses[index].name = value.trim();
+
+      if (!hadName && guestResponses[index].name && !guestResponses[index].manualAttendance) {
+        guestResponses[index].attending = "Yes";
+        renderGuestNameBoxes();
+        const input = document.getElementById(`guestSlotInput${index}`);
+        if (input) {
+          input.focus();
+          input.setSelectionRange(input.value.length, input.value.length);
+        }
+      }
+
+      const errName = document.getElementById("errName");
+      if (errName) errName.style.display = "none";
+      updateGuestTotal();
+    }
+
+    function setGuestResponse(index, value) {
+      if (!guestResponses[index]) return;
+      guestResponses[index].attending = value;
+      guestResponses[index].manualAttendance = true;
+      updateGuestTotal();
+    }
+
+    function updateGuestTotal() {
+      const total = guestResponses.filter((guest) => guest.name && guest.name.trim() && guest.attending === "Yes").length;
+      const countEl = document.getElementById("attendingGuestCount");
+      if (countEl) countEl.textContent = total;
+    }
+
+    function goRSVPStep(toStep) {
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const dot1 = document.getElementById("dot-1");
+      const dot2 = document.getElementById("dot-2");
+
+      if (toStep === 2) {
+        const named = guestResponses.filter((guest) => guest.name && guest.name.trim());
+        if (!named.length) {
+          const errName = document.getElementById("errName");
+          if (errName) errName.style.display = "block";
+          return;
+        }
+
+        guestResponses.forEach((guest) => {
+          if (!guest.name || !guest.name.trim()) guest.attending = "No";
+          if (guest.name && guest.name.trim() && !guest.attending) guest.attending = "Yes";
+        });
+
+        const errName = document.getElementById("errName");
+        if (errName) errName.style.display = "none";
+      }
+
+      if (step1) step1.style.display = toStep === 1 ? "block" : "none";
+      if (step2) step2.style.display = toStep === 2 ? "block" : "none";
+      if (dot1) dot1.classList.toggle("on", toStep >= 1);
+      if (dot2) dot2.classList.toggle("on", toStep >= 2);
+
+      requestAnimationFrame(updateGuestListScrollUI);
+    }
+
+    function showRSVPThankYou(groupName, attendingCount) {
+      ["step1", "step2"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+
+      const dots = document.querySelector(".step-dots");
+      if (dots) dots.style.display = "none";
+
+      const ok = document.getElementById("stepOk");
+      if (ok) ok.style.display = "block";
+
+      const okMsg = document.getElementById("okMsg");
+      if (okMsg) {
+        okMsg.innerHTML = `Thank you, <strong>${escapeHTML(groupName)}</strong>!<br>We received your RSVP for ${attendingCount} guest${attendingCount === 1 ? "" : "s"}.`;
+      }
+    }
+
+    function submitRSVP() {
+      guestResponses.forEach((guest) => {
+        if (!guest.name || !guest.name.trim()) guest.attending = "No";
+      });
+
+      const attendingCount = guestResponses.filter((guest) => guest.name && guest.name.trim() && guest.attending === "Yes").length;
+      const submittedNames = guestResponses.map((guest) => guest.name.trim()).filter(Boolean);
+      const groupName = formatGuestNames(submittedNames);
+      const responseLines = guestResponses
+        .filter((guest) => guest.name && guest.name.trim())
+        .map((guest) => `${guest.slot} - ${guest.name}: ${guest.attending}`)
+        .join("\n");
+      const messageEl = document.getElementById("guestMsg");
+      const message = messageEl ? messageEl.value.trim() : "";
+      const sendButton = document.getElementById("sendBtn");
+
+      if (sendButton) {
+        sendButton.textContent = "Sending...";
+        sendButton.disabled = true;
+      }
+
+      const attendingGuests = guestResponses
+        .filter((guest) => guest.name && guest.name.trim() && guest.attending === "Yes")
+        .map((guest) => guest.name.trim());
+      const notAttendingGuests = guestResponses
+        .filter((guest) => guest.name && guest.name.trim() && guest.attending === "No")
+        .map((guest) => guest.name.trim());
+
+      /* Sheet-only RSVP submission.
+         No customer email, guest email, mailto, or notification field is sent from the invitation. */
+      postRSVPToGoogleSheet({
+        guest_name: groupName,
+        guest_count: attendingCount,
+        attending_guests: attendingGuests.join(", "),
+        not_attending_guests: notAttendingGuests.join(", "),
+        individual_responses: responseLines,
+        message,
+        submitted_at: new Date().toISOString()
+      });
+
+      window.setTimeout(() => {
+        if (sendButton) {
+          sendButton.textContent = "Sent ✓";
+          sendButton.disabled = true;
+        }
+        showRSVPThankYou(groupName, attendingCount);
+      }, 700);
+    }
+
+    const continueToMessageBtn = document.getElementById("continueToMessageBtn");
+    const backToGuestsBtn = document.getElementById("backToGuestsBtn");
+    if (continueToMessageBtn) continueToMessageBtn.addEventListener("click", () => goRSVPStep(2));
+    if (backToGuestsBtn) backToGuestsBtn.addEventListener("click", () => goRSVPStep(1));
+    if (sendBtn) sendBtn.addEventListener("click", submitRSVP);
+
+    const guestSlotNameListEl = document.getElementById("guestSlotNameList");
+    if (guestSlotNameListEl) {
+      guestSlotNameListEl.addEventListener("scroll", updateGuestListScrollUI, { passive: true });
+      guestSlotNameListEl.addEventListener("touchstart", updateGuestListScrollUI, { passive: true });
+    }
+
+    function uniqueValues(values) {
+      return Array.from(new Set(values.filter(Boolean)));
+    }
+
+    function preloadImage(url) {
+      return new Promise((resolve) => {
+        if (!url) {
+          resolve(false);
+          return;
+        }
+
+        const img = new Image();
+        let settled = false;
+
+        function finish(ok) {
+          if (settled) return;
+          settled = true;
+          resolve(ok);
+        }
+
+        function decodeThenFinish() {
+          if (img.decode) {
+            img.decode().then(() => finish(true)).catch(() => finish(true));
+          } else {
+            finish(true);
+          }
+        }
+
+        img.decoding = "async";
+        img.onload = decodeThenFinish;
+        img.onerror = () => finish(false);
+        img.src = url;
+
+        if (img.complete && img.naturalWidth > 0) decodeThenFinish();
+      });
+    }
+
+    function waitForFonts() {
+      if (document.fonts && document.fonts.ready) {
+        return document.fonts.ready.then(() => true).catch(() => false);
+      }
+      return Promise.resolve(true);
+    }
+
+    function waitForAudio(audioEl) {
+      return new Promise((resolve) => {
+        if (!audioEl) {
+          resolve(true);
+          return;
+        }
+
+        if (audioEl.readyState >= 3) {
+          resolve(true);
+          return;
+        }
+
+        let settled = false;
+        const maxAudioWait = 8000;
+
+        function cleanup() {
+          audioEl.removeEventListener("canplaythrough", finish);
+          audioEl.removeEventListener("canplay", finish);
+          audioEl.removeEventListener("loadeddata", finish);
+          audioEl.removeEventListener("loadedmetadata", finish);
+          audioEl.removeEventListener("error", finish);
+        }
+
+        function finish() {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          resolve(true);
+        }
+
+        audioEl.addEventListener("canplaythrough", finish, { once: true });
+        audioEl.addEventListener("canplay", finish, { once: true });
+        audioEl.addEventListener("loadeddata", finish, { once: true });
+        audioEl.addEventListener("loadedmetadata", finish, { once: true });
+        audioEl.addEventListener("error", finish, { once: true });
+
+        try { audioEl.load(); } catch (error) {}
+        window.setTimeout(finish, maxAudioWait);
+      });
+    }
+
+    function collectInvitationImageUrls() {
+      const domImageUrls = Array.from(document.querySelectorAll("img[src]"))
+        .map((img) => img.currentSrc || img.src);
+
+      return uniqueValues([
+        PANO_URL,
+        CAR_URL,
+        HOT_AIR_4B_URL,
+        HOT_AIR_5_URL,
+        ...domImageUrls
+      ]);
+    }
+
+    function initLoader() {
+      const loader = document.getElementById("loader");
+      const fill = document.getElementById("loaderFill");
+      const percent = document.getElementById("loaderPercent");
+      const loaderText = document.querySelector(".loader-text");
+
+      if (!loader || !fill || !percent) return;
+
+      const startedAt = Date.now();
+      const imageUrls = collectInvitationImageUrls();
+      const jobs = [
+        ...imageUrls.map((url) => ({ label: "image", promise: preloadImage(url) })),
+        { label: "fonts", promise: waitForFonts() },
+        { label: "music", promise: waitForAudio(weddingMusic) }
+      ];
+      let done = 0;
+
+      function setProgress(value) {
+        const safe = Math.round(clamp(value, 0, 100));
+        fill.style.width = safe + "%";
+        percent.textContent = safe + "%";
+      }
+
+      function finishOne() {
+        done += 1;
+        setProgress(done / jobs.length * 100);
+      }
+
+      setProgress(0);
+      if (loaderText) loaderText.textContent = "Loading";
+
+      window.setTimeout(() => {
+        if (!loader.classList.contains("hidden") && loaderText) {
+          loaderText.textContent = "Still loading all invitation details";
+        }
+      }, 7000);
+
+      Promise.all(jobs.map((job) => job.promise.then(finishOne).catch(finishOne))).then(() => {
+        const delay = Math.max(0, 650 - (Date.now() - startedAt));
+        window.setTimeout(() => {
+          setProgress(100);
+          body.classList.remove("assets-loading");
+          loader.classList.add("hidden");
+          loader.setAttribute("aria-hidden", "true");
+        }, delay);
+      });
+    }
+
+    function startInvitationPage() {
+      scrollToRatio(0, "auto");
+      applyGuestParams();
+      requestUIUpdate();
+      initLoader();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startInvitationPage, { once: true });
+    } else {
+      startInvitationPage();
+    }
+
+    window.addEventListener("load", () => {
+      requestUIUpdate();
+      updateGuestListScrollUI();
+    });
+
+    window.addEventListener("resize", () => {
+      const keep = currentRatio;
+      requestAnimationFrame(() => {
+        scrollToRatio(keep, "auto");
+        requestUIUpdate();
+        updateGuestListScrollUI();
+      });
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", () => {
+        requestAnimationFrame(() => {
+          requestUIUpdate();
+          updateGuestListScrollUI();
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Thomas & Sarah — Beach Wedding</title>
+
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+  <link rel="preconnect" href="https://github.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #f8d88a;
+      --warm-gold: #d99d45;
+      --cream: #fff3da;
+      --dark: #100807;
+
+      /* Fixed Open Invitation button position inside the 9:16 stage.
+         These percentages are relative to the visible invitation screen,
+         not the full panoramic image, so the button stays in the same place
+         on desktop, mobile, and after viewport resize/address-bar changes. */
+      --open-invitation-x: 50%;
+      --open-invitation-y: 79.6%;
+
+      /* 9:16 preview frame.
+         On desktop it shows a true mobile-shaped screen.
+         On mobile it keeps the same ratio instead of stretching/reflowing. */
+      --screen-w: min(100vw, calc(100svh * 9 / 16));
+      --screen-h: min(100svh, calc(100vw * 16 / 9));
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #080403;
+      color: var(--cream);
+      font-family: "Cormorant Garamond", serif;
+      overflow: hidden;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    body.opened {
+      overflow: hidden;
+    }
+
+    .stage {
+      position: relative;
+      width: var(--screen-w);
+      height: var(--screen-h);
+      overflow: hidden;
+      background: #060302;
+      box-shadow: 0 0 0 1px rgba(248,216,138,.16), 0 28px 70px rgba(0,0,0,.55);
+      isolation: isolate;
+    }
+
+    .pano-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      cursor: grab;
+      scrollbar-width: none;
+      touch-action: pan-x;
+    }
+
+    .pano-wrap:active {
+      cursor: grabbing;
+    }
+
+    .pano-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pano {
+      position: relative;
+      height: 100%;
+      width: calc(var(--screen-h) * (2048 / 265));
+      background-image: url("https://github.com/NemerDavid/web-des/blob/main/Beach/Beach5.png?raw=true");
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* All decorative/content elements below are positioned on the panoramic image with percentages.
+       Their sizes are tied to --screen-h, so they keep the same visual ratio when the preview size changes. */
+
+    .hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .27);
+      padding: calc(var(--screen-h) * .018);
+      text-align: center;
+      border: 1px solid rgba(248, 216, 138, .38);
+      border-radius: calc(var(--screen-h) * .026);
+      background: rgba(12, 5, 4, .42);
+      box-shadow: 0 calc(var(--screen-h) * .020) calc(var(--screen-h) * .055) rgba(0, 0, 0, .38);
+      backdrop-filter: blur(5px);
+    }
+
+    .hotspot h2 {
+      margin: 0 0 calc(var(--screen-h) * .008);
+      font-family: "Great Vibes", cursive;
+      font-size: calc(var(--screen-h) * .040);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--gold);
+      text-shadow: 0 0 calc(var(--screen-h) * .018) rgba(255, 198, 88, .55);
+    }
+
+    .hotspot p {
+      margin: 0;
+      font-size: calc(var(--screen-h) * .014);
+      line-height: 1.35;
+      color: rgba(255, 243, 218, .93);
+    }
+
+    .first-scene-gif {
+      position: absolute;
+      left: 8.8%;
+      top: 70.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .215);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+.first-rings { display: none; }
+
+.first-glass { display: none; }
+
+
+
+.first-Cake { display: none; }
+
+
+
+.first-Dance { display: none; }
+
+
+
+    
+    
+.first-board2 {
+  position: absolute;
+  left: 31.1%;
+  top: 47.8%;
+  transform: translate(-50%, -50%);
+
+  width: calc(var(--screen-h) * .38);   /* width */
+  height: calc(var(--screen-h) * .45);  /* height */
+
+  z-index: 3;
+  pointer-events: none;
+ 
+}
+    
+ .first-board2 { 
+   position: absolute;
+   left: 31%;
+   top: 50.1%;
+   transform: translate(-50%, -50%);
+   width: calc(var(--screen-h) * .30);
+   height: auto; z-index: 3; 
+   pointer-events: none; 
+ }   
+    
+    
+    
+    
+      .first-balloon {
+      position: absolute;
+      left: 14.8%;
+      top: 25.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .08);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+    
+          .first-cloud {
+      position: absolute;
+      left: 6.8%;
+      top: 30.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .12);
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+    
+        .first-cloud2 {
+      position: absolute;
+      left: 9.8%;
+      top: 15%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .18);
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+       .first-Cruise {
+      position: absolute;
+      left: 37.8%;
+      top: 53.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .34);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+    
+     .first-balloon4 {
+      position: absolute;
+      left: 39.8%;
+      top: 37.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .08);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+       
+     .first-balloon5 {
+      position: absolute;
+      left: 35.9%;
+      top: 29.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .08);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+    
+    
+    .first-balloon2 {
+      position: absolute;
+      left: 64.8%;
+      top: 30.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .08);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+       .first-balloon3 {
+      position: absolute;
+      left: 60.8%;
+      top: 32.5%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--screen-h) * .08);
+      height: auto;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .024) rgba(0,0,0,.35));
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    /* Gentle motion for Hot_air.png and Cloud.png */
+    @keyframes balloonFloatSoft {
+      0% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-1deg);
+      }
+      25% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .010), calc(var(--screen-h) * -.010), 0) rotate(1deg);
+      }
+      50% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .018), calc(var(--screen-h) * -.024), 0) rotate(2deg);
+      }
+      75% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .006), calc(var(--screen-h) * -.012), 0) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-1deg);
+      }
+    }
+
+    @keyframes balloonFloatSoftReverse {
+      0% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(1deg);
+      }
+      30% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.010), calc(var(--screen-h) * -.014), 0) rotate(-1deg);
+      }
+      60% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.018), calc(var(--screen-h) * -.026), 0) rotate(-2deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(1deg);
+      }
+    }
+
+    @keyframes cloudDriftSoft {
+      0% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .070), calc(var(--screen-h) * -.004), 0);
+      }
+      100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes cloudDriftSoftReverse {
+      0% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.055), calc(var(--screen-h) * .004), 0);
+      }
+      100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+      }
+    }
+
+    .first-balloon,
+    .first-balloon2,
+    .first-balloon3,
+    .first-balloon4,
+    .first-balloon5,
+    .first-cloud,
+    .first-cloud2 {
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    .first-balloon {
+      animation: balloonFloatSoft 15s ease-in-out infinite;
+    }
+
+    .first-balloon2 {
+      animation: balloonFloatSoftReverse 18s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+
+    .first-balloon3 {
+      animation: balloonFloatSoft 21s ease-in-out infinite;
+      animation-delay: -8s;
+    }
+
+.first-balloon4 {
+      animation: balloonFloatSoftReverse 18s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+
+    .first-balloon5 {
+      animation: balloonFloatSoft 21s ease-in-out infinite;
+      animation-delay: -8s;
+    }
+
+
+
+
+
+
+
+
+
+
+    .first-cloud {
+      animation: cloudDriftSoft 38s ease-in-out infinite;
+      animation-delay: -6s;
+    }
+
+    .first-cloud2 {
+      animation: cloudDriftSoftReverse 46s ease-in-out infinite;
+      animation-delay: -12s;
+    }
+
+    @keyframes cruiseForwardSlow {
+      0% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.018), 0, 0);
+      }
+      50% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .060), calc(var(--screen-h) * -.004), 0);
+      }
+      100% {
+        transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.018), 0, 0);
+      }
+    }
+
+    .first-Cruise {
+      will-change: transform;
+      transform-origin: center center;
+      animation: cruiseForwardSlow 34s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .first-balloon,
+      .first-balloon2,
+      .first-balloon3,
+      .first-balloon4,
+      .first-balloon5,
+      .first-cloud,
+      .first-cloud2,
+      .first-Cruise {
+        animation: none;
+      }
+    }
+
+
+
+    /* Main couple text added on the first scene — matched to reference: glowing script, warm gold */
+    .hero-couple-text {
+      position: absolute;
+      left: 12.2%;
+      top: 50.2%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      width: calc(var(--screen-h) * .33);
+      text-align: center;
+      pointer-events: none;
+      color: #ffd978;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .006) rgba(255, 238, 174, .98),
+        0 0 calc(var(--screen-h) * .018) rgba(255, 177, 70, .86),
+        0 0 calc(var(--screen-h) * .038) rgba(255, 117, 33, .58),
+        0 calc(var(--screen-h) * .003) calc(var(--screen-h) * .009) rgba(60, 18, 4, .52);
+    }
+
+    .hero-couple-names {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .066);
+      line-height: .86;
+      letter-spacing: .01em;
+    }
+
+    .hero-couple-amp {
+      display: block;
+      font-size: calc(var(--screen-h) * .048);
+      line-height: .72;
+      margin: calc(var(--screen-h) * .005) 0 calc(var(--screen-h) * .003);
+    }
+
+    .hero-date-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--screen-h) * .009);
+      margin-top: calc(var(--screen-h) * .016);
+    }
+
+    .hero-date-line {
+      width: calc(var(--screen-h) * .057);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 217, 120, .92));
+      box-shadow: 0 0 calc(var(--screen-h) * .007) rgba(255, 177, 70, .74);
+    }
+
+    .hero-date-line.right {
+      background: linear-gradient(90deg, rgba(255, 217, 120, .92), transparent);
+    }
+
+    .hero-heart {
+      font-family: "Cormorant Garamond", serif;
+      font-size: calc(var(--screen-h) * .029);
+      line-height: 1;
+      color: #ffe59c;
+    }
+
+    .hero-wedding-date {
+      margin: calc(var(--screen-h) * .006) 0 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: calc(var(--screen-h) * .0255);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: .018em;
+      color: #ffe6a3;
+      text-transform: lowercase;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .007) rgba(255, 238, 174, .88),
+        0 0 calc(var(--screen-h) * .020) rgba(255, 155, 55, .66),
+        0 calc(var(--screen-h) * .002) calc(var(--screen-h) * .006) rgba(55, 17, 4, .52);
+    }
+
+    .open-invitation-btn {
+      position: absolute;
+      left: var(--open-invitation-x);
+      top: var(--open-invitation-y);
+      transform: translate(-50%, -50%);
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      padding: calc(var(--screen-h) * .011) calc(var(--screen-h) * .033);
+      border-radius: 999px;
+      border: 1px solid rgba(248, 216, 138, .72);
+      background: linear-gradient(135deg, rgba(255, 224, 151, .96), rgba(185, 111, 42, .92));
+      color: #2a1206;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .0105);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 calc(var(--screen-h) * .014) calc(var(--screen-h) * .032) rgba(213, 133, 51, .28);
+      backdrop-filter: blur(8px);
+      transition: transform .22s ease, opacity .22s ease, filter .22s ease;
+    }
+
+    .open-invitation-btn:hover {
+      transform: translate(-50%, -52%);
+      filter: brightness(1.05);
+    }
+
+    .invitation-card {
+      left: 22.2%;
+      top: 44.5%;
+      width: calc(var(--screen-h) * .46);
+      padding: calc(var(--screen-h) * .024) calc(var(--screen-h) * .026);
+      border-radius: calc(var(--screen-h) * .030);
+      border: 1px solid rgba(255, 220, 139, .30);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 203, 104, .14), transparent 42%),
+        linear-gradient(180deg, rgba(31, 10, 4, .58), rgba(12, 5, 4, .42));
+      box-shadow:
+        0 calc(var(--screen-h) * .018) calc(var(--screen-h) * .052) rgba(0,0,0,.38),
+        inset 0 0 0 1px rgba(255, 245, 214, .06);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      overflow: hidden;
+    }
+
+    .invitation-card::before,
+    .invitation-card::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 72%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 221, 146, .62), transparent);
+      pointer-events: none;
+    }
+
+    .invitation-card::before { top: calc(var(--screen-h) * .014); }
+    .invitation-card::after { bottom: calc(var(--screen-h) * .014); }
+
+    .invitation-card h2 {
+      margin-bottom: calc(var(--screen-h) * .013);
+      font-size: calc(var(--screen-h) * .037);
+    }
+
+    .families-intro {
+      margin: 0 auto;
+      max-width: calc(var(--screen-h) * .35);
+      color: rgba(255, 243, 218, .96);
+      text-align: center;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .012) rgba(255, 184, 75, .20),
+        0 2px 9px rgba(0,0,0,.55);
+    }
+
+    .families-intro .verse-ref {
+      margin: 0 0 calc(var(--screen-h) * .020);
+      font-family: "Cormorant Garamond", serif;
+      font-size: calc(var(--screen-h) * .0188);
+      font-weight: 700;
+      letter-spacing: .050em;
+      color: #fff0c8;
+      text-transform: uppercase;
+    }
+
+    .families-intro .verse-text {
+      margin: 0 auto calc(var(--screen-h) * .032);
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: calc(var(--screen-h) * .0365);
+      line-height: 1.22;
+      color: #ffd978;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .006) rgba(255, 238, 174, .92),
+        0 0 calc(var(--screen-h) * .019) rgba(255, 177, 70, .76),
+        0 calc(var(--screen-h) * .003) calc(var(--screen-h) * .009) rgba(60, 18, 4, .52);
+    }
+
+    .families-intro .parents {
+      display: block;
+      font-size: calc(var(--screen-h) * .0215);
+      font-weight: 700;
+      line-height: 1.30;
+      color: #fff0c8;
+      letter-spacing: .012em;
+    }
+
+    .families-intro .amp {
+      display: block;
+      margin: calc(var(--screen-h) * .018) 0 calc(var(--screen-h) * .020);
+      font-family: "Great Vibes", cursive;
+      font-size: calc(var(--screen-h) * .041);
+      line-height: 1;
+      color: #ffd978;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .008) rgba(255, 238, 174, .85),
+        0 0 calc(var(--screen-h) * .020) rgba(255, 177, 70, .62);
+    }
+
+    .families-intro .request {
+      display: block;
+      margin: calc(var(--screen-h) * .026) auto;
+      font-size: calc(var(--screen-h) * .017);
+      line-height: 1.48;
+      font-weight: 600;
+      color: rgba(255, 242, 210, .95);
+    }
+
+    .families-intro .closing-request {
+      max-width: calc(var(--screen-h) * .31);
+      margin-top: calc(var(--screen-h) * .032);
+      margin-bottom: 0;
+      font-size: calc(var(--screen-h) * .0165);
+      line-height: 1.58;
+    }
+
+    .program-card {
+      left: 31.15%;
+      top: 53%;
+      width: calc(var(--screen-h) * .395);
+      min-height: calc(var(--screen-h) * .310);
+      padding: calc(var(--screen-h) * .020) calc(var(--screen-h) * .035);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .program-card h2 {
+      font-size: calc(var(--screen-h) * .055);
+      margin: 0 0 calc(var(--screen-h) * .030);
+      color: #ffe29a;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .007) rgba(255, 238, 174, .92),
+        0 0 calc(var(--screen-h) * .020) rgba(255, 177, 70, .62),
+        0 calc(var(--screen-h) * .003) calc(var(--screen-h) * .009) rgba(60, 18, 4, .58);
+    }
+
+    .program-list {
+      display: grid;
+      gap: calc(var(--screen-h) * .022);
+      margin-bottom: 35px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: calc(var(--screen-h) * .025);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .015em;
+      color: #fff0c8;
+      text-shadow:
+        0 0 calc(var(--screen-h) * .006) rgba(255, 238, 174, .60),
+        0 calc(var(--screen-h) * .002) calc(var(--screen-h) * .008) rgba(0,0,0,.58);
+    }
+
+    .program-list div {
+      display: grid;
+      grid-template-columns: calc(var(--screen-h) * .085) 1fr calc(var(--screen-h) * .052);
+      align-items: center;
+      column-gap: calc(var(--screen-h) * .016);
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .program-list div span:first-child {
+      text-align: left;
+    }
+
+    .program-list div span:last-child {
+      text-align: left;
+    }
+
+    .program-icon {
+      width: calc(var(--screen-h) * .043);
+      height: calc(var(--screen-h) * .043);
+      object-fit: contain;
+      justify-self: end;
+      opacity: .98;
+      filter:
+        drop-shadow(0 0 calc(var(--screen-h) * .006) rgba(248, 216, 138, .50))
+        drop-shadow(0 calc(var(--screen-h) * .002) calc(var(--screen-h) * .004) rgba(0,0,0,.45));
+      pointer-events: none;
+    }
+
+    .screen-card {
+      left: 55.23%;
+      top: 45.3%;
+      width: calc(var(--screen-h) * .33);
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      pointer-events: none;
+    }
+
+    .screen-card h2 {
+      margin: 0 0 calc(var(--screen-h) * .012);
+      font-size: calc(var(--screen-h) * .040);
+      color: rgba(255, 225, 151, .82);
+      text-shadow: 0 0 calc(var(--screen-h) * .016) rgba(255, 205, 103, .42), 0 2px 8px rgba(0,0,0,.18);
+      pointer-events: none;
+    }
+
+    .projector-album {
+      width: 88%;
+      margin: 0 auto;
+      border-radius: calc(var(--screen-h) * .018);
+      overflow: hidden;
+      position: relative;
+      background: rgba(255, 238, 196, .12);
+      border: 1px solid rgba(248, 216, 138, .24);
+      box-shadow: 0 calc(var(--screen-h) * .014) calc(var(--screen-h) * .028) rgba(0, 0, 0, .18);
+      touch-action: none;
+      pointer-events: auto;
+      user-select: none;
+    }
+
+    .projector-album-track {
+      display: flex;
+      transition: transform .42s ease;
+      will-change: transform;
+    }
+
+    .projector-album-slide {
+      min-width: 100%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 239, 205, .10);
+    }
+
+    .projector-album-slide img {
+      width: 100%;
+      height: calc(var(--screen-h) * .255);
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: rgba(255, 238, 196, .06);
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .open-photo-album-btn {
+      position: absolute;
+      left: 50%;
+      top: calc(var(--screen-h) * .092);
+      transform: translateX(-50%);
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      padding: calc(var(--screen-h) * .008) calc(var(--screen-h) * .020);
+      border-radius: 999px;
+      border: 1px solid rgba(248, 216, 138, .68);
+      background: rgba(42, 18, 6, .58);
+      color: #fff7df;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .0088);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 calc(var(--screen-h) * .008) calc(var(--screen-h) * .020) rgba(0,0,0,.18);
+      backdrop-filter: blur(6px);
+      transition: transform .22s ease, filter .22s ease;
+    }
+
+    .open-photo-album-btn:hover {
+      transform: translateX(-50%) translateY(calc(var(--screen-h) * -.002));
+      filter: brightness(1.08);
+    }
+
+    .photo-album-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--screen-h) * .028);
+      background: rgba(5, 2, 1, .82);
+      backdrop-filter: blur(8px);
+    }
+
+    .photo-album-modal.open {
+      display: flex;
+    }
+
+    .photo-album-viewer {
+      position: relative;
+      width: 94vw;
+      height: 84svh;
+      max-width: calc(var(--screen-h) * .62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .photo-album-modal-track {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      transition: transform .42s ease;
+      will-change: transform;
+    }
+
+    .photo-album-modal-slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--screen-h) * .010);
+    }
+
+    .photo-album-modal-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: calc(var(--screen-h) * .018);
+      box-shadow: 0 calc(var(--screen-h) * .020) calc(var(--screen-h) * .060) rgba(0,0,0,.55);
+      background: rgba(255, 248, 230, .08);
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .photo-album-modal-counter {
+      position: absolute;
+      left: 50%;
+      bottom: calc(var(--screen-h) * .022);
+      transform: translateX(-50%);
+      z-index: 1001;
+      padding: calc(var(--screen-h) * .007) calc(var(--screen-h) * .015);
+      border-radius: 999px;
+      border: 1px solid rgba(248, 216, 138, .34);
+      background: rgba(42, 18, 6, .58);
+      color: rgba(255, 243, 218, .9);
+      font: 700 calc(var(--screen-h) * .0095)/1 "Montserrat", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+
+    .photo-album-close {
+      position: absolute;
+      right: calc(var(--screen-h) * .020);
+      top: calc(var(--screen-h) * .020);
+      z-index: 1001;
+      width: calc(var(--screen-h) * .043);
+      height: calc(var(--screen-h) * .043);
+      border-radius: 50%;
+      border: 1px solid rgba(248, 216, 138, .58);
+      background: rgba(42, 18, 6, .72);
+      color: #fff7df;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .025);
+      line-height: 1;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+
+    .photo-album-modal-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1002;
+      width: calc(var(--screen-h) * .054);
+      height: calc(var(--screen-h) * .054);
+      border-radius: 50%;
+      border: 1px solid rgba(248, 216, 138, .62);
+      background: rgba(42, 18, 6, .62);
+      color: #fff7df;
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .030);
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 calc(var(--screen-h) * .012) calc(var(--screen-h) * .030) rgba(0,0,0,.35);
+      transition: transform .22s ease, background .22s ease, filter .22s ease;
+    }
+
+    .photo-album-modal-arrow:hover {
+      transform: translateY(-50%) scale(1.04);
+      background: rgba(42, 18, 6, .82);
+      filter: brightness(1.08);
+    }
+
+    .photo-album-modal-arrow.prev {
+      left: calc(var(--screen-h) * .030);
+    }
+
+    .photo-album-modal-arrow.next {
+      right: calc(var(--screen-h) * .030);
+    }
+
+    @media (max-width: 720px) {
+      .photo-album-modal-arrow {
+        width: calc(var(--screen-h) * .046);
+        height: calc(var(--screen-h) * .046);
+        font-size: calc(var(--screen-h) * .026);
+      }
+
+      .photo-album-modal-arrow.prev {
+        left: calc(var(--screen-h) * .012);
+      }
+
+      .photo-album-modal-arrow.next {
+        right: calc(var(--screen-h) * .012);
+      }
+    }
+
+    .projector-album-counter {
+      margin-top: calc(var(--screen-h) * .009);
+      font-family: "Montserrat", sans-serif;
+      font-size: calc(var(--screen-h) * .0085);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255, 243, 218, .78);
+      text-shadow: 0 1px 5px rgba(0,0,0,.24);
+      pointer-events: none;
+    }
+
+
+
+.gift-card {
+  left: 69.1%;
+  top: 39%;
+  width: calc(var(--screen-h) * .37);      /* reduced from .30 */
+  min-height: calc(var(--screen-h) * .28); /* add this to force more height */
+}
+
+
+
+
+
+.gift-card p {
+  font-size: calc(var(--screen-h) * .0195);
+}
+
+
+
+
+.gift-card2 {
+  left: 94.25%;
+  top: 37%;
+  width: calc(var(--screen-h) * .53);      /* reduced from .30 */
+  min-height: calc(var(--screen-h) * .28); /* add this to force more height */
+}
+
+
+.gift-card2 p {
+  font-size: calc(var(--screen-h) * .0195);
+}
+
+.gift-card2 .powered-by {
+  display: inline-block;
+  margin-top: calc(var(--screen-h) * .060);
+  color: rgba(255, 243, 218, .92);
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(var(--screen-h) * .0105);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-offset: calc(var(--screen-h) * .004);
+  text-decoration-thickness: 1px;
+  letter-spacing: .04em;
+  pointer-events: auto;
+}
+
+.gift-card2 .powered-by:hover {
+  color: var(--gold);
+}
+
+
+
+
+
+
+
+
+
+
+    /* Extra moving clouds over the RSVP background */
+    .rsvp-cloud {
+      position: absolute;
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+      opacity: .82;
+      filter: drop-shadow(0 calc(var(--screen-h) * .010) calc(var(--screen-h) * .020) rgba(0,0,0,.22));
+      will-change: transform;
+    }
+
+    .rsvp-cloud-1 {
+      left: 74%;
+      top: 10%;
+      width: calc(var(--screen-h) * .17);
+      animation: rsvpCloudDriftRight 54s ease-in-out infinite;
+    }
+
+    .rsvp-cloud-2 {
+      left: 84%;
+      top: 18%;
+      width: calc(var(--screen-h) * .21);
+      opacity: .70;
+      animation: rsvpCloudDriftLeft 66s ease-in-out infinite;
+      animation-delay: -16s;
+    }
+
+    .rsvp-cloud-3 {
+      left: 94%;
+      top: 8%;
+      width: calc(var(--screen-h) * .14);
+      opacity: .76;
+      animation: rsvpCloudDriftRight 48s ease-in-out infinite;
+      animation-delay: -9s;
+    }
+
+    .rsvp-cloud-4 {
+      left: 79%;
+      top: 27%;
+      width: calc(var(--screen-h) * .13);
+      opacity: .58;
+      animation: rsvpCloudDriftLeft 58s ease-in-out infinite;
+      animation-delay: -25s;
+    }
+
+    @keyframes rsvpCloudDriftRight {
+      0% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.055), 0, 0); }
+      50% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .080), calc(var(--screen-h) * -.006), 0); }
+      100% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.055), 0, 0); }
+    }
+
+    @keyframes rsvpCloudDriftLeft {
+      0% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .060), 0, 0); }
+      50% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * -.080), calc(var(--screen-h) * .006), 0); }
+      100% { transform: translate(-50%, -50%) translate3d(calc(var(--screen-h) * .060), 0, 0); }
+    }
+
+    .rsvp-card {
+      left: 80%;
+      top: 40%;
+      width: calc(var(--screen-h) * .43);
+      max-height: calc(var(--screen-h) * .77);
+      padding: calc(var(--screen-h) * .018);
+      overflow: hidden;
+    }
+
+    .rsvp-card h2 {
+      font-size: calc(var(--screen-h) * .052);
+      margin-bottom: calc(var(--screen-h) * .008);
+    }
+
+    .rsvp-card p {
+      font-size: calc(var(--screen-h) * .0175);
+      line-height: 1.22;
+    }
+
+    .rsvp-form {
+      margin-top: calc(var(--screen-h) * .012);
+      display: grid;
+      gap: calc(var(--screen-h) * .008);
+      max-height: calc(var(--screen-h) * .57);
+      overflow-y: auto;
+      padding-right: calc(var(--screen-h) * .005);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(248,216,138,.55) rgba(255,255,255,.10);
+    }
+
+    .rsvp-form::-webkit-scrollbar { width: calc(var(--screen-h) * .006); }
+    .rsvp-form::-webkit-scrollbar-track { background: rgba(255,255,255,.10); border-radius: 999px; }
+    .rsvp-form::-webkit-scrollbar-thumb { background: rgba(248,216,138,.55); border-radius: 999px; }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(248, 216, 138, .36);
+      border-radius: calc(var(--screen-h) * .012);
+      padding: calc(var(--screen-h) * .011) calc(var(--screen-h) * .013);
+      background: rgba(255, 248, 230, .88);
+      color: #2a1206;
+      font: 600 calc(var(--screen-h) * .0142)/1.2 "Montserrat", sans-serif;
+      outline: none;
+    }
+
+    textarea {
+      min-height: calc(var(--screen-h) * .066);
+      resize: none;
+    }
+
+
+
+    .guest-link-greeting {
+      margin: 0 0 calc(var(--screen-h) * .004);
+      font-family: "Cormorant Garamond", serif;
+      font-size: calc(var(--screen-h) * .023);
+      line-height: 1.12;
+      color: var(--gold);
+      text-shadow: 0 0 calc(var(--screen-h) * .012) rgba(255, 198, 88, .45);
+    }
+
+    .guest-slot-list {
+      display: grid;
+      gap: calc(var(--screen-h) * .007);
+    }
+
+    .guest-slot {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: calc(var(--screen-h) * .007);
+      align-items: stretch;
+    }
+
+    .guest-slot[hidden] {
+      display: none !important;
+    }
+
+    .guest-slot input[readonly] {
+      cursor: default;
+      opacity: .95;
+    }
+
+    .guest-attendance {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: calc(var(--screen-h) * .004);
+      min-width: calc(var(--screen-h) * .095);
+    }
+
+    .guest-attendance label {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      border: 1px solid rgba(248, 216, 138, .36);
+      border-radius: calc(var(--screen-h) * .010);
+      background: rgba(255, 248, 230, .78);
+      color: #2a1206;
+      font: 800 calc(var(--screen-h) * .0102)/1 "Montserrat", sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .guest-attendance input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .guest-attendance input:checked + span {
+      color: #fff8df;
+    }
+
+    .guest-attendance label:has(input:checked) {
+      background: linear-gradient(135deg, rgba(255, 226, 157, .92), rgba(196, 122, 44, .92));
+      border-color: rgba(255, 226, 157, .78);
+      box-shadow: 0 0 calc(var(--screen-h) * .014) rgba(248,216,138,.22);
+    }
+
+    .legacy-attendance-field {
+      display: none !important;
+    }
+
+    .submit-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: calc(var(--screen-h) * .016) calc(var(--screen-h) * .020);
+      background: linear-gradient(135deg, #ffe29d, #c47a2c);
+      color: #241006;
+      font: 800 calc(var(--screen-h) * .0142)/1 "Montserrat", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .scroll-progress-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: calc(var(--screen-h) * .018);
+      transform: translateX(-50%);
+      z-index: 10;
+      width: calc(var(--screen-h) * .19);
+      padding: calc(var(--screen-h) * .006);
+      border-radius: 999px;
+      background: rgba(5, 2, 1, .52);
+      border: 1px solid rgba(248, 216, 138, .28);
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .scroll-progress-track {
+      width: 100%;
+      height: calc(var(--screen-h) * .010);
+      border-radius: 999px;
+      background: rgba(255, 243, 218, .22);
+      overflow: hidden;
+      box-shadow: inset 0 0 calc(var(--screen-h) * .006) rgba(0,0,0,.22);
+    }
+
+    .scroll-progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffe8a4, #f8d88a, #d99d45);
+      box-shadow: 0 0 calc(var(--screen-h) * .010) rgba(248, 216, 138, .52);
+      transition: width .18s ease;
+    }
+
+    .drag-hint {
+      position: absolute;
+      left: 50%;
+      top: calc(var(--screen-h) * .918);
+      z-index: 10;
+      transform: translateX(-50%);
+      padding: calc(var(--screen-h) * .008) calc(var(--screen-h) * .017);
+      border-radius: 999px;
+      background: rgba(5, 2, 1, .48);
+      color: rgba(255, 243, 218, .88);
+      font: 600 calc(var(--screen-h) * .0095)/1 "Montserrat", sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid rgba(248, 216, 138, .22);
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .music {
+      position: absolute;
+      right: calc(var(--screen-h) * .016);
+      bottom: calc(var(--screen-h) * .018);
+      z-index: 12;
+      width: calc(var(--screen-h) * .043);
+      height: calc(var(--screen-h) * .043);
+      border-radius: 50%;
+      border: 1px solid rgba(248, 216, 138, .52);
+      background: rgba(8, 3, 2, .62);
+      color: var(--gold);
+      font-size: calc(var(--screen-h) * .022);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .invitation-locked .pano-wrap {
+      cursor: default;
+      overflow: hidden;
+      touch-action: none;
+      overscroll-behavior: none;
+    }
+
+    .invitation-locked .scroll-progress-wrap,
+    .invitation-locked .drag-hint,
+    .invitation-locked .music {
+      opacity: .45;
+    }
+
+    .invitation-locked .music {
+      pointer-events: none;
+    }
+
+    @media (max-width: 720px) {
+      .stage {
+        box-shadow: none;
+      }
+    }
+  
+/* CARDIA FIX — Beach RSVP: above 3 guests becomes scrollable */
+.rsvp-card .guest-slot-list {
+  max-height: calc((var(--screen-h) * .044 + var(--screen-h) * .007) * 3) !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding-right: calc(var(--screen-h) * .012) !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(248,216,138,.95) rgba(255,255,255,.14) !important;
+  overscroll-behavior: contain !important;
+}
+
+.rsvp-card .guest-slot-list::-webkit-scrollbar {
+  width: calc(var(--screen-h) * .010) !important;
+}
+
+.rsvp-card .guest-slot-list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.16) !important;
+  border-radius: 999px !important;
+}
+
+.rsvp-card .guest-slot-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffe29d, #c47a2c) !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(42,18,6,.22) !important;
+}
+
+.rsvp-card .guest-slot-list-wrap {
+  position: relative !important;
+}
+
+.rsvp-card .guest-slot-list-wrap::before,
+.rsvp-card .guest-slot-list-wrap::after {
+  position: absolute !important;
+  right: calc(var(--screen-h) * -.004) !important;
+  z-index: 8 !important;
+  width: calc(var(--screen-h) * .020) !important;
+  height: calc(var(--screen-h) * .020) !important;
+  border-radius: 50% !important;
+  display: none;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, rgba(255,226,157,.96), rgba(196,122,44,.96)) !important;
+  color: #2a1206 !important;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: calc(var(--screen-h) * .010) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  box-shadow: 0 calc(var(--screen-h) * .005) calc(var(--screen-h) * .014) rgba(0,0,0,.22) !important;
+  pointer-events: none !important;
+}
+
+.rsvp-card .guest-slot-list-wrap::before {
+  content: "▲" !important;
+  top: calc(var(--screen-h) * -.002) !important;
+}
+
+.rsvp-card .guest-slot-list-wrap::after {
+  content: "▼" !important;
+  bottom: calc(var(--screen-h) * -.002) !important;
+}
+
+.rsvp-card .guest-slot-list-wrap.has-scroll::before,
+.rsvp-card .guest-slot-list-wrap.has-scroll::after {
+  display: flex !important;
+}
+
+@media (max-width: 720px) {
+  .rsvp-card .guest-slot-list {
+    max-height: calc((var(--screen-h) * .044 + var(--screen-h) * .007) * 3) !important;
+    overflow-y: scroll !important;
+    padding-right: calc(var(--screen-h) * .014) !important;
+  }
+
+  .rsvp-card .guest-slot-list::-webkit-scrollbar {
+    width: calc(var(--screen-h) * .012) !important;
+  }
+}
+
+
+/* CARDIA FIX — stop RSVP Yes/No taps from dragging or snapping the panorama on mobile */
+#rsvp,
+#rsvp *,
+.rsvp-card,
+.rsvp-card * {
+  overscroll-behavior: contain;
+}
+
+#rsvp .guest-attendance,
+#rsvp .guest-attendance label {
+  touch-action: manipulation !important;
+}
+
+#rsvp .guest-attendance input[type="radio"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(50%) !important;
+}
+
+
+/* CARDIA FIX — Mobile RSVP keyboard stability */
+.rsvp-card,
+.rsvp-card *,
+.rsvp-form,
+.rsvp-form * {
+  touch-action: manipulation;
+}
+
+.rsvp-card input,
+.rsvp-card textarea,
+.rsvp-card select,
+.guest-attendance label {
+  scroll-margin: 0 !important;
+}
+
+
+/* CARDIA UPDATE — Beach asset loader until PNG/background images are ready */
+.beach-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--screen-h) * .035);
+  background:
+    radial-gradient(circle at 50% 34%, rgba(248,216,138,.18), transparent 38%),
+    linear-gradient(180deg, rgba(16,8,7,.97), rgba(8,4,3,.98));
+  color: var(--cream);
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .55s ease, visibility .55s ease;
+}
+
+.beach-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.beach-loader-card {
+  width: min(82%, calc(var(--screen-h) * .38));
+  padding: calc(var(--screen-h) * .035) calc(var(--screen-h) * .030);
+  border-radius: calc(var(--screen-h) * .030);
+  border: 1px solid rgba(248,216,138,.34);
+  background: rgba(12,5,4,.54);
+  box-shadow:
+    0 calc(var(--screen-h) * .022) calc(var(--screen-h) * .060) rgba(0,0,0,.42),
+    inset 0 0 0 1px rgba(255,245,214,.055);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+
+.beach-loader-title {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: calc(var(--screen-h) * .052);
+  line-height: 1;
+  color: var(--gold);
+  text-shadow:
+    0 0 calc(var(--screen-h) * .008) rgba(255,238,174,.90),
+    0 0 calc(var(--screen-h) * .024) rgba(255,177,70,.60);
+}
+
+.beach-loader-text {
+  margin: calc(var(--screen-h) * .018) 0 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(var(--screen-h) * .0105);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+  color: rgba(255,243,218,.84);
+}
+
+.beach-loader-bar {
+  position: relative;
+  width: 100%;
+  height: calc(var(--screen-h) * .009);
+  margin: calc(var(--screen-h) * .026) auto calc(var(--screen-h) * .014);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,243,218,.16);
+  box-shadow: inset 0 0 calc(var(--screen-h) * .007) rgba(0,0,0,.32);
+}
+
+.beach-loader-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffe8a4, #f8d88a, #d99d45);
+  box-shadow: 0 0 calc(var(--screen-h) * .014) rgba(248,216,138,.58);
+  transition: width .25s ease;
+}
+
+.beach-loader-percent {
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(var(--screen-h) * .0105);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,243,218,.74);
+}
+
+.beach-loader-dots::after {
+  content: "";
+  animation: beachLoaderDots 1.2s steps(4, end) infinite;
+}
+
+@keyframes beachLoaderDots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75%, 100% { content: "..."; }
+}
+
+body.beach-assets-loading .pano-wrap,
+body.beach-assets-loading .music,
+body.beach-assets-loading .open-invitation-btn,
+body.beach-assets-loading .open-photo-album-btn,
+body.beach-assets-loading .photo-album-modal,
+body.beach-assets-loading .scroll-progress-wrap,
+body.beach-assets-loading .drag-hint {
+  pointer-events: none !important;
+}
+
+@media (max-width: 720px) {
+  .beach-loader-card {
+    width: min(86%, calc(var(--screen-h) * .39));
+  }
+}
+
+  </style>
+</head>
+
+<body class="opened invitation-locked beach-assets-loading">
+  <main class="stage">
+
+    <div class="beach-loader" id="beachLoader" role="status" aria-live="polite" aria-label="Loading invitation images">
+      <div class="beach-loader-card">
+        <h2 class="beach-loader-title">Preparing your invitation</h2>
+        <p class="beach-loader-text">Loading wedding details<span class="beach-loader-dots"></span></p>
+        <div class="beach-loader-bar" aria-hidden="true">
+          <div class="beach-loader-fill" id="beachLoaderFill"></div>
+        </div>
+        <div class="beach-loader-percent" id="beachLoaderPercent">0%</div>
+      </div>
+    </div>
+    <div class="drag-hint">Drag left / right to explore</div>
+
+    <button class="music" id="musicBtn" aria-label="Toggle music">♫</button>
+    <audio id="music" loop preload="auto">
+      <source src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Music/paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="pano-wrap" id="panoWrap">
+      <div class="pano" id="pano">
+        <img
+          class="first-scene-gif"
+          src="https://github.com/NemerDavid/web-des/blob/main/Beach/giphy.gif?raw=true"
+          alt=""
+        >
+        
+        
+        
+     
+<img
+class="first-rings"
+src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Rings2.png"
+alt=""
+>
+  
+       <img
+class="first-glass"
+src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Glass2.png"
+alt=""
+> 
+        
+            <img
+class="first-Cake"
+src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cake2.png"
+alt=""
+>    
+ 
+             <img
+class="first-Dance"
+src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Dance2.png"
+alt=""
+>    
+ 
+        
+        
+        <img
+          class="first-balloon"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Hot_air.png"
+          alt=""
+        >
+        
+        
+              <img
+          class="first-cloud"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud.png"
+          alt=""
+        >
+               <img
+          class="first-cloud2"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud2.png"
+          alt=""
+        >
+        
+        
+        
+        
+           <img
+          class="first-balloon2"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Hot_air.png"
+          alt=""
+        >
+        
+          <img
+          class="first-balloon3"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Hot_air.png"
+          alt=""
+        >
+        
+              <img
+          class="first-balloon4"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Hot_air.png"
+          alt=""
+        >
+        
+        
+                <img
+          class="first-balloon5"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Hot_air.png"
+          alt=""
+        >
+        
+        
+        
+        
+        <img
+class="first-board2"
+src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Board5.png"
+alt=""
+>
+  
+        
+        
+        
+         <img
+          class="first-Cruise"
+          src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cruise2.png"
+          alt=""
+        >
+        
+        
+        
+        
+
+        <div class="hero-couple-text" aria-label="Thomas and Sarah wedding date">
+          <h1 class="hero-couple-names">Thomas<span class="hero-couple-amp">&amp;</span>Sarah</h1>
+          <div class="hero-date-wrap" aria-hidden="true">
+            <span class="hero-date-line"></span>
+            <span class="hero-heart">♡</span>
+            <span class="hero-date-line right"></span>
+          </div>
+          <p class="hero-wedding-date">14 august 2027</p>
+        </div>
+
+
+        <section class="hotspot invitation-card" data-point="1">
+        
+          
+      
+          
+          
+          
+          <div class="families-intro">
+            <h1 class="verse-ref">MATTHEW 19:6</h1>
+            <h2 class="verse-text">“What therefore God<br>has joined together,<br>let no man put asunder.”</h2>
+            <span class="request">Together with their families</span>
+            <span class="parents">Robert &amp; Tina<br>Martin</span>
+            <span class="amp">&amp;</span>
+            <span class="parents">Michael &amp; Anne<br>Clarke</span>
+            <span class="request closing-request">Request the honor of your presence<br>at the wedding of their son and daughter</span>
+          </div>
+        </section>
+
+        <section class="hotspot program-card" data-point="2">
+     
+        </section>
+
+        <section class="hotspot screen-card" data-point="3">
+          <h2>Photo Album</h2>
+          <div class="projector-album" id="projectorAlbum">
+            <div class="projector-album-track" id="projectorAlbumTrack">
+              <div class="projector-album-slide"><img loading="lazy" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P1.png" alt="Couple photo 1"></div>
+              <div class="projector-album-slide"><img loading="lazy" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P2.png" alt="Couple photo 2"></div>
+              <div class="projector-album-slide"><img loading="lazy" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Classy%20rose%20envelope/P3.png" alt="Couple photo 3"></div>
+            </div>
+            <button class="open-photo-album-btn" id="openPhotoAlbumBtn" type="button">Open photo album</button>
+          </div>
+          <div class="projector-album-counter" id="projectorAlbumCounter">1 / 3</div>
+        </section>
+
+        <section class="hotspot gift-card" data-point="4">
+          <h2>Gift Registry</h2>
+          <p>Your love, laughter, and presence are all we could wish for. For those who wish, a wedding list is available at all Whish Money branches.</p>
+          <p style="margin-top:10px;"><strong>Whish Money</strong><br>ACC# xxxxxx</p>
+        </section>
+
+
+
+        <img class="rsvp-cloud rsvp-cloud-1" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud.png" alt="">
+        <img class="rsvp-cloud rsvp-cloud-2" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud2.png" alt="">
+        <img class="rsvp-cloud rsvp-cloud-3" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud.png" alt="">
+        <img class="rsvp-cloud rsvp-cloud-4" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Beach/Cloud2.png" alt="">
+
+        <section class="hotspot rsvp-card" id="rsvp" data-point="5">
+          <h2>RSVP</h2>
+          <p>Kindly reply before 20 July 2027.</p>
+          <form class="rsvp-form" id="rsvpForm" novalidate>
+            <p class="guest-link-greeting" id="guestLinkGreeting">Dear Guest,</p>
+            <div class="guest-slot-list-wrap" id="guestSlotListWrap">
+              <div class="guest-slot-list" id="guestSlotList">
+              <div class="guest-slot" data-guest-slot="1"><input name="guestName[]" placeholder="Guest 1 name" autocomplete="name" required></div>
+              <div class="guest-slot" data-guest-slot="2"><input name="guestName[]" placeholder="Guest 2 name" autocomplete="name"></div>
+              <div class="guest-slot" data-guest-slot="3"><input name="guestName[]" placeholder="Guest 3 name" autocomplete="name"></div>
+              <div class="guest-slot" data-guest-slot="4"><input name="guestName[]" placeholder="Guest 4 name" autocomplete="name"></div>
+              </div>
+            </div>
+            <select class="legacy-attendance-field" name="attendance" aria-hidden="true" tabindex="-1">
+              <option value="">Will you attend?</option>
+              <option>Joyfully attending</option>
+              <option>Sadly cannot attend</option>
+            </select>
+            <textarea name="message" placeholder="Message for the couple"></textarea>
+            <button class="submit-btn" id="sendBtn" type="submit">Send RSVP</button>
+          </form>
+          <div id="rsvpThankYou" style="display:none; margin-top: calc(var(--screen-h) * .018); font-family:'Cormorant Garamond',serif; font-size: calc(var(--screen-h) * .020); line-height:1.35; color: rgba(255,243,218,.94);"></div>
+        </section>
+        
+        
+        
+          <section class="hotspot gift-card2" data-point="4">
+          <h2 style="margin-top:50px;"> We cannot wait to celebrate with you</h2>
+          <p>Thomas & Sarah</p>
+          <p style="margin-top:10px;"><strong>August 14, 2027 · Ehden, Lebanon</strong></p>
+          <a class="powered-by" href="https://www.instagram.com/cardiastudios?igsh=MXByaGpxdHNjMTJnbQ==" target="_blank" rel="noopener">Powered by Cardia Studios</a>
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+
+
+    <button class="open-invitation-btn" id="openInvitationBtn" type="button">Open Invitation</button>
+
+    <div class="photo-album-modal" id="photoAlbumModal" aria-hidden="true">
+      <button class="photo-album-close" id="photoAlbumClose" type="button" aria-label="Close photo album">×</button>
+      <button class="photo-album-modal-arrow prev" id="photoAlbumPrev" type="button" aria-label="Previous photo">‹</button>
+      <div class="photo-album-viewer" id="photoAlbumViewer">
+        <div class="photo-album-modal-track" id="photoAlbumModalTrack"></div>
+      </div>
+      <button class="photo-album-modal-arrow next" id="photoAlbumNext" type="button" aria-label="Next photo">›</button>
+      <div class="photo-album-modal-counter" id="photoAlbumModalCounter">1 / 3</div>
+    </div>
+
+    <div class="scroll-progress-wrap" aria-hidden="true">
+      <div class="scroll-progress-track">
+        <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+
+    (function initBeachAssetLoader() {
+      document.body.classList.add("beach-assets-loading");
+
+      const loader = document.getElementById("beachLoader");
+      const fill = document.getElementById("beachLoaderFill");
+      const percent = document.getElementById("beachLoaderPercent");
+      const minVisibleMs = 700;
+      const maxWaitMs = 12000;
+      const startedAt = Date.now();
+
+      function setProgress(value) {
+        const safeValue = Math.max(0, Math.min(100, Math.round(value)));
+        if (fill) fill.style.width = safeValue + "%";
+        if (percent) percent.textContent = safeValue + "%";
+      }
+
+      function normalizeAssetUrl(url) {
+        if (!url) return "";
+        const clean = String(url).trim().replace(/^['"]|['"]$/g, "");
+        try {
+          return new URL(clean, window.location.href).href;
+        } catch (error) {
+          return clean;
+        }
+      }
+
+      function collectImageAssets() {
+        const urls = new Set();
+
+        document.querySelectorAll("img[src]").forEach((img) => {
+          const src = img.getAttribute("src");
+          if (src) urls.add(normalizeAssetUrl(src));
+        });
+
+        document.querySelectorAll("source[srcset]").forEach((source) => {
+          const srcset = source.getAttribute("srcset") || "";
+          srcset.split(",").forEach((part) => {
+            const url = part.trim().split(/\s+/)[0];
+            if (url) urls.add(normalizeAssetUrl(url));
+          });
+        });
+
+        Array.from(document.styleSheets).forEach((sheet) => {
+          let rules = [];
+          try {
+            rules = Array.from(sheet.cssRules || []);
+          } catch (error) {
+            rules = [];
+          }
+
+          rules.forEach((rule) => {
+            const text = rule.cssText || "";
+            const matches = text.matchAll(/url\(([^)]+)\)/g);
+            for (const match of matches) {
+              const url = normalizeAssetUrl(match[1]);
+              if (url) urls.add(url);
+            }
+          });
+        });
+
+        const inlineStyleUrls = document.documentElement.innerHTML.matchAll(/url\(([^)]+)\)/g);
+        for (const match of inlineStyleUrls) {
+          const url = normalizeAssetUrl(match[1]);
+          if (url) urls.add(url);
+        }
+
+        return Array.from(urls).filter((url) => /\.(png|jpe?g|gif|webp|svg)(\?|#|$)/i.test(url));
+      }
+
+      function preloadImage(url) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.decoding = "async";
+          img.onload = () => resolve({ url, ok: true });
+          img.onerror = () => resolve({ url, ok: false });
+          img.src = url;
+          if (img.complete) resolve({ url, ok: true });
+        });
+      }
+
+      function finishLoader() {
+        const elapsed = Date.now() - startedAt;
+        const delay = Math.max(0, minVisibleMs - elapsed);
+        setProgress(100);
+        window.setTimeout(() => {
+          document.body.classList.remove("beach-assets-loading");
+          if (loader) {
+            loader.classList.add("hidden");
+            loader.setAttribute("aria-hidden", "true");
+          }
+        }, delay);
+      }
+
+      const assets = collectImageAssets();
+      if (!assets.length) {
+        finishLoader();
+        return;
+      }
+
+      let completed = 0;
+      setProgress(0);
+
+      const preloadAll = Promise.all(assets.map((url) => preloadImage(url).then((result) => {
+        completed += 1;
+        setProgress((completed / assets.length) * 100);
+        return result;
+      })));
+
+      const timeout = new Promise((resolve) => window.setTimeout(resolve, maxWaitMs));
+      Promise.race([preloadAll, timeout]).then(finishLoader);
+    })();
+
+    const musicBtn = document.getElementById("musicBtn");
+    const music = document.getElementById("music");
+    const wrap = document.getElementById("panoWrap");
+    const scrollProgressFill = document.getElementById("scrollProgressFill");
+    const openInvitationBtn = document.getElementById("openInvitationBtn");
+
+const points = [0.095, 0.165, 0.245, 0.47, 0.695, 0.9];
+    let currentPointIndex = 0;
+
+    function scrollToPoint(index, behavior = "smooth") {
+      currentPointIndex = index;
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      wrap.scrollTo({ left: maxScroll * points[index], behavior });
+    }
+
+    function positionLockedOpeningScene() {
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      wrap.scrollLeft = maxScroll * points[0];
+    }
+
+    window.addEventListener("load", () => {
+      requestAnimationFrame(positionLockedOpeningScene);
+    });
+
+    window.addEventListener("resize", () => {
+      if (document.body.classList.contains("invitation-locked")) {
+        requestAnimationFrame(positionLockedOpeningScene);
+        return;
+      }
+
+      /* On mobile, opening/closing the keyboard fires resize events.
+         If an RSVP field was focused, do NOT snap to another panorama point;
+         keep the RSVP panel exactly where the user was typing. */
+      if (window.__rsvpKeyboardLock && typeof window.__rsvpKeyboardLeft === "number") {
+        requestAnimationFrame(() => window.__holdPanoAt(window.__rsvpKeyboardLeft));
+        return;
+      }
+
+      requestAnimationFrame(() => scrollToPoint(currentPointIndex, "auto"));
+    });
+
+    window.addEventListener("orientationchange", () => {
+      if (!document.body.classList.contains("invitation-locked")) return;
+      window.setTimeout(() => requestAnimationFrame(positionLockedOpeningScene), 250);
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", () => {
+        if (document.body.classList.contains("invitation-locked")) {
+          requestAnimationFrame(positionLockedOpeningScene);
+        }
+      });
+    }
+
+    openInvitationBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      document.body.classList.remove("invitation-locked");
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      const ratio = maxScroll ? wrap.scrollLeft / maxScroll : 0;
+      scrollProgressFill.style.width = `${Math.max(0, Math.min(100, ratio * 100))}%`;
+      openInvitationBtn.style.opacity = "0";
+      openInvitationBtn.style.pointerEvents = "none";
+
+      try {
+        await music.play();
+        musicBtn.textContent = "❚❚";
+      } catch (err) {
+        musicBtn.textContent = "♫";
+      }
+    });
+
+    musicBtn.addEventListener("click", async () => {
+      if (music.paused) {
+        await music.play();
+        musicBtn.textContent = "❚❚";
+      } else {
+        music.pause();
+        musicBtn.textContent = "♫";
+      }
+    });
+
+
+    const albumTrack = document.getElementById("projectorAlbumTrack");
+    const albumCounter = document.getElementById("projectorAlbumCounter");
+    const openPhotoAlbumBtn = document.getElementById("openPhotoAlbumBtn");
+    const photoAlbumModal = document.getElementById("photoAlbumModal");
+    const photoAlbumClose = document.getElementById("photoAlbumClose");
+    const photoAlbumPrev = document.getElementById("photoAlbumPrev");
+    const photoAlbumNext = document.getElementById("photoAlbumNext");
+    const photoAlbumViewer = document.getElementById("photoAlbumViewer");
+    const photoAlbumModalTrack = document.getElementById("photoAlbumModalTrack");
+    const photoAlbumModalCounter = document.getElementById("photoAlbumModalCounter");
+    const albumSlides = [...document.querySelectorAll(".projector-album-slide")];
+    const album = document.getElementById("projectorAlbum");
+    let albumIndex = 0;
+    let albumDragging = false;
+    let albumStartX = 0;
+    let albumCurrentX = 0;
+
+    function updateProjectorAlbum(withTransition = true) {
+      albumTrack.style.transition = withTransition ? "transform .42s ease" : "none";
+      albumTrack.style.transform = `translateX(${-albumIndex * 100}%)`;
+      albumCounter.textContent = `${albumIndex + 1} / ${albumSlides.length}`;
+    }
+
+    function moveProjectorAlbum(step) {
+      albumIndex = (albumIndex + step + albumSlides.length) % albumSlides.length;
+      updateProjectorAlbum(true);
+    }
+
+    function buildFullPhotoAlbum() {
+      photoAlbumModalTrack.innerHTML = albumSlides.map((slide) => {
+        const img = slide.querySelector("img");
+        const src = img?.currentSrc || img?.src || "";
+        const alt = img?.alt || "Full-size photo";
+        return `<div class="photo-album-modal-slide"><img src="${src}" alt="${alt}"></div>`;
+      }).join("");
+    }
+
+    function updateFullPhotoAlbum(withTransition = true) {
+      photoAlbumModalTrack.style.transition = withTransition ? "transform .42s ease" : "none";
+      photoAlbumModalTrack.style.transform = `translateX(${-albumIndex * 100}%)`;
+      photoAlbumModalCounter.textContent = `${albumIndex + 1} / ${albumSlides.length}`;
+      updateProjectorAlbum(withTransition);
+    }
+
+    function openFullPhotoAlbum() {
+      buildFullPhotoAlbum();
+      updateFullPhotoAlbum(false);
+      photoAlbumModal.classList.add("open");
+      photoAlbumModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeFullPhotoAlbum() {
+      photoAlbumModal.classList.remove("open");
+      photoAlbumModal.setAttribute("aria-hidden", "true");
+      photoAlbumModalTrack.innerHTML = "";
+    }
+
+    function moveFullPhotoAlbum(step) {
+      albumIndex = (albumIndex + step + albumSlides.length) % albumSlides.length;
+      updateFullPhotoAlbum(true);
+    }
+
+    openPhotoAlbumBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+    openPhotoAlbumBtn.addEventListener("pointerup", (e) => e.stopPropagation());
+    openPhotoAlbumBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openFullPhotoAlbum();
+    });
+
+    photoAlbumClose.addEventListener("click", closeFullPhotoAlbum);
+
+    [photoAlbumPrev, photoAlbumNext].forEach((arrow) => {
+      arrow.addEventListener("pointerdown", (e) => e.stopPropagation());
+      arrow.addEventListener("pointerup", (e) => e.stopPropagation());
+    });
+
+    photoAlbumPrev.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      moveFullPhotoAlbum(-1);
+    });
+
+    photoAlbumNext.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      moveFullPhotoAlbum(1);
+    });
+
+    photoAlbumModal.addEventListener("click", (e) => {
+      if (e.target === photoAlbumModal) closeFullPhotoAlbum();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && photoAlbumModal.classList.contains("open")) closeFullPhotoAlbum();
+    });
+
+    let modalDragging = false;
+    let modalStartX = 0;
+    let modalCurrentX = 0;
+
+    photoAlbumViewer.addEventListener("pointerdown", (e) => {
+      if (!photoAlbumModal.classList.contains("open")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      modalDragging = true;
+      modalStartX = e.clientX;
+      modalCurrentX = e.clientX;
+      photoAlbumViewer.setPointerCapture(e.pointerId);
+      photoAlbumModalTrack.style.transition = "none";
+    });
+
+    photoAlbumViewer.addEventListener("pointermove", (e) => {
+      if (!modalDragging) return;
+      e.preventDefault();
+      e.stopPropagation();
+      modalCurrentX = e.clientX;
+      const dx = modalCurrentX - modalStartX;
+      const percent = (dx / photoAlbumViewer.clientWidth) * 100;
+      photoAlbumModalTrack.style.transform = `translateX(${(-albumIndex * 100) + percent}%)`;
+    });
+
+    function endModalSwipe(e) {
+      if (!modalDragging) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const dx = modalCurrentX - modalStartX;
+      modalDragging = false;
+      if (Math.abs(dx) > photoAlbumViewer.clientWidth * 0.14) {
+        moveFullPhotoAlbum(dx < 0 ? 1 : -1);
+      } else {
+        updateFullPhotoAlbum(true);
+      }
+    }
+
+    photoAlbumViewer.addEventListener("pointerup", endModalSwipe);
+    photoAlbumViewer.addEventListener("pointercancel", endModalSwipe);
+    photoAlbumViewer.addEventListener("lostpointercapture", () => {
+      if (modalDragging) {
+        modalDragging = false;
+        updateFullPhotoAlbum(true);
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!photoAlbumModal.classList.contains("open")) return;
+      if (e.key === "ArrowLeft") moveFullPhotoAlbum(-1);
+      if (e.key === "ArrowRight") moveFullPhotoAlbum(1);
+    });
+
+    album.addEventListener("pointerdown", (e) => {
+      /* Keep the small preview locked: guests can only swipe photos
+         after pressing “Open photo album” and entering the full album. */
+      if (!e.target.closest(".open-photo-album-btn")) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    album.addEventListener("pointermove", (e) => {
+      if (!albumDragging) return;
+      e.preventDefault();
+      e.stopPropagation();
+      albumCurrentX = e.clientX;
+      const dx = albumCurrentX - albumStartX;
+      const percent = (dx / album.clientWidth) * 100;
+      albumTrack.style.transform = `translateX(${(-albumIndex * 100) + percent}%)`;
+    });
+
+    function endAlbumSwipe(e) {
+      if (!albumDragging) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const dx = albumCurrentX - albumStartX;
+      albumDragging = false;
+      if (Math.abs(dx) > album.clientWidth * 0.16) {
+        moveProjectorAlbum(dx < 0 ? 1 : -1);
+      } else {
+        updateProjectorAlbum(true);
+      }
+    }
+
+    album.addEventListener("pointerup", endAlbumSwipe);
+    album.addEventListener("pointercancel", endAlbumSwipe);
+    album.addEventListener("lostpointercapture", () => {
+      if (albumDragging) {
+        albumDragging = false;
+        updateProjectorAlbum(true);
+      }
+    });
+
+    wrap.addEventListener("scroll", () => {
+      if (document.body.classList.contains("invitation-locked")) return;
+      if (window.__rsvpKeyboardLock && typeof window.__rsvpKeyboardLeft === "number") {
+        requestAnimationFrame(() => holdPanoAt(window.__rsvpKeyboardLeft));
+        return;
+      }
+
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      const ratio = maxScroll ? wrap.scrollLeft / maxScroll : 0;
+      let closest = 0;
+      let dist = Infinity;
+
+      points.forEach((p, i) => {
+        const d = Math.abs(ratio - p);
+        if (d < dist) {
+          dist = d;
+          closest = i;
+        }
+      });
+
+      currentPointIndex = closest;
+      scrollProgressFill.style.width = `${Math.max(0, Math.min(100, ratio * 100))}%`;
+    });
+
+    let isDown = false;
+    let startX = 0;
+    let startLeft = 0;
+
+
+
+    /* CARDIA FIX — RSVP controls must not move the panoramic screen.
+       On mobile, tapping a hidden radio inside a draggable horizontal panorama can make
+       the browser scroll the panorama to the right while it tries to focus the radio.
+       We handle the Yes/No pills manually and immediately restore the exact RSVP scroll position. */
+    const rsvpCard = document.getElementById("rsvp");
+
+    function updatePanoProgressFromCurrentPosition() {
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      const ratio = maxScroll ? wrap.scrollLeft / maxScroll : 0;
+      scrollProgressFill.style.width = `${Math.max(0, Math.min(100, ratio * 100))}%`;
+    }
+
+    function holdPanoAt(left) {
+      const restore = () => {
+        wrap.scrollLeft = left;
+        updatePanoProgressFromCurrentPosition();
+      };
+      restore();
+      requestAnimationFrame(restore);
+      setTimeout(restore, 0);
+      setTimeout(restore, 60);
+      setTimeout(restore, 180);
+      setTimeout(restore, 360);
+      setTimeout(restore, 700);
+      setTimeout(restore, 1100);
+    }
+
+    window.__holdPanoAt = holdPanoAt;
+    window.__rsvpKeyboardLock = false;
+    window.__rsvpKeyboardLeft = null;
+    let rsvpKeyboardUnlockTimer = null;
+
+    function lockPanoForRsvpKeyboard(left = wrap.scrollLeft, duration = 1400) {
+      window.__rsvpKeyboardLock = true;
+      window.__rsvpKeyboardLeft = left;
+      currentPointIndex = 4;
+      holdPanoAt(left);
+
+      clearTimeout(rsvpKeyboardUnlockTimer);
+      rsvpKeyboardUnlockTimer = setTimeout(() => {
+        window.__rsvpKeyboardLock = false;
+      }, duration);
+    }
+
+    function activeElementIsInRsvp() {
+      return !!(rsvpCard && rsvpCard.contains(document.activeElement));
+    }
+
+    function keepRsvpStillDuringKeyboardChange() {
+      if (!window.__rsvpKeyboardLock && !activeElementIsInRsvp()) return;
+      const left = typeof window.__rsvpKeyboardLeft === "number" ? window.__rsvpKeyboardLeft : wrap.scrollLeft;
+      lockPanoForRsvpKeyboard(left, 1600);
+    }
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", keepRsvpStillDuringKeyboardChange);
+      window.visualViewport.addEventListener("scroll", keepRsvpStillDuringKeyboardChange);
+    }
+
+    function chooseAttendanceFromLabel(label) {
+      if (!label) return;
+      const keepLeft = wrap.scrollLeft;
+      const radio = label.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('input', { bubbles: true }));
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      holdPanoAt(keepLeft);
+    }
+
+    if (rsvpCard) {
+      ["pointerdown", "pointermove", "pointerup", "pointercancel", "touchstart", "touchmove", "touchend", "mousedown", "mouseup", "click", "input", "change", "focusin"].forEach((eventName) => {
+        rsvpCard.addEventListener(eventName, (e) => {
+          e.stopPropagation();
+          const keepLeft = wrap.scrollLeft;
+          requestAnimationFrame(() => holdPanoAt(keepLeft));
+        }, true);
+      });
+
+      rsvpCard.addEventListener("pointerdown", (e) => {
+        const label = e.target.closest('.guest-attendance label');
+        if (!label) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        label.dataset.panoKeepLeft = String(wrap.scrollLeft);
+      }, true);
+
+      rsvpCard.addEventListener("pointerup", (e) => {
+        const label = e.target.closest('.guest-attendance label');
+        if (!label) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        chooseAttendanceFromLabel(label);
+      }, true);
+
+      rsvpCard.addEventListener("click", (e) => {
+        const label = e.target.closest('.guest-attendance label');
+        if (!label) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        chooseAttendanceFromLabel(label);
+      }, true);
+
+      rsvpCard.addEventListener("focusin", (e) => {
+        if (!e.target.matches("input, textarea, select")) return;
+        lockPanoForRsvpKeyboard(wrap.scrollLeft, 3000);
+      }, true);
+
+      rsvpCard.addEventListener("focusout", (e) => {
+        if (!e.target.matches("input, textarea, select")) return;
+        const keepLeft = typeof window.__rsvpKeyboardLeft === "number" ? window.__rsvpKeyboardLeft : wrap.scrollLeft;
+        /* Android Chrome moves the horizontal scroll when the keyboard closes.
+           This keeps restoring the same panorama position through that close animation. */
+        lockPanoForRsvpKeyboard(keepLeft, 1800);
+      }, true);
+
+      ["blur", "orientationchange"].forEach((eventName) => {
+        window.addEventListener(eventName, () => {
+          if (window.__rsvpKeyboardLock || activeElementIsInRsvp()) {
+            const keepLeft = typeof window.__rsvpKeyboardLeft === "number" ? window.__rsvpKeyboardLeft : wrap.scrollLeft;
+            lockPanoForRsvpKeyboard(keepLeft, 1800);
+          }
+        }, true);
+      });
+
+    }
+
+    wrap.addEventListener("pointerdown", (e) => {
+      if (document.body.classList.contains("invitation-locked")) {
+        if (!e.target.closest("#openInvitationBtn")) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        return;
+      }
+      if (e.target.closest("#rsvp, .rsvp-card, .rsvp-form, .projector-album, .open-photo-album-btn, .photo-album-modal, input, select, textarea, button, label, .guest-attendance, .guest-slot")) return;
+      isDown = true;
+      startX = e.clientX;
+      startLeft = wrap.scrollLeft;
+      wrap.setPointerCapture(e.pointerId);
+    });
+
+    wrap.addEventListener("pointermove", (e) => {
+      if (!isDown) return;
+      wrap.scrollLeft = startLeft - (e.clientX - startX);
+    });
+
+    wrap.addEventListener("pointerup", () => isDown = false);
+    wrap.addEventListener("pointercancel", () => isDown = false);
+
+
+
+    const COUPLE_NAME = 'Thomas & Sarah';
+    const CUSTOMER_EMAIL = 'cardiastudios@gmail.com';
+    const RSVP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJmJqBu9U9t6lKlbBMCvHtkXNBo6026SirsYWAhVMo_H5l9gRhoBmXipvAvI47c5v4lw/exec';
+    const inviteParams = new URLSearchParams(window.location.search);
+
+    function decodeGuestList(rawValue) {
+      if (!rawValue) return [];
+      return rawValue
+        .split(/\||,|\n|;/)
+        .map(name => name.trim())
+        .filter(Boolean);
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[char]));
+    }
+
+    function formatGuestNames(names) {
+      const clean = names.map(name => String(name || '').trim()).filter(Boolean);
+      if (!clean.length) return 'Guest';
+      if (clean.length === 1) return clean[0];
+      if (clean.length === 2) return clean[0] + ' & ' + clean[1];
+      return clean.slice(0, -1).join(', ') + ' & ' + clean[clean.length - 1];
+    }
+
+    const namedGuestsFromLink = [
+      ...decodeGuestList(inviteParams.get('invite') || ''),
+      ...decodeGuestList(inviteParams.get('group') || ''),
+      ...decodeGuestList(inviteParams.get('guests') || ''),
+      ...decodeGuestList(inviteParams.get('guest') || '')
+    ];
+
+    const uniqueNamedGuestsFromLink = [...new Set(namedGuestsFromLink)];
+    const hasLockedGuestNames = uniqueNamedGuestsFromLink.length > 0;
+    const parsedGuestLimit = parseInt(inviteParams.get('limit') || String(uniqueNamedGuestsFromLink.length || 2), 10);
+    const guestLimit = Number.isFinite(parsedGuestLimit) && parsedGuestLimit > 0 ? parsedGuestLimit : Math.max(uniqueNamedGuestsFromLink.length, 2);
+    const lockedGuestNames = hasLockedGuestNames ? uniqueNamedGuestsFromLink.slice(0, guestLimit) : [];
+    const invitedGroupForClient = formatGuestNames(lockedGuestNames);
+
+    function applyGuestLinkPersonalization() {
+      const greeting = document.getElementById('guestLinkGreeting');
+      const slotList = document.getElementById('guestSlotList');
+      if (!slotList) return;
+
+      if (greeting) {
+        greeting.textContent = 'Dear ' + (hasLockedGuestNames ? invitedGroupForClient : 'Guest') + ',';
+      }
+
+      slotList.innerHTML = '';
+      for (let index = 0; index < guestLimit; index++) {
+        const slot = document.createElement('div');
+        slot.className = 'guest-slot';
+        slot.dataset.guestSlot = String(index + 1);
+
+        const input = document.createElement('input');
+        input.name = 'guestName[]';
+        input.id = 'guestSlotInput' + index;
+        input.placeholder = 'Guest ' + (index + 1) + ' name';
+        input.autocomplete = 'name';
+        input.required = false;
+
+        if (hasLockedGuestNames && lockedGuestNames[index]) {
+          input.value = lockedGuestNames[index];
+          input.readOnly = true;
+          input.setAttribute('aria-readonly', 'true');
+        }
+
+        const attendance = document.createElement('div');
+        attendance.className = 'guest-attendance';
+        attendance.setAttribute('aria-label', 'Attendance for guest ' + (index + 1));
+
+        const yesId = 'guestAttendYes' + index;
+        const noId = 'guestAttendNo' + index;
+        const radioName = 'guestAttend[' + index + ']';
+
+        attendance.innerHTML =
+          '<label for="' + yesId + '"><input id="' + yesId + '" type="radio" name="' + radioName + '" value="Yes"><span>Yes</span></label>' +
+          '<label for="' + noId + '"><input id="' + noId + '" type="radio" name="' + radioName + '" value="No"><span>No</span></label>';
+
+        slot.appendChild(input);
+        slot.appendChild(attendance);
+        slotList.appendChild(slot);
+      }
+    }
+
+    function collectGuestResponses() {
+      return Array.from(document.querySelectorAll('#guestSlotList .guest-slot')).map((slot, index) => {
+        const input = slot.querySelector('input[name="guestName[]"]');
+        const attendanceInput = slot.querySelector('input[type="radio"]:checked');
+        return {
+          slot: 'Guest ' + (index + 1),
+          name: input ? input.value.trim() : '',
+          attending: attendanceInput ? attendanceInput.value : '',
+          manualAttendance: true,
+          locked: input ? input.readOnly : false
+        };
+      });
+    }
+
+    function postRSVPToGoogleSheet(payload) {
+      const iframeName = 'rsvpGoogleSheetFrame';
+      let iframe = document.getElementById(iframeName);
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.id = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+      }
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = RSVP_SCRIPT_URL;
+      form.target = iframeName;
+      form.style.display = 'none';
+
+      Object.entries(payload).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      setTimeout(() => form.remove(), 1500);
+    }
+
+    applyGuestLinkPersonalization();
+
+    function updateBeachGuestScroller() {
+      const list = document.getElementById('guestSlotList');
+      const wrapEl = document.getElementById('guestSlotListWrap');
+      if (!list || !wrapEl) return;
+      const visibleSlots = Array.from(list.querySelectorAll('.guest-slot')).filter(slot => !slot.hidden);
+      wrapEl.classList.toggle('has-scroll', visibleSlots.length > 3);
+      list.style.overflowY = visibleSlots.length > 3 ? 'scroll' : 'visible';
+    }
+
+    window.addEventListener('load', updateBeachGuestScroller);
+    window.addEventListener('resize', updateBeachGuestScroller);
+
+    updateBeachGuestScroller();
+
+    document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const form = e.currentTarget;
+      const sendBtn = document.getElementById('sendBtn') || form.querySelector('button[type="submit"]');
+      const messageField = form.querySelector('textarea[name="message"]');
+      const guestResponses = collectGuestResponses();
+      const submittedGuestNames = guestResponses.map(guest => guest.name).filter(Boolean);
+      const missingAttendance = guestResponses.some(guest => guest.name && !guest.attending);
+
+      if (!submittedGuestNames.length) {
+        alert('Please enter at least one guest name.');
+        return;
+      }
+
+      if (missingAttendance) {
+        alert('Please choose Yes or No for each guest.');
+        return;
+      }
+
+      if (sendBtn) {
+        sendBtn.textContent = 'Sending...';
+        sendBtn.disabled = true;
+      }
+
+      const attendingCount = guestResponses.filter(guest => guest.name && guest.attending === 'Yes').length;
+      const groupName = formatGuestNames(submittedGuestNames);
+      const responseLines = guestResponses
+        .filter(guest => guest.name)
+        .map(guest => guest.slot + ' - ' + guest.name + ': ' + guest.attending)
+        .join('\n');
+
+      const payload = {
+        event: COUPLE_NAME,
+        customer_email: CUSTOMER_EMAIL,
+        guest_name: groupName,
+        invited_guest_from_link: invitedGroupForClient,
+        attending: attendingCount > 0 ? 'Yes' : 'No',
+        attending_summary: responseLines,
+        guest_count: attendingCount,
+        guest_limit: guestLimit,
+        guests_json: JSON.stringify(guestResponses),
+        message: messageField ? messageField.value.trim() : '',
+        page_url: window.location.href,
+        submitted_at: new Date().toISOString()
+      };
+
+      postRSVPToGoogleSheet(payload);
+
+      setTimeout(() => {
+        if (sendBtn) {
+          sendBtn.textContent = 'Sent ✓';
+          sendBtn.disabled = true;
+        }
+        form.style.display = 'none';
+        const thankYou = document.getElementById('rsvpThankYou');
+        if (thankYou) {
+          thankYou.style.display = 'block';
+          thankYou.innerHTML = 'Thank you! We received your RSVP for <strong>' + escapeHTML(groupName) + '</strong><br>(' + attendingCount + ' guest' + (attendingCount === 1 ? '' : 's') + ' attending).';
+        }
+      }, 650);
+    });
+  </script>
+</body>
+</html>
