@@ -947,8 +947,402 @@ body.fr .block.lang-en {
   }
 }
   </style>
- </head>
- <body>
+ <style id="cardia-rsvp-standard-style">
+/* CARDIA STANDARD RSVP — shared across invitation templates */
+.cardia-rsvp-standard{
+  --cardia-rsvp-accent:#b98b52;
+  --cardia-rsvp-text:#332b25;
+  --cardia-rsvp-muted:#756a60;
+  width:100%;
+  max-width:100%;
+  margin:0 auto;
+  color:var(--cardia-rsvp-text);
+  text-align:left;
+  font-family:'Montserrat',sans-serif;
+}
+.cardia-rsvp-standard,
+.cardia-rsvp-standard *{box-sizing:border-box;}
+.cardia-rsvp-standard .cardia-rsvp-form{width:100%;margin:0;padding:0;}
+.cardia-rsvp-step-dots{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:0 0 20px;
+}
+.cardia-rsvp-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(0,0,0,.14);
+  transition:.2s ease;
+}
+.cardia-rsvp-dot.is-on{background:var(--cardia-rsvp-accent);}
+.cardia-rsvp-welcome{
+  margin:4px 0 7px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(29px,7vw,42px);
+  line-height:1.02;
+  font-weight:500;
+  color:var(--cardia-rsvp-accent);
+  text-align:center;
+}
+.cardia-rsvp-note{
+  margin:0 0 12px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;
+  line-height:1.4;
+  color:var(--cardia-rsvp-muted);
+  text-align:center;
+}
+.cardia-rsvp-list-wrap{
+  position:relative;
+  width:100%;
+}
+.cardia-rsvp-list{
+  display:grid;
+  gap:8px;
+  width:100%;
+  max-height:292px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:2px 3px 2px 0;
+  scrollbar-width:thin;
+  scrollbar-color:var(--cardia-rsvp-accent) transparent;
+}
+.cardia-rsvp-list::-webkit-scrollbar{width:4px;}
+.cardia-rsvp-list::-webkit-scrollbar-track{background:transparent;}
+.cardia-rsvp-list::-webkit-scrollbar-thumb{
+  background:var(--cardia-rsvp-accent);
+  border-radius:999px;
+}
+.cardia-rsvp-guest{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  min-width:0;
+  padding:8px 9px;
+  border:1px solid rgba(0,0,0,.13);
+  border-radius:13px;
+  background:rgba(255,255,255,.68);
+}
+.cardia-rsvp-guest.is-locked{background:rgba(255,255,255,.82);}
+.cardia-rsvp-name{
+  min-width:0 !important;
+  width:100% !important;
+  height:38px !important;
+  margin:0 !important;
+  padding:0 2px !important;
+  border:0 !important;
+  border-bottom:0 !important;
+  border-radius:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  color:var(--cardia-rsvp-text) !important;
+  font-family:'Cormorant Garamond',serif !important;
+  font-size:18px !important;
+  line-height:1.15 !important;
+  font-weight:500 !important;
+}
+.cardia-rsvp-name::placeholder{
+  color:var(--cardia-rsvp-muted) !important;
+  opacity:.68 !important;
+}
+.cardia-rsvp-name[readonly]{cursor:default;}
+.cardia-rsvp-options{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:5px;
+  flex-shrink:0;
+}
+.cardia-rsvp-options label{
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  cursor:pointer;
+}
+.cardia-rsvp-options input[type="radio"]{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  margin:-1px !important;
+  padding:0 !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  clip:rect(0 0 0 0) !important;
+}
+.cardia-rsvp-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  height:38px;
+  padding:0 9px;
+  border:1px solid rgba(0,0,0,.14);
+  border-radius:10px;
+  background:rgba(255,255,255,.72);
+  color:var(--cardia-rsvp-text);
+  font-family:'Montserrat',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:.18s ease;
+  user-select:none;
+}
+.cardia-rsvp-options input[type="radio"]:checked + .cardia-rsvp-pill{
+  background:var(--cardia-rsvp-accent);
+  border-color:var(--cardia-rsvp-accent);
+  color:#fff;
+  box-shadow:0 5px 14px rgba(0,0,0,.12);
+}
+.cardia-rsvp-total{
+  margin:14px 0 4px;
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  line-height:1.3;
+  color:var(--cardia-rsvp-text);
+}
+.cardia-rsvp-error{
+  display:none;
+  margin:7px 0 0;
+  color:#9b3f35;
+  font-size:11px;
+  line-height:1.4;
+  text-align:center;
+}
+.cardia-rsvp-primary,
+.cardia-rsvp-secondary{
+  width:100% !important;
+  min-height:46px;
+  margin:0 !important;
+  padding:12px 14px !important;
+  border-radius:999px !important;
+  font-family:'Montserrat',sans-serif !important;
+  font-size:10px !important;
+  line-height:1.2 !important;
+  font-weight:700 !important;
+  letter-spacing:.15em !important;
+  text-transform:uppercase !important;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.cardia-rsvp-primary{
+  margin-top:14px !important;
+  border:1px solid var(--cardia-rsvp-accent) !important;
+  background:var(--cardia-rsvp-accent) !important;
+  color:#fff !important;
+}
+.cardia-rsvp-secondary{
+  border:1px solid rgba(0,0,0,.16) !important;
+  background:rgba(255,255,255,.64) !important;
+  color:var(--cardia-rsvp-text) !important;
+}
+.cardia-rsvp-primary:disabled{opacity:.65;cursor:default;}
+.cardia-rsvp-message-label{
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:var(--cardia-rsvp-text) !important;
+}
+.cardia-rsvp-message-label-text{
+  display:block;
+  margin:0 0 10px;
+  color:var(--cardia-rsvp-text);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.cardia-rsvp-message{
+  display:block;
+  width:100% !important;
+  min-height:100px !important;
+  margin:0 !important;
+  padding:12px 13px !important;
+  border:1px solid rgba(0,0,0,.14) !important;
+  border-radius:13px !important;
+  outline:0 !important;
+  resize:vertical !important;
+  background:rgba(255,255,255,.72) !important;
+  color:var(--cardia-rsvp-text) !important;
+  font-family:'Cormorant Garamond',serif !important;
+  font-size:17px !important;
+  line-height:1.4 !important;
+}
+.cardia-rsvp-message::placeholder{
+  color:var(--cardia-rsvp-muted) !important;
+  opacity:.68 !important;
+}
+.cardia-rsvp-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:14px;
+}
+.cardia-rsvp-actions .cardia-rsvp-primary{margin-top:0 !important;}
+.cardia-rsvp-step-thanks{
+  padding:20px 0 8px;
+  text-align:center;
+}
+.cardia-rsvp-sparkle{font-size:40px;margin-bottom:8px;}
+.cardia-rsvp-thanks-title{
+  margin:0 0 8px;
+  color:var(--cardia-rsvp-accent);
+  font-family:'Great Vibes',cursive;
+  font-size:48px;
+  line-height:1;
+  font-weight:400;
+}
+.cardia-rsvp-thanks-message{
+  margin:0;
+  color:var(--cardia-rsvp-text);
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  line-height:1.55;
+}
+@media(max-width:360px){
+  .cardia-rsvp-guest{gap:5px;padding:7px;}
+  .cardia-rsvp-pill{min-width:40px;padding:0 7px;font-size:8px;}
+  .cardia-rsvp-name{font-size:16px !important;}
+}
+</style>
+
+<style id="cardia-preloader-style">
+  /* ===== Cardia Studios elegant asset preloader ===== */
+  body.cardia-loading { overflow: hidden !important; }
+  #cardiaPreloader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(196, 168, 116, .10), transparent 32%),
+      linear-gradient(180deg, #fffdf9 0%, #f8f3ea 100%);
+    color: #574b3e;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .75s ease, visibility .75s ease;
+  }
+  #cardiaPreloader.cardia-preloader-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .cardia-loader-inner {
+    width: min(82vw, 360px);
+    text-align: center;
+    padding: 28px 24px;
+  }
+  .cardia-loader-mark {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+  }
+  .cardia-loader-ring,
+  .cardia-loader-ring::before {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    content: "";
+  }
+  .cardia-loader-ring {
+    border: 1px solid rgba(177, 143, 85, .22);
+  }
+  .cardia-loader-ring::before {
+    border: 1.5px solid transparent;
+    border-top-color: #b18f55;
+    border-right-color: rgba(177, 143, 85, .62);
+    animation: cardiaLoaderSpin 1.45s linear infinite;
+  }
+  .cardia-loader-heart {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    line-height: 1;
+    color: #b18f55;
+    transform: translateY(-1px);
+  }
+  .cardia-loader-brand {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: .03em;
+    color: #4f4337;
+  }
+  .cardia-loader-subtitle {
+    margin-top: 8px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #9a8564;
+  }
+  .cardia-loader-progress-wrap {
+    width: 100%;
+    height: 1px;
+    margin: 28px auto 12px;
+    overflow: hidden;
+    background: rgba(122, 100, 69, .15);
+  }
+  #cardiaLoaderProgress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(177, 143, 85, .45), #b18f55);
+    transition: width .28s ease;
+  }
+  #cardiaLoaderPercent {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    letter-spacing: .12em;
+    color: #8b7657;
+  }
+  .cardia-loader-note {
+    margin-top: 7px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #a08e77;
+  }
+  @keyframes cardiaLoaderSpin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .cardia-loader-ring::before { animation-duration: 2.8s; }
+    #cardiaPreloader, #cardiaLoaderProgress { transition-duration: .01ms; }
+  }
+</style>
+
+</head>
+ <body class="cardia-loading">
+
+<div id="cardiaPreloader" role="status" aria-live="polite" aria-label="Loading invitation">
+  <div class="cardia-loader-inner">
+    <div class="cardia-loader-mark" aria-hidden="true">
+      <span class="cardia-loader-ring"></span>
+      <span class="cardia-loader-heart">♡</span>
+    </div>
+    <div class="cardia-loader-brand">Thomas &amp; Sarah</div>
+    <div class="cardia-loader-subtitle">Preparing your invitation</div>
+    <div class="cardia-loader-progress-wrap" aria-hidden="true">
+      <div id="cardiaLoaderProgress"></div>
+    </div>
+    <div id="cardiaLoaderPercent">0%</div>
+    <div class="cardia-loader-note">A little moment while everything is prepared…</div>
+  </div>
+</div>
+
   <div class="lang-toggle">
    <button class="active" id="btnEN" onclick="setLang('en')">
     EN
@@ -1435,82 +1829,47 @@ body.fr .block.lang-en {
        </span>
       </p>
       <div class="rsvp-box">
-       <form id="rsvpForm" onsubmit="sendRSVP(event)">
-        <p class="question">
-         <span class="lang-en">
-          Will you be attending? *
-         </span>
-         <span class="lang-fr">
-          Serez-vous pr&eacute;sent ? *
-         </span>
-        </p>
-        <label class="radio-line">
-         <input checked="" name="attending" type="radio" value="Yes"/>
-         <span class="lang-en">
-          Yes, I'll be there
-         </span>
-         <span class="lang-fr">
-          Oui, je serai pr&eacute;sent(e)
-         </span>
-        </label>
-        <label class="radio-line">
-         <input name="attending" type="radio" value="No"/>
-         <span class="lang-en">
-          Unfortunately, I can't make it
-         </span>
-         <span class="lang-fr">
-          Malheureusement, je ne pourrai pas &ecirc;tre pr&eacute;sent(e)
-         </span>
-        </label>
-        <p class="question">
-         <span class="lang-en">
-          How many guests?
-         </span>
-         <span class="lang-fr">
-          Combien d&rsquo;invit&eacute;s ?
-         </span>
-        </p>
-        <div class="guest-counter">
-         <button onclick="changeGuests(-1)" type="button">
-          &minus;
-         </button>
-         <span id="guestCount">
-          1
-         </span>
-         <button onclick="changeGuests(1)" type="button">
-          +
-         </button>
-        </div>
-        <p class="question">
-         <span class="lang-en">
-          Person 1 / Main contact
-         </span>
-         <span class="lang-fr">
-          Personne 1 / Contact principal
-         </span>
-        </p>
-        <input data-placeholder-en="Full name" data-placeholder-fr="Nom complet" id="fullName" placeholder="Full name" required="" type="text"/>
-        <p class="question">
-         <span class="lang-en">
-          Message for the couple
-         </span>
-         <span class="lang-fr">
-          Message pour les mari&eacute;s
-         </span>
-        </p>
-        <textarea data-placeholder-en="Is there anything you'd like to tell us?" data-placeholder-fr="Souhaitez-vous nous laisser un message ?" id="message" placeholder="Is there anything you'd like to tell us?"></textarea>
-        <button class="send-btn" type="submit">
-         <span class="lang-en">
-          Send RSVP
-         </span>
-         <span class="lang-fr">
-          Envoyer la r&eacute;ponse
-         </span>
-        </button>
-        <p id="formStatus" style="text-align:center;margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--accent);">
-        </p>
-       </form>
+<div class="cardia-rsvp-standard"
+     data-cardia-rsvp-standard
+     style="--cardia-rsvp-accent:var(--accent, #9b3f35);--cardia-rsvp-text:var(--ink, #5c402f);--cardia-rsvp-muted:var(--ink-soft, #8c705c);">
+  <form class="cardia-rsvp-form" novalidate>
+    <div class="cardia-rsvp-step-dots" aria-hidden="true">
+      <span class="cardia-rsvp-dot is-on"></span>
+      <span class="cardia-rsvp-dot"></span>
+    </div>
+
+    <div class="cardia-rsvp-step cardia-rsvp-step-guests">
+      <h3 class="cardia-rsvp-welcome">Dear <span class="cardia-rsvp-welcome-name">Guest</span>,</h3>
+      <p class="cardia-rsvp-note">Please enter your name to confirm the RSVP.</p>
+
+      <div class="cardia-rsvp-list-wrap">
+        <div class="cardia-rsvp-list"></div>
       </div>
+
+      <p class="cardia-rsvp-total">Total guests attending: <strong class="cardia-rsvp-count">0</strong></p>
+      <p class="cardia-rsvp-error" role="alert"></p>
+      <button class="cardia-rsvp-primary cardia-rsvp-continue" type="button">Continue →</button>
+    </div>
+
+    <div class="cardia-rsvp-step cardia-rsvp-step-message" hidden>
+      <label class="cardia-rsvp-message-label">
+        <span class="cardia-rsvp-message-label-text">Leave a wish (optional)</span>
+        <textarea class="cardia-rsvp-message" rows="4" placeholder="Share a wish for Thomas & Sarah…"></textarea>
+      </label>
+      <div class="cardia-rsvp-actions">
+        <button class="cardia-rsvp-secondary cardia-rsvp-back" type="button">← Back</button>
+        <button class="cardia-rsvp-primary cardia-rsvp-send" type="submit">Send RSVP</button>
+      </div>
+    </div>
+
+    <div class="cardia-rsvp-step cardia-rsvp-step-thanks" hidden>
+      <div class="cardia-rsvp-sparkle">✨</div>
+      <h3 class="cardia-rsvp-thanks-title">Thank you!</h3>
+      <p class="cardia-rsvp-thanks-message"></p>
+    </div>
+  </form>
+</div>
+</div>
      </div>
     </section>
     <footer class="footer">
@@ -1569,5 +1928,571 @@ function albumGo(index){const track=document.getElementById('albumTrack');const 
 function albumMove(direction){albumGo(albumIndex+direction)}
 updateLocalizedFields();
   </script>
- </body>
+ <script id="cardia-rsvp-standard-script">
+(function() {
+  'use strict';
+
+  const RSVP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSs_cUnM9Su_Q5Z4fFMWFV5JKVJqF6l_NG_ulTrkpP39ncxUoG8snT5iR4ixZ78RB-/exec';
+  const CUSTOMER_EMAIL = 'cardia.studios@gmail.com';
+  const COUPLE_NAME =
+    (typeof CONFIG !== 'undefined' && CONFIG && CONFIG.coupleName)
+      ? CONFIG.coupleName
+      : 'Thomas & Sarah';
+
+  const copy = {
+    en: {
+      dear: 'Dear',
+      guest: 'Guest',
+      lockedNote: 'Please confirm who can attend from this invitation.',
+      oneNote: 'Please enter your name to confirm the RSVP.',
+      manyNote: 'Please enter the guest names to confirm the RSVP.',
+      guestPlaceholder: 'Guest {n}',
+      yes: 'Yes',
+      no: 'No',
+      total: 'Total guests attending:',
+      needName: 'Please enter at least one guest name.',
+      needAttendance: 'Please choose Yes or No for each guest.',
+      continue: 'Continue →',
+      wish: 'Leave a wish (optional)',
+      wishPlaceholder: 'Share a wish for Thomas & Sarah…',
+      back: '← Back',
+      send: 'Send RSVP',
+      sending: 'Sending...',
+      sent: 'Sent ✓',
+      thanks: 'Thank you!',
+      received: function(name, count) {
+        return 'Thank you, <strong>' + escapeHTML(name) + '</strong>!<br>We received your RSVP for ' + count + ' guest' + (count === 1 ? '' : 's') + '.';
+      }
+    },
+    fr: {
+      dear: 'Cher',
+      guest: 'Invité',
+      lockedNote: 'Merci de confirmer qui pourra être présent avec cette invitation.',
+      oneNote: 'Merci d’indiquer votre nom pour confirmer votre réponse.',
+      manyNote: 'Merci d’indiquer les noms des invités pour confirmer votre réponse.',
+      guestPlaceholder: 'Invité {n}',
+      yes: 'Oui',
+      no: 'Non',
+      total: 'Nombre total de présents :',
+      needName: 'Merci d’indiquer au moins un nom.',
+      needAttendance: 'Merci de choisir Oui ou Non pour chaque invité.',
+      continue: 'Continuer →',
+      wish: 'Laisser un message (facultatif)',
+      wishPlaceholder: 'Un petit mot pour Thomas & Sarah…',
+      back: '← Retour',
+      send: 'Envoyer la réponse',
+      sending: 'Envoi en cours...',
+      sent: 'Envoyé ✓',
+      thanks: 'Merci !',
+      received: function(name, count) {
+        return 'Merci, <strong>' + escapeHTML(name) + '</strong> !<br>Nous avons reçu votre réponse pour ' + count + ' invité' + (count === 1 ? '' : 's') + '.';
+      }
+    }
+  };
+
+  function currentLang() {
+    const htmlLang = (document.documentElement.lang || '').toLowerCase();
+    return (document.body && document.body.classList.contains('fr')) || htmlLang.startsWith('fr') ? 'fr' : 'en';
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char];
+    });
+  }
+
+  function decodeGuestList(rawValue) {
+    if (!rawValue) return [];
+    return rawValue
+      .split(/\||,|\n|;/)
+      .map(function(name) { return name.trim(); })
+      .filter(Boolean);
+  }
+
+  function formatGuestNames(names) {
+    const clean = names.map(function(name) { return String(name || '').trim(); }).filter(Boolean);
+    if (!clean.length) return 'Guest';
+    if (clean.length === 1) return clean[0];
+    if (clean.length === 2) return clean[0] + ' & ' + clean[1];
+    return clean.slice(0, -1).join(', ') + ' & ' + clean[clean.length - 1];
+  }
+
+  function postRSVPToGoogleSheet(payload) {
+    const iframeName = 'cardiaRsvpGoogleSheetFrame';
+    let iframe = document.getElementById(iframeName);
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.id = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = RSVP_SCRIPT_URL;
+    form.target = iframeName;
+    form.style.display = 'none';
+
+    Object.entries(payload).forEach(function(entry) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = entry[0];
+      input.value = entry[1] == null ? '' : String(entry[1]);
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    window.setTimeout(function() { form.remove(); }, 1500);
+  }
+
+  function initRSVP(root) {
+    if (!root || root.dataset.cardiaRsvpReady === '1') return;
+    root.dataset.cardiaRsvpReady = '1';
+
+    const params = new URLSearchParams(window.location.search);
+    const namesFromLink = []
+      .concat(decodeGuestList(params.get('invite') || ''))
+      .concat(decodeGuestList(params.get('group') || ''))
+      .concat(decodeGuestList(params.get('guests') || ''))
+      .concat(decodeGuestList(params.get('guest') || ''));
+
+    const uniqueNames = Array.from(new Set(namesFromLink));
+    const hasLockedNames = uniqueNames.length > 0;
+    const parsedLimit = parseInt(params.get('limit') || String(uniqueNames.length || 1), 10);
+    const guestLimit = Number.isFinite(parsedLimit) && parsedLimit > 0
+      ? parsedLimit
+      : Math.max(uniqueNames.length, 1);
+    const lockedNames = hasLockedNames ? uniqueNames.slice(0, guestLimit) : [];
+    const invitedGroupForClient = formatGuestNames(lockedNames);
+
+    let guests = hasLockedNames
+      ? lockedNames.map(function(name, index) {
+          return { slot:'Guest ' + (index + 1), name:name, attending:'', locked:true };
+        })
+      : Array.from({length:guestLimit}, function(_, index) {
+          return { slot:'Guest ' + (index + 1), name:'', attending:'', locked:false };
+        });
+
+    const form = root.querySelector('.cardia-rsvp-form');
+    const guestStep = root.querySelector('.cardia-rsvp-step-guests');
+    const messageStep = root.querySelector('.cardia-rsvp-step-message');
+    const thanksStep = root.querySelector('.cardia-rsvp-step-thanks');
+    const list = root.querySelector('.cardia-rsvp-list');
+    const welcome = root.querySelector('.cardia-rsvp-welcome-name');
+    const note = root.querySelector('.cardia-rsvp-note');
+    const countEl = root.querySelector('.cardia-rsvp-count');
+    const errorEl = root.querySelector('.cardia-rsvp-error');
+    const continueBtn = root.querySelector('.cardia-rsvp-continue');
+    const backBtn = root.querySelector('.cardia-rsvp-back');
+    const sendBtn = root.querySelector('.cardia-rsvp-send');
+    const messageEl = root.querySelector('.cardia-rsvp-message');
+    const messageLabel = root.querySelector('.cardia-rsvp-message-label-text');
+    const thanksTitle = root.querySelector('.cardia-rsvp-thanks-title');
+    const thanksMessage = root.querySelector('.cardia-rsvp-thanks-message');
+    const dots = Array.from(root.querySelectorAll('.cardia-rsvp-dot'));
+
+    function tr() { return copy[currentLang()]; }
+
+    function setError(message) {
+      if (!errorEl) return;
+      errorEl.textContent = message || '';
+      errorEl.style.display = message ? 'block' : 'none';
+    }
+
+    function syncFromDOM() {
+      if (!list) return;
+      Array.from(list.querySelectorAll('.cardia-rsvp-guest')).forEach(function(row) {
+        const index = Number(row.dataset.index);
+        if (!Number.isInteger(index) || !guests[index]) return;
+
+        const nameInput = row.querySelector('.cardia-rsvp-name');
+        const selected = row.querySelector('input[type="radio"]:checked');
+
+        if (nameInput && !guests[index].locked) guests[index].name = nameInput.value.trim();
+        if (selected && (selected.value === 'Yes' || selected.value === 'No')) {
+          guests[index].attending = selected.value;
+        }
+      });
+    }
+
+    function updateCount() {
+      syncFromDOM();
+      const total = guests.filter(function(guest) {
+        return guest.name && guest.name.trim() && guest.attending === 'Yes';
+      }).length;
+      if (countEl) countEl.textContent = String(total);
+      return total;
+    }
+
+    function renderGuests() {
+      if (!list) return;
+      syncFromDOM();
+      const c = tr();
+
+      list.innerHTML = guests.map(function(guest, index) {
+        const safeName = escapeHTML(guest.name || '');
+        const readonly = guest.locked ? ' readonly aria-readonly="true"' : '';
+        const lockedClass = guest.locked ? ' is-locked' : '';
+        const yesChecked = guest.attending === 'Yes' ? ' checked' : '';
+        const noChecked = guest.attending === 'No' ? ' checked' : '';
+        const placeholder = escapeHTML(c.guestPlaceholder.replace('{n}', String(index + 1)));
+
+        return '<div class="cardia-rsvp-guest' + lockedClass + '" data-index="' + index + '">' +
+          '<input class="cardia-rsvp-name" type="text" autocomplete="name" value="' + safeName + '" placeholder="' + placeholder + '"' + readonly + '>' +
+          '<div class="cardia-rsvp-options" aria-label="Guest ' + (index + 1) + ' attendance">' +
+            '<label><input type="radio" name="cardiaGuestAttend' + index + '" value="Yes"' + yesChecked + '><span class="cardia-rsvp-pill">' + c.yes + '</span></label>' +
+            '<label><input type="radio" name="cardiaGuestAttend' + index + '" value="No"' + noChecked + '><span class="cardia-rsvp-pill">' + c.no + '</span></label>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      updateCount();
+    }
+
+    function updateLanguage() {
+      syncFromDOM();
+      const c = tr();
+      if (welcome) welcome.textContent = hasLockedNames ? invitedGroupForClient : c.guest;
+      if (note) note.textContent = hasLockedNames ? c.lockedNote : (guestLimit === 1 ? c.oneNote : c.manyNote);
+      if (continueBtn) continueBtn.textContent = c.continue;
+      if (messageLabel) messageLabel.textContent = c.wish;
+      if (messageEl) messageEl.placeholder = c.wishPlaceholder;
+      if (backBtn) backBtn.textContent = c.back;
+      if (sendBtn && !sendBtn.disabled) sendBtn.textContent = c.send;
+      if (thanksTitle) thanksTitle.textContent = c.thanks;
+      const totalLine = root.querySelector('.cardia-rsvp-total');
+      if (totalLine) {
+        totalLine.childNodes[0].nodeValue = c.total + ' ';
+      }
+      renderGuests();
+    }
+
+    function namedGuests() {
+      syncFromDOM();
+      return guests.filter(function(guest) {
+        return guest.name && guest.name.trim();
+      });
+    }
+
+    function validateGuests() {
+      const c = tr();
+      const named = namedGuests();
+      if (!named.length) {
+        setError(c.needName);
+        return false;
+      }
+      const missingAttendance = named.some(function(guest) {
+        return guest.attending !== 'Yes' && guest.attending !== 'No';
+      });
+      if (missingAttendance) {
+        setError(c.needAttendance);
+        return false;
+      }
+      setError('');
+      return true;
+    }
+
+    function showStep(which) {
+      if (guestStep) guestStep.hidden = which !== 'guests';
+      if (messageStep) messageStep.hidden = which !== 'message';
+      if (thanksStep) thanksStep.hidden = which !== 'thanks';
+      if (dots.length >= 2) {
+        dots[0].classList.toggle('is-on', which === 'guests');
+        dots[1].classList.toggle('is-on', which === 'message');
+        root.querySelector('.cardia-rsvp-step-dots').style.display = which === 'thanks' ? 'none' : 'flex';
+      }
+      const section = root.closest('section');
+      if (section && which !== 'guests') {
+        const focused = document.activeElement;
+        if (focused && typeof focused.blur === 'function') focused.blur();
+        requestAnimationFrame(function() {
+          section.scrollIntoView({behavior:'auto', block:'center'});
+        });
+        window.setTimeout(function() {
+          section.scrollIntoView({behavior:'auto', block:'center'});
+        }, 320);
+      }
+    }
+
+    if (list) {
+      list.addEventListener('input', function(event) {
+        const input = event.target.closest('.cardia-rsvp-name');
+        if (!input) return;
+        const row = input.closest('.cardia-rsvp-guest');
+        if (!row) return;
+        const index = Number(row.dataset.index);
+        if (!Number.isInteger(index) || !guests[index] || guests[index].locked) return;
+        guests[index].name = input.value.trim();
+        setError('');
+        updateCount();
+      });
+
+      list.addEventListener('change', function(event) {
+        const radio = event.target.closest('input[type="radio"]');
+        if (!radio) return;
+        const row = radio.closest('.cardia-rsvp-guest');
+        if (!row) return;
+        const index = Number(row.dataset.index);
+        if (!Number.isInteger(index) || !guests[index]) return;
+        guests[index].attending = radio.value === 'Yes' ? 'Yes' : 'No';
+        setError('');
+        updateCount();
+      });
+    }
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', function() {
+        if (!validateGuests()) return;
+        showStep('message');
+      });
+    }
+
+    if (backBtn) backBtn.addEventListener('click', function() { showStep('guests'); });
+
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (!validateGuests()) {
+          showStep('guests');
+          return;
+        }
+
+        syncFromDOM();
+        const c = tr();
+        const namedResponses = guests
+          .filter(function(guest) { return guest.name && guest.name.trim(); })
+          .map(function(guest) {
+            return {
+              slot: guest.slot || '',
+              name: guest.name.trim(),
+              attending: guest.attending === 'Yes' ? 'Yes' : 'No'
+            };
+          });
+
+        const attendingGuestsList = namedResponses
+          .filter(function(guest) { return guest.attending === 'Yes'; })
+          .map(function(guest) { return guest.name; });
+
+        const notAttendingGuestsList = namedResponses
+          .filter(function(guest) { return guest.attending !== 'Yes'; })
+          .map(function(guest) { return guest.name; });
+
+        const attendingCount = attendingGuestsList.length;
+        const submittedGuestNames = namedResponses.map(function(guest) { return guest.name; });
+        const groupName = formatGuestNames(submittedGuestNames);
+        const responseLines = namedResponses
+          .map(function(guest) {
+            return guest.name + ' — ' + (guest.attending === 'Yes' ? 'Attending' : 'Not attending');
+          })
+          .join('\n');
+
+        const payload = {
+          event: COUPLE_NAME,
+          customer_email: CUSTOMER_EMAIL,
+          guest_name: groupName,
+          invited_guest_from_link: invitedGroupForClient,
+          attending: attendingCount > 0 ? 'Yes' : 'No',
+          guest_count: attendingCount,
+          guest_limit: guestLimit,
+          attending_guests: attendingGuestsList.join(', '),
+          not_attending_guests: notAttendingGuestsList.join(', '),
+          individual_responses: responseLines,
+          attending_summary: responseLines,
+          guest_responses: responseLines,
+          responses: responseLines,
+          guests_json: JSON.stringify(namedResponses),
+          message: messageEl ? messageEl.value.trim() : '',
+          page_url: window.location.href,
+          submitted_at: new Date().toISOString()
+        };
+
+        if (sendBtn) {
+          sendBtn.textContent = c.sending;
+          sendBtn.disabled = true;
+        }
+
+        postRSVPToGoogleSheet(payload);
+
+        window.setTimeout(function() {
+          if (sendBtn) sendBtn.textContent = c.sent;
+          if (thanksMessage) thanksMessage.innerHTML = c.received(groupName, attendingCount);
+          showStep('thanks');
+        }, 650);
+      });
+    }
+
+    updateLanguage();
+    showStep('guests');
+
+    if (document.body && window.MutationObserver) {
+      const languageObserver = new MutationObserver(function(mutations) {
+        if (mutations.some(function(m) { return m.attributeName === 'class'; })) updateLanguage();
+      });
+      languageObserver.observe(document.body, {attributes:true, attributeFilter:['class']});
+    }
+  }
+
+  document.querySelectorAll('[data-cardia-rsvp-standard]').forEach(initRSVP);
+})();
+</script>
+
+<script id="cardia-preloader-script">
+(function () {
+  'use strict';
+
+  var overlay = document.getElementById('cardiaPreloader');
+  var progressBar = document.getElementById('cardiaLoaderProgress');
+  var percentLabel = document.getElementById('cardiaLoaderPercent');
+  if (!overlay) return;
+
+  var startedAt = Date.now();
+  var MIN_VISIBLE_MS = 650;
+  var MEDIA_TIMEOUT_MS = 45000;
+
+  function normalizeUrl(url) {
+    if (!url) return '';
+    try { return new URL(url, document.baseURI).href; }
+    catch (e) { return ''; }
+  }
+
+  function collectAssets() {
+    var urls = new Set();
+    var html = document.documentElement.innerHTML;
+
+    // Finds literal image/audio/video URLs anywhere in HTML, inline CSS, and inline JS.
+    var absoluteAssetRegex = /https?:\/\/[^\s"'<>\)]+?\.(?:png|jpe?g|webp|gif|svg|mp3|m4a|wav|ogg|mp4|webm|mov)(?:\?[^\s"'<>\)]*)?/gi;
+    (html.match(absoluteAssetRegex) || []).forEach(function (u) {
+      var clean = normalizeUrl(u.replace(/&amp;/g, '&'));
+      if (clean) urls.add(clean);
+    });
+
+    // Also collect DOM-resolved sources, including relative URLs if any are added later.
+    document.querySelectorAll('img[src], video[src], video source[src], audio[src], audio source[src], source[src]').forEach(function (el) {
+      var clean = normalizeUrl(el.getAttribute('src'));
+      if (clean) urls.add(clean);
+    });
+    document.querySelectorAll('video[poster]').forEach(function (el) {
+      var clean = normalizeUrl(el.getAttribute('poster'));
+      if (clean) urls.add(clean);
+    });
+
+    return Array.from(urls);
+  }
+
+  function assetKind(url) {
+    var path = url.split('?')[0].toLowerCase();
+    if (/\\.(mp4|webm|mov)$/.test(path)) return 'video';
+    if (/\\.(mp3|m4a|wav|ogg)$/.test(path)) return 'audio';
+    return 'image';
+  }
+
+  function loadImage(url) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      var done = function () { resolve(); };
+      img.onload = function () {
+        if (img.decode) img.decode().catch(function () {}).finally(done);
+        else done();
+      };
+      img.onerror = done; // Do not trap the guest forever if a remote asset is unavailable.
+      img.src = url;
+      if (img.complete) done();
+    });
+  }
+
+  function loadMedia(url, kind) {
+    // First download the complete media response. For the GitHub-hosted MP3/MP4
+    // assets used by these invitations, this warms the browser HTTP cache before
+    // the guest can open the invitation.
+    if (window.fetch) {
+      var controller = window.AbortController ? new AbortController() : null;
+      var timer = controller ? setTimeout(function () { controller.abort(); }, MEDIA_TIMEOUT_MS) : null;
+      return fetch(url, {
+        cache: 'force-cache',
+        signal: controller ? controller.signal : undefined
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Media preload failed');
+        return response.blob();
+      }).then(function () {
+        if (timer) clearTimeout(timer);
+      }).catch(function () {
+        if (timer) clearTimeout(timer);
+        return loadMediaElementFallback(url, kind);
+      });
+    }
+    return loadMediaElementFallback(url, kind);
+  }
+
+  function loadMediaElementFallback(url, kind) {
+    return new Promise(function (resolve) {
+      var media = document.createElement(kind === 'video' ? 'video' : 'audio');
+      var settled = false;
+      var timer;
+
+      function done() {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        media.removeAttribute('src');
+        try { media.load(); } catch (e) {}
+        resolve();
+      }
+
+      media.preload = 'auto';
+      media.muted = true;
+      media.playsInline = true;
+      media.addEventListener('canplaythrough', done, { once: true });
+      media.addEventListener('error', done, { once: true });
+      media.src = url;
+      try { media.load(); } catch (e) { done(); }
+      if (media.readyState >= 4) done();
+      timer = setTimeout(done, MEDIA_TIMEOUT_MS);
+    });
+  }
+
+  function preload(url) {
+    var kind = assetKind(url);
+    return kind === 'image' ? loadImage(url) : loadMedia(url, kind);
+  }
+
+  function setProgress(done, total) {
+    var pct = total ? Math.round((done / total) * 100) : 100;
+    pct = Math.max(0, Math.min(100, pct));
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (percentLabel) percentLabel.textContent = pct + '%';
+  }
+
+  function reveal() {
+    var elapsed = Date.now() - startedAt;
+    var delay = Math.max(0, MIN_VISIBLE_MS - elapsed);
+    setTimeout(function () {
+      setProgress(1, 1);
+      overlay.classList.add('cardia-preloader-hide');
+      document.body.classList.remove('cardia-loading');
+      setTimeout(function () { overlay.remove(); }, 850);
+      window.dispatchEvent(new CustomEvent('cardia:assets-ready'));
+    }, delay);
+  }
+
+  var assets = collectAssets();
+  var completed = 0;
+  setProgress(0, assets.length);
+
+  if (!assets.length) {
+    reveal();
+    return;
+  }
+
+  Promise.all(assets.map(function (url) {
+    return preload(url).finally(function () {
+      completed += 1;
+      setProgress(completed, assets.length);
+    });
+  })).then(reveal, reveal);
+})();
+</script>
+
+</body>
 </html>
