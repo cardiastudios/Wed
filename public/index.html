@@ -6806,6 +6806,41 @@ body {
 }
 
 /* Combined template gallery: A0–A10 plus A8B retain Best Seller badges; B1–B6 share the same gallery without badges. */
+
+/* Special Editions subsection inside the main template gallery. */
+.special-editions-heading {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 2.2rem 0 .3rem;
+  padding: 2.1rem 1rem 1.1rem;
+  text-align: center;
+  border-top: 1px solid rgba(184, 144, 60, .24);
+}
+
+.special-editions-heading h3 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.special-editions-heading p {
+  margin: .45rem 0 0;
+  font-family: "Jost", sans-serif;
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rose-lt);
+}
+
+@media (max-width: 640px) {
+  .special-editions-heading {
+    margin-top: 1.4rem;
+    padding-top: 1.7rem;
+  }
+}
+
 #bestsellers .bs-card .bs-template-id {
   z-index: 5;
 }
@@ -9263,6 +9298,33 @@ document.addEventListener('DOMContentLoaded', function () {
 <span class="bs-card-link">View theme</span>
 </div>
 </a>
+
+<!-- Special Editions -->
+<div class="special-editions-heading reveal">
+  <h3>Special Editions</h3>
+  <p>Story-driven invitation experiences</p>
+</div>
+
+<!-- Hobbit — Special Edition SE1 -->
+<a class="bs-card reveal" data-template="SE1" href="https://www.cardiastudios.com/templates/Hobbit_PR.html" style="--bs-grad: radial-gradient(ellipse at 50% 70%, rgba(80,113,61,.24) 0%, rgba(222,231,203,.16) 70%, transparent 100%);" target="_blank" rel="noopener" aria-label="View Hobbiton Special Edition template">
+<div class="bs-card-visual">
+<div class="bs-badge special-edition-badge">Special Edition</div>
+<div class="bs-template-id">SE1</div>
+<div class="bs-png-stack">
+<div class="bs-phone-frame">
+<img class="bs-png-main" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/SE1_1.png" alt="Hobbiton Special Edition invitation preview" loading="lazy" decoding="async"/>
+</div>
+<img class="bs-png-inner one" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/SE1_2.png" alt="Hobbiton Special Edition second preview" loading="lazy" decoding="async"/>
+<img class="bs-png-inner two" src="https://raw.githubusercontent.com/cardiastudios/Wed/refs/heads/main/public/AB/SE1_3.png" alt="Hobbiton Special Edition third preview" loading="lazy" decoding="async"/>
+</div>
+</div>
+<div class="bs-card-info">
+<div class="bs-card-name">Hobbiton</div>
+<div class="template-id-note">Template ID: SE1</div>
+<div class="bs-card-desc">A journey through Middle-earth.</div>
+<span class="bs-card-link">View theme</span>
+</div>
+</a>
 </div>
 </section>
 </section>
@@ -9362,14 +9424,14 @@ document.addEventListener('DOMContentLoaded', function () {
 <h2 class="reveal">How Our Online Wedding Invitations Work</h2>
 <p class="reveal">Choose a design, personalize every detail, then share your digital wedding invitation online</p>
 <div class="steps">
-<div class="step reveal"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs and B for book-style invitations.</p></div>
+<div class="step reveal"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs, B for book-style invitations, and SE for Special Editions.</p></div>
 <div class="step reveal"><div class="step-num">02</div><h3>Send your details</h3><p>Share your template ID, names, date, venue, schedule, and any personal touches you'd like included.</p></div>
 <div class="step reveal"><div class="step-num">03</div><h3>We customize it</h3><p>We adapt the template to your wedding: names, date, venue, schedule, photos, wording, sections, and small design details are adjusted to match your event.</p></div>
 <div class="step reveal"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. You receive a Google Sheet that updates in real time whenever a guest confirms or declines attendance.</p></div>
 </div>
 <div class="steps-swiper-wrap" id="howSwiper">
 <div class="steps-swiper-track" id="howTrack">
-<div class="step"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs and B for book-style invitations.</p></div>
+<div class="step"><div class="step-num">01</div><h3>Choose a design</h3><p>Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs, B for book-style invitations, and SE for Special Editions.</p></div>
 <div class="step"><div class="step-num">02</div><h3>Send your details</h3><p>Share your template ID, names, date, venue, schedule, and any personal touches you'd like included.</p></div>
 <div class="step"><div class="step-num">03</div><h3>We customize it</h3><p>We adapt the template to your wedding: names, date, venue, schedule, photos, wording, sections, and small design details are adjusted to match your event.</p></div>
 <div class="step"><div class="step-num">04</div><h3>Share with guests</h3><p>Send a single link to all your guests. You receive a Google Sheet that updates in real time whenever a guest confirms or declines attendance.</p></div>
@@ -9862,7 +9924,7 @@ const CARDIA_TRANSLATIONS = {
     howTitle:'How Our Online Wedding Invitations Work', howSub:'Choose a design, personalize every detail, then share your digital wedding invitation online',
     rsvpKicker:'Live RSVP Demo', rsvpTitle:'Online RSVP Demo with Guest Tracking', rsvpIntro:'Guests can open your online wedding invitation, submit their RSVP, and automatically update your connected Google Sheet dashboard with their attendance response.', rsvpCaption:'Try out our RSVP system', rsvpStepTitles:['Create a guest link','Watch the dashboard update'], rsvpStepText:['<ul class="rsvp-demo-list"><li>Create a personalized guest or family link.</li><li>Click the generated link to open the Thomas & Sarah invitation.</li><li>See how it changes with your settings: 1, 2, or any number of guests, pre-filled names, or blank fields.</li><li>Send a test RSVP like a real guest.</li></ul><p class="rsvp-demo-video-links"><a href="https://drive.google.com/file/d/1Wpz5yfjQ4ARIMfun-yENcQGzSlylVLpT/view?usp=sharing" rel="noopener" target="_blank">Click here to watch the Mode 1 video demo</a><a href="https://drive.google.com/file/d/1bp0DzpVFCr_Rfi83qteHOawl47RovPv0/view?usp=drive_link" rel="noopener" target="_blank">Click here to watch the Mode 2 video demo</a></p>','<p>After submitting the RSVP, open the Google Sheet dashboard to see how every answer is collected automatically.</p>'], rsvpButtons:['Try link generator','View dashboard'], rsvpNote:'This is a live demo, so test answers may appear in the demo dashboard. For your own wedding, you will also receive an email notification for every RSVP in addition to the dashboard.',
     steps:[
-      ['Choose a design','Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs and B for book-style invitations.'],
+      ['Choose a design','Browse our complete template collection and choose the design that speaks to your love story. Every design keeps its original ID: A for best-selling designs, B for book-style invitations, and SE for Special Editions.'],
       ['Send your details',"Share your template ID, names, date, venue, schedule, and any personal touches you'd like included."],
       ['We customize it','We adapt the template to your wedding: names, date, venue, schedule, photos, wording, sections, and small design details are adjusted to match your event.'],
       ['Share with guests','Send a single link to all your guests. You receive a Google Sheet that updates in real time whenever a guest confirms or declines attendance.']
@@ -10380,7 +10442,7 @@ function applyLanguage(lang) {
 
   setText('.bestsellers-header h2', t.bestTitle);
   setText('.bestsellers-header p', t.bestSub);
-  setAllText('.bs-badge', t.bestBadge);
+  setAllText('.bs-badge:not(.special-edition-badge)', t.bestBadge);
   setAllText('.bs-card-link', t.viewTheme);
 
   setText('.section-header h2', t.collectionTitle);
