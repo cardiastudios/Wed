@@ -20,7 +20,7 @@
   <link rel="preload" as="image" href="https://www.cardiastudios.com/media/Hobbit__Hot_air4b.webp">
   <link rel="preload" as="image" href="https://www.cardiastudios.com/media/Hobbit__Hot_air5.webp">
   <link rel="preload" as="image" href="https://www.cardiastudios.com/media/Rossi__Plane3.webp">
-  <link rel="preload" as="image" href="https://www.cardiastudios.com/media/Rossi__Posta.webp">
+  <link rel="preload" as="audio" href="https://www.cardiastudios.com/media/Raymond__Ray.mp3" type="audio/mpeg">
 
   <style>
     :root {
@@ -2138,13 +2138,12 @@ color: #1E1C11;
         <p class="loader-text">Loading Ehden sunset</p>
         <div class="loader-bar" aria-hidden="true"><div class="loader-fill" id="loaderFill"></div></div>
         <div class="loader-percent" id="loaderPercent">0%</div>
-        <button id="loaderRetry" type="button" hidden style="margin-top:16px;padding:10px 18px;border:1px solid #f7d27c;border-radius:999px;background:#391606;color:#ffe7a6;cursor:pointer;font:600 12px Montserrat,sans-serif">Retry loading</button>
       </div>
     </div>
 
 
 
-    <audio id="weddingMusic" loop preload="metadata">
+    <audio id="weddingMusic" loop preload="auto">
       <source src="https://www.cardiastudios.com/media/Raymond__Ray.mp3" type="audio/mpeg">
     </audio>
 
@@ -2278,7 +2277,7 @@ color: #1E1C11;
 
     <div class="stage-vignette"></div>
 
-    <button class="open-invitation-btn" id="openBtn" type="button" disabled>Open Invitation</button>
+    <button class="open-invitation-btn" id="openBtn" type="button">Open Invitation</button>
     <button class="music-toggle-btn" id="musicToggleBtn" type="button" aria-label="Stop music" aria-pressed="false"><span class="music-toggle-icon" aria-hidden="true">♪</span><span id="musicToggleText">Stop music</span></button>
     <div class="drag-hint" id="dragHint">Drag left / right to follow the car</div>
 
@@ -2516,7 +2515,6 @@ color: #1E1C11;
     }
 
     openBtn.addEventListener("click", () => {
-      if (body.classList.contains("assets-loading")) return;
       body.classList.remove("invitation-locked");
       body.classList.add("invitation-open");
       scrollToRatio(0.015, "smooth");
@@ -2856,124 +2854,150 @@ color: #1E1C11;
       guestSlotNameListEl.addEventListener("touchstart", updateGuestListScrollUI, { passive: true });
     }
 
-    // CARDIA — strict visual readiness gate. Audio never blocks image loading.
+    function uniqueValues(values) {
+      return Array.from(new Set(values.filter(Boolean)));
+    }
+
+    function preloadImage(url) {
+      return new Promise((resolve) => {
+        if (!url) {
+          resolve(false);
+          return;
+        }
+
+        const img = new Image();
+        let settled = false;
+
+        function finish(ok) {
+          if (settled) return;
+          settled = true;
+          resolve(ok);
+        }
+
+        function decodeThenFinish() {
+          if (img.decode) {
+            img.decode().then(() => finish(true)).catch(() => finish(true));
+          } else {
+            finish(true);
+          }
+        }
+
+        img.decoding = "async";
+        img.onload = decodeThenFinish;
+        img.onerror = () => finish(false);
+        img.src = url;
+
+        if (img.complete && img.naturalWidth > 0) decodeThenFinish();
+      });
+    }
+
+    function waitForFonts() {
+      if (document.fonts && document.fonts.ready) {
+        return document.fonts.ready.then(() => true).catch(() => false);
+      }
+      return Promise.resolve(true);
+    }
+
+    function waitForAudio(audioEl) {
+      return new Promise((resolve) => {
+        if (!audioEl) {
+          resolve(true);
+          return;
+        }
+
+        if (audioEl.readyState >= 3) {
+          resolve(true);
+          return;
+        }
+
+        let settled = false;
+        const maxAudioWait = 8000;
+
+        function cleanup() {
+          audioEl.removeEventListener("canplaythrough", finish);
+          audioEl.removeEventListener("canplay", finish);
+          audioEl.removeEventListener("loadeddata", finish);
+          audioEl.removeEventListener("loadedmetadata", finish);
+          audioEl.removeEventListener("error", finish);
+        }
+
+        function finish() {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          resolve(true);
+        }
+
+        audioEl.addEventListener("canplaythrough", finish, { once: true });
+        audioEl.addEventListener("canplay", finish, { once: true });
+        audioEl.addEventListener("loadeddata", finish, { once: true });
+        audioEl.addEventListener("loadedmetadata", finish, { once: true });
+        audioEl.addEventListener("error", finish, { once: true });
+
+        try { audioEl.load(); } catch (error) {}
+        window.setTimeout(finish, maxAudioWait);
+      });
+    }
+
+    function collectInvitationImageUrls() {
+      const domImageUrls = Array.from(document.querySelectorAll("img[src]"))
+        .map((img) => img.currentSrc || img.src);
+
+      return uniqueValues([
+        PANO_URL,
+        CAR_URL,
+        HOT_AIR_4B_URL,
+        HOT_AIR_5_URL,
+        ...domImageUrls
+      ]);
+    }
+
     function initLoader() {
       const loader = document.getElementById("loader");
       const fill = document.getElementById("loaderFill");
       const percent = document.getElementById("loaderPercent");
-      const text = loader.querySelector(".loader-text");
-      const retry = document.getElementById("loaderRetry");
-      const groups = new Map();
-      const ready = new Set();
-      const retained = [];
-      const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-      let running = false;
-      openBtn.disabled = true;
+      const loaderText = document.querySelector(".loader-text");
 
-      function group(url) {
-        const key = new URL(url, document.baseURI).href;
-        if (!groups.has(key)) groups.set(key, []);
-        return groups.get(key);
-      }
-      // Use the actual DOM image elements, including duplicates.
-      document.querySelectorAll("img[src]").forEach(img => {
-        img.loading = "eager";
-        group(img.currentSrc || img.src).push(img);
-      });
-      // The panorama and car also appear as CSS images.
-      [PANO_URL, CAR_URL].forEach(url => {
-        const img = new Image();
-        retained.push(img);
-        group(url).push(img);
-      });
-      document.querySelectorAll('link[rel="preload"][as="image"][href]').forEach(link => {
-        if (!groups.has(link.href)) {
-          const img = new Image();
-          retained.push(img);
-          group(link.href).push(img);
-        }
-      });
+      if (!loader || !fill || !percent) return;
 
-      function checkImage(img, url, reload) {
-        return new Promise((resolve, reject) => {
-          let settled = false, decoding = false;
-          const timer = setTimeout(() => finish(false), 45000);
-          function finish(ok) {
-            if (settled) return;
-            settled = true;
-            clearTimeout(timer);
-            img.removeEventListener("load", verify);
-            img.removeEventListener("error", fail);
-            if (ok) resolve(); else reject(new Error(url));
-          }
-          function fail() { finish(false); }
-          function verify() {
-            if (settled || decoding) return;
-            if (!img.complete || !img.naturalWidth) return;
-            decoding = true;
-            Promise.resolve().then(() => typeof img.decode === "function" ? img.decode() : undefined)
-              .then(() => finish(img.complete && img.naturalWidth > 0), fail);
-          }
-          img.addEventListener("load", verify);
-          img.addEventListener("error", fail);
-          if (!img.getAttribute("src") || (reload && !(img.complete && img.naturalWidth))) {
-            if (reload) img.removeAttribute("src");
-            img.src = url;
-          }
-          if (img.complete) {
-            if (img.naturalWidth) verify(); else fail();
-          }
-        });
+      const startedAt = Date.now();
+      const imageUrls = collectInvitationImageUrls();
+      const jobs = [
+        ...imageUrls.map((url) => ({ label: "image", promise: preloadImage(url) })),
+        { label: "fonts", promise: waitForFonts() },
+        { label: "music", promise: waitForAudio(weddingMusic) }
+      ];
+      let done = 0;
+
+      function setProgress(value) {
+        const safe = Math.round(clamp(value, 0, 100));
+        fill.style.width = safe + "%";
+        percent.textContent = safe + "%";
       }
 
-      function progress() {
-        const value = ready.size === groups.size ? 100 : Math.floor(100 * ready.size / groups.size);
-        fill.style.width = value + "%";
-        percent.textContent = value + "%";
+      function finishOne() {
+        done += 1;
+        setProgress(done / jobs.length * 100);
       }
-      async function loadGroup(url, images, manual) {
-        for (let attempt = 0; attempt < 3; attempt++) {
-          const results = await Promise.allSettled(images.map(img => checkImage(img, url, manual || attempt > 0)));
-          if (results.every(result => result.status === "fulfilled")) {
-            ready.add(url);
-            progress();
-            return;
-          }
-          if (attempt < 2) await delay(600 * (attempt + 1));
+
+      setProgress(0);
+      if (loaderText) loaderText.textContent = "Loading";
+
+      window.setTimeout(() => {
+        if (!loader.classList.contains("hidden") && loaderText) {
+          loaderText.textContent = "Still loading all invitation details";
         }
-        console.warn("[Cardia] Image could not be loaded:", url);
-      }
-      async function run(manual = false) {
-        if (running) return;
-        running = true;
-        retry.hidden = true;
-        text.textContent = "Loading Ehden sunset";
-        progress();
-        const started = Date.now();
-        const slow = setTimeout(() => { text.textContent = "Still loading invitation details…"; }, 7000);
-        await Promise.all(Array.from(groups, ([url, images]) => ready.has(url) ? Promise.resolve() : loadGroup(url, images, manual)));
-        clearTimeout(slow);
-        if (ready.size !== groups.size) {
-          text.textContent = "Some images could not load. Please retry.";
-          retry.hidden = false;
-          running = false;
-          return;
-        }
-        // Give fonts a brief opportunity to settle, but do not hang on a font server.
-        if (document.fonts && document.fonts.ready) {
-          await Promise.race([document.fonts.ready.catch(() => {}), delay(3000)]);
-        }
-        await delay(Math.max(0, 650 - (Date.now() - started)));
-        scrollToRatio(0, "auto");
-        requestUIUpdate();
-        body.classList.remove("assets-loading");
-        loader.classList.add("hidden");
-        loader.setAttribute("aria-hidden", "true");
-        openBtn.disabled = false;
-        console.info("[Cardia] All invitation images ready: " + ready.size + " / " + groups.size);
-      }
-      retry.addEventListener("click", () => run(true));
-      run();
+      }, 7000);
+
+      Promise.all(jobs.map((job) => job.promise.then(finishOne).catch(finishOne))).then(() => {
+        const delay = Math.max(0, 650 - (Date.now() - startedAt));
+        window.setTimeout(() => {
+          setProgress(100);
+          body.classList.remove("assets-loading");
+          loader.classList.add("hidden");
+          loader.setAttribute("aria-hidden", "true");
+        }, delay);
+      });
     }
 
     function startInvitationPage() {
