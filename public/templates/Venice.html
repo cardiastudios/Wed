@@ -16,7 +16,7 @@
   --rust:  #c97b4b;
 
   /* BASE PATH — change once if you move assets */
-  --cdn: "https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/";
+  --cdn: "https://www.cardiastudios.com/media/";
 }
 
 html, body {
@@ -2737,6 +2737,9 @@ html, body{
   .loading-note{font-size:16px; margin-top:14px;}
 }
 
+
+#cardiaRetryImages { margin-top: 18px; padding: 10px 18px; border: 1px solid var(--gold); border-radius: 24px; background: var(--cream); color: var(--deep); font: 400 12px 'Jost', sans-serif; cursor: pointer; }
+#cardiaRetryImages[hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -2748,15 +2751,16 @@ html, body{
     <div class="loading-subtitle">Please wait a moment</div>
     <div class="loading-bar"><span id="loadingBarFill"></span></div>
     <div class="loading-percent" id="loadingPercent">0%</div>
+    <button id="cardiaRetryImages" type="button" hidden>Retry loading</button>
 
   </div>
 </div>
 <audio id="bgMusic" preload="auto" loop>
-  <source src="https://raw.githubusercontent.com/NemerDavid/web-des/main/Music/paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg">
+  <source src="https://www.cardiastudios.com/media/Music__paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg">
 </audio>
 <button id="musicBtn" type="button" aria-label="Play or stop music">♪</button>
 <img id="travelGondola"
-     src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Gondola.png"
+     src="https://www.cardiastudios.com/media/Venice__Gondola.webp"
      alt="">
 <div id="progress"></div>
 <div id="hint">
@@ -2771,63 +2775,63 @@ html, body{
        BACKGROUND LAYERS (full 800cqw)
   ══════════════════════════════════ -->
   <img id="bg-sky"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sky.png"
+       src="https://www.cardiastudios.com/media/Venice__Sky.webp"
        alt="">
   <img id="bg-sea"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
 
   <img id="bg-sea1"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
 
 
 <img id="bg-sea1"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
        
        
 <img id="bg-sea2"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">  
        
        
        
 <img id="bg-sea3"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
   <img id="bg-sea4"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
        
 <img id="bg-sea5"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
        
        
        
   <img id="bg-sea6"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
   <img id="bg-sea7"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
        
 <img id="bg-sea8"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
        
        
        
       <img id="bg-sea9"
-       src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Sea.png"
+       src="https://www.cardiastudios.com/media/Venice__Sea.webp"
        alt="">
        
 
@@ -2845,57 +2849,57 @@ html, body{
 
 
  <img class="layer l-balloon"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Hot_air4b.webp" alt="">
 
 
 
  
 
  <img class="layer l-balloon4"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Hot_air5.webp" alt="">
 
 
 
 
 
  <img class="layer l-balloon5"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Hot_air4b.webp" alt="">
 
 
     
     
-    <img class="layer l-balloon6" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" />
+    <img class="layer l-balloon6" src="https://www.cardiastudios.com/media/Hobbit__Hot_air5.webp" alt="" />
  
 
 
 
  <img class="layer l-balloon7"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air4b.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Hot_air4b.webp" alt="">
 
 
     
     
-    <img class="layer l-balloon8" src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air5.png" alt="" />
+    <img class="layer l-balloon8" src="https://www.cardiastudios.com/media/Hobbit__Hot_air5.webp" alt="" />
  
 
  <img class="layer l-balloon9"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Hobbit/Hot_air6.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Hot_air6.webp" alt="">
 
 
 
 
  <img class="layer l-Road"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Road2.png" alt="">
+         src="https://www.cardiastudios.com/media/Venice__Road2.webp" alt="">
 
 
 
  <img class="layer l-Plane"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Plane2.png" alt="">
+         src="https://www.cardiastudios.com/media/Venice__Plane2.webp" alt="">
 
 
 
  <img class="layer l-clouds1"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
 
 
@@ -2904,30 +2908,30 @@ html, body{
 
 
                  <img class="layer l-bld1a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__1a.webp" alt="">  
          
          
                  <img class="layer l-bld2a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__2a.webp" alt="">  
          
 
 
          
           <img class="layer l-bld5a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__5a.webp" alt="">  
          
            <img class="layer l-bld6a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__6a.webp" alt="">  
          
        
        
        
                    
          <img class="layer l-bld3a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/3a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__3a.webp" alt="">  
          
            <img class="layer l-bld8a"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/8a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__8a.webp" alt="">  
          
 
 
@@ -2935,24 +2939,24 @@ html, body{
             
             
               <img class="layer l-bld2aa"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__2a.webp" alt=""> 
             
         
         
           <img class="layer l-bld1b"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1b.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__1b.webp" alt="">  
          
           <img class="layer l-bld2b"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/2b.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__2b.webp" alt="">  
          
 
          <img class="layer l-bld4b"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/4b.png" alt="">
+         src="https://www.cardiastudios.com/media/Venice__4b.webp" alt="">
          
 
          
           <img class="layer l-bld8b"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/8b.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__8b.webp" alt=""> 
          
 
          
@@ -2966,11 +2970,11 @@ html, body{
          
          
                  <img class="layer l-bld1aR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/1a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__1a.webp" alt="">  
          
          
                  <img class="layer l-bld2aR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__6a.webp" alt="">  
          
             
    
@@ -2978,30 +2982,30 @@ html, body{
 
          
              <img class="layer l-bld5aaR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__5a.webp" alt="">  
          
            <img class="layer l-bld8aR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/9a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__9a.webp" alt="">  
          
  <img class="layer l-bld10aR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/10a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__10a.webp" alt=""> 
 
          
             
 
          <img class="layer l-bld4bR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/3a.png" alt="">
+         src="https://www.cardiastudios.com/media/Venice__3a.webp" alt="">
          
 
          
           <img class="layer l-bld8bR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/7a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__7a.webp" alt=""> 
          
          
 
          
           <img class="layer l-bld1binvR"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__6a.webp" alt=""> 
          
          
          
@@ -3015,7 +3019,7 @@ html, body{
         
          
                 <img class="layer l-bld2aEnd"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/6a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__6a.webp" alt="">  
          
             
    
@@ -3023,13 +3027,13 @@ html, body{
 
          
              <img class="layer l-bld5End"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/5a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__5a.webp" alt="">  
          
            <img class="layer l-bld8End"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/9a.png" alt="">  
+         src="https://www.cardiastudios.com/media/Venice__9a.webp" alt="">  
          
  <img class="layer l-bld10End"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/10a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__10a.webp" alt=""> 
          
          
          
@@ -3040,17 +3044,17 @@ html, body{
          
              
           <img class="layer l-bridge"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__Bridge.webp" alt=""> 
          
           <img class="layer l-bridge2"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__Bridge.webp" alt=""> 
    
            <img class="layer l-bridge3"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge3a.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__Bridge3a.webp" alt=""> 
          
          
                 <img class="layer l-bridge4"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Bridge.png" alt=""> 
+         src="https://www.cardiastudios.com/media/Venice__Bridge.webp" alt=""> 
          
          
          
@@ -3065,9 +3069,9 @@ html, body{
          
          
     <img class="layer l-gondola"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Gondola.png" alt="">
+         src="https://www.cardiastudios.com/media/Venice__Gondola.webp" alt="">
     <img class="layer l-clouds"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
     <div class="content">
       <div class="fixed-copy cover-copy">
@@ -3094,7 +3098,7 @@ html, body{
 
 
     <img class="layer l-clouds"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
     <div class="content">
       <div class="fixed-copy story-copy">
@@ -3142,7 +3146,7 @@ html, body{
     <div class="water-shimmer"></div>
 
     <img class="layer l-clouds"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
     <div class="content">
       <div class="fixed-copy album-copy">
@@ -3152,9 +3156,9 @@ html, body{
 
         <div class="venice-album" id="veniceAlbum">
           <div class="venice-album-track" id="veniceAlbumTrack">
-            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 1"></div>
-            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 2"></div>
-            <div class="venice-album-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 3"></div>
+            <div class="venice-album-slide"><img loading="eager" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 1"></div>
+            <div class="venice-album-slide"><img loading="eager" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 2"></div>
+            <div class="venice-album-slide"><img loading="eager" src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Couple photo 3"></div>
           </div>
           <button class="venice-album-arrow prev" type="button" aria-label="Previous photo" onclick="moveVeniceAlbum(-1)">‹</button>
           <button class="venice-album-arrow next" type="button" aria-label="Next photo" onclick="moveVeniceAlbum(1)">›</button>
@@ -3173,7 +3177,7 @@ html, body{
     <div class="water-shimmer"></div>
 
     <img class="layer l-clouds"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
     <div class="content">
       <div class="fixed-copy gift-copy">
@@ -3271,7 +3275,7 @@ html, body{
     <div class="water-shimmer"></div>
 
     <img class="layer l-clouds"
-         src="https://raw.githubusercontent.com/NemerDavid/web-des/refs/heads/main/Venice/Clouds.png" alt="">
+         src="https://www.cardiastudios.com/media/Hobbit__Clouds-a.webp" alt="">
 
     <div class="content">
       <div class="fixed-copy closing-copy">
@@ -3290,72 +3294,102 @@ html, body{
 
 <script>
 
-  /* ELEGANT PRELOADER FOR HEAVY PNG ASSETS
-     The overlay blocks the invitation until the artwork is ready.
-     A safety timeout prevents guests from being stuck if one remote image is slow or blocked. */
+  /* CARDIA — strict image readiness gate (WebP and all other image formats). */
   (function initCardiaAssetLoader(){
-    const loaderStage = document.getElementById('stage');
-    const loaderOverlay = document.getElementById('loadingOverlay');
-    const loaderBar = document.getElementById('loadingBarFill');
-    const loaderPercent = document.getElementById('loadingPercent');
-    if (!loaderStage || !loaderOverlay) return;
-
-    const imageUrls = [...new Set(
-      Array.from(document.querySelectorAll('img[src]'))
-        .map(img => img.currentSrc || img.getAttribute('src'))
-        .filter(Boolean)
-    )];
-
-    const minimumVisibleTime = 1200;
-    const safetyTimeout = 14000;
-    const startedAt = Date.now();
-    let done = 0;
-    let finished = false;
-
-    function setLoaderProgress(value){
-      const pct = Math.max(0, Math.min(100, Math.round(value)));
-      if (loaderBar) loaderBar.style.width = pct + '%';
-      if (loaderPercent) loaderPercent.textContent = pct + '%';
-    }
-
-    function finishLoader(){
-      if (finished) return;
-      finished = true;
-      setLoaderProgress(100);
-      const wait = Math.max(0, minimumVisibleTime - (Date.now() - startedAt));
-      setTimeout(() => {
-        loaderStage.classList.remove('assets-loading');
-        loaderStage.classList.add('assets-ready');
-        loaderOverlay.classList.add('is-hidden');
-        loaderOverlay.setAttribute('aria-hidden', 'true');
-        setTimeout(() => loaderOverlay.remove(), 900);
-      }, wait + 250);
-    }
-
-    if (!imageUrls.length) {
-      finishLoader();
-      return;
-    }
-
-    function markAssetReady(){
-      if (finished) return;
-      done += 1;
-      setLoaderProgress((done / imageUrls.length) * 100);
-      if (done >= imageUrls.length) finishLoader();
-    }
-
-    setLoaderProgress(3);
-
-    imageUrls.forEach(src => {
-      const img = new Image();
-      img.onload = markAssetReady;
-      img.onerror = markAssetReady;
-      img.src = src;
-      if (img.complete) markAssetReady();
+    const stage = document.getElementById('stage');
+    const overlay = document.getElementById('loadingOverlay');
+    const bar = document.getElementById('loadingBarFill');
+    const percent = document.getElementById('loadingPercent');
+    const open = document.getElementById('openInvitationBtn');
+    if (!stage || !overlay) return;
+    const status = overlay.querySelector('.loading-subtitle');
+    const retry = overlay.querySelector('#cardiaRetryImages');
+    const started = Date.now();
+    const groups = new Map();
+    const ready = new Set();
+    let running = false;
+    if (open) open.disabled = true;
+    const blocked = Array.from(stage.children).filter(el => el !== overlay && !el.inert);
+    blocked.forEach(el => { el.inert = true; });
+    overlay.setAttribute('aria-busy', 'true');
+    document.querySelectorAll('img[src]').forEach(img => {
+      img.loading = 'eager';
+      const url = img.src;
+      if (!groups.has(url)) groups.set(url, []);
+      groups.get(url).push(img);
     });
-
-    window.addEventListener('load', () => setTimeout(finishLoader, 2500), { once:true });
-    setTimeout(finishLoader, safetyTimeout);
+    function progress(){
+      const n = groups.size ? Math.floor(100 * ready.size / groups.size) : 100;
+      if (bar) bar.style.width = n + '%';
+      if (percent) percent.textContent = n + '%';
+    }
+    function verify(img, url, reload){
+      return new Promise((resolve, reject) => {
+        let settled = false, decoding = false;
+        const timer = setTimeout(() => finish(false), 45000);
+        function finish(ok){
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          img.removeEventListener('load', check);
+          img.removeEventListener('error', fail);
+          if (ok) resolve(); else reject(new Error(url));
+        }
+        function fail(){ finish(false); }
+        function check(){
+          if (settled || decoding || !img.complete) return;
+          if (!img.naturalWidth) { finish(false); return; }
+          decoding = true;
+          Promise.resolve().then(() => typeof img.decode === 'function' ? img.decode() : undefined)
+            .then(() => finish(img.complete && img.naturalWidth > 0), fail);
+        }
+        img.addEventListener('load', check);
+        img.addEventListener('error', fail);
+        if (reload && (!img.complete || !img.naturalWidth)) img.src = url;
+        check();
+      });
+    }
+    async function loadGroup(url, images, manual){
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const results = await Promise.allSettled(images.map(img => verify(img, url, manual || attempt > 0)));
+        if (results.every(r => r.status === 'fulfilled')) {
+          ready.add(url); progress(); return;
+        }
+        if (attempt < 2) await new Promise(r => setTimeout(r, 750 * (attempt + 1)));
+      }
+      console.warn('[Cardia] Image not ready:', url);
+    }
+    async function run(manual = false){
+      if (running) return;
+      running = true;
+      retry.hidden = true;
+      overlay.setAttribute('aria-busy', 'true');
+      status.textContent = 'Please wait a moment';
+      progress();
+      const slow = setTimeout(() => { status.textContent = 'Still loading wedding details…'; }, 12000);
+      await Promise.all(Array.from(groups, ([url, images]) => ready.has(url) ? Promise.resolve() : loadGroup(url, images, manual)));
+      clearTimeout(slow);
+      if (ready.size !== groups.size) {
+        running = false;
+        overlay.setAttribute('aria-busy', 'false');
+        status.textContent = 'Some images could not load. Please try again.';
+        retry.hidden = false;
+        return;
+      }
+      status.textContent = 'Ready';
+      await new Promise(r => setTimeout(r, Math.max(0, 1200 - (Date.now() - started)) + 250));
+      stage.classList.remove('assets-loading');
+      stage.classList.add('assets-ready');
+      overlay.setAttribute('aria-busy', 'false');
+      overlay.classList.add('is-hidden');
+      overlay.setAttribute('aria-hidden', 'true');
+      blocked.forEach(el => { el.inert = false; });
+      if (open) open.disabled = false;
+      setTimeout(() => overlay.remove(), 900);
+      console.info('[Cardia] All invitation images ready: ' + ready.size + ' / ' + groups.size);
+    }
+    retry.addEventListener('click', () => run(true));
+    run();
   })();
 
   const panorama = document.getElementById('panorama');
@@ -3527,6 +3561,7 @@ html, body{
 
   if (openInvitationBtn) {
     openInvitationBtn.addEventListener('click', function(e){
+      if (stage.classList.contains('assets-loading')) return;
       e.preventDefault();
       e.stopPropagation();
       invitationOpened = true;
